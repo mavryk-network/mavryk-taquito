@@ -90,7 +90,7 @@ export class LedgerSigner implements Signer {
     private prompt: boolean = true,
     private derivationType: DerivationType = DerivationType.ED25519
   ) {
-    this.transport.setScrambleKey('XTZ');
+    this.transport.setScrambleKey('MVRK');
     if (!path.startsWith(`44'/1729'`)) {
       throw new InvalidDerivationPathError(
         path,

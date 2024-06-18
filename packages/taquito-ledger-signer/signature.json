@@ -125,7 +125,7 @@
           "version": "8.0.4-beta.0",
           "description": "Ledger signer provider",
           "keywords": [
-            "tezos",
+            "mavryk",
             "blockchain",
             "ledger"
           ],

@@ -22,21 +22,21 @@ npm i --save @mavrykdynamics/taquito
 
 ## Usage
 
-**Create an instance of the `Tzip12Module` and add it as an extension to the `TezosToolkit`**
+**Create an instance of the `Tzip12Module` and add it as an extension to the `MavrykToolkit`**
 
-The constructor of the `Tzip12Module` takes an optional `MetadataProvider` as a parameter. When none is passed, the default `MetadataProvider` of Taquito is instantiated, and the default handlers (`HttpHandler,` `IpfsHandler,` and `TezosStorageHandler`) are used. The `MetadataProvider` can be customized by the user if needed.
+The constructor of the `Tzip12Module` takes an optional `MetadataProvider` as a parameter. When none is passed, the default `MetadataProvider` of Taquito is instantiated, and the default handlers (`HttpHandler,` `IpfsHandler,` and `MavrykStorageHandler`) are used. The `MetadataProvider` can be customized by the user if needed.
 
 **Use the `tzip12` function to extend a contract abstraction**
 
 ```ts
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { Tzip12Module } from '@mavrykdynamics/taquito-tzip12';
 import { tzip12 } from '@mavrykdynamics/taquito-tzip12';
 
-const Tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
-Tezos.addExtension(new Tzip12Module());
+const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
+Mavryk.addExtension(new Tzip12Module());
 
-const contract = await Tezos.contract.at("contractAddress", tzip12)
+const contract = await Mavryk.contract.at("contractAddress", tzip12)
 
 // get the token metadata
 await contract.tzip12().getTokenMetadata(1);

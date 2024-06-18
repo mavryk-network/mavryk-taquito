@@ -2,24 +2,24 @@ import { CONFIGS } from "../../config";
 import { voteSample } from "../../data/vote-contract";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test contract origination of a vote contract through wallet api using: ${rpc}`, () => {
 
     beforeEach(async () => {
       await setup()
     })
     test('Verify wallet.originate for a voting contract and initialize the storage', async () => {
-      const op = await Tezos.wallet.originate({
+      const op = await Mavryk.wallet.originate({
         balance: "1",
         code: voteSample,
         storage: {
           mgr1: {
-            addr: await Tezos.signer.publicKeyHash(),
+            addr: await Mavryk.signer.publicKeyHash(),
             key: null,
           },
           mgr2: {
-            addr: await Tezos.signer.publicKeyHash(),
-            key: await Tezos.signer.publicKeyHash(),
+            addr: await Mavryk.signer.publicKeyHash(),
+            key: await Mavryk.signer.publicKeyHash(),
           },
         }
       }).send()

@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js';
 import { ViewSimulationError } from "@mavrykdynamics/taquito";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`On chain views using the contract API: ${rpc}`, () => {
 
@@ -13,7 +13,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     })
     it(`as a user I want to originate a smart contract having top level views and simulate the views execution`, async () => {
       // Contract origination
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: codeViewsTopLevel,
         storage: 2,
         balance: '2',
@@ -25,7 +25,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       expect(op.hash).toBeDefined();
       expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
 
-      const source = await Tezos.signer.publicKeyHash();
+      const source = await Mavryk.signer.publicKeyHash();
 
       // views simulation
 
@@ -72,7 +72,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         // view that always fails
         await contract.contractViews.test_failwith(3).executeView({ viewCaller: contract.address });
       } catch (error: any) {
-        const protocol = (await Tezos.rpc.getProtocols()).protocol
+        const protocol = (await Mavryk.rpc.getProtocols()).protocol
         expect(error).toBeInstanceOf(ViewSimulationError)
       }
 

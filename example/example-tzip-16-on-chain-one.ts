@@ -1,4 +1,4 @@
-import { MichelsonMap, TezosToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
 import { contractCode, metadataViewsExample1 } from '../integration-tests/data/metadataViews';
 import { stringToBytes } from '@mavrykdynamics/taquito-utils';
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
@@ -6,8 +6,8 @@ import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network';
   const signer = new InMemorySigner('edskRtmEwZxRzwd1obV9pJzAoLoxXFWTSHbgqpDBRHx1Ktzo5yVuJ37e2R4nzjLnNbxFU4UiBU1iHzAy52pK5YBRpaFwLbByca');
-  const tezos = new TezosToolkit(provider);
-  tezos.setSignerProvider(signer);
+  const mavryk = new MavrykToolkit(provider);
+  mavryk.setSignerProvider(signer);
 
   try {
     console.log('Deploying Tzip16OffChainOne contract...');
@@ -16,7 +16,7 @@ async function example() {
     metadataBigMAp.set("", stringToBytes('mavryk-storage:here'));
     metadataBigMAp.set("here", stringToBytes(JSON.stringify(metadataViewsExample1)))
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractCode,
       storage: {
         0: 7,

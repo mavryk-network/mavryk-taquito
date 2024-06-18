@@ -4,7 +4,7 @@ import { MichelsonMap } from '@mavrykdynamics/taquito';
 import { stringToBytes, tzip16, Tzip16Module, IpfsHttpHandler, Handler, MetadataProvider } from '@mavrykdynamics/taquito-tzip16';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
 
     const customHandler = new Map<string, Handler>([
         ['ipfs', new IpfsHttpHandler('cloudflare-ipfs.com')]
@@ -12,7 +12,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     const customMetadataProvider = new MetadataProvider(customHandler);
 
-    Tezos.addExtension(new Tzip16Module(customMetadataProvider));
+    Mavryk.addExtension(new Tzip16Module(customMetadataProvider));
 
     let contractAddress: string;
 
@@ -35,7 +35,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
             const tacoShopStorageMap = new MichelsonMap();
 
-            const op = await Tezos.wallet.originate({
+            const op = await Mavryk.wallet.originate({
                 code: tacoContractTzip16,
                 storage: {
                     metadata: metadataBigMAp,
@@ -49,7 +49,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
         test('Verify that the metadata for the contract having metadata stored on IPFS can be fetched', async () => {
 
-            const contract = await Tezos.wallet.at(contractAddress, tzip16);
+            const contract = await Mavryk.wallet.at(contractAddress, tzip16);
             const metadata = await contract.tzip16().getMetadata();
 
             expect(metadata.uri).toEqual('ipfs://QmXnASUptTDnfhmcoznFqz3S1Mxu7X1zqo2YwbTN3nW52V');

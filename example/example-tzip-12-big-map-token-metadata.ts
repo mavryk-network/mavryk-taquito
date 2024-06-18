@@ -1,4 +1,4 @@
-import { MichelsonMap, TezosToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
 import { importKey, InMemorySigner } from '@mavrykdynamics/taquito-signer';
 import { b58cencode, stringToBytes, Prefix, prefix } from '@mavrykdynamics/taquito-utils';
 import { fa2TokenFactory } from '../integration-tests/data/fa2-token-factory';
@@ -9,22 +9,22 @@ const nodeCrypto = require('crypto');
 const provider = 'https://basenet.rpc.mavryk.network';
 
 async function createAddress() {
-  const tezos = new TezosToolkit(provider)
+  const mavryk = new MavrykToolkit(provider)
 
   const keyBytes = Buffer.alloc(32);
   nodeCrypto.randomFillSync(keyBytes)
 
   const key = b58cencode(new Uint8Array(keyBytes), prefix[Prefix.P2SK]);
-  await importKey(tezos, key);
+  await importKey(mavryk, key);
 
-  return tezos;
+  return mavryk;
 }
 
 async function example() {
 	
     const signer = new InMemorySigner('edskRtmEwZxRzwd1obV9pJzAoLoxXFWTSHbgqpDBRHx1Ktzo5yVuJ37e2R4nzjLnNbxFU4UiBU1iHzAy52pK5YBRpaFwLbByca');
-    const tezos = new TezosToolkit(provider);
-    tezos.setSignerProvider(signer);
+    const mavryk = new MavrykToolkit(provider);
+    mavryk.setSignerProvider(signer);
   
   try {
     console.log('Deploying Tzip12BigMapsTokenMetadata contract...');
@@ -89,10 +89,10 @@ async function example() {
 			token_total_supply.set('1', '54000000');
 			token_total_supply.set('2', '10000000');
 
-			const op = await tezos.contract.originate({
+			const op = await mavryk.contract.originate({
 				code: fa2TokenFactory,
 				storage: {
-					admin: await tezos.signer.publicKeyHash(),
+					admin: await mavryk.signer.publicKeyHash(),
 					exchange_address: 'KT1DGRPQUwLJyCZnM8WKtwDGiKDSMv4hftk4',
 					last_token_id: '2',
 					ledger,

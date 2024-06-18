@@ -93,7 +93,7 @@ export function b58decode(payload: string) {
 
   const pref = prefixMap[new Uint8Array(buf.slice(0, 3)).toString()];
   if (pref) {
-    // tz addresses
+    // mv addresses
     const hex = buf2hex(buf.slice(3));
     return pref + hex;
   } else {
@@ -314,10 +314,10 @@ export const buf2hex = (buffer: Uint8Array): string => {
 
 /**
  *
- *  @description Gets Tezos address (PKH) from Public Key
+ *  @description Gets Mavryk address (PKH) from Public Key
  *
  *  @param publicKey Public Key
- *  @returns A string of the Tezos address (PKH) that was derived from the given Public Key
+ *  @returns A string of the Mavryk address (PKH) that was derived from the given Public Key
  */
 export const getPkhfromPk = (publicKey: string): string => {
   let encodingPrefix;

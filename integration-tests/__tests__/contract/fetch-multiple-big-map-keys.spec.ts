@@ -4,7 +4,7 @@ import { MichelsonMap, BigMapAbstraction } from '@mavrykdynamics/taquito';
 import BigNumber from 'bignumber.js';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
 
     describe(`Test contract origination with multiple BigMap variations through contract api using: ${rpc}`, () => {
         /**  The contract code doesn't have annotations, so the keys of the storage and of the bigmap are indexes. */
@@ -15,7 +15,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
         test('Verify contract.originate for a contract with a BigMap with multiple values to be indexed (also fetching the Storage/BigMap)', async () => {
 
-            const signer = await Tezos.signer.publicKeyHash();
+            const signer = await Mavryk.signer.publicKeyHash();
 
             const bigMapInit = new MichelsonMap();
             bigMapInit.set(signer, { 0: '1', 1: new MichelsonMap() });
@@ -23,7 +23,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             bigMapInit.set('mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ', { 0: '3', 1: new MichelsonMap() });
             bigMapInit.set('mv3WNhwFRPV4fCkK2iBDWZtLNsDg4tecU5X5', { 0: '4', 1: new MichelsonMap() });
             // Deploy a contract with a big map
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: tokenCode,
                 storage: {
                     0: bigMapInit,
@@ -68,7 +68,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
 
             // Specify a level
-            const { header } = await Tezos.rpc.getBlock();
+            const { header } = await Mavryk.rpc.getBlock();
 
             // Fetch multiples keys
             const bigMapValuesWithLevel = await bigMap.getMultipleValues<BigMapVal>(['mv3Bk6yGMcuVGYqzJ31iMQyhNhmfSJAJJina', 'mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ'], header.level);

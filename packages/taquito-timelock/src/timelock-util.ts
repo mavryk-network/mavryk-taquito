@@ -28,7 +28,7 @@ function nextPrime(n: BigInteger): BigInteger {
   }
   const limit = n.multiply(2);
   for (let p = n.next(); p.compare(limit) < 0; p = p.next()) {
-    // use 25 bases like in GMP mpz_nextprime and thus in Tezos
+    // use 25 bases like in GMP mpz_nextprime and thus in Mavryk
     if (p.isProbablePrime(25, rand)) {
       return p;
     }

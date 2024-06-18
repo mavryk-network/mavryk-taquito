@@ -4,7 +4,7 @@ import { CONFIGS } from '../../config';
 // TC-T-001: Testcase to duplicate a ticket using "dup" instruction.
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const weeklynet = protocol === Protocols.ProtoALpha ? test : test.skip;
 
   describe(`Test contracts using: ${rpc}`, () => {
@@ -14,7 +14,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet('Verify type ticket string cannot be used with "dup" here because it is not duplicable', async () => {
       try {
-        const opTicketsDup = await Tezos.contract.originate({
+        const opTicketsDup = await Mavryk.contract.originate({
           code: `{ parameter unit;
         storage unit;
         code
@@ -43,7 +43,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet('Verify type ticket string cannot be used with "dup n" here because it is not duplicable', async () => {
       try {
-        const opTicketsDup = await Tezos.contract.originate({
+        const opTicketsDup = await Mavryk.contract.originate({
           code: `{ parameter unit;
             storage unit;
             code
@@ -74,7 +74,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet('Verify type list (ticket string) cannot be used here because it is not duplicable', async () => {
       try {
-        const opTicketsDup = await Tezos.contract.originate({
+        const opTicketsDup = await Mavryk.contract.originate({
           code: `{ parameter unit;
             storage unit;
             code
@@ -106,7 +106,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet('Verify Packing a ticket is not possible', async () => {
       try {
-        const opTicketsDup = await Tezos.contract.originate({
+        const opTicketsDup = await Mavryk.contract.originate({
           code: `{ parameter unit;
             storage unit;
             code
@@ -134,7 +134,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet('Verify pack a ticket stored within a pair structure is not possible', async () => {
       try {
-        const opTicketsDup = await Tezos.contract.originate({
+        const opTicketsDup = await Mavryk.contract.originate({
           code: `{ parameter unit;
             storage unit;
             code
@@ -162,7 +162,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet('Verify returning a ticket in an on-chain view is not possible', async () => {
       try {
-        const opTicketsDup = await Tezos.contract.originate({
+        const opTicketsDup = await Mavryk.contract.originate({
           code: `{ parameter unit;
             storage (option (ticket string));
             code

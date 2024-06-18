@@ -1,5 +1,5 @@
 import { CONFIGS } from '../../config';
-import { MichelsonMap, MichelCodecPacker, TezosToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap, MichelCodecPacker, MavrykToolkit } from '@mavrykdynamics/taquito';
 import { permit_admin_42_expiry } from '../../data/permit_admin_42_expiry';
 import { permit_admin_42_set } from '../../data/permit_admin_42_set';
 import { permit_fa12_smartpy } from '../../data/permit_fa12_smartpy';
@@ -10,10 +10,10 @@ import { packDataBytes } from "@mavrykdynamics/taquito-michel-codec"
 const blake = require('blakejs');
 const bob_address = 'mv1JzsKuzj5RFo68zyW6TG7aHx6p5gzoNuuU';
 
-const create_bytes_to_sign = async (Tezos: TezosToolkit, contractAddress: string, methodHash: string) => {
-  const chainId = await Tezos.rpc.getChainId();
+const create_bytes_to_sign = async (Mavryk: MavrykToolkit, contractAddress: string, methodHash: string) => {
+  const chainId = await Mavryk.rpc.getChainId();
 
-  const contract = await Tezos.contract.at(contractAddress)
+  const contract = await Mavryk.contract.at(contractAddress)
   const contractStorage: any = await contract.storage();
   let counter = 0;
   if (contractStorage.hasOwnProperty("counter")) {
@@ -69,14 +69,14 @@ const create_bytes_to_sign = async (Tezos: TezosToolkit, contractAddress: string
 
   const sigParamPacked = packDataBytes(sigParamData, sigParamType);
   // signs the hash
-  const signature = await Tezos.signer.sign(sigParamPacked.bytes);
+  const signature = await Mavryk.signer.sign(sigParamPacked.bytes);
 
   return signature.sig
 }
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
-  const Tezos = lib;
-  Tezos.setPackerProvider(new MichelCodecPacker());
+  const Mavryk = lib;
+  Mavryk.setPackerProvider(new MichelCodecPacker());
 
   describe(`Verify contract origination, transfer, and minting with a permit for tzip-17 through contract api: ${rpc}`, () => {
     beforeEach(async () => {
@@ -84,7 +84,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     });
 
     test('Verify a Permit can be submitted and set', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: permit_admin_42_set,
         storage: {
           0: new MichelsonMap(),
@@ -99,18 +99,18 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
       expect(op.status).toEqual('applied');
 
-      const signer_key = await Tezos.signer.publicKey();
+      const signer_key = await Mavryk.signer.publicKey();
       const wrapped_param: any =
         permit_contract.methods['wrapped'](42).toTransferParams().parameter?.value;
       const wrapped_param_type = permit_contract.entrypoints.entrypoints['wrapped'];
-      const raw_packed = await Tezos.rpc.packData({
+      const raw_packed = await Mavryk.rpc.packData({
         data: wrapped_param,
         type: wrapped_param_type,
       });
       const packed_param = raw_packed.packed;
       const param_hash = buf2hex(blake.blake2b(hex2buf(packed_param), null, 32));
 
-      const param_sig = await create_bytes_to_sign(Tezos, permit_contract.address, param_hash)
+      const param_sig = await create_bytes_to_sign(Mavryk, permit_contract.address, param_hash)
 
       const permitMethodCall = await permit_contract.methods
         .permit(signer_key, param_sig, param_hash)
@@ -122,7 +122,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     });
 
     test('Verify contract.originate for a permit contract and expiry can be set', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: permit_admin_42_expiry,
         storage: {
           0: 300,
@@ -141,7 +141,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       const setExpiryMethodCall = await expiry_contract.methods
         .setExpiry(
           null, //bytes
-          await Tezos.signer.publicKeyHash(), //address of current signer
+          await Mavryk.signer.publicKeyHash(), //address of current signer
           42 // nat
         )
         .send();
@@ -152,14 +152,14 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     });
 
     test('Verify contract.originate for a permit contract and defaultExpiry can be set', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: permit_admin_42_expiry,
         storage: {
           0: 300,
           1: new MichelsonMap(),
           2: 0,
-          3: await Tezos.signer.publicKeyHash(),
-          4: await Tezos.signer.publicKeyHash(),
+          3: await Mavryk.signer.publicKeyHash(),
+          4: await Mavryk.signer.publicKeyHash(),
         },
       });
       await op.confirmation();
@@ -185,10 +185,10 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       const metadata = new MichelsonMap();
       metadata.set('', bytesUrl);
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: permit_fa12_smartpy,
         storage: {
-          administrator: await Tezos.signer.publicKeyHash(),
+          administrator: await Mavryk.signer.publicKeyHash(),
           balances: new MichelsonMap(),
           counter: '0',
           default_expiry: '50000',
@@ -213,7 +213,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
       const setMintMethodCall = await fa12_contract.methods
         .mint(
-          await Tezos.signer.publicKeyHash(), //address :to
+          await Mavryk.signer.publicKeyHash(), //address :to
           mint_amount // nat :value
         )
         .send();
@@ -223,9 +223,9 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       const storage: any = await fa12_contract.storage();
       expect(storage['totalSupply'].toString()).toEqual('42');
 
-      Tezos.addExtension(new Tzip16Module());
+      Mavryk.addExtension(new Tzip16Module());
 
-      const contract = await Tezos.contract.at(contractAddress, tzip16);
+      const contract = await Mavryk.contract.at(contractAddress, tzip16);
       const contract_metadata = await contract.tzip16().getMetadata();
 
       expect(contract_metadata.uri).toEqual(url);
@@ -252,7 +252,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
         const LocalTez1 = await createAddress();
         const bootstrap1_address = await LocalTez1.signer.publicKeyHash();
-        const funding_op1 = await Tezos.contract.transfer({
+        const funding_op1 = await Mavryk.contract.transfer({
           to: bootstrap1_address,
           amount: 0.1,
         });
@@ -260,7 +260,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
         const LocalTez2 = await createAddress();
         const bootstrap2_address = await LocalTez2.signer.publicKeyHash();
-        const funding_op2 = await Tezos.contract.transfer({
+        const funding_op2 = await Mavryk.contract.transfer({
           to: bootstrap2_address,
           amount: 0.1,
         });
@@ -268,7 +268,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
         const LocalTez3 = await createAddress();
         const bootstrap3_address = await LocalTez3.signer.publicKeyHash();
-        const funding_op3 = await Tezos.contract.transfer({
+        const funding_op3 = await Mavryk.contract.transfer({
           to: bootstrap3_address,
           amount: 0.1,
         });
@@ -276,7 +276,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
         const LocalTez4 = await createAddress();
         const bootstrap4_address = await LocalTez4.signer.publicKeyHash();
-        const funding_op4 = await Tezos.contract.transfer({
+        const funding_op4 = await Mavryk.contract.transfer({
           to: bootstrap4_address,
           amount: 0.1,
         });
@@ -288,7 +288,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
         const metadata = new MichelsonMap();
         metadata.set('', bytesUrl);
 
-        const op = await Tezos.contract.originate({
+        const op = await Mavryk.contract.originate({
           code: permit_fa12_smartpy,
           storage: {
             administrator: await LocalTez1.signer.publicKeyHash(),
@@ -337,7 +337,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
           1
         ).toTransferParams().parameter?.value;
         const type = fa12_contract.entrypoints.entrypoints['transfer'];
-        const TRANSFER_PARAM_PACKED = await Tezos.rpc.packData({
+        const TRANSFER_PARAM_PACKED = await Mavryk.rpc.packData({
           data: transfer_param,
           type: type,
         });

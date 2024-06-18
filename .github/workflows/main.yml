@@ -43,8 +43,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - testnet: atlasnet
-            testnet_uppercase: ATLASNET
+          - testnet: boreasnet
+            testnet_uppercase: BOREASNET
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -61,7 +61,7 @@ jobs:
     - run: npm -w integration-tests run test:${{ matrix.testnet }} -- --maxWorkers=4
       env:
         # Ternary operator workaround
-        TEZOS_RPC_${{ matrix.testnet_uppercase }}: ${{ github.event.pull_request.head.repo.fork && format('https://{0}.ecadinfra.com', matrix.testnet) || null }}
+        MAVRYK_RPC_${{ matrix.testnet_uppercase }}: ${{ github.event.pull_request.head.repo.fork && format('https://{0}.ecadinfra.com', matrix.testnet) || null }}
 
   integration-tests-flexmasa:
     runs-on: ubuntu-latest
@@ -72,7 +72,7 @@ jobs:
           - protocol: Atlas
             testnet: atlasnet
             testnet_uppercase: ATLASNET
-            flexmasa_docker_image: oxheadalpha/flexmasa:20230607
+            flexmasa_docker_image: registry.gitlab.com/mavryk-network/flexmasa:atlas-update-run
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -102,7 +102,7 @@ jobs:
           --root /tmp/mini-box --size 1 \
           --set-history-mode N000:archive \
           --number-of-b 1 \
-          --balance-of-bootstrap-accounts tez:100_000_000 \
+          --balance-of-bootstrap-accounts mav:100_000_000 \
           --time-b 1 \
           --add-bootstrap-account="${alice}@2_000_000_000_000" \
           --add-bootstrap-account="${bob}@2_000_000_000_000" \
@@ -114,12 +114,12 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: source ./integration-tests/sandbox-env.sh
-    - run: npm -w integration-tests run test:nairobinet-secret-key sandbox-ballot-operation.spec.ts
-    - run: npm -w integration-tests run test:nairobinet-secret-key sandbox-drain-delegate-operation.spec.ts
+    - run: npm -w integration-tests run test:boreasnet-secret-key sandbox-ballot-operation.spec.ts
+    - run: npm -w integration-tests run test:boreasnet-secret-key sandbox-drain-delegate-operation.spec.ts
       env:
         RUN_${{ matrix.testnet_uppercase }}_WITH_SECRET_KEY: true
         SECRET_KEY: edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq
-        TEZOS_RPC_${{ matrix.testnet_uppercase }}: http://localhost:20000
+        MAVRYK_RPC_${{ matrix.testnet_uppercase }}: http://localhost:20000
         POLLING_INTERVAL_MILLISECONDS: 100
         RPC_CACHE_MILLISECONDS: 0
-        TEZOS_BAKER: mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv
+        MAVRYK_BAKER: mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv

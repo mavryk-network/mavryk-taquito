@@ -1,4 +1,4 @@
-// Michelson abstract syntax tree types https://tezos.gitlab.io/whitedoc/michelson.html#concrete-syntax
+// Michelson abstract syntax tree types https://protocol.mavryk.org/whitedoc/michelson.html#concrete-syntax
 
 export type SourceReference = {
   first: number;

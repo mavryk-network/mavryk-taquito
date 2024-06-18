@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js';
 import {
   LazyStorageDiffBigMap,
   OperationContentsAndResultEndorsement,
-  OperationContentsAndResultEndorsementWithSlot,
+  OperationContentsAndResultAttestationWithDal,
   OperationContentsAndResultOrigination,
   OperationResultTransaction,
   OperationContentsAndResultTransaction,
@@ -32,6 +32,7 @@ import {
   SmartRollupRefutationStart,
   SmartRollupRefutationOptions,
   RPCSimulateOperationParam,
+  OperationContentsAndResultDalPublishCommitment,
 } from '../src/types';
 import {
   blockWeeklynetResponse,
@@ -46,6 +47,8 @@ import {
   smartRollupRefuteResponse,
   smartRollupRecoverBondResponse,
   smartRollupTimeoutResponse,
+  aiLaunchCycle,
+  unstakeRequestsResponse,
 } from './data/rpc-responses';
 
 /**
@@ -114,6 +117,98 @@ describe('RpcClient test', () => {
       });
       expect(balance).toBeInstanceOf(BigNumber);
       expect(balance.toString()).toEqual('10000');
+    });
+  });
+
+  describe('getFullBalance', () => {
+    it('should query the right url and return a string', async () => {
+      httpBackend.createRequest.mockReturnValue(Promise.resolve('10000'));
+      const balance = await client.getFullBalance(contractAddress);
+
+      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
+        method: 'GET',
+        url: `root/chains/test/blocks/head/context/contracts/${contractAddress}/full_balance`,
+      });
+      expect(balance).toBeInstanceOf(BigNumber);
+      expect(balance.toString()).toEqual('10000');
+    });
+  });
+
+  describe('getStakedBalance', () => {
+    it('should query the right url and return a string', async () => {
+      httpBackend.createRequest.mockReturnValue(Promise.resolve('10000'));
+      const balance = await client.getStakedBalance(contractAddress);
+
+      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
+        method: 'GET',
+        url: `root/chains/test/blocks/head/context/contracts/${contractAddress}/staked_balance`,
+      });
+      expect(balance).toBeInstanceOf(BigNumber);
+      expect(balance.toString()).toEqual('10000');
+    });
+  });
+
+  describe('getUnstakedFinalizableBalance', () => {
+    it('should query the right url and return a string', async () => {
+      httpBackend.createRequest.mockReturnValue(Promise.resolve('10000'));
+      const balance = await client.getUnstakedFinalizableBalance(contractAddress);
+
+      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
+        method: 'GET',
+        url: `root/chains/test/blocks/head/context/contracts/${contractAddress}/unstaked_finalizable_balance`,
+      });
+      expect(balance).toBeInstanceOf(BigNumber);
+      expect(balance.toString()).toEqual('10000');
+    });
+  });
+
+  describe('getUnstakedFrozenBalance', () => {
+    it('should query the right url and return a string', async () => {
+      httpBackend.createRequest.mockReturnValue(Promise.resolve('10000'));
+      const balance = await client.getUnstakedFrozenBalance(contractAddress);
+
+      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
+        method: 'GET',
+        url: `root/chains/test/blocks/head/context/contracts/${contractAddress}/unstaked_frozen_balance`,
+      });
+      expect(balance).toBeInstanceOf(BigNumber);
+      expect(balance.toString()).toEqual('10000');
+    });
+  });
+
+  describe('getUnstakeRequests', () => {
+    it('should query the right url', async () => {
+      httpBackend.createRequest.mockReturnValue(Promise.resolve(unstakeRequestsResponse));
+      await client.getUnstakeRequests(contractAddress);
+
+      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
+        method: 'GET',
+        url: `root/chains/test/blocks/head/context/contracts/${contractAddress}/unstake_requests`,
+      });
+    });
+
+    it('should parse the response properly', async () => {
+      httpBackend.createRequest.mockResolvedValue(unstakeRequestsResponse);
+      const response = await client.getUnstakeRequests(contractAddress);
+
+      expect(response).toEqual({
+        finalizable: [
+          {
+            delegate: 'mv1X83v8gdttgFt4U8kDExzcXV68Ndh141U5',
+            cycle: 10,
+            amount: new BigNumber('500000000'),
+          },
+        ],
+        unfinalizable: {
+          delegate: 'mv1X83v8gdttgFt4U8kDExzcXV68Ndh141U5',
+          requests: [
+            {
+              cycle: 11,
+              amount: new BigNumber('200000000'),
+            },
+          ],
+        },
+      });
     });
   });
 
@@ -217,22 +312,47 @@ describe('RpcClient test', () => {
     });
   });
 
+  describe('getAllDelegates', () => {
+    it('should query the right url and data', async () => {
+      httpBackend.createRequest.mockResolvedValue(['mv1A1LYBjHEe6JUT8dg4nLdkftGE7nYPNwfc']);
+      const result = await client.getAllDelegates({ active: true, with_minimal_stake: true });
+      await client.getAllDelegates({ active: true, with_minimal_stake: true });
+      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
+        method: 'GET',
+        url: 'root/chains/test/blocks/head/context/delegates',
+        query: { active: true, with_minimal_stake: true },
+      });
+
+      expect(result).toEqual(['mv1A1LYBjHEe6JUT8dg4nLdkftGE7nYPNwfc']);
+    });
+  });
+
   describe('getDelegates', () => {
     const sampleResponse = {
-      balance: '5092341810457',
-      frozen_balance: '2155290163074',
-      frozen_balance_by_cycle: [
-        { cycle: 135, deposit: '381760000000', fees: '971071', rewards: '11843833332' },
-        { cycle: 136, deposit: '394368000000', fees: '1433657', rewards: '12200333332' },
-      ],
-      staking_balance: '20936607331513',
-      delegated_contracts: [
-        'KT1VvXEpeBpreAVpfp4V8ZujqWu2gVykwXBJ',
-        'KT1VsSxSXUkgw6zkBGgUuDXXuJs9ToPqkrCg',
-      ],
-      delegated_balance: '15908924646030',
+      full_balance: new BigNumber('10289576365'),
+      current_frozen_deposits: new BigNumber('2028957741'),
+      frozen_deposits: new BigNumber('1028957741'),
+      staking_balance: new BigNumber('10289576365'),
+      delegated_contracts: ['mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv'],
+      delegated_balance: new BigNumber('0'),
+      min_delegated_in_current_cycle: {
+        amount: '8260618624',
+        level: {
+          level: 81924,
+          level_position: 81923,
+          cycle: 7,
+          cycle_position: 3,
+          expected_commitment: false,
+        },
+      },
       deactivated: false,
-      grace_period: 146,
+      grace_period: 7,
+      pending_denunciations: false,
+      total_delegated_stake: new BigNumber('0'),
+      staking_denominator: new BigNumber('0'),
+      voting_power: new BigNumber('10289577405'),
+      remaining_proposals: 20,
+      active_consensus_key: 'mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv',
     };
 
     it('should query the right url', async () => {
@@ -250,30 +370,30 @@ describe('RpcClient test', () => {
       const response = await client.getDelegates(contractAddress);
 
       expect(response).toEqual({
-        balance: new BigNumber('5092341810457'),
-        frozen_balance: new BigNumber('2155290163074'),
-        frozen_balance_by_cycle: [
-          {
-            cycle: 135,
-            deposit: new BigNumber('381760000000'),
-            fees: new BigNumber('971071'),
-            rewards: new BigNumber('11843833332'),
+        full_balance: new BigNumber('10289576365'),
+        current_frozen_deposits: new BigNumber('2028957741'),
+        frozen_deposits: new BigNumber('1028957741'),
+        staking_balance: new BigNumber('10289576365'),
+        delegated_contracts: ['mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv'],
+        delegated_balance: new BigNumber('0'),
+        min_delegated_in_current_cycle: {
+          amount: '8260618624',
+          level: {
+            level: 81924,
+            level_position: 81923,
+            cycle: 7,
+            cycle_position: 3,
+            expected_commitment: false,
           },
-          {
-            cycle: 136,
-            deposit: new BigNumber('394368000000'),
-            fees: new BigNumber('1433657'),
-            rewards: new BigNumber('12200333332'),
-          },
-        ],
-        staking_balance: new BigNumber('20936607331513'),
-        delegated_contracts: [
-          'KT1VvXEpeBpreAVpfp4V8ZujqWu2gVykwXBJ',
-          'KT1VsSxSXUkgw6zkBGgUuDXXuJs9ToPqkrCg',
-        ],
-        delegated_balance: new BigNumber('15908924646030'),
+        },
         deactivated: false,
-        grace_period: 146,
+        grace_period: 7,
+        pending_denunciations: false,
+        total_delegated_stake: new BigNumber('0'),
+        staking_denominator: new BigNumber('0'),
+        voting_power: new BigNumber('10289577405'),
+        remaining_proposals: 20,
+        active_consensus_key: 'mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv',
       });
     });
 
@@ -1616,93 +1736,6 @@ describe('RpcClient test', () => {
       expect(transaction.metadata.operation_result.consumed_gas).toEqual('24660');
     });
 
-    it('should query the right url and property for operation, proto 9, endorsement_with_slot', async () => {
-      httpBackend.createRequest.mockReturnValue(
-        Promise.resolve({
-          protocol: 'PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i',
-          chain_id: 'NetXxkAx4woPLyu',
-          hash: 'BLRWVvWTrqgUt1JL76RnUguKhkqfbHnXVrznXpuCrhxemSuCrb3',
-          header: {
-            level: 174209,
-            proto: 1,
-            predecessor: 'BMarN3hiEmCrSrfeo6qndubHe9FXpPy4qcj3Xr2NBGGfG4Tfcaj',
-            timestamp: '2021-05-07T18:37:59Z',
-            validation_pass: 4,
-            operations_hash: 'LLoaFb5cQjcr2pzKbLsmhPN2NgLY5gGs9ePimjRsNyCtgAQejfbXg',
-            fitness: ['01', '000000000002a880'],
-            context: 'CoWMJU1LmpfMn92zz4Ah1TrwXaSHnRWcy8dcso32AH7miULKad1d',
-            priority: 0,
-            proof_of_work_nonce: '08351e3d59170e00',
-            signature:
-              'sigg9pz9Q5i17nDZpZ3mbbMQsLHNuHX3SxTxHguLwgR9xYL2x17TmH7QfVFsadQTa61QCnq5vuFXkFtymeQKNh74VsWnMu9D',
-          },
-          metadata: {},
-          operations: [
-            [
-              {
-                protocol: 'PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i',
-                chain_id: 'NetXxkAx4woPLyu',
-                hash: 'ooYSSxYcgreJQtrzxqyBpBdCntVbnbvHdtqA7RZsFcSDz4XFZJY',
-                branch: 'BMarN3hiEmCrSrfeo6qndubHe9FXpPy4qcj3Xr2NBGGfG4Tfcaj',
-                contents: [
-                  {
-                    kind: 'endorsement_with_slot',
-                    endorsement: {
-                      branch: 'BMarN3hiEmCrSrfeo6qndubHe9FXpPy4qcj3Xr2NBGGfG4Tfcaj',
-                      operations: { kind: 'endorsement', level: 174208 },
-                      signature:
-                        'signiPFVn2gFXvu7dKxEnifWQgbzan9ca6z7XSS5PyNBin2BufNBTFz9hgM7imvWf2HSj6NY3ECtEvb5xmwiYnUDbpSTUQC6',
-                    },
-                    slot: 4,
-                    metadata: {
-                      balance_updates: [
-                        {
-                          kind: 'contract',
-                          contract: 'mv1XAsUdbF1PgG3iierMq88yzqKNUwhQYsJr',
-                          change: '-320000000',
-                          origin: 'block',
-                        },
-                        {
-                          kind: 'freezer',
-                          category: 'deposits',
-                          delegate: 'mv1XAsUdbF1PgG3iierMq88yzqKNUwhQYsJr',
-                          cycle: 85,
-                          change: '320000000',
-                          origin: 'block',
-                        },
-                        {
-                          kind: 'freezer',
-                          category: 'rewards',
-                          delegate: 'mv1XAsUdbF1PgG3iierMq88yzqKNUwhQYsJr',
-                          cycle: 85,
-                          change: '6250000',
-                          origin: 'block',
-                        },
-                      ],
-                      delegate: 'mv1XAsUdbF1PgG3iierMq88yzqKNUwhQYsJr',
-                      slots: [4, 11, 18, 21, 24],
-                    },
-                  },
-                ],
-              },
-            ],
-          ],
-        })
-      );
-
-      const response = await client.getBlock();
-
-      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
-        method: 'GET',
-        url: 'root/chains/test/blocks/head',
-      });
-      const endorsementWithSlot = response.operations[0][0]
-        .contents[0] as OperationContentsAndResultEndorsementWithSlot;
-      expect(endorsementWithSlot.kind).toEqual('endorsement_with_slot');
-      expect(endorsementWithSlot.metadata.slots).toEqual([4, 11, 18, 21, 24]);
-      expect(endorsementWithSlot.slot).toEqual(4);
-    });
-
     it('should query the right url and properties (big_map_diff and lazy_storage_diff) in transaction operation result, proto 9', async () => {
       httpBackend.createRequest.mockReturnValue(
         Promise.resolve({
@@ -2733,6 +2766,174 @@ describe('RpcClient test', () => {
       expect(ticketReceipt?.updates[0].account).toEqual('KT1JoRgUcR6NApwMLnBZ2pehCzp8tR4HtkHj');
       expect(ticketReceipt?.updates[0].amount).toEqual('1');
     });
+
+    it('should query the right url and property for operation, proto 20, attestation_with_dal', async () => {
+      httpBackend.createRequest.mockReturnValue(
+        Promise.resolve({
+          protocol: 'PtParisBQscdCm6Cfow6ndeU6wKJyA3aV1j4D3gQBQMsTQyJCrz',
+          chain_id: 'NetXo8SqH1c38SS',
+          hash: 'BKsCfYZrh417adJiKbGsyhVG2XrvUBJDhhkCAkZQzWzkEHCejXr',
+          header: {
+            level: 416914,
+            proto: 2,
+            predecessor: 'BLBXzegi3m1K8YjP7w9YgEpts5a9ZCFjY7xqRcm16p6yFxXbZGT',
+            timestamp: '2024-05-06T18:01:07Z',
+            validation_pass: 4,
+            operations_hash: 'LLoZxmgEJQyZ74XCrZQu8Jtcov4SnGGRyuYf32fYmURW2Xfcj58Gv',
+            fitness: ['02', '00065c92', '', 'ffffffff', '00000000'],
+            context: 'CoV1GGrMBca5uBG4AzQbKNrQhQHHTtSYJAHVk7pJtuMw3uWiNvTV',
+            payload_hash: 'vh1mfavAuf7E1m1tZUEHkWomS8BDiLsVZz9T1A79Afu8Cag5DQHG',
+            payload_round: 0,
+            proof_of_work_nonce: 'e38cf66600000000',
+            liquidity_baking_toggle_vote: 'on',
+            adaptive_issuance_vote: 'on',
+            signature:
+              'sighpgD4aPxorZUvPxKvBHYNvnQEBRctF14bYXFX9qLbXbCGZv64S1dFVduBLzWBSEXCcHWiBuUT1iLZt9SE2mKCTkLtWuo5',
+          },
+          metadata: {},
+          operations: [
+            [
+              {
+                protocol: 'PtParisBQscdCm6Cfow6ndeU6wKJyA3aV1j4D3gQBQMsTQyJCrz',
+                chain_id: 'NetXo8SqH1c38SS',
+                hash: 'opSmHyeasw4QcJ4Jc2qi6arNeSQMhFRjHBdFYWXGoMydLkgVRtb',
+                branch: 'BLHyjaqV2FhuHLQL3CBjWJqgZZ77BxcNxh3ehXcNYMQjjqAPwqA',
+                contents: [
+                  {
+                    kind: 'attestation_with_dal',
+                    slot: 19,
+                    level: 416913,
+                    round: 0,
+                    block_payload_hash: 'vh27AvfjAJob9VdcZHEPHFbMAzi6nhCiHVzAyDBEdAPDCcEa676t',
+                    dal_attestation: '0',
+                    metadata: {
+                      delegate: 'mv1CaYhbjXN399YZ91o39R6bNRoJBN7SPFTu',
+                      consensus_power: 532,
+                      consensus_key: 'mv1CaYhbjXN399YZ91o39R6bNRoJBN7SPFTu',
+                    },
+                  },
+                ],
+                signature:
+                  'sigh9rmktxbqmK6fXaq2ciAQrbrVH8pZhKeXEKHCzgNmJaP6gc1njofiMMzvhx2SRXQ7Gv8aVDzBM18kDGmUoBxQA693Bk2o',
+              },
+            ],
+          ],
+        })
+      );
+
+      const response = await client.getBlock();
+
+      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
+        method: 'GET',
+        url: 'root/chains/test/blocks/head',
+      });
+      const endorsementWithSlot = response.operations[0][0]
+        .contents[0] as OperationContentsAndResultAttestationWithDal;
+      expect(endorsementWithSlot.kind).toEqual('attestation_with_dal');
+      expect(endorsementWithSlot.slot).toEqual(19);
+      expect(endorsementWithSlot.dal_attestation).toEqual('0');
+    });
+
+    it('should query the right url and property for operation, proto 20, dal_publish_commitment', async () => {
+      httpBackend.createRequest.mockReturnValue(
+        Promise.resolve({
+          protocol: 'PtParisBQscdCm6Cfow6ndeU6wKJyA3aV1j4D3gQBQMsTQyJCrz',
+          chain_id: 'NetXo8SqH1c38SS',
+          hash: 'BKsCfYZrh417adJiKbGsyhVG2XrvUBJDhhkCAkZQzWzkEHCejXr',
+          header: {
+            level: 416914,
+            proto: 2,
+            predecessor: 'BLBXzegi3m1K8YjP7w9YgEpts5a9ZCFjY7xqRcm16p6yFxXbZGT',
+            timestamp: '2024-05-06T18:01:07Z',
+            validation_pass: 4,
+            operations_hash: 'LLoZxmgEJQyZ74XCrZQu8Jtcov4SnGGRyuYf32fYmURW2Xfcj58Gv',
+            fitness: ['02', '00065c92', '', 'ffffffff', '00000000'],
+            context: 'CoV1GGrMBca5uBG4AzQbKNrQhQHHTtSYJAHVk7pJtuMw3uWiNvTV',
+            payload_hash: 'vh1mfavAuf7E1m1tZUEHkWomS8BDiLsVZz9T1A79Afu8Cag5DQHG',
+            payload_round: 0,
+            proof_of_work_nonce: 'e38cf66600000000',
+            liquidity_baking_toggle_vote: 'on',
+            adaptive_issuance_vote: 'on',
+            signature:
+              'sighpgD4aPxorZUvPxKvBHYNvnQEBRctF14bYXFX9qLbXbCGZv64S1dFVduBLzWBSEXCcHWiBuUT1iLZt9SE2mKCTkLtWuo5',
+          },
+          metadata: {},
+          operations: [
+            [
+              {
+                protocol: 'ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK',
+                chain_id: 'NetXycmjU7QxoVf',
+                hash: 'onhU8VcKQ7Jfh2wE2ABJMq4MHN2x9262WVeSXV6SVzpZjZcqSj8',
+                branch: 'BMT5yA3UH3CJkaYJBq33Q1BNZU6NL4zZNBhCHKwxygSm59P1x9M',
+                contents: [
+                  {
+                    kind: 'dal_publish_commitment',
+                    source: 'mv1ArAmw2TmmDcxKy3kjRDCnfrwGqSsHj7yf',
+                    fee: '513',
+                    counter: '67',
+                    gas_limit: '1433',
+                    storage_limit: '0',
+                    slot_header: {
+                      slot_index: 0,
+                      commitment:
+                        'sh1vHbHrPSt7eWqYJmM9EUk5scjbvR5PKBckJxmmDJzYHHBkca8Lz4hxXX6zpW5wbhJhswJd4v',
+                      commitment_proof:
+                        '90c6576ad09e11b14eb464cdd214fe061ba8e8e5a3175e29fe7ff40526f90c2f2f4e02fe9fe03f7adb0fe286d7828b970eb1979f0f65ca3637a51d5456b442377d20397eb1b02544c2e435d79e156881443179fe16b32ad9e9501622a647c2ce',
+                    },
+                    metadata: {
+                      balance_updates: [
+                        {
+                          kind: 'contract',
+                          contract: 'mv1ArAmw2TmmDcxKy3kjRDCnfrwGqSsHj7yf',
+                          change: '-513',
+                          origin: 'block',
+                        },
+                        {
+                          kind: 'accumulator',
+                          category: 'block fees',
+                          change: '513',
+                          origin: 'block',
+                        },
+                      ],
+                      operation_result: {
+                        status: 'applied',
+                        slot_header: {
+                          version: '0',
+                          level: 117424,
+                          index: 0,
+                          commitment:
+                            'sh1vHbHrPSt7eWqYJmM9EUk5scjbvR5PKBckJxmmDJzYHHBkca8Lz4hxXX6zpW5wbhJhswJd4v',
+                        },
+                        consumed_milligas: '1332590',
+                      },
+                    },
+                  },
+                ],
+                signature:
+                  'sigwNUDa4HvpGMwpNEuqha91o9vgQzE4AkHZvLiYybRv1137jtorpHr1RZrhw5K167Z4e5UkbPHUsBMTq3KFyPkA1N6ZQnZD',
+              },
+            ],
+          ],
+        })
+      );
+
+      const response = await client.getBlock();
+
+      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
+        method: 'GET',
+        url: 'root/chains/test/blocks/head',
+      });
+      const endorsementWithSlot = response.operations[0][0]
+        .contents[0] as OperationContentsAndResultDalPublishCommitment;
+      expect(endorsementWithSlot.kind).toEqual('dal_publish_commitment');
+      expect(endorsementWithSlot.slot_header.slot_index).toEqual(0);
+      expect(endorsementWithSlot.slot_header.commitment).toEqual(
+        'sh1vHbHrPSt7eWqYJmM9EUk5scjbvR5PKBckJxmmDJzYHHBkca8Lz4hxXX6zpW5wbhJhswJd4v'
+      );
+      expect(endorsementWithSlot.slot_header.commitment_proof).toEqual(
+        '90c6576ad09e11b14eb464cdd214fe061ba8e8e5a3175e29fe7ff40526f90c2f2f4e02fe9fe03f7adb0fe286d7828b970eb1979f0f65ca3637a51d5456b442377d20397eb1b02544c2e435d79e156881443179fe16b32ad9e9501622a647c2ce'
+      );
+    });
   });
 
   describe('getBakingRights', () => {
@@ -2771,81 +2972,6 @@ describe('RpcClient test', () => {
       expect(result[0].delegate).toEqual('mv3Fqu4nnPcvRQREkhxCjVJfznU7JfiQ3CGL');
       expect(result[0].estimated_time).toEqual('2019-08-02T09:48:56Z');
       expect(result[0].consensus_key).toEqual('mv1PamFfqchwSDu2zPvs8WbtEhPzBXozSEVn');
-    });
-  });
-
-  describe('getEndorsingRights', () => {
-    it('query the right url and data', async () => {
-      httpBackend.createRequest.mockResolvedValue([
-        {
-          level: 547386,
-          delegate: 'mv3V4zLbrZc6grWr2BnCvP8P7QdyWputqnTy',
-          slots: [27],
-          estimated_time: '2019-08-02T09:42:56Z',
-        },
-        {
-          level: 547386,
-          delegate: 'mv3Fqu4nnPcvRQREkhxCjVJfznU7JfiQ3CGL',
-          slots: [23, 12, 0],
-          estimated_time: '2019-08-02T09:42:56Z',
-        },
-        {
-          level: 547386,
-          delegate: 'mv3AGu3hCvXE6SwkaJRX8gvvFoLhw8BSzbsV',
-          slots: [31, 17, 13],
-          estimated_time: '2019-08-02T09:42:56Z',
-        },
-        {
-          level: 547386,
-          delegate: 'mv3NMZKzwCJFFgmGCjQu2GTa72bK4bcAjb5Q',
-          slots: [24, 9, 1],
-          estimated_time: '2019-08-02T09:42:56Z',
-        },
-      ]);
-      const result = await client.getEndorsingRights();
-
-      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
-        method: 'GET',
-        query: {},
-        url: 'root/chains/test/blocks/head/helpers/endorsing_rights',
-      });
-
-      expect(result[1].delegate).toEqual('mv3Fqu4nnPcvRQREkhxCjVJfznU7JfiQ3CGL');
-      expect(result[1].estimated_time).toEqual('2019-08-02T09:42:56Z');
-      expect(result[1].slots!.length).toEqual(3);
-    });
-
-    it('query the right url and data (with consensus key in delegates)', async () => {
-      httpBackend.createRequest.mockResolvedValue([
-        {
-          level: 547386,
-          delegates: [
-            {
-              delegate: 'mv3V4zLbrZc6grWr2BnCvP8P7QdyWputqnTy',
-              first_slot: 1,
-              endorsing_power: 1,
-              consensus_key: 'mv1PamFfqchwSDu2zPvs8WbtEhPzBXozSEVn',
-            },
-          ],
-          slots: [27],
-          estimated_time: '2019-08-02T09:42:56Z',
-        },
-      ]);
-      const result = await client.getEndorsingRights();
-
-      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
-        method: 'GET',
-        query: {},
-        url: 'root/chains/test/blocks/head/helpers/endorsing_rights',
-      });
-
-      expect(result[0].delegates).toBeDefined();
-      expect(result[0].delegates![0].delegate).toEqual('mv3V4zLbrZc6grWr2BnCvP8P7QdyWputqnTy');
-      expect(result[0].delegates![0].first_slot).toEqual(1);
-      expect(result[0].delegates![0].endorsing_power).toEqual(1);
-      expect(result[0].delegates![0].consensus_key).toEqual('mv1PamFfqchwSDu2zPvs8WbtEhPzBXozSEVn');
-      expect(result[0].estimated_time).toEqual('2019-08-02T09:42:56Z');
-      expect(result[0].slots!.length).toEqual(1);
     });
   });
 
@@ -3730,8 +3856,22 @@ describe('RpcClient test', () => {
     });
   });
 
+  describe('AdaptiveIssuanceLaunchCycle', () => {
+    it('should query the right url and data', async () => {
+      httpBackend.createRequest.mockResolvedValue(aiLaunchCycle);
+      const response = await client.getAdaptiveIssuanceLaunchCycle();
+
+      expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
+        method: 'GET',
+        url: `root/chains/test/blocks/head/context/adaptive_issuance_launch_cycle`,
+      });
+
+      expect(response).toEqual(aiLaunchCycle);
+    });
+  });
+
   describe('getPendingOperations', () => {
-    it('should query the correct url and retrun pending operations in mempool', async () => {
+    it('should query the correct url and return pending operations in mempool', async () => {
       httpBackend.createRequest.mockReturnValue(Promise.resolve(pendingOperationsResponse));
       const response: PendingOperationsV1 | PendingOperationsV2 =
         await client.getPendingOperations();

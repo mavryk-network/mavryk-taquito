@@ -4,7 +4,7 @@
  */
 
 import BigNumber from 'bignumber.js';
-import { MichelCodecPacker, Packer, TzReadProvider } from '@mavrykdynamics/taquito';
+import { MichelCodecPacker, Packer, MvReadProvider } from '@mavrykdynamics/taquito';
 import {
   b58cdecode,
   format,
@@ -64,7 +64,7 @@ export class SaplingToolkit {
   #saplingId: string | undefined;
   #contractAddress: string;
   #memoSize: number;
-  #readProvider: TzReadProvider;
+  #readProvider: MvReadProvider;
   #packer: Packer;
   #saplingForger: SaplingForger;
   #saplingTxBuilder: SaplingTransactionBuilder;
@@ -75,7 +75,7 @@ export class SaplingToolkit {
       saplingProver?: InMemoryProvingKey;
     },
     saplingContractDetails: SaplingContractDetails,
-    readProvider: TzReadProvider,
+    readProvider: MvReadProvider,
     packer = new MichelCodecPacker(),
     saplingForger = new SaplingForger(),
     saplingTxBuilder = new SaplingTransactionBuilder(
@@ -116,7 +116,7 @@ export class SaplingToolkit {
   /**
    * @description Prepare a shielded transaction
    * @param shieldedTxParams `to` is the payment address that will receive the shielded tokens (zet).
-   * `amount` is the amount of shielded tokens in tez by default.
+   * `amount` is the amount of shielded tokens in mav by default.
    * `mumav` needs to be set to true if the amount of shielded tokens is in mumav.
    * `memo` is an empty string by default.
    * @returns a string representing the sapling transaction
@@ -148,8 +148,8 @@ export class SaplingToolkit {
 
   /**
    * @description Prepare an unshielded transaction
-   * @param unshieldedTxParams `to` is the Tezos address that will receive the unshielded tokens (mv1, mv2 or mv3).
-   * `amount` is the amount of unshielded tokens in tez by default.
+   * @param unshieldedTxParams `to` is the Mavryk address that will receive the unshielded tokens (mv1, mv2 or mv3).
+   * `amount` is the amount of unshielded tokens in mav by default.
    * `mumav` needs to be set to true if the amount of unshielded tokens is in mumav.
    * @returns a string representing the sapling transaction.
    */
@@ -186,7 +186,7 @@ export class SaplingToolkit {
   /**
    * @description Prepare a sapling transaction (zet to zet)
    * @param saplingTxParams `to` is the payment address that will receive the shielded tokens (zet).
-   * `amount` is the amount of unshielded tokens in tez by default.
+   * `amount` is the amount of unshielded tokens in mav by default.
    * `mumav` needs to be set to true if the amount of unshielded tokens is in mumav.
    * `memo` is an empty string by default.
    * @returns a string representing the sapling transaction.

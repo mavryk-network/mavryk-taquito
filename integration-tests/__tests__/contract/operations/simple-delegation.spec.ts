@@ -1,7 +1,7 @@
 import { CONFIGS } from "../../../config";
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBaker }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test delegation of account through contract api using: ${rpc}`, () => {
 
     beforeEach(async () => {
@@ -9,9 +9,9 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker }) => {
     })
     it('Verify that account can be delegated to a known baker using contract.setDelegate', async () => {
       const delegate = knownBaker
-      const pkh = await Tezos.signer.publicKeyHash()
+      const pkh = await Mavryk.signer.publicKeyHash()
       try {
-        const op = await Tezos.contract.setDelegate({
+        const op = await Mavryk.contract.setDelegate({
           delegate,
           source: pkh,
         })
@@ -25,10 +25,10 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker }) => {
         expect(op.source).toEqual(pkh);
         expect(op.status).toEqual('applied');
 
-        const account = await Tezos.rpc.getDelegate(pkh)
+        const account = await Mavryk.rpc.getDelegate(pkh)
         expect(account).toEqual(delegate)
       } catch (ex: any) {
-        if (await Tezos.rpc.getDelegate(pkh) === pkh) {
+        if (await Mavryk.rpc.getDelegate(pkh) === pkh) {
           // Forbidden delegate deletion
           expect(ex.message).toMatch('delegate.no_deletion')
         } else {

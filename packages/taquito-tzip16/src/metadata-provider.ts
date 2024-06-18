@@ -45,7 +45,7 @@ export class MetadataProvider implements MetadataProviderInterface {
    * @returns an object which contains the uri, the metadata, an optional integrity check result and an optional SHA256 hash
    * @param _contractAbstraction the contract abstraction which contains the URI in its storage
    * @param _uri the decoded uri found in the storage
-   * @param context the TezosToolkit Context
+   * @param context the MavrykToolkit Context
    */
   async provideMetadata(
     contractAbstraction: ContractAbstraction<ContractProvider | Wallet>,

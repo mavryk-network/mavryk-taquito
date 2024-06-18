@@ -30,7 +30,7 @@ interface PollingConfig {
 }
 
 /**
- * @description Utility class to interact with Tezos operations
+ * @description Utility class to interact with Mavryk operations
  */
 export class Operation {
   private _pollingConfig$ = new ReplaySubject<PollingConfig>(1);

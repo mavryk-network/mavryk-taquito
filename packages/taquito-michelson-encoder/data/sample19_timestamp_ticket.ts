@@ -2650,7 +2650,7 @@ export const rpcContractResponse = {
 						{
 							prim: 'Pair',
 							args: [
-								{ string: 'XTZ-USD' },
+								{ string: 'MVRK-USD' },
 								{ int: '2' },
 								{ int: '2' },
 								{ int: '86400' },

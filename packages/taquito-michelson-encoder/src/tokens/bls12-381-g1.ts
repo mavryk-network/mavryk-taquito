@@ -13,7 +13,7 @@ export class Bls12381g1ValidationError extends TokenValidationError {
 }
 export class Bls12381g1Token extends Token {
   // A point on the BLS12-381 curve G1
-  // See https://tezos.gitlab.io/michelson-reference/#type-bls12_381_g1
+  // See https://protocol.mavryk.org/michelson-reference/#type-bls12_381_g1
   static prim: 'bls12_381_g1' = 'bls12_381_g1' as const;
 
   constructor(

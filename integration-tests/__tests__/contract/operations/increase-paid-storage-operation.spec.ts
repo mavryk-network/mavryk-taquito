@@ -4,14 +4,14 @@ import { ligoSample } from '../../../data/ligo-simple-contract';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
 
-  const Tezos = lib;
+  const Mavryk = lib;
   let simpleContractAddress: string;
   describe(`Test Increase Paid Storage using: ${rpc}`, () => {
     beforeAll(async () => {
       await setup(true);
 
       try {
-        const op = await Tezos.contract.originate({
+        const op = await Mavryk.contract.originate({
           balance: "1",
           code: `parameter string;
           storage string;
@@ -32,9 +32,9 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     it(`should be able to increase the paid storage of a contract successfully: ${rpc}`, async () => {
-      const paidSpaceBefore = await Tezos.rpc.getStoragePaidSpace(simpleContractAddress);
+      const paidSpaceBefore = await Mavryk.rpc.getStoragePaidSpace(simpleContractAddress);
 
-      const op = await Tezos.contract.increasePaidStorage({
+      const op = await Mavryk.contract.increasePaidStorage({
         amount: 1,
         destination: simpleContractAddress
       });
@@ -43,15 +43,15 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       expect(op.hash).toBeDefined();
       expect(op.status).toEqual('applied');
 
-      const paidSpaceAfter = await Tezos.rpc.getStoragePaidSpace(simpleContractAddress);
+      const paidSpaceAfter = await Mavryk.rpc.getStoragePaidSpace(simpleContractAddress);
 
       expect(parseInt(paidSpaceAfter)).toEqual(parseInt(paidSpaceBefore) + 1);
     });
 
     it(`should be able to include increasePaidStorage operation in a batch (different batch syntax): ${rpc}`, async () => {
-      const paidSpaceBefore = await Tezos.rpc.getStoragePaidSpace(simpleContractAddress);
+      const paidSpaceBefore = await Mavryk.rpc.getStoragePaidSpace(simpleContractAddress);
 
-      const op = await Tezos.contract.batch([
+      const op = await Mavryk.contract.batch([
         {
           kind: OpKind.ORIGINATION,
           balance: '1',
@@ -69,14 +69,14 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       await op.confirmation();
       expect(op.status).toEqual('applied');
 
-      const paidSpaceAfter = await Tezos.rpc.getStoragePaidSpace(simpleContractAddress);
+      const paidSpaceAfter = await Mavryk.rpc.getStoragePaidSpace(simpleContractAddress);
 
       expect(parseInt(paidSpaceAfter)).toEqual(parseInt(paidSpaceBefore) + 1);
     });
 
     it('should return error when destination contract address is invalid', async () => {
       expect(async () => {
-        const op = await Tezos.contract.increasePaidStorage({
+        const op = await Mavryk.contract.increasePaidStorage({
           amount: 1,
           destination: 'invalid_address'
         });

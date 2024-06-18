@@ -1,9 +1,9 @@
 {
   "name": "@mavrykdynamics/taquito-core",
-  "version": "19.1.0",
+  "version": "20.0.0",
   "description": "Classes, interfaces, and types shared across Taquito packages",
   "keywords": [
-    "tezos",
+    "mavryk",
     "blockchain"
   ],
   "main": "dist/taquito-core.umd.js",

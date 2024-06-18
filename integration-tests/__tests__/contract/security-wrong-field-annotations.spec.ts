@@ -41,13 +41,13 @@ import { securityWrongAnnotations } from '../../data/security-wrong-annotations-
  *        [a] Value is not a number: undefined
  *        [valueA] Value is not a number: undefined
  *
- *  With Jakarta there is a change regarding Annotations: https://tezos.gitlab.io/protocols/013_jakarta.html#michelson.
+ *  With Jakarta there is a change regarding Annotations: https://protocol.mavryk.org/protocols/013_jakarta.html#michelson.
  *  This means the sub testcases 3 & 7 in TC-009 will behave differently in Jakarta.
  *
  */
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const weeklynet = protocol === Protocols.ProtoALpha ? test : test.skip;
 
   describe(`Test contracts to verify wrong field annotations are leading to failed transactions using: ${rpc}`, () => {
@@ -56,7 +56,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
     });
 
     weeklynet('Verify annotation combinations on weeklynet', async () => {
-      const addition = await Tezos.contract.originate({
+      const addition = await Mavryk.contract.originate({
         code: securityWrongAnnotations,
         init: `0`,
       });

@@ -48,7 +48,7 @@ export class ContractMethodObject<T extends ContractProvider | Wallet> implement
 
     /**
      *
-     * @description Create transfer params to be used with TezosToolkit.contract.transfer methods
+     * @description Create transfer params to be used with MavrykToolkit.contract.transfer methods
      *
      * @param Options generic transfer operation parameters
      */

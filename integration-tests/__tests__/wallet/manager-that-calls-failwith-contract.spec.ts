@@ -4,7 +4,7 @@ import { managerCode } from "../../data/manager_code";
 import { MANAGER_LAMBDA } from "@mavrykdynamics/taquito";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test contract origination of a contract that calls 2nd contract that FAILs through wallet api: ${rpc}`, () => {
 
@@ -12,7 +12,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       await setup()
     })
     test('Verify that transferring token from the manager contract to a contract having a FAILWITH instruction will fail.', async () => {
-      const op = await Tezos.wallet.originate({
+      const op = await Mavryk.wallet.originate({
         balance: "1",
         code: failwithContractCode,
         storage: null
@@ -21,10 +21,10 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       expect(op.opHash).toBeDefined();
       await op.confirmation();
 
-      const opManager = await Tezos.wallet.originate({
+      const opManager = await Mavryk.wallet.originate({
         balance: "1",
         code: managerCode,
-        init: { "string": await Tezos.signer.publicKeyHash() },
+        init: { "string": await Mavryk.signer.publicKeyHash() },
       }).send()
 
       const managerContract = await opManager.contract()

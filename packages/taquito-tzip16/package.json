@@ -1,9 +1,9 @@
 {
   "name": "@mavrykdynamics/taquito-tzip16",
-  "version": "19.2.3",
+  "version": "20.0.0",
   "description": "Tzip16",
   "keywords": [
-    "tezos",
+    "mavryk",
     "blockchain",
     "tzip16"
   ],
@@ -61,12 +61,12 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/taquito": "^19.2.3",
-    "@mavrykdynamics/taquito-core": "^19.1.0",
-    "@mavrykdynamics/taquito-http-utils": "^19.2.3",
-    "@mavrykdynamics/taquito-michelson-encoder": "^19.2.3",
-    "@mavrykdynamics/taquito-rpc": "^19.2.3",
-    "@mavrykdynamics/taquito-utils": "^19.2.3",
+    "@mavrykdynamics/taquito-core": "^20.0.0",
+    "@mavrykdynamics/taquito-http-utils": "^20.0.0",
+    "@mavrykdynamics/taquito-michelson-encoder": "^20.0.0",
+    "@mavrykdynamics/taquito-rpc": "^20.0.0",
+    "@mavrykdynamics/taquito": "^20.0.0",
+    "@mavrykdynamics/taquito-utils": "^20.0.0",
     "bignumber.js": "^9.1.2",
     "crypto-js": "^4.2.0"
   },

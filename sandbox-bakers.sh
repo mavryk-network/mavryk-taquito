@@ -6,10 +6,10 @@ flexmasa_docker_image="${1}"
 # Set environment variables
 export RUN_"${testnet_uppercase}"_WITH_SECRET_KEY=true
 export SECRET_KEY="${secret_key}"
-export TEZOS_RPC_"${testnet_uppercase}"="http://localhost:20000"
+export MAVRYK_RPC_"${testnet_uppercase}"="http://localhost:20000"
 export POLLING_INTERVAL_MILLISECONDS=100
 export RPC_CACHE_MILLISECONDS=0
-export TEZOS_BAKER=mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv
+export MAVRYK_BAKER=mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv
 
 alice=$(docker run --rm "${flexmasa_docker_image}" flexmasa key alice)
 bob=$(docker run --rm "${flexmasa_docker_image}" flexmasa key bob)
@@ -37,7 +37,7 @@ docker run \
   --root /tmp/mini-box --size 1 \
   --set-history-mode N000:archive \
   --number-of-b 1 \
-  --balance-of-bootstrap-accounts tez:100_000_000 \
+  --balance-of-bootstrap-accounts mav:100_000_000 \
   --time-b 1 \
   --add-bootstrap-account="${alice}@2_000_000_000_000" \
   --add-bootstrap-account="${bob}@2_000_000_000_000" \

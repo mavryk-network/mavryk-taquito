@@ -7,7 +7,7 @@ const manifest = require('./manifest.json')
 const package = require('./package.json')
 
 const integrityRegex = /integrity="(.*)"/;
-const versionRegex = /@taquito\/taquito@(.+)\/dist/
+const versionRegex = /@mavrykdynamics\/taquito@(.+)\/dist/
 
 if (fs.existsSync(readmePath)) {
   let readme = fs.readFileSync(readmePath).toString('utf8');

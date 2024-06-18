@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 // This test is skipped on Flexmasa due to the high number of operations taking too long to resolve in the sandbox
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
 
     describe(`Test contract.batch containing a high number of operations through contract api using: ${rpc}`, () => {
         beforeEach(async () => {
@@ -25,7 +25,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
                 dests.push({ key, pkh });
             }
 
-            const batch = Tezos.contract.batch()
+            const batch = Mavryk.contract.batch()
             dests.forEach(({ pkh }) => {
                 batch.withTransfer({ to: pkh, amount: 0.001 });
             })

@@ -23,7 +23,7 @@ values={[
 
 | Provider         | Net          | URL                                      | Header                                                                          |
 |------------------|--------------|------------------------------------------|---------------------------------------------------------------------------------|
-| Mavryk Dynamics        | Mainnet      | https://mainnet.rpc.mavryk.network            | [Check](https://mainnet.rpc.mavryk.network/chains/main/blocks/head/header)           |
+| Mavryk Dynamics        | Mainnet     | https://mainnet.rpc.mavryk.network           | [Check](https://mainnet.rpc.mavryk.network/chains/main/blocks/head/header)          |
 | Mavryk Dynamics        | Basenet     | https://basenet.rpc.mavryk.network           | [Check](https://basenet.rpc.mavryk.network/chains/main/blocks/head/header)          |
 | Mavryk Dynamics        | Atlasnet    | https://atlasnet.rpc.mavryk.network          | [Check](https://atlasnet.rpc.mavryk.network/chains/main/blocks/head/header)         |
 

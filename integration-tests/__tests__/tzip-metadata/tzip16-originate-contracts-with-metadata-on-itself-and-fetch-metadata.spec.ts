@@ -4,8 +4,8 @@ import { tacoContractTzip16 } from "../../data/modified-taco-contract"
 import { MichelsonMap } from "@mavrykdynamics/taquito";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
-  Tezos.addExtension(new Tzip16Module());
+  const Mavryk = lib;
+  Mavryk.addExtension(new Tzip16Module());
   let contractAddress: string;
   let contractMetadataInAnotherContract: string;
 
@@ -36,7 +36,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
       const tacoShopStorageMap = new MichelsonMap();
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: tacoContractTzip16,
         storage: {
           metadata: metadataBigMap,
@@ -51,7 +51,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     it('Verify the metadata for a contract having metadata inside its own storage can be fetched', async () => {
 
-      const contract = await Tezos.wallet.at(contractAddress, tzip16);
+      const contract = await Mavryk.wallet.at(contractAddress, tzip16);
       const metadata = await contract.tzip16().getMetadata();
 
       expect(metadata.uri).toEqual('mavryk-storage:here');
@@ -88,7 +88,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
       const tacoShopStorageMap = new MichelsonMap();
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: tacoContractTzip16,
         storage: {
           metadata: metadataBigMap,
@@ -103,7 +103,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     it('Verify that metadata for contract having metadata inside another contract on the same network can be fetched', async () => {
 
-      const contract = await Tezos.wallet.at(contractMetadataInAnotherContract, tzip16);
+      const contract = await Mavryk.wallet.at(contractMetadataInAnotherContract, tzip16);
       const metadata = await contract.tzip16().getMetadata();
 
       expect(metadata.uri).toEqual(`mavryk-storage://${contractAddress}/here`);

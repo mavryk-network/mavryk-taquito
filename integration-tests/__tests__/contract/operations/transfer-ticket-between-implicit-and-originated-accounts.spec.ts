@@ -1,15 +1,15 @@
 import { CONFIGS } from "../../../config";
-import { DefaultContractType, TezosToolkit } from "@mavrykdynamics/taquito";
+import { DefaultContractType, MavrykToolkit } from "@mavrykdynamics/taquito";
 import { ticketsSendTz, ticketsBagTz, ticketsBlackholeTz } from "../../../data/code_with_ticket_transfer";
 import { RpcClient, TicketTokenParams } from '@mavrykdynamics/taquito-rpc';
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
-  const Tezos1 = lib;
+  const Mavryk1 = lib;
   const client = new RpcClient(rpc);
 
-  let tezos1Pkh: string;
-  let tezos2Pkh: string;
-  let Tezos2: TezosToolkit;
+  let mavryk1Pkh: string;
+  let mavryk2Pkh: string;
+  let Mavryk2: MavrykToolkit;
   let ticketSendContract: DefaultContractType;
   let ticketBagContract: DefaultContractType;
   let ticketBlackholeContract: DefaultContractType;
@@ -20,22 +20,22 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     beforeAll(async () => {
       await setup(true);
       try {
-        Tezos2 = await createAddress();
-        tezos1Pkh = await Tezos1.signer.publicKeyHash();
-        tezos2Pkh = await Tezos2.signer.publicKeyHash();
+        Mavryk2 = await createAddress();
+        mavryk1Pkh = await Mavryk1.signer.publicKeyHash();
+        mavryk2Pkh = await Mavryk2.signer.publicKeyHash();
 
         // ticketSend contract has one default entrypoint which accepts an address to issue tickets to
-        const ticketSendOrigination = await Tezos1.contract.originate({ code: ticketsSendTz, storage: null });
+        const ticketSendOrigination = await Mavryk1.contract.originate({ code: ticketsSendTz, storage: null });
         await ticketSendOrigination.confirmation();
         ticketSendContract = await ticketSendOrigination.contract();
 
         // ticketBag contract has two entrypoints, one is "save" to receive tickets and the other is "send" to send tickets out
-        const ticketBagOrigination = await Tezos1.contract.originate({ code: ticketsBagTz, storage: [] });
+        const ticketBagOrigination = await Mavryk1.contract.originate({ code: ticketsBagTz, storage: [] });
         await ticketBagOrigination.confirmation();
         ticketBagContract = await ticketBagOrigination.contract();
 
         // ticketBlackhole contract has one default entrypoint to accept tickets and dispose them
-        const ticketBlackholeOrigination = await Tezos1.contract.originate({ code: ticketsBlackholeTz, storage: null });
+        const ticketBlackholeOrigination = await Mavryk1.contract.originate({ code: ticketsBlackholeTz, storage: null });
         await ticketBlackholeOrigination.confirmation();
         ticketBlackholeContract = await ticketBlackholeOrigination.contract();
 
@@ -46,37 +46,37 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     });
 
     it('will send 3 tickets from an originated to an implicit account', async () => {
-      const ticketSendToImplicitOp = await ticketSendContract.methods.default(tezos1Pkh, '3').send();
+      const ticketSendToImplicitOp = await ticketSendContract.methods.default(mavryk1Pkh, '3').send();
       await ticketSendToImplicitOp.confirmation();
       expect(ticketSendToImplicitOp.status).toEqual('applied');
 
-      let tezos1TicketBalance = await client.getTicketBalance(tezos1Pkh, ticketToken);
-      expect(tezos1TicketBalance).toBe('3');
+      let Mavryk1TicketBalance = await client.getTicketBalance(mavryk1Pkh, ticketToken);
+      expect(Mavryk1TicketBalance).toBe('3');
     });
 
     it('will transfer 1 tickets from an implicit to another implicit account', async () => {
-      let tezos2TicketBalanceBefore = await client.getTicketBalance(tezos2Pkh, ticketToken);
-      expect(tezos2TicketBalanceBefore).toBe('0');
+      let Mavryk2TicketBalanceBefore = await client.getTicketBalance(mavryk2Pkh, ticketToken);
+      expect(Mavryk2TicketBalanceBefore).toBe('0');
 
-      const implicitToImplicitOp = await Tezos1.contract.transferTicket({
+      const implicitToImplicitOp = await Mavryk1.contract.transferTicket({
         ticketContents: { string: "Ticket" },
         ticketTy: { prim: "string" },
         ticketTicketer: ticketSendContract.address,
         ticketAmount: 1,
-        destination: await Tezos2.signer.publicKeyHash(),
+        destination: await Mavryk2.signer.publicKeyHash(),
         entrypoint: 'default',
       });
       await implicitToImplicitOp.confirmation();
       expect(implicitToImplicitOp.status).toEqual('applied');
 
-      let tezos1TicketBalanceAfter = await client.getTicketBalance(await Tezos1.signer.publicKeyHash(), ticketToken);
-      expect(tezos1TicketBalanceAfter).toBe('2');
-      let tezos2TicketBalanceAfter = await client.getTicketBalance(await Tezos2.signer.publicKeyHash(), ticketToken);
-      expect(tezos2TicketBalanceAfter).toBe('1');
+      let Mavryk1TicketBalanceAfter = await client.getTicketBalance(await Mavryk1.signer.publicKeyHash(), ticketToken);
+      expect(Mavryk1TicketBalanceAfter).toBe('2');
+      let Mavryk2TicketBalanceAfter = await client.getTicketBalance(await Mavryk2.signer.publicKeyHash(), ticketToken);
+      expect(Mavryk2TicketBalanceAfter).toBe('1');
     });
 
     it('will transfer 1 ticket from an implicit to an originated account', async () => {
-      const implicitToOriginatedOp = await Tezos1.contract.transferTicket({
+      const implicitToOriginatedOp = await Mavryk1.contract.transferTicket({
         ticketContents: { string: "Ticket" },
         ticketTy: { prim: "string" },
         ticketTicketer: ticketSendContract.address,

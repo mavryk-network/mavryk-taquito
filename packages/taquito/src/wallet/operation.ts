@@ -84,7 +84,7 @@ export class WalletOperation {
   }
 
   /**
-   * @description Receipt expose the total amount of tezos token burn and spent on fees
+   * @description Receipt expose the total amount of mavryk token burn and spent on fees
    * The promise returned by receipt will resolve only once the transaction is included
    */
   async receipt(): Promise<Receipt> {

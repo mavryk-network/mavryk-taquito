@@ -11,7 +11,7 @@ import {
   OperationResultTransaction,
   OperationResultTransferTicket,
   PreapplyResponse,
-  TezosGenericOperationError,
+  MavrykGenericOperationError,
 } from '@mavrykdynamics/taquito-rpc';
 import {
   hasMetadata,
@@ -19,28 +19,28 @@ import {
   hasMetadataWithResult,
 } from './types';
 
-export interface TezosOperationErrorWithMessage extends TezosGenericOperationError {
+export interface MavrykOperationErrorWithMessage extends MavrykGenericOperationError {
   with: MichelsonV1ExpressionBase;
 }
 
-const isErrorWithMessage = (error: any): error is TezosOperationErrorWithMessage => {
+const isErrorWithMessage = (error: any): error is MavrykOperationErrorWithMessage => {
   return 'with' in error;
 };
 
 /**
  *  @category Error
- *  @description Generic tezos error that will be thrown when a mistake occurs when doing an operation; more details here https://tezos.gitlab.io/api/errors.html
+ *  @description Generic mavryk error that will be thrown when a mistake occurs when doing an operation; more details here https://protocol.mavryk.org/api/errors.html
  */
-export class TezosOperationError extends RpcError {
-  public readonly lastError: TezosGenericOperationError;
+export class MavrykOperationError extends RpcError {
+  public readonly lastError: MavrykGenericOperationError;
 
   constructor(
-    public readonly errors: TezosGenericOperationError[],
+    public readonly errors: MavrykGenericOperationError[],
     public readonly errorDetails: string,
     public readonly operationsWithResults: OperationContentsAndResult[]
   ) {
     super();
-    this.name = 'TezosOperationError';
+    this.name = 'MavrykOperationError';
     // Last error is 'often' the one with more detail
     this.lastError = errors[errors.length - 1];
 
@@ -67,12 +67,12 @@ export class TezosOperationError extends RpcError {
 
 /**
  *  @category Error
- *  @description Tezos error that will be thrown when a mistake happens during the preapply stage
+ *  @description Mavryk error that will be thrown when a mistake happens during the preapply stage
  */
-export class TezosPreapplyFailureError extends Error {
+export class MavrykPreapplyFailureError extends Error {
   constructor(public readonly result: any) {
     super();
-    this.name = 'TezosPreapplyFailureError';
+    this.name = 'MavrykPreapplyFailureError';
     this.message = 'Preapply returned an unexpected result';
   }
 }
@@ -126,7 +126,7 @@ export const flattenErrors = (
 ) => {
   const results = Array.isArray(response) ? response : [response];
 
-  let errors: TezosGenericOperationError[] = [];
+  let errors: MavrykGenericOperationError[] = [];
   // Transaction that do not fail will be backtracked in case one failure occur
   for (let i = 0; i < results.length; i++) {
     for (let j = 0; j < results[i].contents.length; j++) {

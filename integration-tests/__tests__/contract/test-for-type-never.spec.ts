@@ -4,14 +4,14 @@ import { CONFIGS } from '../../config';
 import { contractWithNever } from '../../data/contract-with-never-in-param';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-	const Tezos = lib;
+	const Mavryk = lib;
 	describe(`Test contract origination with type never through contract api using: ${rpc}`, () => {
 		beforeEach(async () => {
 			await setup();
 		});
 
 		it('Verify contract.originate for a contract and then try to call its %admin entry-point of type never, expect the method call to fail', async () => {
-			const op = await Tezos.contract.originate({
+			const op = await Mavryk.contract.originate({
 				code: contractWithNever,
 				storage: {
 					admin: "Unit",
@@ -55,7 +55,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 				}
 			];
 
-			const op = await Tezos.contract.originate({
+			const op = await Mavryk.contract.originate({
 				code,
 				storage: [] // empty set
 			});

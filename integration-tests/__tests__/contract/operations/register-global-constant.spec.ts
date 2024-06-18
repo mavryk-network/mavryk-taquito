@@ -2,7 +2,7 @@ import { CONFIGS } from '../../../config';
 const crypto = require('crypto');
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Register global constants using: ${rpc}`, () => {
     const randomAnnots = () => crypto.randomBytes(3).toString('hex');
@@ -14,7 +14,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     test('Verify contract.registerGlobalConstant to register a Micheline expression to the global table of constants', async () => {
       // We use a randomized annots in the Micheline expression because an expression can only be registered once.
-      const op = await Tezos.contract.registerGlobalConstant({
+      const op = await Mavryk.contract.registerGlobalConstant({
         value: {
           prim: 'list',
           args: [{ prim: 'nat' }],
@@ -38,7 +38,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     test(
       'Verify contract.registerGlobalConstant to register a global constant with auto-estimation of the fee, storage limit and gas limit',
       async () => {
-        const op = await Tezos.contract.registerGlobalConstant({
+        const op = await Mavryk.contract.registerGlobalConstant({
           value: {
             prim: 'list',
             args: [{ prim: 'nat' }],

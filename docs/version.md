@@ -2,6 +2,107 @@
 title: Versions
 author: Jev Bjorsell
 ---
+
+# Taquito v20.0.0
+## Summary
+
+### Boreas Protocol Support 
+Boreas Protocol has new Adaptive Issuance features, including staking pseudo-operations and rpc endpoints.
+
+⚠️ Warning ⚠️ 
+Adaptive Issuance, Staking, and Adaptive slashing will be in effect roughly two weeks (5 cycles) after the proposal is activated on Mainnet. The new AI features will not be usable until then.
+
+### ⚠️ Breaking Changes ⚠️
+
+### Beacon Migration
+As of Beacon version 4.2.0, Beacon has migrated from using `dAppClient.getActiveAccount()` to using an event subscription method `BeaconEvent.ACTIVE_ACCOUNT_SET` for handling active account changes. 
+
+**IF YOU ARE STILL USING THE `eventHandlers` PROPERTY WHEN INITIALIZING A DAPP CLIENT, PLEASE UPDATE YOUR CODE.**
+
+```
+const wallet = new BeaconWallet(options);
+await wallet.client.subscribeToEvent(BeaconEvent.ACTIVE_ACCOUNT_SET, (data) => {
+    // your logic to update your state
+    console.log(data.address);
+    console.log(data.network.type);
+});
+await wallet.requestPermissions();
+```
+### Michelson-encoder
+We fixed a bug in `@mavrykdynamics/taquito-Michelson-encoder` when there are nested `pair` and `or` without having `annots` consistently; the indexing key will have unexpected behaviour as below. This is an API behaviour-breaking change; if your dApp depends on the old behaviour or changing is too much effort, you can configure your `MavrykToolkit` with `Mavryk.setFieldNumberingStrategy('Legacy')` to keep the previous behaviour. But please note that this option might be removed in a future release.
+
+Previous behaviour - inner object's field numbers depend on the object's location in its parent, and start with '2'
+```
+{
+  '0': 'firstValue',
+  '1': 'secondValue,
+  '2': {
+   '2': 'thirdValue',
+   '3': 'fourthValue'
+  }
+}
+```
+New behaviour - inner object's field number will start with '0'
+```
+{
+  '0': 'firstValue',
+  '1': 'secondValue,
+  '2': {
+   '0': 'thirdValue',
+   '1': 'fourthValue'
+  }
+}
+```
+
+### New Features
+- `@mavrykdynamics/taquito` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Contract API. This includes support for `prepareProvider`, `estimationProvider`, and `rpcContractProvider` #2886
+- `@mavrykdynamics/taquito` - Added staking related pseudo operations (stake, unstake, finalize_unstake) to the Wallet API #2921
+- `@mavrykdynamics/taquito-rpc` - Added various RPC endpoints related to Adaptive Issuance (Staking) #2676 #2678
+- `@mavrykdynamics/taquito-rpc` - Updated return types for several RPC endpoints related to the Boreas protocol update #2887
+- `@mavrykdynamics/taquito-rpc` - Removed `getEndorsingRights` RPC endpoint along with its related type definition and tests #2884
+- `@mavrykdynamics/taquito-rpc` - Updated RPC types for `AttestationWithDal` and `EndorsementWithDal` #2880
+- `@mavrykdynamics/taquito-rpc` - Updated RPC response types to support DAL types #2882
+- `@mavrykdynamics/taquito-rpc` - Updated RPC response type for the new manager op `dal_publish_commitment` #2881 
+- `@mavrykdynamics/taquito-rpc` - Added a new RPC endpoint called `getAllDelegates` #2976
+- `@mavrykdynamics/taquito-local-forging` - Added local forging support for `AttestationWithDal` operation #2880
+- `@mavrykdynamics/taquito-local-forging` - Added local forging support for the new manager operation `dal_publish_commitment` #2881 
+- `@mavrykdynamics/taquito-michel-codec` - Updated Michelson type definitions and validators to include the new Boreas protocol ticket literals [PR#2940](https://github.com/ecadlabs/taquito/pull/2940)
+
+### Internals
+- Updated protocol constants integration test for Boreas protocol #2869
+- Configured keygen and integration test configs for Boreas protocol #2888
+- Added forger integration test for protocol migrations #2850
+- Updated `@mavrykdynamics/taquito-beacon-wallet` to use event subscription instead of `getActiveAccount()` #2958
+- Updated some website dependencies [PR#2961](https://github.com/ecadlabs/taquito/pull/2961)
+- Updated Beacon wallet dependency to the latest version `v4.2.3` (includes Boreas protocol definitions) [PR#2956](https://github.com/ecadlabs/taquito/pull/2956)
+- Fixed nested `pair` and `or` indexing bug #2927
+- Added a test-dapp case to transfer ghostnet mav to etherlink address #2944
+- Updated the Boreas protocol hash to reflect the latest Octez fix [PR](https://github.com/ecadlabs/taquito/pull/2974)
+
+### Documentation
+- Updated documentation for new Adaptive Issuance related features [PR#2928](https://github.com/ecadlabs/taquito/pull/2928)
+- Added Mavryk Foundation public testnet nodes to rpc_nodes on website #2933
+
+
+### `@mavrykdynamics/taquito` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Contract API
+
+```javascript
+const op = await Mavryk.contract.stake({
+  amount: 100
+});
+await op.confirmation();
+```
+
+### `@mavrykdynamics/taquito` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Wallet API
+
+```javascript
+const op = await Mavryk.wallet.stake({
+  amount: 100,
+  mumav: false
+}).send();
+await op.confirmation();
+```
+
 # Taquito v19.2.0
 
 **Breaking Changes**: (if applicable)
@@ -21,7 +122,7 @@ author: Jev Bjorsell
 
 ### Internals
 - Re-added Flextesa test scripts run `drain_delegate` and `ballot` operations' integration test against a Nairobi sandbox #2851
-- Updated Airgap's Beacon package to version 4.2.2. For more information on the release, click [here](https://github.com/airgap-it/beacon-sdk/releases/tag/v4.2.1) [PR#2874](https://github.com/ecadlabs/taquito/pull/2874)
+- Updated Airgap's Beacon package to version 4.2.3. For more information on the release, click [here](https://github.com/airgap-it/beacon-sdk/releases/tag/v4.2.1) [PR#2874](https://github.com/ecadlabs/taquito/pull/2874)
 - Changed website build command for CloudFlare [PR#2804](https://github.com/ecadlabs/taquito/pull/2804)
 
 # Taquito v19.1.0
@@ -358,16 +459,16 @@ Further improved error classes
 Taquito now supports the `failing_noop` operation
 
 ```
-const Tezos = new TezosToolkit(rpcUrl);
+const Mavryk = new MavrykToolkit(rpcUrl);
 
-Tezos.setWalletProvider(wallet)
-const signedW = await Tezos.wallet.signFailingNoop({
+Mavryk.setWalletProvider(wallet)
+const signedW = await Mavryk.wallet.signFailingNoop({
 arbitrary: char2Bytes("Hello World"),
 basedOnBlock: 0,
 });
 
-Tezos.setSignerProvider(signer)
-const signedC = await Tezos.contract.signFailingNoop({
+Mavryk.setSignerProvider(signer)
+const signedC = await Mavryk.contract.signFailingNoop({
 arbitrary: char2Bytes("Hello World"),
 basedOnBlock: 'genesis',
 });
@@ -376,11 +477,11 @@ basedOnBlock: 'genesis',
 ## `@mavrykdynamics/taquito-rpc` - Add support of simulateOperation RPC call
 
 ```
-const Tezos = new TezosToolkit(rpcUrl)
+const Mavryk = new MavrykToolkit(rpcUrl)
 let account ='mv1...'
-let counter = Number((await Tezos.rpc.getContract(account, {block: 'head'})).counter)
+let counter = Number((await Mavryk.rpc.getContract(account, {block: 'head'})).counter)
 const op = {
-  chain_id: await Tezos.rpc.getChainId(),
+  chain_id: await Mavryk.rpc.getChainId(),
   operation: {
     branch: 'BLzyjjHKEKMULtvkpSHxuZxx6ei6fpntH2BTkYZiLgs8zLVstvX',
     contents: [{
@@ -396,7 +497,7 @@ const op = {
   }
 };
 
-let simulate = await Tezos.rpc.simulateOperation(op)).contents[0]
+let simulate = await Mavryk.rpc.simulateOperation(op)).contents[0]
 ```
 # Taquito v17.1.1
 ## Summary
@@ -425,7 +526,7 @@ Some other subtle changes that might affect some developers:
 
 ## Summary
 ### New Features
-- Exposed the injector to be customizable from the TezosToolkit class #1344
+- Exposed the injector to be customizable from the MavrykToolkit class #1344
 
 ### Improvement
 - Simplified generated Lambda for `transferToContract` [PR#2404](https://github.com/ecadlabs/taquito/pull/2404)
@@ -513,29 +614,29 @@ Protocol Nairobi comes with a couple potential breaking changes for our users:
 ### Documentation
 - Updated old Michelson code in our smart contract documentation #2482
 - Updated `README` to reference Mumbainet #2459
-- Updated wrong example in docs for Tezos domains #2436
+- Updated wrong example in docs for Mavryk domains #2436
 - Added extra detail on complex parameter calls in the docs #2443
 
 
 ### Internals
 - `OperationEmitter` class in `@mavrykdynamics/taquito` have been replaced with `PrepareProvider` and the `Provider` abstract class #2257
-    - RpcContractProvider, RpcEstimateProvider, RpcBatchProvider, and RpcTzProvider no longer extends `OperationEmitter`, and is replaced with a more lightweight abstract class `Provider` #2428, #2429, #2430, #2431
+    - RpcContractProvider, RpcEstimateProvider, RpcBatchProvider, and RpcMvProvider no longer extends `OperationEmitter`, and is replaced with a more lightweight abstract class `Provider` #2428, #2429, #2430, #2431
 - Removed the dependency `axios-fetch-adapter` and adapted the code directly into Taquito [PR#2457](https://github.com/ecadlabs/taquito/pull/2457)
 
 ### `@mavrykdynamics/taquito` - Added a filter for events listener to exclude failed events
 Introduces a new filter `excludeFailedOperations` to determine whether you'd want to filter out failed events or not
 ```typescript
-const Tezos = new TezosToolkit(RPC_URL);
+const Mavryk = new MavrykToolkit(RPC_URL);
 
-Tezos.setStreamProvider(
-  Tezos.getFactory(PollingSubscribeProvider)({
+Mavryk.setStreamProvider(
+  Mavryk.getFactory(PollingSubscribeProvider)({
     shouldObservableSubscriptionRetry: true,
     pollingIntervalMilliseconds: 1500
   })
 );
 
 try {
-  const sub = Tezos.stream.subscribeEvent({
+  const sub = Mavryk.stream.subscribeEvent({
     tag: 'tagName',
     address: 'KT1_CONTRACT_ADDRESS',
     excludeFailedOperations: true
@@ -589,16 +690,16 @@ await rpcClient.getPendingOperations();
 
 The estimate provider now supports estimates for contract calls directly, and is usable as such:
 ```typescript
-const contract = await Tezos.contract.at(contractAddress!);
+const contract = await Mavryk.contract.at(contractAddress!);
 const opEntrypoint = contract.methods.default(5);
-const estimate = await Tezos.estimate.contractCall(opEntrypoint);
+const estimate = await Mavryk.estimate.contractCall(opEntrypoint);
 ```
 
 ### `@mavrykdynamics/taquito` - Added `smart_rollup_originate` operation support
 Added support in the contract provider to inject `smart_rollup_originate` operations
 
 ```typescript
-const op = await Tezos.contract.smartRollupOriginate({
+const op = await Mavryk.contract.smartRollupOriginate({
   pvmKind: PvmKind.WASM2,
   kernel: ${KERNEL_VALUE} ,
   parametersType: { prim: 'bytes' }
@@ -609,19 +710,19 @@ const op = await Tezos.contract.smartRollupOriginate({
 Provided 2 utility functions to convert results from the `PrepareProvider` (`PreparedOperation` type objects) into `ForgeParams` and `PreapplyParams`
 ```typescript!
 // pre-apply
-const prepared = await Tezos.prepare.transaction({
+const prepared = await Mavryk.prepare.transaction({
   amount: 1,
   to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM'
 });
-const params = await Tezos.prepare.toPreapply(prepared);
-const preapplyOp = await Tezos.rpc.preapplyOperations(params);
+const params = await Mavryk.prepare.toPreapply(prepared);
+const preapplyOp = await Mavryk.rpc.preapplyOperations(params);
 
 // forge
-const prepared = await Tezos.prepare.transaction({
+const prepared = await Mavryk.prepare.transaction({
   amount: 1,
   to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM'
 });
-const params = Tezos.prepare.toForge(prepared);
+const params = Mavryk.prepare.toForge(prepared);
 const forgedBytes = await forger.forge(params);
 ```
 
@@ -653,7 +754,7 @@ const forgedBytes = await forger.forge(params);
 ### Documentation
 - Removed Cryptonomic links from the commercial RPC list on the website #2332
 - Added documentation on `MANAGER_LAMBDA` #1718
-- Added documentation on ~100 most popular contract entrypoint parameter examples on Tezos #2153
+- Added documentation on ~100 most popular contract entrypoint parameter examples on Mavryk #2153
 - Fixed broken link on Dapp pre-launch checklist page #2293
 - Fixed broken link on smart contract collection page #2295
 - Fixed broken live code examples on the `taquito.mavryk.org` website #2305
@@ -676,7 +777,7 @@ const forgedBytes = await forger.forge(params);
 ## `@mavrykdynamics/taquito` - Support for new operation `smart_rollup_add_messages`
 Support for a new manager operation to add messages to a smart rollup inbox have been added, and can be used as follows:
 ```typescript
-const op = await Tezos.contract.smartRollupAddMessages({
+const op = await Mavryk.contract.smartRollupAddMessages({
   message: [
     '0000000031010000000b48656c6c6f20776f726c6401bdb6f61e4f12c952f807ae7d3341af5367887dac000000000764656661756c74'
   ]
@@ -698,13 +799,13 @@ Added a few new types to accommodate for Mumbai protocol changes:
 ## `@mavrykdynamics/taquito-michel-codec` - Added support for `bytes`
 The Mumbai protocol update introduces a change where the following Michelson instructions support `bytes`: `AND`, `OR`, `XOR`, `NOT`, `LSL`, `LSR`
 
-These instructions now have bytes support of the opcodes. For more information, refer to [this document](https://gitlab.com/tezos/tezos/-/merge_requests/6055)
+These instructions now have bytes support of the opcodes. For more information, refer to [this document](https://gitlab.com/mavryk-network/mavryk-protocol/-/merge_requests/6055)
 
 
 ## `@mavrykdynamics/taquito-michel-codec` - Added support for bytes-nat conversion in Michelson
 The Mumbai protocol update now supports conversion between `bytes` and `nat` as well as `bytes` and `int`
 
-For more information, refer to [this page](https://gitlab.com/tezos/tezos/-/merge_requests/6681)
+For more information, refer to [this page](https://gitlab.com/mavryk-network/mavryk-protocol/-/merge_requests/6681)
 # Taquito v15.1.0
 ## Summary
 
@@ -724,11 +825,11 @@ For more information, refer to [this page](https://gitlab.com/tezos/tezos/-/merg
 
 ## `@mavrykdynamics/taquito` - Added new provider `PrepareProvider` to facilitate operation preparation
 
-`PrepareProvider` now extends more control to the user to give them the ability to 'prepare' Tezos operations before forging and injection. The preparation step now can be done through the `TezosToolkit` class as such:
+`PrepareProvider` now extends more control to the user to give them the ability to 'prepare' Mavryk operations before forging and injection. The preparation step now can be done through the `MavrykToolkit` class as such:
 
 ```typescript
 // example of a transaction operation preparation
-const prepare = await Tezos.prepare.transaction({
+const prepare = await Mavryk.prepare.transaction({
     to: 'mv194tkdxpwcxPy541ePRJdECnzqbvwZWJZq',
     amount: 5
 });
@@ -761,7 +862,7 @@ The expected output will look something like this:
 Taquito now supports `increase_paid_storage` operation in the Wallet API (previously only available in the Contract API).
 
 ```typescript
-const op = await Tezos.wallet.increasePaidStorage({
+const op = await Mavryk.wallet.increasePaidStorage({
   amount: 1,
   destination: simpleContractAddress
 }).send();
@@ -789,7 +890,7 @@ PR: https://github.com/ecadlabs/taquito/pull/2221
 ## `@mavrykdynamics/taquito` drain_delegate operation support
 A new manager operation related to the consensus_key change in Lima has been added:
 ```typescript
-const op = await Tezos.contract.updateConsensusKey({
+const op = await Mavryk.contract.updateConsensusKey({
     pk: 'PUBLIC_KEY'
 });
 
@@ -834,7 +935,7 @@ await op.confirmation();
 ## `@mavrykdynamics/taquito` - Added support for `update_consensus_key`
 A new manager operation to update consensus keys can be used as follows:
 ```typescript
-const op = await Tezos.contract.updateConsensusKey({
+const op = await Mavryk.contract.updateConsensusKey({
     pk: 'PUBLIC_KEY'
 });
 
@@ -858,7 +959,7 @@ Added a few new types to accommodate Lima protocol changes:
 Also updates to existing types to accommodate changes regarding consensus keys.
 
 ## `@mavrykdynamics/taquito-michelson-encoder` - Support new type `TICKET_DEPRECATED`
-- Added support for the new Michelson type `TICKET_DEPRECATED`. More info here: https://tezos.gitlab.io/protocols/015_lima.html#breaking-changes
+- Added support for the new Michelson type `TICKET_DEPRECATED`. More info here: https://protocol.mavryk.org/protocols/015_lima.html#breaking-changes
 
 ## `@mavrykdynamics/taquito-michel-codec` - Support new instruction `LAMBDA_REC` and value `Lambda_rec`
 
@@ -885,7 +986,7 @@ The `TICKET` instruction now returns an optional ticket instead of a ticket. Thi
 We added a new Contract API method to support the `Ballot` operation. Bakers can now cast their ballots using this operation from Taquito as follows:
 
 ```typescript
-const op = await Tezos.contract.ballot({
+const op = await Mavryk.contract.ballot({
   proposal: 'PROTOCOL_HASH',
   ballot: 'BALLOT_VOTE_STRING'
 });
@@ -897,7 +998,7 @@ await op.confirmation();
 Alongside the `Ballot` operation support, bakers can now also submit proposals using the `Proposals` operation that can be used as follows:
 
 ```typescript
-const op = await Tezos.contract.proposals({
+const op = await Mavryk.contract.proposals({
   proposals: ['PROTOCOL_HASH1', 'PROTOCOL_HASH2']
 });
 
@@ -954,10 +1055,10 @@ const signer = InMemorySigner.fromMnemonic({ mnemonic, password, derivationPath:
 Taquito provides a simple way for users to subscribe to certain events on the blockchain via the `PollingSubscribeProvider`.
 
 ```typescript
-const Tezos = new TezosToolkit(RPC_URL);
+const Mavryk = new MavrykToolkit(RPC_URL);
 
 try {
-  const sub = Tezos.stream.subscribeEvent({
+  const sub = Mavryk.stream.subscribeEvent({
     tag: 'tagName',
     address: 'KT1_CONTRACT_ADDRESS'
   });
@@ -1004,7 +1105,7 @@ In service worker environments (e.g., Cloudflare workers), `XMLHttpRequest` used
 
 ## `@mavrykdynamics/taquito` - confirmationPollingTimeoutSecond not working
 
-There was an issue with the `confirmationPollingTimeoutSecond` on the `TezosToolkit`. During the operation confirmation (both on the contract and wallet API), the timeout timer restarted on every new block emission. This has been fixed.
+There was an issue with the `confirmationPollingTimeoutSecond` on the `MavrykToolkit`. During the operation confirmation (both on the contract and wallet API), the timeout timer restarted on every new block emission. This has been fixed.
 
 ## `@mavrykdynamics/taquito` - `PollingSubscribeProvider` used in contract confirmations might skip blocks
 
@@ -1016,15 +1117,15 @@ A bug has been fixed, allowing support of UNIX timestamp number when deploying a
 
 ## `@mavrykdynamics/taquito` - Allow users to customize the parser
 
-Taquito makes internal uses of the `@mavrykdynamics/taquito-michel-codec` package on smart contract origination, allowing to convert Plain Michelson into JSON Michelson, expand Macros and validate Michelson to ensure its correctness. There is no change in this behavior, but we exposed a `parserProvider` at the TezosToolkit level allowing users to customize if needed. By default, the `parserProvider` is an instance of `MichelCodecParser`.
+Taquito makes internal uses of the `@mavrykdynamics/taquito-michel-codec` package on smart contract origination, allowing to convert Plain Michelson into JSON Michelson, expand Macros and validate Michelson to ensure its correctness. There is no change in this behavior, but we exposed a `parserProvider` at the MavrykToolkit level allowing users to customize if needed. By default, the `parserProvider` is an instance of `MichelCodecParser`.
 
 ## `@mavrykdynamics/taquito` - Accept amount, `fee`, `gasLimit`, and `storageLimit` as parameters of the `withContractCall` method
 
 Before version 14.1.0, it was impossible to specify the amount, the fee, the `gasLimit`, and the `storageLimit` when calling a smart contract entry point using the batch API via the withContractCall method. An optional parameter has been added to the method to support this feature and can be used as follows:
 
 ```typescript
-const contract = Tezos.contract.at('contactAddress');
-const batch = Tezos.contract.batch()
+const contract = Mavryk.contract.at('contactAddress');
+const batch = Mavryk.contract.batch()
     .withContractCall(contract.methods.entrypointName("entrypointParam", { fee: 100, gasLimit: 1000, storageLimit: 10 })
     .withContractCall(...)
 
@@ -1048,7 +1149,7 @@ If you have feature or issue requests, please create an issue on http://github.c
 
 # Taquito v14.0.0-beta
 
-Note for the users of the lower level APIs: injecting more than one manager operation per block from the same account is now forbidden by Tezos in the Kathmandu protocol. You will now receive the following error message: `Error while applying operation opHash: Only one manager operation per manager per block allowed (found opHash2 with Xtez fee).` This change has no impact if you use the TezosToolkit to send operations. Waiting for the operation to be included in a block is already required before submitting another one.
+Note for the users of the lower level APIs: injecting more than one manager operation per block from the same account is now forbidden by Mavryk in the Kathmandu protocol. You will now receive the following error message: `Error while applying operation opHash: Only one manager operation per manager per block allowed (found opHash2 with Xtez fee).` This change has no impact if you use the MavrykToolkit to send operations. Waiting for the operation to be included in a block is already required before submitting another one.
 
 **Breaking changes:**
 - Be aware that if you implemented the readProvider interface, we added a new method named `getSaplingDiffByContract`.
@@ -1098,9 +1199,9 @@ Note for the users of the lower level APIs: injecting more than one manager oper
 The `increase_paid_storage` operation allows increasing the paid storage of a smart contract by a specified bytes amount. The smart contract owner doesn't have to do it; any user can increase the storage. The operation is of interest for high-traffic dapps as it allows prepaying for storage and prevents transactions from failing because of an unpredictable storage burn.
 
 ```typescript
-const Tezos = new TezosToolkit('https://basenet.rpc.mavryk.network');
+const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
-const op = await Tezos.contract.increasePaidStorage({
+const op = await Mavryk.contract.increasePaidStorage({
     amount: 5,
     destination: 'contract'
 });
@@ -1173,9 +1274,9 @@ As the next steps for the sapling package, we will provide interfaces for the ke
 The `transfer_ticket` operation allows transferring tickets from an implicit account to a smart contract.
 
 ```typescript
-const Tezos = new TezosToolkit('https://jakartanet.ecadinfra.com');
+const Mavryk = new MavrykToolkit('https://jakartanet.ecadinfra.com');
 
-const op = await Tezos.contract.transferTicket({
+const op = await Mavryk.contract.transferTicket({
     ticketContents: { "string": "foobar" },
     ticketTy: { "prim": "string" } ,
     ticketTicketer: 'KT1AL8we1Bfajn2M7i3gQM5PJEuyD36sXaYb',
@@ -1308,7 +1409,7 @@ The `TxRollupL2AddressToken` class allows users of Taquito to pass `mv4` address
 
 > A new instruction MIN_BLOCK_TIME has been added. It can be used to push the current minimal time between blocks onto the stack. The value is obtained from the protocol's minimal_block_delay constant.
 
-*Reference: https://tezos.gitlab.io/protocols/013jakarta.html#michelson*
+*Reference: https://protocol.mavryk.org/protocols/013jakarta.html#michelson*
 
 ## `@mavrykdynamics/taquito-michel-codec` - Annotating the top-level parameter constructor to designate the root entry point is now forbidden
 
@@ -1316,7 +1417,7 @@ If the top-level parameter constructor is annotated when parsing a contract, a `
 
 > Annotating the parameter toplevel constructor to designate the root entrypoint is now forbidden. Put the annotation on the parameter type instead. E.g. replace parameter %a int; by parameter (int %a);
 
-*Reference: https://tezos.gitlab.io/protocols/013jakarta.html#michelson*
+*Reference: https://protocol.mavryk.org/protocols/013jakarta.html#michelson*
 
 ## `@mavrykdynamics/taquito` - Added support for the `tx_rollup_origination` and `tx_rollup_submit_batch` operations
 
@@ -1326,7 +1427,7 @@ We plan to add support for the remaining operations related to TORU in subsequen
 
 **Example of originating a rollup with Taquito:**
 ```typescript=
-const op = await Tezos.contract.originateTxRollup();
+const op = await Mavryk.contract.originateTxRollup();
 await op.confirmation();
 
 const rollup = op.originatedRollup;
@@ -1335,7 +1436,7 @@ The `originateTxRollup` method takes optional `storageLimit`, `gasLimit` and `fe
 
 **Example of sending a batch to a rollup with Taquito:**
 ```typescript=
-const op = await Tezos.contract.txRollupSubmitBatch({
+const op = await Mavryk.contract.txRollupSubmitBatch({
     content: '626c6f62',
     rollup: 'txr1YTdi9BktRmybwhgkhRK7WPrutEWVGJT7w'
 });
@@ -1366,7 +1467,7 @@ The `txRollupSubmitBatch` method also takes optional `storageLimit`, `gasLimit` 
 ## Compatibility with the Jakarta protocol
 We addressed the Jakarta protocol's breaking changes, making this version of Taquito compatible with the Jakarta protocol. This early integration has been possible by using the Mondaynet testnet.
 
-The Jakarta protocol addresses the [malleability issue](https://tezos.gitlab.io/alpha/sapling.html#preventing-malleability) discovered in Sapling. It introduces changes around the sapling related types and instructions that are now supported in Taquito:
+The Jakarta protocol addresses the [malleability issue](https://protocol.mavryk.org/alpha/sapling.html#preventing-malleability) discovered in Sapling. It introduces changes around the sapling related types and instructions that are now supported in Taquito:
 - The encoding of `sapling_transaction` has changed; we added support for it in the `@mavrykdynamics/taquito-local-forging` package and support for `sapling_transaction_deprecated`.
 
 - The optional type returned by the `SAPLING_VERIFY_UPDATE` instruction contains an additional property named `bound_data`. We added support for it in the `@mavrykdynamics/taquito-michel-codec` package.
@@ -1419,7 +1520,7 @@ new RpcClient('url', 'chain', new HttpBackend(50000));
 ## Compatibility with the Jakarta protocol
 We addressed the Jakarta protocol's breaking changes, making this version of Taquito compatible with the Jakarta protocol. This early integration has been possible by using the Mondaynet testnet.
 
-The Jakarta protocol addresses the [malleability issue](https://tezos.gitlab.io/alpha/sapling.html#preventing-malleability) discovered in Sapling. It introduces changes around the sapling related types and instructions that are now supported in Taquito:
+The Jakarta protocol addresses the [malleability issue](https://protocol.mavryk.org/alpha/sapling.html#preventing-malleability) discovered in Sapling. It introduces changes around the sapling related types and instructions that are now supported in Taquito:
 - The encoding of `sapling_transaction` has changed; we added support for it in the `@mavrykdynamics/taquito-local-forging` package and support for `sapling_transaction_deprecated`.
 
 - The optional type returned by the `SAPLING_VERIFY_UPDATE` instruction contains an additional property named `bound_data`. We added support for it in the `@mavrykdynamics/taquito-michel-codec` package.
@@ -1486,7 +1587,7 @@ new RpcClient('url', 'chain', new HttpBackend(50000));
 
 ### Documentation
 - Examples of using the BeaconWallet instance as a singleton #1045: https://taquito.mavryk.org/docs/beaconwallet-singleton
-- Fixed link to Tezos faucet #1383
+- Fixed link to Mavryk faucet #1383
 - Updated all website examples to show contract and wallet API example variants #493
 - Algolia improvements - Fixed search bar returning dead links and duplicates #1411
 
@@ -1523,7 +1624,7 @@ We added support to forge and parse operations containing the new `SUB_MUMAV` in
 
 > [SUB_MUMAV] is similar to the mumav case of the SUB instruction but its return type is option mumav instead of mumav. This allows subtracting mumav values without failing in case of underflow.
 
-*source: https://tezos.gitlab.io/protocols/012ithaca.html#michelson*
+*source: https://protocol.mavryk.org/protocols/012ithaca.html#michelson*
 
 ## @mavrykdynamics/taquito-rpc - Updated the `RpcClient` types based on the changes to the balance updates and the new type of operations
 
@@ -1538,7 +1639,7 @@ The new categories of balance updates are `legacy_rewards`, `block fees`, `legac
 
 The new origin for balance update is `simulation`.
 
-For more information on the balance update changes, refer to https://tezos.gitlab.io/protocols/tenderbake.html#metadata
+For more information on the balance update changes, refer to https://protocol.mavryk.org/protocols/tenderbake.html#metadata
 
 ## @mavrykdynamics/taquito-rpc - Updated signature of the `getEndorsingRights` and `getBakingRights` methods
 
@@ -1614,24 +1715,24 @@ Response example for hangzhounet:
 
 ## @mavrykdynamics/taquito - Introduction of a "Read" interface
 
-When using Taquito, all data retrieved from the blockchain are obtained using an RPC by default. For example, all required data for preparing an operation are fetched by doing different queries to a configured RPC node. Those data could be obtained using another medium (i.e., an Indexer), which would reduce the load on the nodes. With this in mind, we defined a new interface in Taquito named `TzReadProvider` and a new provider on the `TezosToolkit` named `readProvider`. The `readProvider` defaults to the RPC as before. The goal would be to have the different indexers implement the `TzReadProvider` interface allowing users to configure their `TezosToolkit` to fetch data from indexers instead of from the RPC.
+When using Taquito, all data retrieved from the blockchain are obtained using an RPC by default. For example, all required data for preparing an operation are fetched by doing different queries to a configured RPC node. Those data could be obtained using another medium (i.e., an Indexer), which would reduce the load on the nodes. With this in mind, we defined a new interface in Taquito named `MvReadProvider` and a new provider on the `MavrykToolkit` named `readProvider`. The `readProvider` defaults to the RPC as before. The goal would be to have the different indexers implement the `MvReadProvider` interface allowing users to configure their `MavrykToolkit` to fetch data from indexers instead of from the RPC.
 
-Another change has been made regarding the confirmation method of the operations. The confirmation is now done using the `SubscribeProvider` set on the `TezosToolkit`. By default, the `SubscribeProvider` is set to an instance of `PollingSubscribeProvider`, which polls on the RPC for the head blocks as before. This change is intended to make it easier to use a different strategy for operation confirmation (for example, it could use streaming based on an indexer instead of polling on the RPC head block).
+Another change has been made regarding the confirmation method of the operations. The confirmation is now done using the `SubscribeProvider` set on the `MavrykToolkit`. By default, the `SubscribeProvider` is set to an instance of `PollingSubscribeProvider`, which polls on the RPC for the head blocks as before. This change is intended to make it easier to use a different strategy for operation confirmation (for example, it could use streaming based on an indexer instead of polling on the RPC head block).
 
-The change to the `confirmation` methods includes a breaking change. The polling interval for the confirmation and the streamer configuration has been moved from the `TezosToolkit` to the `PollingSubscribeProvider` class, where they belong logically.
+The change to the `confirmation` methods includes a breaking change. The polling interval for the confirmation and the streamer configuration has been moved from the `MavrykToolkit` to the `PollingSubscribeProvider` class, where they belong logically.
 
 **BREAKING CHANGE:**
 
 The `confirmationPollingIntervalSecond` and the `ConfigStreamer` are removed from the
-`TezosToolkit`. Configuration for the PollingSubscribeProvider needs to be specified in its constructor:
+`MavrykToolkit`. Configuration for the PollingSubscribeProvider needs to be specified in its constructor:
 
 **Before:**
 ```
-Tezos.setProvider({ config: { confirmationPollingIntervalSecond: 5 }});
+Mavryk.setProvider({ config: { confirmationPollingIntervalSecond: 5 }});
 ```
 **Now:**
 ```
-Tezos.setStreamProvider(Tezos.getFactory(PollingSubscribeProvider)({ pollingIntervalMilliseconds:5000 }));
+Mavryk.setStreamProvider(Mavryk.getFactory(PollingSubscribeProvider)({ pollingIntervalMilliseconds:5000 }));
 ```
 
 These changes consist of preliminary work to better support indexers in Taquito; there will be more to come on this in the near future.
@@ -1674,8 +1775,8 @@ The Taquito codebase is doing different calls to the RPC to construct the variou
 
 ## @mavrykdynamics/taquito - Use the LocalForger by default instead of the RpcForger
 
-Before version 12, the default forger set on the `TezosToolkit` was the `RpcForger`. It is important to ensure that the node is trusted when forging with the RPC and users can change the forger implementation by calling the `setForgerProvider` method.
-As the Taquito local forging implementation provided in the `@mavrykdynamics/taquito-local-forger` package has been battle-tested in the past month, we decided to change the default forger configured in the `TezosToolkit` in favor of the local one.
+Before version 12, the default forger set on the `MavrykToolkit` was the `RpcForger`. It is important to ensure that the node is trusted when forging with the RPC and users can change the forger implementation by calling the `setForgerProvider` method.
+As the Taquito local forging implementation provided in the `@mavrykdynamics/taquito-local-forger` package has been battle-tested in the past month, we decided to change the default forger configured in the `MavrykToolkit` in favor of the local one.
 
 
 Note that Taquito also provides a composite forger to validate the forged bytes against different implementations. The composite forger gives the most protection against supply chain attacks on Taquito and malicious RPCs.
@@ -1693,7 +1794,7 @@ A bug has been fixed where the `ContractAbstraction` instance created by calling
 
 Example of the code that was resulting in an error:
 ```typescript=
-const origination = await Tezos.wallet.originate({
+const origination = await Mavryk.wallet.originate({
     code,
     storage,
 }).send();
@@ -1834,7 +1935,7 @@ A `ViewSimulationError` is returned when a view simulation fails, which now cont
 
 ## @mavrykdynamics/taquito-tzip12 - `TokenIdNotFound` was incorrectly trown on metadata view failure
 
-The `getTokenMetadata` method of the `Tzip12ContractAbstraction` class was throwing a `TokenIdNotFound` error when the execution of a token metadata view failed. However, failures can be related to other reasons related to the Tezos node, which does not mean that the token metadata does not exist. The error handling has been improved at the `@mavrykdynamics/taquito-tzip16` package level; if a view simulation reaches a `FAILWITH` instruction, a `ViewSimulationError` is returned. Otherwise, the original `HttpResponseError` is thrown.
+The `getTokenMetadata` method of the `Tzip12ContractAbstraction` class was throwing a `TokenIdNotFound` error when the execution of a token metadata view failed. However, failures can be related to other reasons related to the Mavryk node, which does not mean that the token metadata does not exist. The error handling has been improved at the `@mavrykdynamics/taquito-tzip16` package level; if a view simulation reaches a `FAILWITH` instruction, a `ViewSimulationError` is returned. Otherwise, the original `HttpResponseError` is thrown.
 
 ## Custom errors should extend Error
 
@@ -1875,7 +1976,7 @@ The `executeView` method of the `OnChainView` class allows simulating the view. 
 Here is an example where a contract contains a view named `myView`, it can be simulated as follow:
 
 ```typescript=
-const contract = Tezos.contract.at('KT1...');
+const contract = Mavryk.contract.at('KT1...');
 const res = contract.contractViews.myView(param).executeView({
     viewCaller: 'KT1...'
 });
@@ -1905,7 +2006,7 @@ In the release note v11.0.0-beta, there was a note about the following limitatio
 >
 > Here is an example:
 > ```typescript=
-> const op = await Tezos.contract.originate({
+> const op = await Mavryk.contract.originate({
 >   code: [
 >     { prim: 'parameter', args: [ ...] },
 >     { prim: 'storage', args: [{ prim: 'constant', args: [{ string: 'expr...' }] }] },
@@ -1916,22 +2017,22 @@ In the release note v11.0.0-beta, there was a note about the following limitatio
 
 It is now possible to deploy a contract having a global constant in the storage part of its contract code using the storage property. Internally, Taquito uses the michel-codec `Parser` and its `expandGlobalConstant` option to feed the MichelsonEncoder, which is responsible for transforming the `storage` property into Michelson, with a script that doesn't contain global constant.
 
-A global constants provider has been added to the `TezosToolkit` class. Currently, Taquito provides a `DefaultGlobalConstantsProvider`, which can be injected in the TezosToolkit and where the user needs to specify the hashes and corresponding expressions used in its contracts.
+A global constants provider has been added to the `MavrykToolkit` class. Currently, Taquito provides a `DefaultGlobalConstantsProvider`, which can be injected in the MavrykToolkit and where the user needs to specify the hashes and corresponding expressions used in its contracts.
 
 Here is a example:
 ```typescript=
-import { TezosToolkit, DefaultGlobalConstantsProvider } from '@mavrykdynamics/taquito';
+import { MavrykToolkit, DefaultGlobalConstantsProvider } from '@mavrykdynamics/taquito';
 
-// create an instance of the `DefaultGlobalConstantsProvider`, load the global constants used in the contract, inject the instance on the TezosToolkit
+// create an instance of the `DefaultGlobalConstantsProvider`, load the global constants used in the contract, inject the instance on the MavrykToolkit
 const expression = { "prim": "int" }
 const constantHash = 'expruu5BTdW7ajqJ9XPTF3kgcV78pRiaBW3Gq31mgp3WSYjjUBYxre';
 
-const Tezos = new TezosToolkit('rpc_url');
+const Mavryk = new MavrykToolkit('rpc_url');
 const globalConstantProvider = new DefaultGlobalConstantsProvider();
 globalConstantProvider.loadGlobalConstant({
   [constantHash]: expression
 })
-Tezos.setGlobalConstantsProvider(globalConstantProvider);
+Mavryk.setGlobalConstantsProvider(globalConstantProvider);
 ```
 
 We plan to support other global constant providers in the future that will depend on indexers or the RPC.
@@ -1951,7 +2052,7 @@ This format is now supported in the Timestamp token of the Michelson-encoder.
 # Taquito v11.0.2-beta
 
 - `@mavrykdynamics/taquito-beacon-wallet` - The beacon-sdk is updated to version 2.3.8
-- `@mavrykdynamics/taquito-utils` - Utility function to get Tezos Address (PKH) from a public key #643
+- `@mavrykdynamics/taquito-utils` - Utility function to get Mavryk Address (PKH) from a public key #643
 
 # Taquito v11.0.1-beta
 
@@ -1965,7 +2066,7 @@ There was an issue with lodash imports in @mavrykdynamics/taquito-rpc package th
 
 This release of Taquito supports the upcoming Hangzhou protocol. As usual, this version supports the current protocol, Granada, and the next protocol Hangzhou.
 
-We encourage all developers to update their projects to use version Taquito v11 as soon as is practical and absolutely before the Tezos mainnet transition from Granada to Hangzhou.
+We encourage all developers to update their projects to use version Taquito v11 as soon as is practical and absolutely before the Mavryk mainnet transition from Granada to Hangzhou.
 
 ### New features - Hangzhou protocol
 - `@mavrykdynamics/taquito` - Support for the new operation kind `register_global_constant` on the contract, batch and estimate APIs #1075
@@ -2001,7 +2102,7 @@ Please note that the `Michelson-Encoder` does not support the global constant in
 
 Here an example:
 ```ts
-const op = await Tezos.contract.originate({
+const op = await Mavryk.contract.originate({
   code: [
     { prim: 'parameter', args: [ ...] },
     { prim: 'storage', args: [{ prim: 'constant', args: [{ string: 'expr...' }] }] },
@@ -2017,7 +2118,7 @@ The new manager operation `register_global_constant` has been added to the contr
 A `registerGlobalConstant` method is available on the `ContractProvider` class. A `value` representing the Micheline expression to register in its JSON format is required as a parameter. The `registerGlobalConstant` method returns an instance of `RegisterGlobalConstantOperation` containing a `globalConstantHash` member that corresponds to the index(hash) of the newly registered constant.
 
 ```ts
-const op = await Tezos.contract.registerGlobalConstant({
+const op = await Mavryk.contract.registerGlobalConstant({
     value: { "prim": "or",
                 "args":
                   [ { "prim": "int", "annots": [ "%decrement" ] },
@@ -2096,22 +2197,22 @@ A new package named `@mavrykdynamics/taquito-contract-library` has been added to
 
 To improve (d)App performance, we aim to provide ways to reduce the number of calls made by Taquito to the RPC. The `@mavrykdynamics/taquito-contracts-library` package allows developers to embed the smart-contract scripts into the application, preventing Taquito from loading this data from the RPC for every user.
 
-The ContractsLibrary class is populated by at project compile time, using contract addresses and their corresponding script and entry points. The `ContractsLibrary` is then injected into a `TezosToolkit` as an extension using the toolkits `addExtension` method.
+The ContractsLibrary class is populated by at project compile time, using contract addresses and their corresponding script and entry points. The `ContractsLibrary` is then injected into a `MavrykToolkit` as an extension using the toolkits `addExtension` method.
 
-When creating a ContractAbstraction instance using the `at` method of the Contract or the Wallet API, if a `ContractsLibrary` is present on the TezosToolkit instance, the script and entry points of matching contracts will be loaded from the ContractsLibrary. Otherwise, the values will be fetched from the RPC as usual.
+When creating a ContractAbstraction instance using the `at` method of the Contract or the Wallet API, if a `ContractsLibrary` is present on the MavrykToolkit instance, the script and entry points of matching contracts will be loaded from the ContractsLibrary. Otherwise, the values will be fetched from the RPC as usual.
 
 **Example of use:**
 ```ts
 import { ContractsLibrary } from '@mavrykdynamics/taquito-contracts-library';
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 
 const contractsLibrary = new ContractsLibrary();
-const Tezos = new TezosToolkit('rpc');
+const Mavryk = new MavrykToolkit('rpc');
 
 contractsLibrary.addContract({
     'contractAddress1': {
-        script: script1, // script should be obtained from Tezos.rpc.getScript('contractAddress1')
-        entrypoints: entrypoints1 // entrypoints should be obtained from Tezos.rpc.getEntrypoints('contractAddress1')
+        script: script1, // script should be obtained from Mavryk.rpc.getScript('contractAddress1')
+        entrypoints: entrypoints1 // entrypoints should be obtained from Mavryk.rpc.getEntrypoints('contractAddress1')
     },
     'contractAddress2': {
         script: script2,
@@ -2120,10 +2221,10 @@ contractsLibrary.addContract({
     //...
 })
 
-Tezos.addExtension(contractsLibrary);
+Mavryk.addExtension(contractsLibrary);
 
 // The script and entrypoints are loaded from the contractsLibrary instead of the RPC
-const contract = await Tezos.contract.at('contractAddress1');
+const contract = await Mavryk.contract.at('contractAddress1');
 ```
 
 
@@ -2135,11 +2236,11 @@ The constructor of the `RpcClientCache` class takes an `RpcClient` instance as a
 
 **Example of use:**
 ```ts
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { RpcClient, RpcClientCache } from '@mavrykdynamics/taquito-rpc';
 
 const rpcClient = new RpcClient('replace_with_RPC_URL');
-const tezos = new TezosToolkit(new RpcClientCache(rpcClient));
+const mavryk = new MavrykToolkit(new RpcClientCache(rpcClient));
 ```
 
 ## @mavrykdynamics/taquito - New Taquito Entrypoint methods accept javascript object format for contract method calls
@@ -2156,7 +2257,7 @@ This version ships with basic compatibility support for the new Hangzhou protoco
 
 ## What's coming next for Taquito?
 
-We started preliminary work on integrating Hangzhounet, the next Tezos protocol update proposal. We plan to deliver a final version of Taquito v11 early, giving teams a longer runway to upgrade their projects before protocol transition.
+We started preliminary work on integrating Hangzhounet, the next Mavryk protocol update proposal. We plan to deliver a final version of Taquito v11 early, giving teams a longer runway to upgrade their projects before protocol transition.
 
 If you have feature or issue requests, please create an issue on http://github.com/ecadlabs/taquito/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
 
@@ -2183,7 +2284,7 @@ Bug fix where the custom polling interval values for the confirmation methods we
 
 **Breaking change**
 
-In version 9.2.0-beta of Taquito, the ability to send more than one operation in the same block was added to Taquito. This ability relied on a workaround solution. The `helpers/preapply/operations` and `helpers/scripts/run_operation`  RPC methods do not accept a counter higher than the head `counter + 1` as described in issue [tezos/tezos#376](https://gitlab.com/tezos/tezos/-/issues/376). Despite the limitation of these RPC's, the Tezos protocol itself does allow the inclusion of more than one operation from the same implicit account. In version 9.2.0-beta of Taquito, we introduced an internal counter and simulated the operation using a counter value that the `preapply` & `run_operation` will accept. This allowed Taquito to send many operations in a single block. However, we found that the workaround used may lead to inconsistent states, and results that violate the [principle of least astonishment](https://en.wikipedia.org/wiki/Principle_of_least_astonishment). We decided to remove this feature temporarily.  We aim to reintroduce this feature when Tezos RPC issue [tezos/tezos#376](https://gitlab.com/tezos/tezos/-/issues/376) is addressed and considers the transaction in the mempool when checking the account counter value or otherwise by providing a separate and adapted new interface to support this use case properly.
+In version 9.2.0-beta of Taquito, the ability to send more than one operation in the same block was added to Taquito. This ability relied on a workaround solution. The `helpers/preapply/operations` and `helpers/scripts/run_operation`  RPC methods do not accept a counter higher than the head `counter + 1` as described in issue [tezos/tezos#376](https://gitlab.com/mavryk-network/mavryk-protocol/-/issues/376). Despite the limitation of these RPC's, the Mavryk protocol itself does allow the inclusion of more than one operation from the same implicit account. In version 9.2.0-beta of Taquito, we introduced an internal counter and simulated the operation using a counter value that the `preapply` & `run_operation` will accept. This allowed Taquito to send many operations in a single block. However, we found that the workaround used may lead to inconsistent states, and results that violate the [principle of least astonishment](https://en.wikipedia.org/wiki/Principle_of_least_astonishment). We decided to remove this feature temporarily.  We aim to reintroduce this feature when Mavryk RPC issue [tezos/tezos#376](https://gitlab.com/mavryk-network/mavryk-protocol/-/issues/376) is addressed and considers the transaction in the mempool when checking the account counter value or otherwise by providing a separate and adapted new interface to support this use case properly.
 
 ## Summary
 
@@ -2208,13 +2309,13 @@ In version 9.2.0-beta of Taquito, the ability to send more than one operation in
 
 ## @mavrykdynamics/taquito - Made PollingSubscribeProvider's polling interval configurable
 
-The default streamer set on the `TezosToolkit` used a hardcoded polling interval of 20 seconds, and there was no easy way to change this. To reduce the probability of missing blocks, it is now possible to configure the interval as follow:
+The default streamer set on the `MavrykToolkit` used a hardcoded polling interval of 20 seconds, and there was no easy way to change this. To reduce the probability of missing blocks, it is now possible to configure the interval as follow:
 
 ```ts
-const tezos = new TezosToolkit('https://mainnet.ecadinfra.com')
-tezos.setProvider({ config: { streamerPollingIntervalMilliseconds: 15000 } });
+const mavryk = new MavrykToolkit('https://mainnet.ecadinfra.com')
+mavryk.setProvider({ config: { streamerPollingIntervalMilliseconds: 15000 } });
 
-const sub = tezos.stream.subscribeOperation(filter)
+const sub = mavryk.stream.subscribeOperation(filter)
 ```
 
 ## @mavrykdynamics/taquito - Possibility to withdraw delegate
@@ -2222,9 +2323,9 @@ const sub = tezos.stream.subscribeOperation(filter)
 It is now possible to `undelegate` by executing a new setDelegate operation and not specifying the delegate property.
 
 ```ts
-// const Tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
+// const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
 
-await Tezos.contract.setDelegate({ source: 'mv1_source'});
+await Mavryk.contract.setDelegate({ source: 'mv1_source'});
 ```
 
 ## @mavrykdynamics/taquito - Property status doesn't exist on a batched transaction for the wallet API
@@ -2258,7 +2359,7 @@ A fix has been made to change the behavior of the `PollingSubscribeProvider`, wh
 
 ### Documentation
 
-- Document usage of Taquito with TezosDomain #912
+- Document usage of Taquito with MavrykDomain #912
 - Document storage and fee passing from wallet to dapp #926
 - Add integration tests for Permit contracts (TZIP-17) #661
 
@@ -2333,7 +2434,7 @@ println(JSON.stringify(extractSchema, null, 2));
 ```
 Based on the information returned by the `ExtractSchema` method, the storage can be writen as follow:
 ```typescript=
-Tezos.contract
+Mavryk.contract
   .originate({
     code: contractCode,
     storage: [
@@ -2397,7 +2498,7 @@ bigMap.set('mv1...', { // address
         1:10 // nat
     });
 
-Tezos.contract
+Mavryk.contract
   .originate({
     code: contractCode,
     storage: bigMap
@@ -2479,7 +2580,7 @@ Unless using the batch API, a specific account was limited to only sending one o
 
 The node accepts the injection of more than one operation from the same account in the same block; the counter needs to be incremented by one for each of them. A limitation comes from the chains/main/blocks/head/helpers/scripts/run_operation and /chains/main/blocks/head/helpers/preapply/operations RPC APIs as they do not take into account the transaction in the mempool when checking the account counter value.
 
-We added a counter property (a map of an account and its counter) on the TezosToolkit instance as a workaround. The counter is incremented when sending more than one operation in a row and used to inject the operation. However, the counter used in the prevalidation or the estimation is the head counter + 1. Note that if you send multiple operations in a block to a contract, the estimate will not take into account the impact of the previous operation on the storage of the contract. Consider using the batch API to send many operations at the same time. The solution presented in this issue is a workaround; the operations will need to be sent from the same TezosToolkit instance as it will hold the counter state.
+We added a counter property (a map of an account and its counter) on the MavrykToolkit instance as a workaround. The counter is incremented when sending more than one operation in a row and used to inject the operation. However, the counter used in the prevalidation or the estimation is the head counter + 1. Note that if you send multiple operations in a block to a contract, the estimate will not take into account the impact of the previous operation on the storage of the contract. Consider using the batch API to send many operations at the same time. The solution presented in this issue is a workaround; the operations will need to be sent from the same MavrykToolkit instance as it will hold the counter state.
 
 
 ## What's coming next for Taquito?
@@ -2521,9 +2622,9 @@ If you have feature or issue requests, please create an issue on http://github.c
 ## @mavrykdynamics/taquito - Added reveal operation on the `RpcContractProvider` and the `RPCEstimateProvider` classes & Include estimate for reveal operation on batch estimate
 
 When sending an operation using the contract API, Taquito takes care of adding a reveal operation when the account needs to be revealed. This has not changed, but we added a `reveal` method on the `RpcContractProvider` class, allowing to reveal the current account using the contract API without the need to do another operation. The method takes an object as a parameter with optional fee, gasLimit and StorageLimit properties:
-`await Tezos.contract.reveal({});`
+`await Mavryk.contract.reveal({});`
 We also added a reveal method on the `RPCEstimateProvider` class, allowing an estimation of the fees, storage and gas related to the operation:
-`await Tezos.estimate.reveal();`
+`await Mavryk.estimate.reveal();`
 
 Moreover, when estimating a batch operation where a reveal operation is needed, an `Estimate` object representing the reveal operation will now be returned as the first element of the returned array.
 
@@ -2548,7 +2649,7 @@ We are currently seeing a high number of transactions being backtracked with "st
 
 We will work on integrating flexmasa node into our CI pipeline. We are currently relying on testnets for testing purposes. Since many Taquito users use flexmasa for testing, including it in our development process will help provide better support, especially regarding errors encountered during Operation.confirmation() issues.
 
-We started some preliminary work on integrating Granadanet, the next Tezos protocol update proposal. We plan to deliver a final version of Taquito v10 early, giving teams a longer runway to upgrade their projects before protocol transition.
+We started some preliminary work on integrating Granadanet, the next Mavryk protocol update proposal. We plan to deliver a final version of Taquito v10 early, giving teams a longer runway to upgrade their projects before protocol transition.
 
 We plan to improve the `michelson-encoder` implementation to open the door for Type generation from contracts and to provide easier discoverability of what parameters endpoints and initial storage take. We opened a discussion on this subject on GitHub where any feedback or suggestions are appreciated: https://github.com/ecadlabs/taquito/discussions/840.
 
@@ -2606,13 +2707,13 @@ To give more flexibility to the user on the retry strategy, we removed the param
 After sending an operation with Taquito, we call the confirmation method on the operation. Taquito does polling to the node to fetch new blocks and validate if the operation hash is in the block. Before this change, the polling interval's default value (confirmationPollingIntervalSecond) was set to 10 seconds. In theory, a new block is baked every 30 seconds on the testnets and every 60 seconds on mainnet. However, the time between blocks is shorter on sandboxes. For example, it can be of 5 seconds on Flexmasa. A 10-second polling interval is too high for sandboxes and leads to a very high chance of missing the block containing the operation. To improve sandbox users' experience., we now calculate the polling interval value dynamically based on the RPC constants. To consider variations regarding the time between blocks in practice, we divide the value by 3 to reduce the risk of missing a block.
 
 Note that this value was configurable before and can still be configured if needed:
-Tezos.setProvider({config: {confirmationPollingIntervalSecond: 5}})
+Mavryk.setProvider({config: {confirmationPollingIntervalSecond: 5}})
 
 ## Delay and maximum number of attempts for the ObservableSubscription
 
 When users configure the ObservableSubscription to retry on error, the retries were happening immediately and indefinitely, causing call stack exception. Now, when the retry is enabled, the subscription uses a default value of 1 second between retries and a maximum value of 10 retries.
 These values are configurable by the user:
-Tezos.setProvider({ config: { shouldObservableSubscriptionRetry: true, observableSubscriptionRetryDelay: 2000, observableSubscriptionRetries: 3 } });
+Mavryk.setProvider({ config: { shouldObservableSubscriptionRetry: true, observableSubscriptionRetryDelay: 2000, observableSubscriptionRetries: 3 } });
 
 ## prefixSig
 
@@ -2624,7 +2725,7 @@ The numerics values (nat, int, and mumav) were not sorted properly by the Michel
 
 ## Documentation Additions and Improvements
 
-A link to the Tezos Taquito Telegram group has been added in the Taquito website home page's footer, making it easier to find the group. You are welcome to join this group to access community support and connect with the Taquito team.
+A link to the Mavryk Taquito Telegram group has been added in the Taquito website home page's footer, making it easier to find the group. You are welcome to join this group to access community support and connect with the Taquito team.
 
 We fixed broken links on the Taquito documentation website.
 
@@ -2673,7 +2774,7 @@ A note on how to use the Kukai wallet for testing on Edonet has been added to th
 
 ## Pack and unpack data locally
 
-Before v8.1, Taquito provided an API to pack data using Tezos RPC. This release introduces local packing and unpacking data, allowing for security-conscious off-line operations and faster dapps because of fewer RPC requests. allows the getBigMapKeyByID to use the new `michel-codec` packData implementation
+Before v8.1, Taquito provided an API to pack data using Mavryk RPC. This release introduces local packing and unpacking data, allowing for security-conscious off-line operations and faster dapps because of fewer RPC requests. allows the getBigMapKeyByID to use the new `michel-codec` packData implementation
 
 Local pack means that fetching big map values is now 50% faster! Big map keys must be encoded using the PACK method, so Taquito needed to use the `rpc.packData()` method. As of v8.1 Taquito, users can opt to pack big map keys locally, eliminating an RPC round trip.
 
@@ -2687,7 +2788,7 @@ IMPORTANT NOTE: Preview builds are not official releases. They are helpful for t
 
 ## Fetch multiple bigmaps at once.
 
-Taquito now provides a new API `getMultipleValues` that fetches multiple keys in a single call.  Taquito ensures that all fetched keys are fetched from the same block level. Future enhancements for this feature may include Taquito directly fetching multiple big maps from an RPC call as and when such an RPC is added to the Tezos nodes. See docs [here](https://taquito.mavryk.org/docs/maps_bigmaps#fetch-multiple-big-map-values-at-once)
+Taquito now provides a new API `getMultipleValues` that fetches multiple keys in a single call.  Taquito ensures that all fetched keys are fetched from the same block level. Future enhancements for this feature may include Taquito directly fetching multiple big maps from an RPC call as and when such an RPC is added to the Mavryk nodes. See docs [here](https://taquito.mavryk.org/docs/maps_bigmaps#fetch-multiple-big-map-values-at-once)
 
 ## Expanded property value support for tickets and better `nat` type support.
 
@@ -2711,9 +2812,9 @@ CodeBlock and Playground folders, along with contracts that work with live code,
 
 For enabling local pack (MichelCodecPacker()) for big map values, there are now instructions and documentation about the benefits of doing so.
 
-Developers can now opt in to use Taquito's local pack implementation when fetching Big Map values. This feature makes fetching Big Map values 50% faster. Big Map keys need to be serialized or PACK'ed, and Taquito relied on the Tezos PACK RPC to PACK the bigmap keys.
+Developers can now opt in to use Taquito's local pack implementation when fetching Big Map values. This feature makes fetching Big Map values 50% faster. Big Map keys need to be serialized or PACK'ed, and Taquito relied on the Mavryk PACK RPC to PACK the bigmap keys.
 
-By relying on the local pack implementation, we eliminate one RPC roundtrip when fetching Big Map Values. To enable this feature, developers must call the `tezos. setPackerProvider(new MichelCodecPacker());` on the program's TezosToolkit instance.
+By relying on the local pack implementation, we eliminate one RPC roundtrip when fetching Big Map Values. To enable this feature, developers must call the `mavryk. setPackerProvider(new MichelCodecPacker());` on the program's MavrykToolkit instance.
 
 ## Website now uses Netlify
 
@@ -2725,13 +2826,13 @@ New RPC endpoints are added to the Taquito RPC package providing better edonet s
 
 ## Graceful error handling for getDelegate method and testing improvements.
 
-The Tezos RPC returns an HTTP 404 when requesting a delegate for an account with no Delegate. Taquito now returns null without throwing an exception for this case.
+The Mavryk RPC returns an HTTP 404 when requesting a delegate for an account with no Delegate. Taquito now returns null without throwing an exception for this case.
 
 Test coverage for the getBlock endpoint has been improved
 
 ## What's coming next for Taquito?
 
-We will soon be working on integrating Florence, the next Tezos protocol update proposal. We plan to deliver a final version of Taquito v9 much earlier, giving teams a longer runway to upgrade their projects before protocol transition.
+We will soon be working on integrating Florence, the next Mavryk protocol update proposal. We plan to deliver a final version of Taquito v9 much earlier, giving teams a longer runway to upgrade their projects before protocol transition.
 
 Developer Experience is our high-priority item, and we have improvements in our backlog that we plan to start work. We are improving the `michelson-encoder implementation to open the door for Type generation from contracts and to provide easier discoverability of what parameters endpoints and initial storage take. Stay tuned!
 
@@ -2748,7 +2849,7 @@ If you have feature or issue requests, please create an issue on http://github.c
 
 ## 8.0.4-beta.0 Refactor batch API, improve errors for LamdbaView
 
-* TezosToolkit.batch has been deprecated in favour of a batch() method on the contract and wallet API. See preliminary docs here: https://github.com/ecadlabs/taquito/pull/648/files and many examples of usage in our integration tests.
+* MavrykToolkit.batch has been deprecated in favour of a batch() method on the contract and wallet API. See preliminary docs here: https://github.com/ecadlabs/taquito/pull/648/files and many examples of usage in our integration tests.
 * LamdbaView returns a useful error message when a signer is not configured in Taquito
 * More intergration-tests to cover the Wallet API
 * Many small fixes to the Taquito documentation
@@ -2768,9 +2869,9 @@ If you have feature or issue requests, please create an issue on http://github.c
 
 ## 8.0.1-beta.1 Final v8.0.1 - Update Now - mainnet transitions to edo on Feb 13th 2021!
 
-The Tezos mainnet transitions from the incumbent delphi protocol to the edo protocol on Feb 13th 2021. If you have projects on mainnet that use Taquito, it is crucial that you update now.
+The Mavryk mainnet transitions from the incumbent delphi protocol to the edo protocol on Feb 13th 2021. If you have projects on mainnet that use Taquito, it is crucial that you update now.
 
-This release supports 008-PtEdo2Zk protocol that ships with the recently releases Tezos v8.2 node.
+This release supports 008-PtEdo2Zk protocol that ships with the recently releases Mavryk v8.2 node.
 
 The edonet testnet has been reset. The public node that Taquito operates is running this new testnet, and this testnet runs the protocol that will come into effect on mainnet this Saturday the 13th of Feb 2021.
 
@@ -2783,7 +2884,7 @@ If you are using a public testnet for your development or testing, please verify
 * Support for off-chain Michelson views
 * Michel-codec type checks all your Michelson
 * Ships with @airgap/beacon-sdk v2.2.1 for the Taquito Beacon wallet provider.
-* As per the Taquito Versioning Strategy this v8.0.0 release supports the upcoming edonet Tezos Protocol which will activate on the Tezos mainnet on February 13th 2021.
+* As per the Taquito Versioning Strategy this v8.0.0 release supports the upcoming edonet Mavryk Protocol which will activate on the Mavryk mainnet on February 13th 2021.
 
 ## edonet Support
 
@@ -2795,7 +2896,7 @@ Taquito’s michel-codec package and michelson-encoder package has been updated 
 
 Michel-codec Update to support all Michelson changes introduced in the 008 edo update.
 
-For all the changes in edo itself, see the edo changelogs here: https://tezos.gitlab.io/protocols/008_edo.html
+For all the changes in edo itself, see the edo changelogs here: https://protocol.mavryk.org/protocols/008_edo.html
 
 Contract and Token Metadata support (TZIP-16/TZIP-12
 Taquito v8 ships with full support for reading Contract and Token metadata, as well as loading and executing “off-chain-views”. Projects can now publish metadata about their contract to IPFS, a HTTP server or (even if not appropriate) on-chain.
@@ -2835,7 +2936,7 @@ Taquito v8 is considered very stable, but we still carry the beta tag, as we wan
 
 ## What’s coming next for Taquito?
 
-We will soon be working on integrating Florence, the next Tezos protocol update proposal. We plan to deliver a final version of Taquito v9 much earlier, giving teams a longer runway to upgrade their projects prior to protocol transition.
+We will soon be working on integrating Florence, the next Mavryk protocol update proposal. We plan to deliver a final version of Taquito v9 much earlier, giving teams a longer runway to upgrade their projects prior to protocol transition.
 
 Developer Experience is our high priority item, and we have improvements in our backlog that we plan to start work on.
 
@@ -2857,11 +2958,11 @@ Special thanks to Philip Diaz and Michael Klien for contributing this feature to
 
 #### michel-codec type checking
 
-The `@mavrykdynamics/taquito-michel-codec` package now validates/type checks your Michelson. This validation provides an additional layer of safety and speed as this package validates Michelson at run-time, catching invalid code before it reaches a Tezos node. We will be integrating `michel-codec` package deeper into Taquito over the next few releases.
+The `@mavrykdynamics/taquito-michel-codec` package now validates/type checks your Michelson. This validation provides an additional layer of safety and speed as this package validates Michelson at run-time, catching invalid code before it reaches a Mavryk node. We will be integrating `michel-codec` package deeper into Taquito over the next few releases.
 
 ### Beacon V2
 
-The Taquito wallet API now supports Beacon V2. This update is the product of close collaboration between AirGap, Kukai, Temple, and Taquito. The updated TZIP-10/Beacon experience is smoother than before, and users who have more than one Tezos wallet are accommodated.
+The Taquito wallet API now supports Beacon V2. This update is the product of close collaboration between AirGap, Kukai, Temple, and Taquito. The updated TZIP-10/Beacon experience is smoother than before, and users who have more than one Mavryk wallet are accommodated.
 
 ### Docs
 
@@ -2875,7 +2976,7 @@ This release updates Taquito's Wallet API provider for TZIP-10/beacon-sdk to 1.2
 
 ## Taquito v7.0.0-beta
 
-As per the Taquito [Versioning Strategy](https://github.com/ecadlabs/taquito#versioning-strategy) this v7.0.0 release supports the upcoming Delphinet Tezos Protocol which we are expecting to reach quorum in the coming days.
+As per the Taquito [Versioning Strategy](https://github.com/ecadlabs/taquito#versioning-strategy) this v7.0.0 release supports the upcoming Delphinet Mavryk Protocol which we are expecting to reach quorum in the coming days.
 
 
 ### Delphinet Support
@@ -2896,7 +2997,7 @@ Documentation is available here: https://taquito.mavryk.org/docs/ledger_signer
 
 We have tested using both Ledger Nano S and X devices.
 
-Both the [Madfish](https://www.madfish.solutions/) ([Temple Wallet](https://templewallet.com/)) and Agile Ventures (Tezos Domains) have put this package to use in their products. A special thanks to Klas and Luis of the Kukai team for their early feedback.
+Both the [Madfish](https://www.madfish.solutions/) ([Temple Wallet](https://templewallet.com/)) and Agile Ventures (Mavryk Domains) have put this package to use in their products. A special thanks to Klas and Luis of the Kukai team for their early feedback.
 
 
 ### More documentation!
@@ -2906,7 +3007,7 @@ Both the [Madfish](https://www.madfish.solutions/) ([Temple Wallet](https://temp
   - [Ledger Devices](https://taquito.mavryk.org/docs/ledger_integration_test)
   - [RPC Node](https://taquito.mavryk.org/docs/rpc_nodes_integration_test)
 - [Docs for RPC](https://taquito.mavryk.org/docs/rpc_package)
-- [Docs for popular public Tezos nodes](https://taquito.mavryk.org/docs/rpc_nodes)
+- [Docs for popular public Mavryk nodes](https://taquito.mavryk.org/docs/rpc_nodes)
 
 
 ### Breaking Changes
@@ -2919,14 +3020,14 @@ The three most notable changes are:
 
 #### Removal of the default RPC URL
 
-Users of Taquito must specifically set their RPC URL. We have published a list of [public nodes Tezos RPC nodes](https://taquito.mavryk.org/docs/rpc_nodes/).
+Users of Taquito must specifically set their RPC URL. We have published a list of [public nodes Mavryk RPC nodes](https://taquito.mavryk.org/docs/rpc_nodes/).
 
 
-#### Removal of the default Tezos singleton
+#### Removal of the default Mavryk singleton
 
-Users must now make a new instance of the Taquito `TezosToolkit`. This change is related to the removal of the default RPC node URL.
+Users must now make a new instance of the Taquito `MavrykToolkit`. This change is related to the removal of the default RPC node URL.
 
-#### Remove the deprecated `Tezos.importKey` method from the main Taquito package
+#### Remove the deprecated `Mavryk.importKey` method from the main Taquito package
 We deprecated the top-level `importKey` method last march, and now it’s finally time to remove it. The method continues to be available in the `@mavrykdynamics/taquito-signer` package as usual.
 
 ### Bugs / Improvements
@@ -2992,7 +3093,7 @@ The new Taquito Wallet API is designed to interact with wallets, and it supports
 
 We have published a brand new package that allows you to encode and decode between "plain" Michelson and Michelson in JSON representation. This is a standalone implementation with no external dependencies. It offers Michelson Macro expansion and Michelson validation using TypeScript Types.
 
-This makes originating Smart Contracts in plain Michelson easy, previously you had to do tezos-client command-line gymnastic to convert & expand plain Michelson to JSON Michelson.
+This makes originating Smart Contracts in plain Michelson easy, previously you had to do mavkit-client command-line gymnastic to convert & expand plain Michelson to JSON Michelson.
 
 You can now write pass the initial storage of your contract using plain Michelson.
 
@@ -3016,7 +3117,7 @@ Integration tests have been sped up significantly by using a special key API tha
 
 - Update deps. Taquito now builds using Typescript 3.9.5
 - The hexNonce function has been removed from taquito-utils. This function was not in use, and of little value.
-- getBigMapKey has been deprecated in the Tezos RPC in favour of getBigMapKeyByID.
+- getBigMapKey has been deprecated in the Mavryk RPC in favour of getBigMapKeyByID.
 - Fixed a bug where explicit limits were ignored by the estimator
 - Website live code examples have the key boilerplate hidden, allowing the reader to focus more on the code.
 
@@ -3024,7 +3125,7 @@ Integration tests have been sped up significantly by using a special key API tha
 
 ### Changes
 
-Tezos.importKey() has been marked as deprecated. Please update your application code to use the importKey() method from the @mavrykdynamics/taquito-singer package instead. The deprecated Tezos.importKey() method will be removed in a future release.
+Mavryk.importKey() has been marked as deprecated. Please update your application code to use the importKey() method from the @mavrykdynamics/taquito-singer package instead. The deprecated Mavryk.importKey() method will be removed in a future release.
 
 `import { importKey } from '@mavrykdynamics/taquito-signer';`
 
@@ -3071,7 +3172,7 @@ Additionally, if existing code initializes storage (during contract origination 
 
     map.set({firstName:"Joe", lastName: "Bloe"}, "myValue")
 
-    Tezos.contract.originate({
+    Mavryk.contract.originate({
         code: myContractWithAPairAsKeyCode,
         storage: map
     })
@@ -3080,7 +3181,7 @@ Additionally, if existing code initializes storage (during contract origination 
 Or one can also use the `fromLiteral` convenience method, as illustrated below.
 
 ```typescript
-    Tezos.contract.originate({
+    Mavryk.contract.originate({
         code: assertContractCode,
         storage: {
             owner: "mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ",
@@ -3136,7 +3237,7 @@ As per our versioning policy, we have now removed support for injecting Athens o
 
 #### Local Forging
 
-Taquito now supports Local forging of operations. This allows you to forge operations without relying on a Tezos node RPC. This feature is useful if you do not want to rely (trust) a public node, or if you want to forge & sign operations in an environment that is not accessible to the internet for security purposes.
+Taquito now supports Local forging of operations. This allows you to forge operations without relying on a Mavryk node RPC. This feature is useful if you do not want to rely (trust) a public node, or if you want to forge & sign operations in an environment that is not accessible to the internet for security purposes.
 
 See the `@mavrykdynamics/taquito-local-forging` package for the implementation.
 
@@ -3210,7 +3311,7 @@ We wish to thank the Zengo, Kukai, TQ Group, Truffle Michael Klein, Matej Šima 
 
 ### Features
 
-- Introduction of the remote signer package, allowing Taquito to interact with the Tezos HTTP  remote signer API
+- Introduction of the remote signer package, allowing Taquito to interact with the Mavryk HTTP  remote signer API
 - `gasLimit`, `storageLimit` and `fees` are now surfaced on `Orgination`, `Transaction` and `Delegation` operations
 - Our HTTP backend package now throws more useful errors, which extend javascript's `Error`
 - New bigmap abstraction (released in 5.1.0-beta.1 but not announced)
@@ -3231,7 +3332,7 @@ This release supports Babylon/Proto005. With this release, it is possible to inj
 Developers have two options around operating with the blockchain during the protocol amendment. First option, you can specify the protocol you expect to use in your provider as follows:
 
 ```js
-Tezos.setProvider({protocol: Protocols.PsBabyM1})
+Mavryk.setProvider({protocol: Protocols.PsBabyM1})
 ```
 
 Second option is to not specify the protocol in your provider. Taquito will discover the current protocol before injection an operation by querying the RPC. This method requires less code, but adds an additional RPC query for every injection and is thus slightly slower.
@@ -3241,7 +3342,7 @@ Second option is to not specify the protocol in your provider. Taquito will disc
 - Polling interval for operation confirmation can be set globally for a taquito instance. Useful when working with `zeronet`
 
 ```js
-Tezos.setProvider(
+Mavryk.setProvider(
     {
         config: {
             confirmationPollingIntervalSecond: 10,
@@ -3263,7 +3364,7 @@ Support for the new Babylon multiple BigMap feature is not yet supported.
 
 ### BREAKING CHANGES
 
-- In order to be consistent with Tezos RPC. All RPC types are now all *snake_case*.
+- In order to be consistent with Mavryk RPC. All RPC types are now all *snake_case*.
 
 Documentation:
 
@@ -3312,8 +3413,8 @@ Documentation:
 
 ### Features
 
-- Add activation operation support Tezos.tz.activate("pkh", "secret")
-- High-level function to import a key Tezos.importKey("your_key")
+- Add activation operation support Mavryk.mv.activate("pkh", "secret")
+- High-level function to import a key Mavryk.importKey("your_key")
 - Utility to retrieve private key from faucet/fundraiser account
 - Add RPC support for backing related endpoint (endorsing rights/baking rights)
 - Add RPC support for voting endpoint

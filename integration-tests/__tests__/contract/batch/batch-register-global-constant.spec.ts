@@ -2,7 +2,7 @@ import { CONFIGS } from '../../../config';
 import { OpKind } from '@mavrykdynamics/taquito';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test contract.batch to register global constant using: ${rpc}`, () => {
     const randomAnnots = () => crypto.randomBytes(3).toString('hex');
     beforeEach(async () => {
@@ -10,9 +10,9 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     test('Verify the contract.batch transfer and register global constant operations', async () => {
-      const isAccountRevealed = await Tezos.rpc.getManagerKey(await Tezos.signer.publicKeyHash());
+      const isAccountRevealed = await Mavryk.rpc.getManagerKey(await Mavryk.signer.publicKeyHash());
 
-      const batchOp = await Tezos.contract
+      const batchOp = await Mavryk.contract
         .batch([
           { kind: OpKind.TRANSACTION, to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 },
           {

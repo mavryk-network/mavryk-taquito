@@ -2,7 +2,7 @@ import { CONFIGS } from '../../config';
 import { LedgerSigner, LedgerTransport, DerivationType } from '@mavrykdynamics/taquito-ledger-signer';
 import TransportNodeHid from "@ledgerhq/hw-transport-node-hid";
 import { ligoSample } from "../../data/ligo-simple-contract";
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { localForger } from '@mavrykdynamics/taquito-local-forging';
 import { rpcToForge } from '../../data/contract_origination';
 
@@ -30,7 +30,7 @@ import { rpcToForge } from '../../data/contract_origination';
  */
 
 CONFIGS().forEach(({ lib, setup, rpc }) => {
-  const tezos = lib;
+  const mavryk = lib;
 
   describe('Verify LedgerSigner', () => {
     let transport: LedgerTransport;
@@ -142,7 +142,7 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
       jest.setTimeout(240000)
       it('Verify that a contract can be originated with Ledger', async () => {
 
-        const fundAccountFirst = await tezos.contract.transfer({ to: 'mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq', amount: 9 });
+        const fundAccountFirst = await mavryk.contract.transfer({ to: 'mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq', amount: 9 });
         await fundAccountFirst.confirmation();
 
         const signer = new LedgerSigner(
@@ -151,9 +151,9 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
           false,
           DerivationType.ED25519
         );
-        const Tezos = new TezosToolkit(rpc);
-        Tezos.setSignerProvider(signer);
-        const op = await Tezos.contract.originate({
+        const Mavryk = new MavrykToolkit(rpc);
+        Mavryk.setSignerProvider(signer);
+        const op = await Mavryk.contract.originate({
           balance: "1",
           code: ligoSample,
           storage: 0,
@@ -174,9 +174,9 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
           false,
           DerivationType.ED25519
         );
-        const Tezos = new TezosToolkit(rpc);
-        Tezos.setSignerProvider(signer);
-        const op = await Tezos.wallet.transfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.1 }).send()
+        const Mavryk = new MavrykToolkit(rpc);
+        Mavryk.setSignerProvider(signer);
+        const op = await Mavryk.wallet.transfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.1 }).send()
         await op.confirmation()
         expect(op.opHash).toBeDefined();
       });
@@ -191,11 +191,11 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
           false,
           DerivationType.BIP32_ED25519
         )
-        const Tezos = new TezosToolkit(rpc);
-        Tezos.setSignerProvider(signer);
+        const Mavryk = new MavrykToolkit(rpc);
+        Mavryk.setSignerProvider(signer);
 
-        const pk = await Tezos.signer.publicKey();
-        const pkh = await Tezos.signer.publicKeyHash();
+        const pk = await Mavryk.signer.publicKey();
+        const pkh = await Mavryk.signer.publicKeyHash();
 
         expect(pk).toEqual('edpkujVjFVJtb9Z1D7jpSpPMrKzdTRZSRT8E3L26T42vvA6VSv7jND');
         expect(pkh).toEqual('mv1HCCHzQXa5vuynLfPmDj25LTrn2aa5iF2v');
@@ -212,11 +212,11 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
           false,
           DerivationType.BIP32_ED25519
         )
-        const Tezos = new TezosToolkit(rpc);
-        Tezos.setSignerProvider(signer);
+        const Mavryk = new MavrykToolkit(rpc);
+        Mavryk.setSignerProvider(signer);
 
         const contractCode = rpcToForge.contents[0].script!
-        const contract = await Tezos.contract.originate(contractCode)
+        const contract = await Mavryk.contract.originate(contractCode)
 
         await contract.confirmation();
         expect(contract.status).toEqual('applied')
@@ -232,7 +232,7 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
           false,
           DerivationType.BIP32_ED25519
         )
-        const Tezos = new TezosToolkit(rpc);
+        const Mavryk = new MavrykToolkit(rpc);
 
         const forge = await localForger.forge(rpcToForge)
         const sig = await signer.sign(forge, new Uint8Array([3]))

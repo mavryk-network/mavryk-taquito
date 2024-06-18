@@ -47,8 +47,8 @@
 
 <main>
   <div class="dapp-title">
-    Taquito Test Dapp {$store.Tezos
-      ? `(v${$store.Tezos.getVersionInfo().version})`
+    Taquito Test Dapp {$store.Mavryk
+      ? `(v${$store.Mavryk.getVersionInfo().version})`
       : ""}
   </div>
   <Sidebar bind:this={side}/>

@@ -4,8 +4,8 @@ import { MichelsonMap } from "@mavrykdynamics/taquito";
 import { fa2ContractTzip16 } from "../../data/fa2_contract_with_metadata";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
-   const Tezos = lib;
-   Tezos.addExtension(new Tzip16Module());
+   const Mavryk = lib;
+   Mavryk.addExtension(new Tzip16Module());
    let contractAddress: string;
    describe(`Test contract origination of a fa2 contract having Tzip16 metadata and view through contract api using: ${rpc}`, () => {
 
@@ -38,7 +38,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
          },
             'None');
 
-         const op = await Tezos.contract.originate({
+         const op = await Mavryk.contract.originate({
             code: fa2ContractTzip16,
             storage: {
                default_expiry: 1000,
@@ -51,7 +51,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
                permits: new MichelsonMap(),
                totalSupply: '100',
                roles: {
-                  master_minter: await Tezos.signer.publicKeyHash(),
+                  master_minter: await Mavryk.signer.publicKeyHash(),
                   owner: localTez1Pkh,
                   pauser: localTez2Pkh,
                   pending_owner: null
@@ -68,7 +68,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
       it('Verify that metadata for a Fa2 contract can be fetched', async () => {
 
-         const contract = await Tezos.contract.at(contractAddress, tzip16);
+         const contract = await Mavryk.contract.at(contractAddress, tzip16);
          const metadata = await contract.tzip16().getMetadata();
 
          expect(metadata.uri).toEqual('https://storage.googleapis.com/tzip-16/fa2-metadata.json');
@@ -286,7 +286,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
                },
                {
                   "error": {
-                     "string": "XTZ_RECEIVED"
+                     "string": "MVRK_RECEIVED"
                   },
                   "expansion": {
                      "string": "Contract received a non-zero amount of tokens"
@@ -462,7 +462,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
             },
             {
                "error": {
-                  "string": "XTZ_RECEIVED"
+                  "string": "MVRK_RECEIVED"
                },
                "expansion": {
                   "string": "Contract received a non-zero amount of tokens"
@@ -586,7 +586,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
       it('Verify that Fa2 contract view can be executed', async () => {
 
-         const contractAbstraction = await Tezos.contract.at(contractAddress, tzip16);
+         const contractAbstraction = await Mavryk.contract.at(contractAddress, tzip16);
          const metadataViews = await contractAbstraction.tzip16().metadataViews();
 
          const viewGetCounterResult = await metadataViews.GetCounter().executeView('Unit');

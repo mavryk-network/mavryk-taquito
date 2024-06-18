@@ -89,13 +89,13 @@ describe('Tests for Entrypoint functions and for encode and decoder error messag
     expect(none).toEqual('00');
     const empty = publicKeyHashesEncoder([]);
     expect(empty).toEqual('ff00000000');
-    const tz = publicKeyHashesEncoder([
+    const mv = publicKeyHashesEncoder([
       'mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq',
       'mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ',
       'mv3Ju2CZXqfgiHctrWsjjJD8D7GnwJXMkdvV',
       'mv4V7CnM8pzPbWHtiRRbvSLkaheyM4pEnMSC',
     ]);
-    expect(tz).toEqual(
+    expect(mv).toEqual(
       'ff0000005400c9fc72e8491bd2973e196f04ec6918ad5bcee22d012ffebbf1560632ca767bc960ccdb84669d284c2c026fde46af0356a0476dae4e4600172dc9309b3aa4035c14a7a05c10fc8b402fbcdd48dc8136236bf3c1'
     );
 
@@ -114,12 +114,12 @@ describe('Tests for Entrypoint functions and for encode and decoder error messag
     expect(none).toEqual(undefined);
     const empty = publicKeyHashesDecoder(Uint8ArrayConsumer.fromHexString('ff00000000'));
     expect(empty).toEqual([]);
-    const tz = publicKeyHashesDecoder(
+    const mv = publicKeyHashesDecoder(
       Uint8ArrayConsumer.fromHexString(
         'ff0000005400c9fc72e8491bd2973e196f04ec6918ad5bcee22d012ffebbf1560632ca767bc960ccdb84669d284c2c026fde46af0356a0476dae4e4600172dc9309b3aa4'
       )
     );
-    expect(tz).toEqual([
+    expect(mv).toEqual([
       'mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq',
       'mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ',
       'mv3Ju2CZXqfgiHctrWsjjJD8D7GnwJXMkdvV',

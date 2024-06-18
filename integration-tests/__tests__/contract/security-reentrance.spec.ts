@@ -3,14 +3,14 @@ import { CONFIGS } from '../../config';
 
 /**
  * TC-002/003 This test case originates a contract with a "payout" entrypoint. When calling the payout entrypoint, a contract can transfer
- * all available tez amounts except a "minLockedValue," which can be shared by a contract to a provided destination address.
+ * all available mav amounts except a "minLockedValue," which can be shared by a contract to a provided destination address.
  * The test case tries to move the balance to an "attacker contract," which immediately calls the "payout" entrypoint again.
  * Not updating the balance would make the Attacker glad.   The attacker should not be successful since the credit is instantly
  * updated when executing the transfer transaction. Any reentrancy (after the transfer transaction operation) to the contract finds the updated balance.
  */
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const weeklynet = protocol === Protocols.ProtoALpha ? test : test.skip;
   const address = 'mv1QKLY6XJjb6uD9vdXmtW6aUfP4C7h66aTg';
 
@@ -20,7 +20,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
     });
 
     weeklynet('Reentrance attack test', async () => {
-      const vestingContractOp = await Tezos.contract.originate({
+      const vestingContractOp = await Mavryk.contract.originate({
         balance: '8',
         code: `{ parameter
             (or (pair %adminPayout (mumav %amount) (address %destination))
@@ -71,11 +71,11 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
       const vestingContract = await vestingContractOp.contract();
       expect(await vestingContract.storage()).toBeTruthy();
 
-      const publicKeyHash = await Tezos.signer.publicKeyHash();
-      const opTransfer = await Tezos.contract.transfer({ to: publicKeyHash, amount: 1 });
+      const publicKeyHash = await Mavryk.signer.publicKeyHash();
+      const opTransfer = await Mavryk.contract.transfer({ to: publicKeyHash, amount: 1 });
       await opTransfer.confirmation();
 
-      const attackContractOp = await Tezos.contract.originate({
+      const attackContractOp = await Mavryk.contract.originate({
         code: `{ parameter unit ;
                storage unit ;
                code { CDR ;
@@ -111,7 +111,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
        * Since there are still 5 the reentry failed
        */
 
-      Tezos.tz.getBalance(vestingContract.address).then((vbalance) => {
+      Mavryk.mv.getBalance(vestingContract.address).then((vbalance) => {
         let result = vbalance.toNumber();
         expect((result = 5000000));
       });

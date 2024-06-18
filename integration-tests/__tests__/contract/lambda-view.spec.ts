@@ -5,7 +5,7 @@ import { testContract } from '../../data/test_lambda_view';
 import { fa2Contract } from '../../data/fa2_contract';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const toJSON = (x: any) => JSON.parse(JSON.stringify(x));
 
   describe(`Test contract with lambda view trough contract api using: ${rpc}`, () => {
@@ -32,11 +32,11 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         allowances: mapAccount2
       });
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: tzip7Contract,
         storage: {
-          owner: await Tezos.signer.publicKeyHash(),
+          owner: await Mavryk.signer.publicKeyHash(),
           totalSupply: '100',
           ledger: bigMapLedger
         },
@@ -73,11 +73,11 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         whitelisted: true
       });
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: testContract,
         storage: {
-          administrator: await Tezos.signer.publicKeyHash(),
+          administrator: await Mavryk.signer.publicKeyHash(),
           balances: mapAccount1,
           pause: false,
           totalSupply: '50'
@@ -121,7 +121,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         extras: new MichelsonMap()
       });
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: fa2Contract,
         storage: {

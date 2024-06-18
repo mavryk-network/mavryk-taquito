@@ -191,7 +191,7 @@ export const depositContractCode = [
                 prim: 'IF',
                 args: [
                   [
-                    { prim: 'PUSH', args: [{ prim: 'string' }, { string: 'No tez transferred!' }] },
+                    { prim: 'PUSH', args: [{ prim: 'string' }, { string: 'No mav transferred!' }] },
                     { prim: 'FAILWITH' },
                   ],
                   [
@@ -1011,7 +1011,7 @@ export const depositContractCode = [
                 prim: 'IF',
                 args: [
                   [
-                    { prim: 'PUSH', args: [{ prim: 'string' }, { string: 'No tez to withdraw!' }] },
+                    { prim: 'PUSH', args: [{ prim: 'string' }, { string: 'No mav to withdraw!' }] },
                     { prim: 'FAILWITH' },
                   ],
                   [

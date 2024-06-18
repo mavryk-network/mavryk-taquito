@@ -47,18 +47,18 @@ jobs:
       working-directory: ./integration-tests
       env:
         MONDAYNET: true
-      run: npm run test:originate-known-contracts
+      run: npm run originate-known-contracts
     -
       if: always()
       id: integration-tests-mondaynet
       working-directory: ./integration-tests
       env:
-        TEZOS_MONDAYNET_CONTRACT_ADDRESS: ${{ steps.originate-contracts-mondaynet.outputs.knownContractAddress }}
-        TEZOS_MONDAYNET_BIGMAPCONTRACT_ADDRESS: ${{ steps.originate-contracts-mondaynet.outputs.knownBigMapContractAddress }}
-        TEZOS_MONDAYNET_TZIP1216CONTRACT_ADDRESS: ${{ steps.originate-contracts-mondaynet.outputs.knownTzip12BigMapOffChainContractAddress }}
-        TEZOS_MONDAYNET_SAPLINGCONTRACT_ADDRESS: ${{ steps.originate-contracts-mondaynet.outputs.knownSaplingContractAddress }}
-        TEZOS_MONDAYNET_ON_CHAIN_VIEW_CONTRACT: ${{ steps.originate-contracts-mondaynet.outputs.knownOnChainViewContractAddress }}
-      run: npm run test:mondaynet -- --maxWorkers=2
+        MAVRYK_MONDAYNET_CONTRACT_ADDRESS: ${{ steps.originate-contracts-mondaynet.outputs.knownContractAddress }}
+        MAVRYK_MONDAYNET_BIGMAPCONTRACT_ADDRESS: ${{ steps.originate-contracts-mondaynet.outputs.knownBigMapContractAddress }}
+        MAVRYK_MONDAYNET_TZIP1216CONTRACT_ADDRESS: ${{ steps.originate-contracts-mondaynet.outputs.knownTzip12BigMapOffChainContractAddress }}
+        MAVRYK_MONDAYNET_SAPLINGCONTRACT_ADDRESS: ${{ steps.originate-contracts-mondaynet.outputs.knownSaplingContractAddress }}
+        MAVRYK_MONDAYNET_ON_CHAIN_VIEW_CONTRACT: ${{ steps.originate-contracts-mondaynet.outputs.knownOnChainViewContractAddress }}
+      run: npm run test:weeklynet -- --maxWorkers=2
     -
       name: Slack Notification
       if: always()

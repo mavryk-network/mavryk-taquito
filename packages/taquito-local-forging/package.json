@@ -1,9 +1,9 @@
 {
   "name": "@mavrykdynamics/taquito-local-forging",
-  "version": "19.2.3",
+  "version": "20.0.0",
   "description": "Provide local forging functionality to be with taquito",
   "keywords": [
-    "tezos",
+    "mavryk",
     "blockchain",
     "signer"
   ],
@@ -67,12 +67,12 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/taquito-core": "^19.1.0",
-    "@mavrykdynamics/taquito-utils": "^19.2.3",
+    "@mavrykdynamics/taquito-core": "^20.0.0",
+    "@mavrykdynamics/taquito-utils": "^20.0.0",
     "bignumber.js": "^9.1.2"
   },
   "devDependencies": {
-    "@mavrykdynamics/taquito-rpc": "^19.2.3",
+    "@mavrykdynamics/taquito-rpc": "^20.0.0",
     "@types/bluebird": "^3.5.40",
     "@types/estree": "^1.0.2",
     "@types/jest": "^29.5.5",

@@ -1,9 +1,9 @@
 {
   "name": "@mavrykdynamics/taquito-contracts-library",
-  "version": "19.2.3",
-  "description": "Can be used as an extension on the TezosToolkit to provide contracts data",
+  "version": "20.0.0",
+  "description": "Can be used as an extension on the MavrykToolkit to provide contracts data",
   "keywords": [
-    "tezos"
+    "mavryk"
   ],
   "main": "dist/taquito-contracts-library.umd.js",
   "module": "dist/taquito-contracts-library.es6.js",
@@ -67,10 +67,10 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/taquito": "^19.2.3",
-    "@mavrykdynamics/taquito-core": "^19.1.0",
-    "@mavrykdynamics/taquito-rpc": "^19.2.3",
-    "@mavrykdynamics/taquito-utils": "^19.2.3",
+    "@mavrykdynamics/taquito": "^20.0.0",
+    "@mavrykdynamics/taquito-core": "^20.0.0",
+    "@mavrykdynamics/taquito-rpc": "^20.0.0",
+    "@mavrykdynamics/taquito-utils": "^20.0.0",
     "bignumber.js": "^9.1.2"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-// https://gitlab.com/tezos/tezos/-/blob/master/src/proto_alpha/lib_protocol/contracts/timelock_flip.tz
+// https://gitlab.com/mavryk-network/mavryk-protocol/-/blob/master/src/proto_alpha/lib_protocol/contracts/timelock_flip.mv
 
 export const timelockStorage = {
   "prim": "Pair",

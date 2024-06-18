@@ -4,7 +4,7 @@ import { managerCode } from "../../data/manager_code";
 import { DefaultContractType, MANAGER_LAMBDA, OriginationOperation } from "@mavrykdynamics/taquito";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   let contract: DefaultContractType;
   let opManager: OriginationOperation<DefaultContractType>;
@@ -14,7 +14,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       await setup();
 
       try {
-        const op = await Tezos.contract.originate({
+        const op = await Mavryk.contract.originate({
           balance: "1",
           code: failwithContractCode,
           storage: null
@@ -22,10 +22,10 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         await op.confirmation();
         contract = await op.contract();
 
-        opManager = await Tezos.contract.originate({
+        opManager = await Mavryk.contract.originate({
           balance: "1",
           code: managerCode,
-          init: { "string": await Tezos.signer.publicKeyHash() },
+          init: { "string": await Mavryk.signer.publicKeyHash() },
         });
         await opManager.confirmation();
       } catch(e) {

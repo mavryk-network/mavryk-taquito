@@ -7,7 +7,7 @@ import { SaplingStateValue } from '@mavrykdynamics/taquito-michelson-encoder';
 
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   let saplingContract: ContractAbstraction<ContractProvider>;
   let saplingStateIdLeft: string;
   let saplingStateIdRight: string;
@@ -23,7 +23,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       // Deploy the sapling contract
       // This is an artificial contract used to test handling two states
       // There are 2 sapling states in the contract (named "left" and "right")
-      const saplingContractOrigination = await Tezos.contract.originate({
+      const saplingContractOrigination = await Mavryk.contract.originate({
         code: saplingContractDoubleJProto,
         storage: {
           left: SaplingStateValue,
@@ -46,8 +46,8 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
       // When a contract has multiple sapling states, the `saplingId` parameter in the constructor of the `SaplingToolkit` must be defined
       // The `saplingId` parameter indicates which sapling pool we want to interact with
-      const aliceSaplingToolkitLeft = new SaplingToolkit({ saplingSigner: aliceInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize, saplingId: saplingStateIdLeft }, new RpcReadAdapter(Tezos.rpc));
-      const aliceSaplingToolkitRight = new SaplingToolkit({ saplingSigner: aliceInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize, saplingId: saplingStateIdRight }, new RpcReadAdapter(Tezos.rpc));
+      const aliceSaplingToolkitLeft = new SaplingToolkit({ saplingSigner: aliceInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize, saplingId: saplingStateIdLeft }, new RpcReadAdapter(Mavryk.rpc));
+      const aliceSaplingToolkitRight = new SaplingToolkit({ saplingSigner: aliceInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize, saplingId: saplingStateIdRight }, new RpcReadAdapter(Mavryk.rpc));
       const aliceInMemoryViewingKey = await aliceInmemorySpendingKey.getSaplingViewingKeyProvider();
 
       // Fetch a payment address (zet) for Alice
@@ -68,7 +68,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       }])
 
       // Inject the sapling transaction using the ContractAbstraction by calling the default entrypoint
-      // The amount MUST be specified in the send method in order to transfer the 6 tez to the shielded pool
+      // The amount MUST be specified in the send method in order to transfer the 6 mav to the shielded pool
       // In this contract, if the bool param is set to true, the "left" state is updated, if the bool is set to false, the "right" state is updated
       const op = await saplingContract.methodsObject.default({
         0: true,
@@ -85,8 +85,8 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     it("Verify that Alice's balance in the 'left' pool updated after the shielded tx", async () => {
-      const aliceSaplingToolkitLeft = new SaplingToolkit({ saplingSigner: aliceInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize, saplingId: saplingStateIdLeft }, new RpcReadAdapter(Tezos.rpc));
-      const aliceSaplingToolkitRight = new SaplingToolkit({ saplingSigner: aliceInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize, saplingId: saplingStateIdRight }, new RpcReadAdapter(Tezos.rpc));
+      const aliceSaplingToolkitLeft = new SaplingToolkit({ saplingSigner: aliceInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize, saplingId: saplingStateIdLeft }, new RpcReadAdapter(Mavryk.rpc));
+      const aliceSaplingToolkitRight = new SaplingToolkit({ saplingSigner: aliceInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize, saplingId: saplingStateIdRight }, new RpcReadAdapter(Mavryk.rpc));
 
       const aliceTxViewerLeft = await aliceSaplingToolkitLeft.getSaplingTransactionViewer();
       const aliceBalanceLeft = await aliceTxViewerLeft.getBalance();

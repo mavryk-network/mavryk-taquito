@@ -1,4 +1,4 @@
-import { TezosToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
+import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
 import { InMemorySpendingKey, SaplingToolkit } from '@mavrykdynamics/taquito-sapling';
 import { singleSaplingStateContractJProtocol } from '../integration-tests/data/single_sapling_state_contract_jakarta_michelson';
@@ -9,10 +9,10 @@ async function example() {
     try {
         const provider = 'https://basenet.rpc.mavryk.network';
         const signer = new InMemorySigner('edskRtmEwZxRzwd1obV9pJzAoLoxXFWTSHbgqpDBRHx1Ktzo5yVuJ37e2R4nzjLnNbxFU4UiBU1iHzAy52pK5YBRpaFwLbByca');
-        const tezos = new TezosToolkit(provider);
-        tezos.setSignerProvider(signer);
+        const mavryk = new MavrykToolkit(provider);
+        mavryk.setSignerProvider(signer);
 
-        const saplingContractOrigination = await tezos.contract.originate({
+        const saplingContractOrigination = await mavryk.contract.originate({
             code: singleSaplingStateContractJProtocol(),
             init: '{}'
         });
@@ -21,7 +21,7 @@ async function example() {
         console.log(saplingContract.address);
 
         const aliceInMemorySpendingKey = new InMemorySpendingKey('sask27SLmU9herddHz4qFJBLMjWYMbJF8RtS579w9ej9mfCYK7VUdyCJPHK8AzW9zMsopGZEkYeNjAY7Zz1bkM7CGu8eKLzrjBLTMC5wWJDhxiK91ahA29rhDRsHdJDV2u2jFwb2MNUix8JW7sAkAqYVaJpCehTBPgRQ1KqKwqqUaNmuD8kazd4Q8MCWmgbWs21Yuomdqyi9FLigjRp7oY4m5adaVU19Nj1AHvsMY2tePeU2L');
-        const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize: 8 }, new RpcReadAdapter(tezos.rpc));
+        const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize: 8 }, new RpcReadAdapter(mavryk.rpc));
         const aliceInMemoryViewingKey = await aliceInMemorySpendingKey.getSaplingViewingKeyProvider();
         const alicePaymentAddress = (await aliceInMemoryViewingKey.getAddress()).address;
 

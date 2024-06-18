@@ -16,18 +16,18 @@ npm i --save @mavrykdynamics/taquito-remote-signer
 
 ## Usage
 
-When the `RemoteSigner` is configured on the `TezosToolkit`, Taquito features that require signing support can be used. The Contract API operations will be signed using the signer. Validation of the signature will be conducted before the operation is injected. The `RemoteSigner` can be injected into the `TezosToolkit` as follows:
+When the `RemoteSigner` is configured on the `MavrykToolkit`, Taquito features that require signing support can be used. The Contract API operations will be signed using the signer. Validation of the signature will be conducted before the operation is injected. The `RemoteSigner` can be injected into the `MavrykToolkit` as follows:
 
 ```ts
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { RemoteSigner } from '@mavrykdynamics/taquito-remote-signer';
 
-const Tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
+const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
 const signer = new RemoteSigner(pkh, rootUrl);
-Tezos.setSignerProvider(signer);
+Mavryk.setSignerProvider(signer);
 
 // Taquito will send a request to the configured Remote Signer to sign the transfer operation:
-await Tezos.contract.transfer({ to: publicKeyHash, amount: 2 });
+await Mavryk.contract.transfer({ to: publicKeyHash, amount: 2 });
 ```
 
 The constructor of the `RemoteSigner` class requires the public key hash and the URL of the remote signer as parameters. It also takes optional headers (i.e., Authorization) and an optional `HttpBackend` to override the default one if needed.

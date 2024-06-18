@@ -495,7 +495,7 @@ describe('SaplingToolkit', () => {
     );
   });
 
-  it('should throw when preparing an unshielded transaction if the `to` parameter is not a Tezos address', async () => {
+  it('should throw when preparing an unshielded transaction if the `to` parameter is not a Mavryk address', async () => {
     await expect(
       saplingToolkit.prepareUnshieldedTransaction({
         to: 'zet12mVvzJ4QJhnNQetGHzdwTMcLgNrdC4SFact6BB5jpeqGAefWip3iGgEjvDA9z7b9Y',

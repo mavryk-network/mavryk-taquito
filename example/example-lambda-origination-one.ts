@@ -1,12 +1,12 @@
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { MichelsonMap, TezosToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
 import { tzip7Contract } from '../integration-tests/data/tzip_7_contract';
 
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network';
     const signer = new InMemorySigner('edskRtmEwZxRzwd1obV9pJzAoLoxXFWTSHbgqpDBRHx1Ktzo5yVuJ37e2R4nzjLnNbxFU4UiBU1iHzAy52pK5YBRpaFwLbByca');
-    const tezos = new TezosToolkit(provider);
-    tezos.setSignerProvider(signer);
+    const mavryk = new MavrykToolkit(provider);
+    mavryk.setSignerProvider(signer);
 
   try {
     console.log('Deploying LambdaOne contract...');
@@ -29,9 +29,9 @@ async function example() {
       allowances: mapAccount2
     });
 
-    const the_owner = await tezos.signer.publicKeyHash()
+    const the_owner = await mavryk.signer.publicKeyHash()
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       balance: "1",
       code: tzip7Contract,
       storage: {

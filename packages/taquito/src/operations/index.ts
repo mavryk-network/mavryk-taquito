@@ -44,9 +44,9 @@ export {
   RPCRevealOperation,
 } from './types';
 export {
-  TezosOperationError,
-  TezosOperationErrorWithMessage,
-  TezosPreapplyFailureError,
+  MavrykOperationError,
+  MavrykOperationErrorWithMessage,
+  MavrykPreapplyFailureError,
   InvalidEstimateValueError,
 } from './errors';
 export { BatchOperation } from './batch-operation';

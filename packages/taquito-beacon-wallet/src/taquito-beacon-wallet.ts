@@ -10,6 +10,8 @@ import {
   PermissionScope,
   getDAppClientInstance,
   SigningType,
+  AccountInfo,
+  BeaconEvent,
 } from '@mavrykdynamics/beacon-dapp';
 import { BeaconWalletNotInitialized, MissingRequiredScopes } from './errors';
 import toBuffer from 'typedarray-to-buffer';
@@ -23,6 +25,9 @@ import {
   WalletOriginateParams,
   WalletProvider,
   WalletTransferParams,
+  WalletStakeParams,
+  WalletUnstakeParams,
+  WalletFinalizeUnstakeParams,
 } from '@mavrykdynamics/taquito';
 import { buf2hex, hex2buf, mergebuf } from '@mavrykdynamics/taquito-utils';
 import { UnsupportedActionError } from '@mavrykdynamics/taquito-core';
@@ -32,9 +37,14 @@ export { BeaconWalletNotInitialized, MissingRequiredScopes } from './errors';
 
 export class BeaconWallet implements WalletProvider {
   public client: DAppClient;
+  public account: AccountInfo | undefined;
 
   constructor(options: DAppClientOptions) {
     this.client = getDAppClientInstance(options);
+    // Subscribe to the active account set event, this will update when there are account changes happening in the dApp
+    this.client.subscribeToEvent(BeaconEvent.ACTIVE_ACCOUNT_SET, async (data) => {
+      this.account = data;
+    });
   }
 
   private validateRequiredScopesOrFail(
@@ -59,23 +69,66 @@ export class BeaconWallet implements WalletProvider {
   }
 
   async getPKH() {
-    const account = await this.client.getActiveAccount();
-    if (!account) {
+    if (!this.account) {
       throw new BeaconWalletNotInitialized();
     }
-    return account.address;
+    return this.account.address;
   }
 
   async getPK() {
-    const account = await this.client.getActiveAccount();
-    if (!account) {
+    if (!this.account) {
       throw new BeaconWalletNotInitialized();
     }
-    return account.publicKey ?? '';
+    return this.account.publicKey ?? '';
   }
 
   async mapTransferParamsToWalletParams(params: () => Promise<WalletTransferParams>) {
     let walletParams: WalletTransferParams;
+    await this.client.showPrepare();
+    try {
+      walletParams = await params();
+    } catch (err) {
+      await this.client.hideUI(['alert']);
+      throw err;
+    }
+    return this.removeDefaultParams(
+      walletParams,
+      await createTransferOperation(this.formatParameters(walletParams))
+    );
+  }
+
+  async mapStakeParamsToWalletParams(params: () => Promise<WalletStakeParams>) {
+    let walletParams: WalletStakeParams;
+    await this.client.showPrepare();
+    try {
+      walletParams = await params();
+    } catch (err) {
+      await this.client.hideUI(['alert']);
+      throw err;
+    }
+    return this.removeDefaultParams(
+      walletParams,
+      await createTransferOperation(this.formatParameters(walletParams))
+    );
+  }
+
+  async mapUnstakeParamsToWalletParams(params: () => Promise<WalletUnstakeParams>) {
+    let walletParams: WalletUnstakeParams;
+    await this.client.showPrepare();
+    try {
+      walletParams = await params();
+    } catch (err) {
+      await this.client.hideUI(['alert']);
+      throw err;
+    }
+    return this.removeDefaultParams(
+      walletParams,
+      await createTransferOperation(this.formatParameters(walletParams))
+    );
+  }
+
+  async mapFinalizeUnstakeParamsToWalletParams(params: () => Promise<WalletFinalizeUnstakeParams>) {
+    let walletParams: WalletFinalizeUnstakeParams;
     await this.client.showPrepare();
     try {
       walletParams = await params();
@@ -148,7 +201,13 @@ export class BeaconWallet implements WalletProvider {
   }
 
   removeDefaultParams(
-    params: WalletTransferParams | WalletOriginateParams | WalletDelegateParams,
+    params:
+      | WalletTransferParams
+      | WalletStakeParams
+      | WalletUnstakeParams
+      | WalletFinalizeUnstakeParams
+      | WalletOriginateParams
+      | WalletDelegateParams,
     operatedParams: any
   ) {
     // If fee, storageLimit or gasLimit is undefined by user
@@ -167,11 +226,10 @@ export class BeaconWallet implements WalletProvider {
   }
 
   async sendOperations(params: any[]) {
-    const account = await this.client.getActiveAccount();
-    if (!account) {
+    if (!this.account) {
       throw new BeaconWalletNotInitialized();
     }
-    const permissions = account.scopes;
+    const permissions = this.account.scopes;
     this.validateRequiredScopesOrFail(permissions, [PermissionScope.OPERATION_REQUEST]);
 
     const { transactionHash } = await this.client.requestOperation({ operationDetails: params });

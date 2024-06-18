@@ -8,8 +8,8 @@ import { Context } from './context';
 import { ForgedBytes, ParamsWithKind, RPCOperation, isOpRequireReveal } from './operations/types';
 import {
   InvalidEstimateValueError,
-  TezosOperationError,
-  TezosPreapplyFailureError,
+  MavrykOperationError,
+  MavrykPreapplyFailureError,
   flattenErrors,
 } from './operations/errors';
 import {
@@ -178,7 +178,7 @@ export abstract class Provider {
     const results = await this.rpc.preapplyOperations([forgedBytes.opOb]);
 
     if (!Array.isArray(results)) {
-      throw new TezosPreapplyFailureError(results);
+      throw new MavrykPreapplyFailureError(results);
     }
 
     for (let i = 0; i < results.length; i++) {
@@ -190,7 +190,7 @@ export abstract class Provider {
     const errors = flattenErrors(results);
 
     if (errors.length) {
-      throw new TezosOperationError(
+      throw new MavrykOperationError(
         errors,
         'Error occurred during validation simulation of operation',
         opResponse

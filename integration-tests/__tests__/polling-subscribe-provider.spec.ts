@@ -1,5 +1,5 @@
 import { CONFIGS, sleep } from '../config';
-import { PollingSubscribeProvider, TezosToolkit } from '@mavrykdynamics/taquito';
+import { PollingSubscribeProvider, MavrykToolkit } from '@mavrykdynamics/taquito';
 import { localForger } from '@mavrykdynamics/taquito-local-forging';
 import { send } from 'process';
 import { validateAddress } from '@mavrykdynamics/taquito-utils';
@@ -8,17 +8,17 @@ import { validateAddress } from '@mavrykdynamics/taquito-utils';
 If you need to change the main contract, you can change this, use the ligo compiler to compile it, and update both the Michelson code below and the jsligo here.
 
 const _mainContractJsLigo = `type storage = int
-type parameter = {mode: int, targetContractAddress: address, amount: tez, newStore: int}
+type parameter = {mode: int, targetContractAddress: address, amount: mav, newStore: int}
 
 export const main = ({mode, targetContractAddress, amount, newStore} : parameter, store : storage) => {
     if (mode == 1) {
         return [list([]), newStore];
     }
     assert_with_error(mode != 4, "The main contract fails if parameter is four");
-    let tran = Tezos.transaction(mode, amount, Option.unopt(Tezos.get_contract_opt(targetContractAddress)));
-    let event1 = Tezos.emit("%intFromMainContract", mode + 1);
+    let tran = Mavryk.transaction(mode, amount, Option.unopt(Mavryk.get_contract_opt(targetContractAddress)));
+    let event1 = Mavryk.emit("%intFromMainContract", mode + 1);
     if (store == 1) {
-        let event2 = Tezos.emit("%stringFromMainContract", "lorem ipsum");
+        let event2 = Mavryk.emit("%stringFromMainContract", "lorem ipsum");
         return [list([event1, event2, tran]), newStore];
     } else {
         return [list([event1, tran]), newStore];
@@ -80,7 +80,7 @@ type parameter = int
 
 export const main = (param: parameter, store: storage) => {
   assert_with_error(param != 5, "The called contract fails if parameter is five");
-  return [list([Tezos.emit("%eventFromCalledContract", param + 1)]), store];
+  return [list([Mavryk.emit("%eventFromCalledContract", param + 1)]), store];
 }`; */
 
 const calledContractMichelson = `{ parameter int ;
@@ -102,10 +102,10 @@ const calledContractMichelson = `{ parameter int ;
          PAIR } }`;
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   let calledContractAddress: string;
   let mainContractAddress: string;
-  let secondUser: TezosToolkit;
+  let secondUser: MavrykToolkit;
 
   describe(`Polling Subscribe Provider using ${rpc}`, () => {
     beforeAll(async () => {
@@ -113,25 +113,25 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
       secondUser = await createAddress();
       const secondUserAddress = await secondUser.signer.publicKeyHash();
-      const transfer = await Tezos.contract.transfer({ to: secondUserAddress, amount: 1 });
+      const transfer = await Mavryk.contract.transfer({ to: secondUserAddress, amount: 1 });
       await transfer.confirmation();
 
-      Tezos.setStreamProvider(
-        Tezos.getFactory(PollingSubscribeProvider)({
+      Mavryk.setStreamProvider(
+        Mavryk.getFactory(PollingSubscribeProvider)({
           shouldObservableSubscriptionRetry: true,
           pollingIntervalMilliseconds: 1000,
         })
       );
 
       try {
-        const calledContract = await Tezos.contract.originate({
+        const calledContract = await Mavryk.contract.originate({
           code: calledContractMichelson,
           storage: 0,
         });
         await calledContract.confirmation();
         calledContractAddress = calledContract.contractAddress!;
 
-        let mainContract = await Tezos.contract.originate({
+        let mainContract = await Mavryk.contract.originate({
           code: mainContractMichelson,
           storage: 0,
         });
@@ -143,7 +143,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     });
 
     beforeEach(async () => {
-      const contract = await Tezos.contract.at(mainContractAddress!);
+      const contract = await Mavryk.contract.at(mainContractAddress!);
       const resetStorageOperation = await contract.methodsObject
         .default({
           targetContractAddress: calledContractAddress,
@@ -158,7 +158,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     it('should be able to subscribe to events with tag and address params given', async () => {
       const data: any = [];
 
-      const eventSub = Tezos.stream.subscribeEvent({
+      const eventSub = Mavryk.stream.subscribeEvent({
         tag: 'intFromMainContract',
         address: mainContractAddress,
       });
@@ -167,7 +167,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
         data.push(x);
       });
 
-      const contract1 = await Tezos.contract.at(mainContractAddress!);
+      const contract1 = await Mavryk.contract.at(mainContractAddress!);
 
       const operation1 = contract1.methodsObject.default({
         targetContractAddress: calledContractAddress,
@@ -199,7 +199,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     it.skip('should include events from failed operations when filter does not exclude events from failed operations', async () => {
       const data: any = [];
 
-      const eventSub = Tezos.stream.subscribeEvent({
+      const eventSub = Mavryk.stream.subscribeEvent({
         address: mainContractAddress,
       });
 
@@ -217,7 +217,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
         });
       });
 
-      const contract1 = await Tezos.contract.at(mainContractAddress!);
+      const contract1 = await Mavryk.contract.at(mainContractAddress!);
       const contract2 = await secondUser.contract.at(mainContractAddress!);
       try {
         const operation1 = contract1.methodsObject.default({
@@ -253,7 +253,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     it.skip('should properly filter events from failed operations', async () => {
       const data: any = [];
 
-      const eventSub = Tezos.stream.subscribeEvent({
+      const eventSub = Mavryk.stream.subscribeEvent({
         address: mainContractAddress,
         excludeFailedOperations: true,
       });
@@ -272,7 +272,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
         });
       });
 
-      const contract1 = await Tezos.contract.at(mainContractAddress!);
+      const contract1 = await Mavryk.contract.at(mainContractAddress!);
       const contract2 = await secondUser.contract.at(mainContractAddress!);
       try {
         const operation1 = contract1.methodsObject.default({

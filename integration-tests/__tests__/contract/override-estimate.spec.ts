@@ -2,7 +2,7 @@ import { CONFIGS } from "../../config";
 import { InvalidEstimateValueError } from '@mavrykdynamics/taquito';
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test contract API operations with overridden estimate values ${rpc}`, () => {
     let pkh: string;
@@ -21,7 +21,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
     it('should throw an error when overriding origination estimate values with decimals', async () => {
       expect(async () => {
-        const op = await Tezos.contract.originate({
+        const op = await Mavryk.contract.originate({
           balance: "1",
           code: `parameter string;
           storage string;
@@ -40,7 +40,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
     it('should throw an error when overriding transfer/transaction estimate values with decimal', async () => {
       expect(async () => {
-        const op = await Tezos.contract.transfer({
+        const op = await Mavryk.contract.transfer({
           to: pkh,
           amount: 1,
           fee: 10.5

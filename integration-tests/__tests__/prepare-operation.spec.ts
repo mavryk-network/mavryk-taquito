@@ -4,7 +4,7 @@ import { CONFIGS } from '../config';
 import { LocalForger } from '@mavrykdynamics/taquito-local-forging';
 
 CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   let contractAddress: string;
 
   describe(`Test Preparation of operations using the PrepareProvider`, () => {
@@ -12,7 +12,7 @@ CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
       await setup();
 
       try {
-        const op = await Tezos.contract.originate({
+        const op = await Mavryk.contract.originate({
           code: `{ parameter (or (or (int %decrement) (int %increment)) (unit %reset)) ;
             storage int ;
             code { UNPAIR ;
@@ -35,7 +35,7 @@ CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
     });
 
     it('should be able to prepare a transaction operation', async () => {
-      const prepared = await Tezos.prepare.transaction({
+      const prepared = await Mavryk.prepare.transaction({
         to: 'mv1NiGqJHiRwivfGULeVz8kV16AnhepCa5rW',
         amount: 5
       });
@@ -55,7 +55,7 @@ CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
     });
 
     it('should be able to prepare a batch operation', async () => {
-      const prepared = await Tezos.prepare.batch([
+      const prepared = await Mavryk.prepare.batch([
         {
           kind: OpKind.TRANSACTION,
           to: 'mv1NiGqJHiRwivfGULeVz8kV16AnhepCa5rW',
@@ -80,7 +80,7 @@ CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
     });
 
     it('should be able to prepare a ballot operation', async () => {
-      const prepared = await Tezos.prepare.ballot({
+      const prepared = await Mavryk.prepare.ballot({
         proposal: 'PtKathmankSpLLDALzWw7CGD2j2MtyveTwboEYokqUCP4a1LxMg',
         ballot: 'yay'
       });
@@ -100,9 +100,9 @@ CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
     });
 
     it('should be able to prepare a contractCall', async () => {
-      const contractAbs = await Tezos.contract.at(contractAddress);
+      const contractAbs = await Mavryk.contract.at(contractAddress);
       const method = await contractAbs.methods.increment(1);
-      const prepared = await Tezos.prepare.contractCall(method);
+      const prepared = await Mavryk.prepare.contractCall(method);
 
       expect(prepared).toBeDefined();
       expect(prepared.counter).toBeDefined();
@@ -118,8 +118,8 @@ CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
       const receiver = await createAddress();
 
       const pkh = await receiver.signer.publicKeyHash();
-      const estimates = await Tezos.estimate.transfer({ to: pkh, amount: 1 });
-      const preparedTransfer = await Tezos.prepare.transaction({
+      const estimates = await Mavryk.estimate.transfer({ to: pkh, amount: 1 });
+      const preparedTransfer = await Mavryk.prepare.transaction({
         amount: 1,
         to: pkh,
         fee: estimates.suggestedFeeMumav,
@@ -127,8 +127,8 @@ CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
         gasLimit: estimates.gasLimit
       });
 
-      const preapplyParams = await Tezos.prepare.toPreapply(preparedTransfer)
-      const preapply = await Tezos.rpc.preapplyOperations(preapplyParams);
+      const preapplyParams = await Mavryk.prepare.toPreapply(preparedTransfer)
+      const preapply = await Mavryk.rpc.preapplyOperations(preapplyParams);
 
       expect(preapplyParams[0].contents).toEqual(preparedTransfer.opOb.contents)
       expect(preapplyParams[0].branch).toEqual(preparedTransfer.opOb.branch)
@@ -148,11 +148,11 @@ CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
     it('Verify that toForge is executable for both local forger and rpc.forgeOperations', async () => {
       const receiver = await createAddress();
       const pkh = await receiver.signer.publicKeyHash();
-      const preparedTransfer = await Tezos.prepare.transaction({ amount: 1, to: pkh });
+      const preparedTransfer = await Mavryk.prepare.transaction({ amount: 1, to: pkh });
       const forger = new LocalForger();
 
-      const forged = await forger.forge(Tezos.prepare.toForge(preparedTransfer));
-      const rpcForged = await Tezos.rpc.forgeOperations(Tezos.prepare.toForge(preparedTransfer));
+      const forged = await forger.forge(Mavryk.prepare.toForge(preparedTransfer));
+      const rpcForged = await Mavryk.rpc.forgeOperations(Mavryk.prepare.toForge(preparedTransfer));
 
       expect(forged).toEqual(rpcForged);
 

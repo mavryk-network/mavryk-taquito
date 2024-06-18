@@ -15,22 +15,18 @@ export interface TestSettings {
   run: (input?: any) => Promise<TestResult>;
   showExecutionTime: boolean;
   inputRequired: boolean;
-  inputType?: "string" | "set-limits" | "sapling";
+  inputType?: "string" | "set-limits" | "sapling" | "delegate" | "stake" | "unstake" | "etherlink";
   lastResult: { option: "none" | "some"; val: boolean };
 }
 
-export type TezosContractAddress = `KT1${string}`;
-export type TezosAccountAddress = `tz${"1" | "2" | "3"}${string}`;
+export type MavrykContractAddress = `KT1${string}`;
+export type MavrykAccountAddress = `mv${"1" | "2" | "3"}${string}`;
 
 // export enum NetworkType {
 //   MAINNET = "mainnet",
-//   DELPHINET = "delphinet",
-//   EDONET = "edonet",
-//   FLORENCENET = "florencenet",
-//   GRANADANET = "granadanet",
-//   HANGZHOUNET = "hangzhounet",
-//   ITHACANET = "ithacanet",
-//   BASENET = "basenet",
-//   JAKARTANET = "jakartanet",
+//   GHOSTNET = "basenet",
+//   WEEKLYNET = "weeklynet",
+//   ATLASNET = "atlasnet",
+//   BOREASNET = "boreasnet",
 //   CUSTOM = "custom"
 // }

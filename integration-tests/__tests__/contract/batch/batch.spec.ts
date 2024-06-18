@@ -4,7 +4,7 @@ import { managerCode } from '../../../data/manager_code';
 import { MANAGER_LAMBDA, OpKind } from '@mavrykdynamics/taquito';
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test contract.batch through contract api using: ${rpc}`, () => {
     beforeEach(async () => {
@@ -12,7 +12,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }
     });
 
     it('Verify contract.batch simple transfers with origination code in JSON Michelson format', async () => {
-      const batch = Tezos.contract
+      const batch = Mavryk.contract
         .batch()
         .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
         .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
@@ -30,7 +30,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }
     });
 
     it('Verify contract.batch simple transfers with origination code in Michelson format', async () => {
-      const batch = Tezos.contract
+      const batch = Mavryk.contract
         .batch()
         .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
         .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
@@ -47,7 +47,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }
     });
 
     it('Verify batch of transfers and origination operation using a combination of the two notations (array of operation with kind mixed with withTransfer method)', async () => {
-      const op = await Tezos.contract.batch([
+      const op = await Mavryk.contract.batch([
         {
           kind: OpKind.TRANSACTION,
           to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM',
@@ -70,7 +70,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }
     it('Verify handling of contract.batch simple transfers with bad origination', async () => {
       expect.assertions(1);
       try {
-        await Tezos.contract
+        await Mavryk.contract
           .batch()
           .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
           .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
@@ -93,10 +93,10 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }
 
     it('Verify transfer and origination for contract.batch simple transfers from an account with low balance', async () => {
       const LocalTez = await createAddress();
-      const op = await Tezos.contract.transfer({ to: await LocalTez.signer.publicKeyHash(), amount: 2 });
+      const op = await Mavryk.contract.transfer({ to: await LocalTez.signer.publicKeyHash(), amount: 2 });
       await op.confirmation();
 
-      const contract = await Tezos.contract.at(knownContract);
+      const contract = await Mavryk.contract.at(knownContract);
 
       const batchOp = await LocalTez.contract
         .batch([
@@ -118,16 +118,16 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }
     });
 
     it('Verify contract.batch simple transfers with chained contract calls', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: '1',
         code: managerCode,
-        init: { string: await Tezos.signer.publicKeyHash() }
+        init: { string: await Mavryk.signer.publicKeyHash() }
       });
       await op.confirmation();
       const contract = await op.contract();
       expect(op.status).toEqual('applied');
 
-      const batch = Tezos.contract
+      const batch = Mavryk.contract
         .batch()
         .withTransfer({ to: contract.address, amount: 1 })
         .withContractCall(
@@ -144,8 +144,8 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }
     });
 
     it('Verify contract.batch of simple transfers and a contract entrypoint call using the array notation with kind', async () => {
-      const contract = await Tezos.contract.at(knownContract);
-      const batchOp = await Tezos.contract
+      const contract = await Mavryk.contract.at(knownContract);
+      const batchOp = await Mavryk.contract
         .batch([
           { kind: OpKind.TRANSACTION, to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 },
           { kind: OpKind.TRANSACTION, to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 },
@@ -159,7 +159,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }
     });
 
     it('Verify that with a batch of multiple originations contract address info can be got from the getOriginatedContractAddresses member function', async () => {
-      const batch = Tezos.contract
+      const batch = Mavryk.contract
         .batch()
         .withOrigination({
           balance: '1',
@@ -181,21 +181,21 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }
     })
 
     it('Verify batch contract calls can specify amount, fee, gasLimit and storageLimit', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: managerCode,
-        init: { "string": await Tezos.signer.publicKeyHash() },
+        init: { "string": await Mavryk.signer.publicKeyHash() },
       })
       await op.confirmation();
       const contract = await op.contract();
 
-      const estimateOp = await Tezos.estimate.batch([
+      const estimateOp = await Mavryk.estimate.batch([
         { ...(contract.methodsObject.do(MANAGER_LAMBDA.transferImplicit("mv1UE4jMeeBM49FjNmyvtE19aBKT73HDvM2m", 5)).toTransferParams()), kind: OpKind.TRANSACTION },
         { ...(contract.methodsObject.do(MANAGER_LAMBDA.setDelegate(knownBaker)).toTransferParams()), kind: OpKind.TRANSACTION },
         { ...(contract.methodsObject.do(MANAGER_LAMBDA.removeDelegate()).toTransferParams()), kind: OpKind.TRANSACTION },
       ])
 
-      const batch = Tezos.contract.batch()
+      const batch = Mavryk.contract.batch()
         .withContractCall(contract.methodsObject.do(MANAGER_LAMBDA.transferImplicit("mv1UE4jMeeBM49FjNmyvtE19aBKT73HDvM2m", 5)), { fee: estimateOp[0].suggestedFeeMumav, gasLimit: estimateOp[0].gasLimit, storageLimit: estimateOp[0].storageLimit })
         .withContractCall(contract.methods.do(MANAGER_LAMBDA.setDelegate(knownBaker)), { fee: estimateOp[1].suggestedFeeMumav, gasLimit: estimateOp[1].gasLimit, storageLimit: estimateOp[1].storageLimit })
         .withContractCall(contract.methods.do(MANAGER_LAMBDA.removeDelegate()), { fee: estimateOp[2].suggestedFeeMumav, gasLimit: estimateOp[2].gasLimit, storageLimit: estimateOp[2].storageLimit })

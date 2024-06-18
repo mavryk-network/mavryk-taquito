@@ -382,8 +382,8 @@ describe('ContractAbstraction test', () => {
       expect(method2).toBeInstanceOf(ContractMethod);
 
       const methodObject2 = contractAbs.methodsObject[2]({
-        2: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM',
-        3: '1',
+        0: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM',
+        1: '1',
       });
       expect(methodObject2).toBeInstanceOf(ContractMethodObject);
 

@@ -1,4 +1,4 @@
-import { ParameterValidationError, TaquitoError, TezosToolkitConfigError } from '@mavrykdynamics/taquito-core';
+import { ParameterValidationError, TaquitoError, MavrykToolkitConfigError } from '@mavrykdynamics/taquito-core';
 
 export { InvalidViewParameterError } from '@mavrykdynamics/taquito-core';
 
@@ -91,14 +91,14 @@ export class InvalidContractMetadataTypeError extends TaquitoError {
 
 /**
  *  @category Error
- *  @description Error that indicates metadata provider being unconfigured in the TezosToolkit instance
+ *  @description Error that indicates metadata provider being unconfigured in the MavrykToolkit instance
  */
-export class UnconfiguredContractMetadataProviderError extends TezosToolkitConfigError {
+export class UnconfiguredContractMetadataProviderError extends MavrykToolkitConfigError {
   constructor() {
     super();
     this.name = 'UnconfiguredContractMetadataProviderError';
     this.message =
-      'No metadata provider has been configured. The default one can be configured by calling addExtension(new Tzip16Module()) on your TezosToolkit instance.';
+      'No metadata provider has been configured. The default one can be configured by calling addExtension(new Tzip16Module()) on your MavrykToolkit instance.';
   }
 }
 

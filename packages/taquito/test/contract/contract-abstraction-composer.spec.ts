@@ -1,4 +1,4 @@
-import { TezosToolkit } from '../../src/taquito';
+import { MavrykToolkit } from '../../src/taquito';
 import { ContractAbstraction } from '../../src/contract/contract';
 import { ContractProvider } from '../../src/contract/interface';
 import { script } from './data-lambda-view-class';
@@ -21,7 +21,7 @@ function composeContractAbstractionTest<T extends ContractAbstraction<ContractPr
 
 describe('Contract abstraction composer test', () => {
   let mockRpcClient: any;
-  let toolkit: TezosToolkit;
+  let toolkit: MavrykToolkit;
 
   beforeEach(() => {
     mockRpcClient = {
@@ -38,7 +38,7 @@ describe('Contract abstraction composer test', () => {
     });
     mockRpcClient.getChainId.mockResolvedValue('test');
 
-    toolkit = new TezosToolkit(mockRpcClient);
+    toolkit = new MavrykToolkit(mockRpcClient);
   });
 
   it('Should add a helloWorld method on the contract abstraction', async () => {

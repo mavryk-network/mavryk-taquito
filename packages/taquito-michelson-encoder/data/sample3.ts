@@ -4101,7 +4101,7 @@ export const rpcContractResponse = {
         {
           prim: 'Pair',
           args: [
-            { string: 'Tez-Baking Token' },
+            { string: 'Mav-Baking Token' },
             {
               prim: 'Pair',
               args: [

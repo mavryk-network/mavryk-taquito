@@ -11,7 +11,7 @@ import {
   ViewSimulationError,
 } from '@mavrykdynamics/taquito';
 import { ForbiddenInstructionInViewCodeError, NoParameterExpectedError } from '../errors';
-import { validateAndExtractFailwith, TzReadProvider } from '@mavrykdynamics/taquito';
+import { validateAndExtractFailwith, MvReadProvider } from '@mavrykdynamics/taquito';
 import { View } from './interface';
 import { InvalidViewParameterError } from '@mavrykdynamics/taquito-core';
 
@@ -20,7 +20,7 @@ export class MichelsonStorageView implements View {
     private viewName: string,
     private contract: ContractAbstraction<ContractProvider | Wallet>,
     private rpc: RpcClientInterface,
-    private readProvider: TzReadProvider,
+    private readProvider: MvReadProvider,
     private returnType: MichelsonV1Expression,
     private code: MichelsonV1ExpressionExtended[],
     private viewParameterType?: MichelsonV1ExpressionExtended

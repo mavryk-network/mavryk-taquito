@@ -1,7 +1,7 @@
 import { CONFIGS } from "../../config";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   beforeEach(async () => {
     await setup();
@@ -9,7 +9,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
   describe(`Test wallet api using: ${rpc}`, () => {
     test('Test simple origination and wait for confirmation using promise', async () => {
-      const walletOp = await Tezos.wallet.originate({
+      const walletOp = await Mavryk.wallet.originate({
         balance: "1",
         code: `parameter string;
         storage string;
@@ -51,7 +51,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     test('Test simple origination and wait for confirmation using observable', async () => {
-      const walletOp = await Tezos.wallet.originate({
+      const walletOp = await Mavryk.wallet.originate({
         balance: "1",
         code: `parameter string;
         storage string;

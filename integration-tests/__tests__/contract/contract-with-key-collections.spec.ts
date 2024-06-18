@@ -3,7 +3,7 @@ import { MichelsonMap } from "@mavrykdynamics/taquito";
 import { contractWithKeyCollections } from "../../data/contract-with-key-collections";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test contract origination with key collections through contract api using: ${rpc}`, () => {
     type Storage = { keySet: string[], keyMap: MichelsonMap<string, number>; }
@@ -31,7 +31,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         }) as MichelsonMap<string, number>
       };
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: '1',
         code: contractWithKeyCollections,
         storage: initialStorage

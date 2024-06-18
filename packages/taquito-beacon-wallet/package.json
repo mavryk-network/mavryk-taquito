@@ -1,9 +1,9 @@
 {
   "name": "@mavrykdynamics/taquito-beacon-wallet",
-  "version": "19.2.3",
+  "version": "20.0.0",
   "description": "Beacon wallet provider",
   "keywords": [
-    "tezos",
+    "mavryk",
     "blockchain",
     "websocket"
   ],
@@ -67,9 +67,9 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/beacon-dapp": "^4.2.2",
-    "@mavrykdynamics/taquito-core": "^19.1.0",
-    "@mavrykdynamics/taquito": "^19.2.3"
+    "@mavrykdynamics/beacon-dapp": "^4.2.3",
+    "@mavrykdynamics/taquito-core": "^20.0.0",
+    "@mavrykdynamics/taquito": "^20.0.0"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.40",

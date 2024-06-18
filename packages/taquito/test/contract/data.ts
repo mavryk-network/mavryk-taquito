@@ -69,7 +69,7 @@ const scriptSample = {
                         prim: 'string',
                       },
                       {
-                        string: 'You did not provide enough tez.',
+                        string: 'You did not provide enough mav.',
                       },
                     ],
                   },
@@ -479,10 +479,10 @@ storage   (pair
 code {
        # (pair parameter storage) : []
 
-       # make sure that the participant has contributed at least 1 tez
+       # make sure that the participant has contributed at least 1 mav
        PUSH mumav 1000000;
        AMOUNT;
-       IFCMPGE {} { PUSH string "You did not provide enough tez."; FAILWITH; };
+       IFCMPGE {} { PUSH string "You did not provide enough mav."; FAILWITH; };
 
        # check that the number of guesses has not been exceeded
        UNPAIR; SWAP; # storage : parameter : []
@@ -547,7 +547,7 @@ export const miSample: MichelsonContract = [
               [
                 {
                   prim: 'PUSH',
-                  args: [{ prim: 'string' }, { string: 'You did not provide enough tez.' }],
+                  args: [{ prim: 'string' }, { string: 'You did not provide enough mav.' }],
                 },
                 { prim: 'FAILWITH' },
               ],

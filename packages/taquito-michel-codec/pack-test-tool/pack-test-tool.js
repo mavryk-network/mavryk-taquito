@@ -11,7 +11,7 @@ const argv = yargs(process.argv.slice(2)).options({
     alias: 'u',
     describe: 'RPC URL',
     type: 'string',
-    default: 'https://api.tez.ie/rpc/edonet/',
+    default: 'https://api.mav.ie/rpc/edonet/',
   },
 }).argv;
 

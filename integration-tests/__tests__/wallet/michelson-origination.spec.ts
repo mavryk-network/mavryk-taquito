@@ -4,14 +4,14 @@ import { MichelCodecParser, NoopParser, Context, InvalidCodeParameter } from '@m
 
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test contract origination in a plain Michelson contract through wallet api using: ${rpc}`, () => {
 
     beforeEach(async () => {
       await setup()
     })
     it('Verify wallet.originate for an ID contract written in plain Michelson', async () => {
-      const op = await Tezos.wallet.originate({
+      const op = await Mavryk.wallet.originate({
         balance: "0",
         code: idMichelsonCode,
         init: idInitData
@@ -28,11 +28,11 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       await setup()
     })
     it('uses noopParser to originate Michelson code and fails', async () => {
-      // Configure the Tezostoolkit to use the NoopParser (the Michelson won't be parsed)
-      Tezos.setParserProvider(new NoopParser());
+      // Configure the mavrykToolkit to use the NoopParser (the Michelson won't be parsed)
+      Mavryk.setParserProvider(new NoopParser());
 
       try {
-        const op = await Tezos.wallet.originate({
+        const op = await Mavryk.wallet.originate({
           balance: "0",
           code: idMichelsonCode,
           init: idInitData
@@ -45,10 +45,10 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     it('uses MichelCodecParser to originate Michelson code and succeeds', async () => {
-      // Configure the Tezostoolkit to use the MichelCodecParser (the Michelson will be parsed to JSONMichelson)
-      Tezos.setParserProvider(new MichelCodecParser(new Context(rpc)));
+      // Configure the mavrykToolkit to use the MichelCodecParser (the Michelson will be parsed to JSONMichelson)
+      Mavryk.setParserProvider(new MichelCodecParser(new Context(rpc)));
 
-      const op = await Tezos.wallet.originate({
+      const op = await Mavryk.wallet.originate({
         balance: "0",
         code: idMichelsonCode,
         init: idInitData
@@ -60,7 +60,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     it('no parser configured will use MichelCodecParser by default to originate Michelson code and succeeds', async () => {
       // No parserProvider configured will use MichelCodecParser by default (the Michelson will be parsed to JSONMichelson)
-      const op = await Tezos.wallet.originate({
+      const op = await Mavryk.wallet.originate({
         balance: "0",
         code: idMichelsonCode,
         init: idInitData

@@ -2,7 +2,7 @@ import { OpKind } from '@mavrykdynamics/taquito';
 import { CONFIGS, SignerType } from '../../../config';
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBaker, signerConfig }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
     describe(`Test estimate.batch includes an estimation for a reveal operation when needed using: ${rpc}`, () => {
         beforeEach(async () => {
             await setup(true);
@@ -10,9 +10,9 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, signerConfig }) => {
 
         it('Verify that an estimate for a reveal operation is included in the response when using estimate.batch with an unrevealed signer', async () => {
             try {
-                const batchOpEstimate = await Tezos.estimate
+                const batchOpEstimate = await Mavryk.estimate
                     .batch([
-                        { kind: OpKind.DELEGATION, source: await Tezos.signer.publicKeyHash(), delegate: knownBaker },
+                        { kind: OpKind.DELEGATION, source: await Mavryk.signer.publicKeyHash(), delegate: knownBaker },
                         { kind: OpKind.TRANSACTION, to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 },
                     ])
 
@@ -29,14 +29,14 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, signerConfig }) => {
         });
 
         it('Verify the estimate.batch does not include an estimation of a reveal operation when the signer is already revealed.', async () => {
-            const pkh = await Tezos.signer.publicKeyHash()
+            const pkh = await Mavryk.signer.publicKeyHash()
 
             try {
                 // do a reveal operation first
-                const revealOp = await Tezos.contract.reveal({});
+                const revealOp = await Mavryk.contract.reveal({});
                 await revealOp.confirmation();
 
-                const batchOpEstimate = await Tezos.estimate
+                const batchOpEstimate = await Mavryk.estimate
                     .batch([
                         { kind: OpKind.DELEGATION, source: pkh, delegate: knownBaker },
                         { kind: OpKind.TRANSACTION, to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 },

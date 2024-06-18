@@ -1,5 +1,5 @@
 import { CONFIGS } from './config';
-import { MichelsonMap, OriginateParams, RpcForger, TezosToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap, OriginateParams, RpcForger, MavrykToolkit } from '@mavrykdynamics/taquito';
 import { singleSaplingStateContractJProtocol } from './data/single_sapling_state_contract_jakarta_michelson';
 import { fa2ForTokenMetadataView } from './data/fa2-for-token-metadata-view';
 import { stringToBytes } from '@mavrykdynamics/taquito-utils';
@@ -12,7 +12,7 @@ import * as fs from 'fs/promises';
 const MUMAV_UNIT = new BigNumber(1000000);
 
 CONFIGS().forEach(({ lib, setup, protocol }) => {
-  const tezos = lib;
+  const mavryk = lib;
   let keyPkh: string = "";
   let keyInitialBalance: BigNumber = new BigNumber(0);
   let protocolShort = protocol.substring(0, 9);
@@ -36,9 +36,9 @@ CONFIGS().forEach(({ lib, setup, protocol }) => {
           console.error(err);
         });
     };
-    let originateKnownContract = async (contractName: string, tezos: TezosToolkit, contractOriginateParams: OriginateParams): Promise<void> => {
+    let originateKnownContract = async (contractName: string, mavryk: MavrykToolkit, contractOriginateParams: OriginateParams): Promise<void> => {
       try {
-        const operation = await tezos.contract.originate(contractOriginateParams);
+        const operation = await mavryk.contract.originate(contractOriginateParams);
         await operation.confirmation();
         const contract = await operation.contract();
         console.log(`known ${contractName} address:  ${contract.address}`);
@@ -53,9 +53,9 @@ CONFIGS().forEach(({ lib, setup, protocol }) => {
         if (e.name === "ForgingMismatchError") {
           console.log(`Composite forger failed to originate ${contractName}. Trying to originate the contract by using RPC forger...`);
 
-          tezos.setForgerProvider(tezos.getFactory(RpcForger)());
+          mavryk.setForgerProvider(mavryk.getFactory(RpcForger)());
 
-          originateKnownContract(contractName, tezos, contractOriginateParams);
+          originateKnownContract(contractName, mavryk, contractOriginateParams);
         } else {
           appendOutput(`  ${contractName}: "",`);
         }
@@ -65,11 +65,11 @@ CONFIGS().forEach(({ lib, setup, protocol }) => {
     await writeOutput("import { KnownContracts } from './known-contracts';")
     await appendOutput("export const knownContracts" + protocolShort + ": KnownContracts = {");
 
-    keyPkh = await tezos.signer.publicKeyHash();
-    keyInitialBalance = await tezos.tz.getBalance(keyPkh);
+    keyPkh = await mavryk.signer.publicKeyHash();
+    keyInitialBalance = await mavryk.mv.getBalance(keyPkh);
 
     // KnownContract
-    await originateKnownContract('contract', tezos, {
+    await originateKnownContract('contract', mavryk, {
       balance: '0',
       code: knownContract,
       init: {
@@ -91,7 +91,7 @@ CONFIGS().forEach(({ lib, setup, protocol }) => {
     const allowancesBigMap = new MichelsonMap();
     const ledgerBigMap = new MichelsonMap();
     ledgerBigMap.set('mv1Jf7tRzUSYjEpLfHj2R1EDgdYHstopbySD', { allowances: allowancesBigMap, balance: '100' });
-    await originateKnownContract('bigMapContract', tezos, {
+    await originateKnownContract('bigMapContract', mavryk, {
       code: knownBigMapContract,
       storage: {
         ledger: ledgerBigMap,
@@ -149,7 +149,7 @@ CONFIGS().forEach(({ lib, setup, protocol }) => {
       total_supply: '20000',
     });
 
-    await originateKnownContract('tzip12BigMapOffChainContract', tezos, {
+    await originateKnownContract('tzip12BigMapOffChainContract', mavryk, {
       code: fa2ForTokenMetadataView,
       storage: {
         administrator: 'mv1QKLY6XJjb6uD9vdXmtW6aUfP4C7h66aTg',
@@ -163,13 +163,13 @@ CONFIGS().forEach(({ lib, setup, protocol }) => {
     });
 
     // KnownSaplingContract
-    await originateKnownContract('saplingContract', tezos, {
+    await originateKnownContract('saplingContract', mavryk, {
       code: singleSaplingStateContractJProtocol(),
       init: '{}'
     });
 
     // knownOnChainViewContract
-    await originateKnownContract('onChainViewContractAddress', tezos, {
+    await originateKnownContract('onChainViewContractAddress', mavryk, {
       code: codeViewsTopLevel,
       storage: 2
     });
@@ -180,16 +180,16 @@ CONFIGS().forEach(({ lib, setup, protocol }) => {
     console.log(`
 ################################################################################
 Public Key Hash : ${keyPkh}
-Initial Balance : ${keyInitialBalance.dividedBy(MUMAV_UNIT)} XTZ
-Final Balance   : ${(await tezos.tz.getBalance(keyPkh)).dividedBy(MUMAV_UNIT)} XTZ
+Initial Balance : ${keyInitialBalance.dividedBy(MUMAV_UNIT)} MVRK
+Final Balance   : ${(await mavryk.mv.getBalance(keyPkh)).dividedBy(MUMAV_UNIT)} MVRK
 
-Total XTZ Spent : ${keyInitialBalance.minus(await tezos.tz.getBalance(keyPkh)).dividedBy(MUMAV_UNIT)} XTZ
+Total MVRK Spent : ${keyInitialBalance.minus(await mavryk.mv.getBalance(keyPkh)).dividedBy(MUMAV_UNIT)} MVRK
 `)
   })();
 
 
-  async function printBalance(pkh: string, tezos: TezosToolkit): Promise<void> {
-    let balance = await tezos.tz.getBalance(pkh);
+  async function printBalance(pkh: string, mavryk: MavrykToolkit): Promise<void> {
+    let balance = await mavryk.mv.getBalance(pkh);
     console.log(`${pkh} balance: ${balance}`);
   }
 })

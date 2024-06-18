@@ -193,11 +193,11 @@ export class MichelsonMap<K extends MichelsonMapKey, T> {
    *
    * @example map.set({0: "test", 1: "test1"}, "myValue") // Using a pair as key
    *
-   * @warn The same key can be represented in multiple ways, depending on the type of the key. This duplicate key situation will cause a runtime error (duplicate key) when sending the map data to the Tezos RPC node.
+   * @warn The same key can be represented in multiple ways, depending on the type of the key. This duplicate key situation will cause a runtime error (duplicate key) when sending the map data to the Mavryk RPC node.
    *
    * For example, consider a contract with a map whose key is of type boolean.  If you set the following values in MichelsonMap: map.set(false, "myValue") and map.set(null, "myValue").
    *
-   * You will get two unique entries in the MichelsonMap. These values will both be evaluated as falsy by the MichelsonEncoder and ultimately rejected by the Tezos RPC.
+   * You will get two unique entries in the MichelsonMap. These values will both be evaluated as falsy by the MichelsonEncoder and ultimately rejected by the Mavryk RPC.
    */
   set(key: K, value: T) {
     this.assertTypecheckKey(key);

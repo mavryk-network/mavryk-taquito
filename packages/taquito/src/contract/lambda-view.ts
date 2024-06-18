@@ -1,6 +1,6 @@
 import { MichelsonV1Expression } from '@mavrykdynamics/taquito-rpc';
 import { Contract, ContractAbstraction, WalletContract } from './contract';
-import { TezosOperationError } from '../operations/errors';
+import { MavrykOperationError } from '../operations/errors';
 import { ContractProvider } from './interface';
 import { Wallet } from '../wallet';
 
@@ -24,7 +24,7 @@ export default class LambdaView {
     try {
       await this.lambdaContract.methods.default(this.voidLambda).send();
     } catch (ex) {
-      if (ex instanceof TezosOperationError) {
+      if (ex instanceof MavrykOperationError) {
         return (ex.lastError as any).with;
       } else {
         throw ex;

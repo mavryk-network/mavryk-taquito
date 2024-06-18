@@ -2,7 +2,7 @@ import { CONFIGS } from '../../config';
 import { miStr, miObject } from '../../data/contractWithUnpair';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
 
     describe(`Test contract origination with UNPAIR through contract api using: ${rpc}`, () => {
         beforeEach(async () => {
@@ -10,7 +10,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         });
 
         test('Verify contract.originate for a contract having UNPAIR with code and init in Michelson', async () => {
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: miStr,
                 init: '(Pair 0 "mv1NiGqJHiRwivfGULeVz8kV16AnhepCa5rW")'
             });
@@ -29,7 +29,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         });
 
         test('Verify contract.originate for a contract having UNPAIR with code in Michelson and init in JSON Michelson', async () => {
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: miStr,
                 init: { prim: 'Pair', args: [{ int: '0' }, { string: 'mv1NiGqJHiRwivfGULeVz8kV16AnhepCa5rW' }] }
             });
@@ -47,7 +47,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         });
 
         test('Verify contract.originate for a contract having UNPAIR with code in Michelson and storage', async () => {
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: miStr,
                 storage: {
                     0: '0',
@@ -68,7 +68,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         });
 
         test('Verify contract.originate for a contract having UNPAIR with code in JSON Michelson and init in Michelson', async () => {
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: miObject,
                 init: '(Pair 0 "mv1NiGqJHiRwivfGULeVz8kV16AnhepCa5rW")'
             });
@@ -86,7 +86,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         });
 
         test('Verify contract.originate for a contract having UNPAIR with code and init in JSON Michelson', async () => {
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: miObject,
                 init: { prim: 'Pair', args: [{ int: '0' }, { string: 'mv1NiGqJHiRwivfGULeVz8kV16AnhepCa5rW' }] }
             });
@@ -104,7 +104,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         });
 
         test('Verify contract.originate for a contract having UNPAIR with code in JSON Michelson and storage', async () => {
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: miObject,
                 storage: {
                     0: '0',

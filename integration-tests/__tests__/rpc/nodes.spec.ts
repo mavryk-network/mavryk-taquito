@@ -19,9 +19,9 @@ CONFIGS().forEach(
     knownSaplingContract,
     knownViewContract,
   }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
     const unrestrictedRPCNode = rpc.endsWith("ecadinfra.com") ? test.skip : test;
-    const atlasAndAlpha = ProtoGreaterOrEqual(protocol, Protocols.PtAtLas) ? test : test.skip;
+    const boreasAndAlpha = ProtoGreaterOrEqual(protocol, Protocols.PtBoreas) ? test : test.skip;
 
     let ticketContract: DefaultContractType;
 
@@ -30,7 +30,7 @@ CONFIGS().forEach(
 
       try {
         // originate ticket contract
-        const ticketOp = await Tezos.contract.originate({
+        const ticketOp = await Mavryk.contract.originate({
           code: ticketCode,
           storage: ticketStorage,
         });
@@ -48,7 +48,7 @@ CONFIGS().forEach(
     const rpcList: Array<string> = [rpc];
 
     rpcList.forEach(async (rpc) => {
-      Tezos.setRpcProvider(rpc);
+      Mavryk.setRpcProvider(rpc);
 
       const rpcClient = new RpcClientCache(new RpcClient(rpc));
 
@@ -66,6 +66,31 @@ CONFIGS().forEach(
         it(`Verify that rpcClient.getBalance for knownBaker returns the spendable balance excluding frozen bonds`, async () => {
           const balance = await rpcClient.getBalance(knownBaker);
           expect(balance).toBeDefined();
+        });
+
+        it(`Verify that rpcClient.getFullBalance for knownBaker returns the full balance`, async () => {
+          const balance = await rpcClient.getFullBalance(knownBaker);
+          expect(balance).toBeDefined();
+        });
+
+        it(`Verify that rpcClient.getStakedBalance for knownBaker returns the staked balance`, async () => {
+          const balance = await rpcClient.getStakedBalance(knownBaker);
+          expect(balance).toBeDefined();
+        });
+
+        it(`Verify that rpcClient.getUnstakedFinalizableBalance for knownBaker returns the unstaked finalizable balance`, async () => {
+          const balance = await rpcClient.getUnstakedFinalizableBalance(knownBaker);
+          expect(balance).toBeDefined();
+        });
+
+        it(`Verify that rpcClient.getUnstakedFrozenBalance for knownBaker returns the unstaked frozen balance`, async () => {
+          const balance = await rpcClient.getUnstakedFrozenBalance(knownBaker);
+          expect(balance).toBeDefined();
+        });
+
+        it(`Verify that rpcClient.getUnstakeRequests for knownBaker returns the unstaked requests`, async () => {
+          const response = await rpcClient.getUnstakeRequests('mv19thf7SS3FsU3BXZsE4e3bWPcHrtdJXvRM');
+          expect(response).toBeDefined();
         });
 
         it(`Verify that rpcClient.getStorage for knownContract returns the data of a contract`, async () => {
@@ -119,12 +144,22 @@ CONFIGS().forEach(
           });
           const { key, type } = schema.EncodeBigMapKey('mv1Jf7tRzUSYjEpLfHj2R1EDgdYHstopbySD');
           const { packed } = await rpcClient.packData({ data: key, type });
-          const contract = await Tezos.contract.at(knownBigMapContract);
+          const contract = await Mavryk.contract.at(knownBigMapContract);
           const storage: any = await contract.storage();
           const id = Number(storage.ledger.id);
           const encodedExpr = encodeExpr(packed);
           const bigMapValue = await rpcClient.getBigMapExpr(id.toString(), encodedExpr);
           expect(bigMapValue).toBeDefined();
+        });
+
+        it(`Verify that rpcClient.getAllDelegates returns all delegates from RPC`, async () => {
+          const allDelegates = await rpcClient.getAllDelegates();
+          expect(allDelegates).toBeDefined();
+
+          const allViableDelegates =  await rpcClient.getAllDelegates({active: true, with_minimal_stake: true});
+          expect(allViableDelegates).toBeDefined();
+
+          expect(allViableDelegates.length).toBeLessThanOrEqual(allDelegates.length);
         });
 
         it(`Verify that rpcClient.getDelegates for known baker returns information about a delegate from RPC`, async () => {
@@ -177,19 +212,6 @@ CONFIGS().forEach(
           expect(attestationRights[0].delegates![0].first_slot).toBeDefined();
           expect(typeof attestationRights[0].delegates![0].first_slot).toEqual('number');
           expect(attestationRights[0].delegate).toBeUndefined();
-        });
-
-        unrestrictedRPCNode('Verify that rpcClient.getEndorsingRights retrieves the list of delegates allowed to endorse a block', async () => {
-          const endorsingRights = await rpcClient.getEndorsingRights();
-          expect(endorsingRights).toBeDefined();
-          expect(endorsingRights[0].delegates).toBeDefined();
-          expect(endorsingRights[0].delegates![0].delegate).toBeDefined();
-          expect(typeof endorsingRights[0].delegates![0].delegate).toEqual('string');
-          expect(endorsingRights[0].delegates![0].endorsing_power).toBeDefined();
-          expect(typeof endorsingRights[0].delegates![0].endorsing_power).toEqual('number');
-          expect(endorsingRights[0].delegates![0].first_slot).toBeDefined();
-          expect(typeof endorsingRights[0].delegates![0].first_slot).toEqual('number');
-          expect(endorsingRights[0].delegate).toBeUndefined();
         });
 
         it('Verify that rpcClient.getBallotList returns ballots casted so far during a voting period', async () => {
@@ -263,7 +285,7 @@ CONFIGS().forEach(
         it('Verify that rpcClient.preapplyOperations simulates the validation of an operation', async () => {
           try {
             // the account needs to be revealed first
-            const reveal = await Tezos.contract.reveal({});
+            const reveal = await Mavryk.contract.reveal({});
             await reveal.confirmation();
           } catch (ex) {
             expect(ex).toEqual(expect.objectContaining({
@@ -278,7 +300,7 @@ CONFIGS().forEach(
                 {
                   kind: 'origination',
                   counter: '1',
-                  source: await Tezos.signer.publicKeyHash(),
+                  source: await Mavryk.signer.publicKeyHash(),
                   fee: '10000',
                   gas_limit: '10',
                   storage_limit: '10',
@@ -323,7 +345,7 @@ CONFIGS().forEach(
                   {
                     kind: 'origination',
                     counter: '1',
-                    source: await Tezos.signer.publicKeyHash(),
+                    source: await Mavryk.signer.publicKeyHash(),
                     fee: '10000',
                     gas_limit: '10',
                     storage_limit: '10',
@@ -358,7 +380,7 @@ CONFIGS().forEach(
                   {
                     kind: 'origination',
                     counter: '1',
-                    source: await Tezos.signer.publicKeyHash(),
+                    source: await Mavryk.signer.publicKeyHash(),
                     fee: '10000',
                     gas_limit: '10',
                     storage_limit: '10',
@@ -381,7 +403,7 @@ CONFIGS().forEach(
 
         it('Verify that rpcClient.runView executes tzip4 views', async () => {
 
-          const chainId = await Tezos.rpc.getChainId();
+          const chainId = await Mavryk.rpc.getChainId();
 
           const params: RPCRunViewParam = {
             contract: knownBigMapContract,
@@ -392,13 +414,13 @@ CONFIGS().forEach(
             }
           };
 
-          const views = await Tezos.rpc.runView(params);
+          const views = await Mavryk.rpc.runView(params);
           expect(views).toBeDefined();
           expect(views).toEqual({ "data": { "int": "100" } });
         });
 
         it('Verify that rpcClient.runScriptView executes michelson view', async () => {
-          const chainId = await Tezos.rpc.getChainId();
+          const chainId = await Mavryk.rpc.getChainId();
           const params: RPCRunScriptViewParam = {
             contract: knownViewContract!,
             view: 'add',
@@ -408,7 +430,7 @@ CONFIGS().forEach(
             }
           };
 
-          const views = await Tezos.rpc.runScriptView(params);
+          const views = await Mavryk.rpc.runScriptView(params);
           expect(views).toBeDefined();
           expect(views).toEqual({ "data": { "int": "2" } });
         });
@@ -431,7 +453,7 @@ CONFIGS().forEach(
           expect(saplingDiffByContract).toBeDefined();
         });
 
-        it('Verify that rpcClient.getProtocols will list past and present Tezos protocols', async () => {
+        it('Verify that rpcClient.getProtocols will list past and present Mavryk protocols', async () => {
           const protocols = await rpcClient.getProtocols();
           expect(protocols).toEqual({ protocol, next_protocol: protocol });
         });
@@ -460,6 +482,11 @@ CONFIGS().forEach(
           expect(ticketBalances[0].amount).toBeDefined();
         });
 
+        boreasAndAlpha(`Verify that rpcClient.getAdaptiveIssuanceLaunchCycle will retrieve launch cycle 6 for ${rpc}`, async () => {
+          const launchCycle = await rpcClient.getAdaptiveIssuanceLaunchCycle();
+          expect(launchCycle).toEqual(6);
+        })
+
         it('Verify that rpcClient.getPendingOperations v1 will retrieve the pending operations in mempool with property applied', async () => {
           const pendingOperations = await rpcClient.getPendingOperations({ version: '1' }) as PendingOperationsV1;
           expect(pendingOperations).toBeDefined();
@@ -470,7 +497,7 @@ CONFIGS().forEach(
           expect(pendingOperations.branch_refused).toBeInstanceOf(Array);
         });
 
-        atlasAndAlpha('Verify that rpcClient.getPendingOperations v2 will retrieve the pending operations in mempool with property validated', async () => {
+        it('Verify that rpcClient.getPendingOperations v2 will retrieve the pending operations in mempool with property validated', async () => {
           const pendingOperations = await rpcClient.getPendingOperations({ version: '2' }) as PendingOperationsV2;
           expect(pendingOperations).toBeDefined();
           expect(pendingOperations.validated).toBeInstanceOf(Array);

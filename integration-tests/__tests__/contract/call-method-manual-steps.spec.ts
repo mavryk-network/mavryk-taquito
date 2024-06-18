@@ -3,7 +3,7 @@ import { encodeOpHash } from '@mavrykdynamics/taquito-utils';
 import { CONFIGS } from '../../config';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test obtain operation hash before sending the operation to the node ${rpc}`, () => {
     beforeEach(async () => {
@@ -13,7 +13,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     test('Estimates, forges, signs, obtains the operation hash and injects the operation', async () => {
       // We deploy a simple contract that will be used in the next steps
       const code = `parameter nat; storage nat; code { CAR ; NIL operation ; PAIR }`;
-      const opOrigination = await Tezos.contract.originate({
+      const opOrigination = await Mavryk.contract.originate({
         code,
         storage: 10
       });
@@ -33,7 +33,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       const transferParams = contract.methods.default(5).toTransferParams();
 
       // We estimate the fees for the operation
-      const estimate = await Tezos.estimate.transfer(transferParams);
+      const estimate = await Mavryk.estimate.transfer(transferParams);
 
       // The createTransferOperation function returns RPCTransferOperation where we include the estimated fees
       const rpcTransferOperation = await createTransferOperation({
@@ -44,9 +44,9 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       });
 
       // We add the branch, the source and the counter to the operation object
-      const source = await Tezos.signer.publicKeyHash();
-      const { counter } = await Tezos.rpc.getContract(source);
-      const { hash } = await Tezos.rpc.getBlockHeader();
+      const source = await Mavryk.signer.publicKeyHash();
+      const { counter } = await Mavryk.rpc.getContract(source);
+      const { hash } = await Mavryk.rpc.getBlockHeader();
 
       const op = {
         branch: hash,
@@ -58,19 +58,19 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       }
 
       // We forge the operation
-      const forgedOp = await Tezos.rpc.forgeOperations(toString(op))
+      const forgedOp = await Mavryk.rpc.forgeOperations(toString(op))
 
       // We sign the operation
-      const signOp = await Tezos.signer.sign(forgedOp, new Uint8Array([3]));
+      const signOp = await Mavryk.signer.sign(forgedOp, new Uint8Array([3]));
 
       // We calculate the operation hash
       const opHash = encodeOpHash(signOp.sbytes);
 
       // simulate the operation, additional step in the default main flow
-      // const results = await Tezos.rpc.preapplyOperations(op);
+      // const results = await Mavryk.rpc.preapplyOperations(op);
 
       // We inject the operation
-      const opHashFromRpc = await Tezos.rpc.injectOperation(signOp.sbytes)
+      const opHashFromRpc = await Mavryk.rpc.injectOperation(signOp.sbytes)
 
       expect(opHash).toEqual(opHashFromRpc);
     });

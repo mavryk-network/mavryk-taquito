@@ -5,7 +5,7 @@ import { CONFIGS } from '../../config';
 // Testcase just checks whether this is still the case.
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const weeklynet = protocol === Protocols.ProtoALpha ? test : test.skip;
 
   describe(`Test contracts using: ${rpc}`, () => {
@@ -14,7 +14,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
     });
 
     weeklynet("Verify Obtained balance of a smart contract using the BALANCE instruction does not change during the execution of the entrypoint's own code", async () => {
-      const opTezTransferA = await Tezos.contract.originate({
+      const opTezTransferA = await Mavryk.contract.originate({
         balance: '0.00001',
         code: `        { parameter (option address) ;
             storage (pair (mumav %at_end) (mumav %at_start)) ;
@@ -49,12 +49,12 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
       expect(opTezTransferA.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
       const TezTransferAContract = await opTezTransferA.contract();
       expect(await TezTransferAContract.storage()).toBeTruthy();
-      Tezos.contract.at(TezTransferAContract.address).then((contract) => {
+      Mavryk.contract.at(TezTransferAContract.address).then((contract) => {
         const objects = Object.keys(contract.methodsObject);
         expect(objects).toContain('default');
       });
 
-      const opTezTransferB = await Tezos.contract.originate({
+      const opTezTransferB = await Mavryk.contract.originate({
         code: `        { parameter (option address) ;
              storage (pair (mumav %at_end) (mumav %at_start)) ;
              code { UNPAIR ;
@@ -88,12 +88,12 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
       expect(opTezTransferB.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
       const TezTransferBContract = await opTezTransferB.contract();
       expect(await TezTransferBContract.storage()).toBeTruthy();
-      Tezos.contract.at(TezTransferBContract.address).then((contract) => {
+      Mavryk.contract.at(TezTransferBContract.address).then((contract) => {
         const objects2 = Object.keys(contract.methodsObject);
         expect(objects2).toContain('default');
       });
 
-      await Tezos.contract
+      await Mavryk.contract
         .at(TezTransferAContract.address)
         .then((contract) => {
           return contract.methods.default(`${TezTransferBContract.address}`).send();

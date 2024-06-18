@@ -2,7 +2,7 @@ import { CONFIGS } from "../config";
 import { addContract, lslContract, lsrContract, notContract, orContract, xorContract } from "../data/instructions-with-bytes-contracts";
 
 CONFIGS().forEach(({ lib, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test origination of contract with instructions now supporting bytes`, () => {
 
@@ -11,7 +11,7 @@ CONFIGS().forEach(({ lib, setup }) => {
     });
 
     it(`Should be able to orignate contract with ADD parameter in michelson contract with bytes`, async () => {
-      const contract = await Tezos.contract.originate({
+      const contract = await Mavryk.contract.originate({
         code: addContract,
         storage: 0
       });
@@ -22,7 +22,7 @@ CONFIGS().forEach(({ lib, setup }) => {
     });
 
     it(`Should be able to orignate contract with LSL parameter in michelson contract with bytes`, async () => {
-      const contract = await Tezos.contract.originate({
+      const contract = await Mavryk.contract.originate({
         code: lslContract,
         storage: 0
       });
@@ -33,7 +33,7 @@ CONFIGS().forEach(({ lib, setup }) => {
     });
 
     it(`Should be able to orignate contract with LSR parameter in michelson contract with bytes`, async () => {
-      const contract = await Tezos.contract.originate({
+      const contract = await Mavryk.contract.originate({
         code: lsrContract,
         storage: 0
       });
@@ -44,7 +44,7 @@ CONFIGS().forEach(({ lib, setup }) => {
     });
 
     it(`Should be able to orignate contract with NOT parameter in michelson contract with bytes`, async () => {
-      const contract = await Tezos.contract.originate({
+      const contract = await Mavryk.contract.originate({
         code: notContract,
         storage: 0
       });
@@ -55,7 +55,7 @@ CONFIGS().forEach(({ lib, setup }) => {
     });
 
     it(`Should be able to orignate contract with OR parameter in michelson contract with bytes`, async () => {
-      const contract = await Tezos.contract.originate({
+      const contract = await Mavryk.contract.originate({
         code: orContract,
         storage: 0
       });
@@ -66,7 +66,7 @@ CONFIGS().forEach(({ lib, setup }) => {
     });
 
     it(`Should be able to orignate contract with XOR parameter in michelson contract with bytes`, async () => {
-      const contract = await Tezos.contract.originate({
+      const contract = await Mavryk.contract.originate({
         code: xorContract,
         storage: 0
       });

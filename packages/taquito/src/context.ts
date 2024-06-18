@@ -6,7 +6,7 @@ import { RpcInjector } from './injector/rpc-injector';
 import { Signer } from './signer/interface';
 import { NoopSigner } from './signer/noop';
 import { OperationFactory } from './wallet/operation-factory';
-import { RpcTzProvider } from './tz/rpc-tz-provider';
+import { RpcMvProvider } from './mv/rpc-mv-provider';
 import { RPCEstimateProvider } from './estimate/rpc-estimate-provider';
 import { RpcContractProvider } from './contract/rpc-contract-provider';
 import { RPCBatchProvider } from './batch/rpc-batch-provider';
@@ -19,7 +19,7 @@ import { RpcPacker } from './packer/rpc-packer';
 import { BehaviorSubject } from 'rxjs';
 import { GlobalConstantsProvider } from './global-constants/interface-global-constants-provider';
 import { NoopGlobalConstantsProvider } from './global-constants/noop-global-constants-provider';
-import { TzReadProvider } from './read-provider/interface';
+import { MvReadProvider } from './read-provider/interface';
 import { RpcReadAdapter } from './read-provider/rpc-read-adapter';
 import { SubscribeProvider } from './subscribe/interface';
 import { PollingSubscribeProvider } from './subscribe/polling-subcribe-provider';
@@ -53,9 +53,9 @@ export class Context {
   private _packer: Packer;
   private providerDecorator: Array<(context: Context) => Context> = [];
   private _globalConstantsProvider: GlobalConstantsProvider;
-  private _readProvider: TzReadProvider;
+  private _readProvider: MvReadProvider;
   private _stream: SubscribeProvider;
-  public readonly tz = new RpcTzProvider(this);
+  public readonly mv = new RpcMvProvider(this);
   public readonly estimate = new RPCEstimateProvider(this);
   public readonly contract = new RpcContractProvider(this, this.estimate);
   public readonly prepare = new PrepareProvider(this);
@@ -75,7 +75,7 @@ export class Context {
     wallet?: WalletProvider,
     parser?: ParserProvider,
     globalConstantsProvider?: GlobalConstantsProvider,
-    readProvider?: TzReadProvider,
+    readProvider?: MvReadProvider,
     stream?: SubscribeProvider
   ) {
     if (typeof this._rpc === 'string') {
@@ -189,7 +189,7 @@ export class Context {
     return this._readProvider;
   }
 
-  set readProvider(value: TzReadProvider) {
+  set readProvider(value: MvReadProvider) {
     this._readProvider = value;
   }
 
@@ -235,7 +235,7 @@ export class Context {
   }
 
   /**
-   * @description Allows extensions set on the TezosToolkit to inject logic into the context
+   * @description Allows extensions set on the MavrykToolkit to inject logic into the context
    */
   registerProviderDecorator(fx: (context: Context) => Context) {
     this.providerDecorator.push(fx);
@@ -244,7 +244,7 @@ export class Context {
   /**
    * @description Applies the decorators on a cloned instance of the context and returned this cloned instance.
    * The decorators are functions that inject logic into the context.
-   * They are provided by the extensions set on the TezosToolkit by calling the registerProviderDecorator method.
+   * They are provided by the extensions set on the MavrykToolkit by calling the registerProviderDecorator method.
    */
   withExtensions = (): Context => {
     let clonedContext = this.clone();

@@ -46,12 +46,12 @@ export class InvalidEntrypointError extends ParameterValidationError {
 
 /**
  *  @category Error
- *  @description Error that indicates a failure happening when trying to encode Tezos ID
+ *  @description Error that indicates a failure happening when trying to encode Mavryk ID
  */
-export class TezosIdEncodeError extends ParameterValidationError {
+export class MavrykIdEncodeError extends ParameterValidationError {
   constructor(public readonly message: string) {
     super();
-    this.name = 'TezosIdEncodeError';
+    this.name = 'MavrykIdEncodeError';
   }
 }
 

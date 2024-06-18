@@ -6,7 +6,7 @@ import { CONFIGS } from '../../config';
 */
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const weeklynet = protocol === Protocols.ProtoALpha ? test : test.skip;
 
   describe(`Test contracts using: ${rpc}`, () => {
@@ -15,7 +15,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
     });
 
     weeklynet('Verify failed batch', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: `        { parameter (or (nat %add) (nat %sub)) ;
               storage nat ;
               code { UNPAIR ;
@@ -34,7 +34,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
       expect(op.status).toEqual('applied');
 
       try {
-        const batch = Tezos.contract.batch()
+        const batch = Mavryk.contract.batch()
           .withContractCall(contract.methods.add(2))
           .withContractCall(contract.methods.sub(4))
           .withContractCall(contract.methods.add(3));

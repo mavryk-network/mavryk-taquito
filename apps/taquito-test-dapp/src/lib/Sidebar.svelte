@@ -10,9 +10,9 @@
   export const getWallet = () => wallet;
 
   afterUpdate(async () => {
-    if ($store.Tezos && $store.wallet && $store.tests.length === 0) {
-      const contract = await $store.Tezos.wallet.at(contractAddress[$store.networkType]);
-      const tests = init($store.Tezos, contract, $store.wallet);
+    if ($store.Mavryk && $store.wallet && $store.tests.length === 0) {
+      const contract = await $store.Mavryk.wallet.at(contractAddress[$store.networkType]);
+      const tests = init($store.Mavryk, contract, $store.wallet);
       store.updateTests(tests);
     }
   });

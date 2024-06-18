@@ -1,5 +1,5 @@
-import { TezosToolkit, SetProviderOptions, Wallet, RpcPacker } from '../src/taquito';
-import { RpcTzProvider } from '../src/tz/rpc-tz-provider';
+import { MavrykToolkit, SetProviderOptions, Wallet, RpcPacker } from '../src/taquito';
+import { RpcMvProvider } from '../src/mv/rpc-mv-provider';
 import { RpcContractProvider } from '../src/contract/rpc-contract-provider';
 import { PrepareProvider } from '../src/prepare/prepare-provider';
 import { PollingSubscribeProvider } from '../src/subscribe/polling-subcribe-provider';
@@ -11,9 +11,9 @@ import { NoopGlobalConstantsProvider } from '../src/global-constants/noop-global
 import { TaquitoLocalForger } from '../src/forger/taquito-local-forger';
 import { RpcInjector } from '../src/taquito';
 
-describe('TezosToolkit test', () => {
+describe('MavrykToolkit test', () => {
   let mockRpcClient: any;
-  let toolkit: TezosToolkit;
+  let toolkit: MavrykToolkit;
 
   beforeEach(() => {
     mockRpcClient = {
@@ -43,25 +43,25 @@ describe('TezosToolkit test', () => {
     });
 
     mockRpcClient.getManagerKey.mockResolvedValue('test');
-    toolkit = new TezosToolkit(mockRpcClient);
+    toolkit = new MavrykToolkit(mockRpcClient);
   });
 
-  it('the default providers are set on the TezosToolkit at instantiation', () => {
-    const tezos = new TezosToolkit('rpc');
-    expect(tezos.globalConstants).toBeInstanceOf(NoopGlobalConstantsProvider);
-    expect(tezos.contract).toBeInstanceOf(RpcContractProvider);
-    expect(tezos.estimate).toBeInstanceOf(RPCEstimateProvider);
-    expect(tezos.operation).toBeInstanceOf(OperationFactory);
-    expect(tezos.signer).toBeInstanceOf(NoopSigner);
-    expect(tezos.stream).toBeInstanceOf(PollingSubscribeProvider);
-    expect(tezos.tz).toBeInstanceOf(RpcTzProvider);
-    expect(tezos.wallet).toBeInstanceOf(Wallet);
-    expect(tezos.prepare).toBeInstanceOf(PrepareProvider);
+  it('the default providers are set on the MavrykToolkit at instantiation', () => {
+    const mavryk = new MavrykToolkit('rpc');
+    expect(mavryk.globalConstants).toBeInstanceOf(NoopGlobalConstantsProvider);
+    expect(mavryk.contract).toBeInstanceOf(RpcContractProvider);
+    expect(mavryk.estimate).toBeInstanceOf(RPCEstimateProvider);
+    expect(mavryk.operation).toBeInstanceOf(OperationFactory);
+    expect(mavryk.signer).toBeInstanceOf(NoopSigner);
+    expect(mavryk.stream).toBeInstanceOf(PollingSubscribeProvider);
+    expect(mavryk.mv).toBeInstanceOf(RpcMvProvider);
+    expect(mavryk.wallet).toBeInstanceOf(Wallet);
+    expect(mavryk.prepare).toBeInstanceOf(PrepareProvider);
   });
 
   it('setProvider with string should create rpc provider', () => {
     toolkit.setProvider({ rpc: 'test' });
-    expect(toolkit.tz).toBeInstanceOf(RpcTzProvider);
+    expect(toolkit.mv).toBeInstanceOf(RpcMvProvider);
     expect(toolkit.contract).toBeInstanceOf(RpcContractProvider);
   });
 
@@ -82,7 +82,7 @@ describe('TezosToolkit test', () => {
     .filter((x) => x !== 'rpc')
     .forEach((key) => {
       it(`setting ${key} provider should not override the rpc provider`, () => {
-        toolkit = new TezosToolkit('rpc');
+        toolkit = new MavrykToolkit('rpc');
         expect(toolkit.rpc).toBeInstanceOf(RpcClient);
         toolkit.setProvider({ rpc: 'test' });
         expect(toolkit.rpc.getRpcUrl()).toEqual('test');

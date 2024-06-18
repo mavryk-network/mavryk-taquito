@@ -1,14 +1,14 @@
 import { CONFIGS } from '../../config';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test contract origination and method calls with types bls12_381_fr, bls12_381_g1 and bls12_381_g2 through contract api using: ${rpc}`, () => {
     beforeEach(async () => {
       await setup();
     });
 
     it('Verify contract.originate for a contract with a hex string matching type bls12_381_fr in initial storage and update the storage value via default method call', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: `
         parameter (pair bls12_381_fr bls12_381_fr);
         storage (option (bls12_381_fr));
@@ -38,7 +38,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     it('Verify contract.originate for a contract with a hex string matching type bls12_381_g1 in initial storage and update storage value via default method call', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: `
         parameter (pair bls12_381_g1 bls12_381_fr);
         storage (option (bls12_381_g1));
@@ -73,7 +73,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     it('Verify contract.originate for a contract with empty initial storage and update storage value via default method call with a hex string matching type bls12_381_g2', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: `
         parameter bls12_381_g2;
         storage (option (bls12_381_g2));

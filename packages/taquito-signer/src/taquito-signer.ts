@@ -36,7 +36,7 @@ export interface FromMnemonicParams {
 }
 
 /**
- * @description A local implementation of the signer. Will represent a Tezos account and be able to produce signature in its behalf
+ * @description A local implementation of the signer. Will represent a Mavryk account and be able to produce signature in its behalf
  *
  * @warn If running in production and dealing with tokens that have real value, it is strongly recommended to use a HSM backed signer so that private key material is not stored in memory or on disk
  * @throws {@link InvalidMnemonicError}

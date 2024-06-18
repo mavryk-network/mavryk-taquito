@@ -1,12 +1,12 @@
 import LambdaView from '../../src/contract/lambda-view';
-import { TezosToolkit } from '../../src/taquito';
+import { MavrykToolkit } from '../../src/taquito';
 import { entrypoints, script } from './data-lambda-view-class';
 
 describe('LambdaView test', () => {
   let mockRpcClientView: any;
   let mockRpcClientLambda: any;
-  let toolkitView: TezosToolkit;
-  let toolkitLambda: TezosToolkit;
+  let toolkitView: MavrykToolkit;
+  let toolkitLambda: MavrykToolkit;
 
   beforeEach(() => {
     mockRpcClientView = {
@@ -18,7 +18,7 @@ describe('LambdaView test', () => {
     mockRpcClientView.getContract.mockResolvedValue({ script });
     mockRpcClientView.getChainId.mockResolvedValue('NetXjD3HPJJjmcd');
 
-    toolkitView = new TezosToolkit(mockRpcClientView);
+    toolkitView = new MavrykToolkit(mockRpcClientView);
 
     mockRpcClientLambda = {
       getContract: jest.fn(),
@@ -56,7 +56,7 @@ describe('LambdaView test', () => {
     mockRpcClientLambda.getChainId.mockResolvedValue('NetXjD3HPJJjmcd');
     mockRpcClientLambda.getEntrypoints.mockResolvedValue({ entrypoints: {} });
 
-    toolkitLambda = new TezosToolkit(mockRpcClientLambda);
+    toolkitLambda = new MavrykToolkit(mockRpcClientLambda);
   });
 
   it('LambdaView is instantiable with parameters', async () => {

@@ -5,7 +5,7 @@ import { mapWithPairAsKeyCode, mapWithPairAsKeyStorage } from "../../data/bigmap
 import { MichelsonMapKey } from "@mavrykdynamics/taquito-michelson-encoder";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   let storageMap: MichelsonMap<MichelsonMapKey, unknown>;
 
   describe(`Test contract origination with pair as key in storage through contract api using: ${rpc}`, () => {
@@ -69,7 +69,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     it('Verify contract.originate for a contract with pair as a key', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "0",
         code: storageContractWithPairAsKey,
         storage: storageMap
@@ -83,7 +83,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     it('Verify contract.originate for a contract with pair as a key in map ', async () => {
       /** The init property is used in this test instead of the storage property as in the previous test. */
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "0",
         code: mapWithPairAsKeyCode,
         init: mapWithPairAsKeyStorage

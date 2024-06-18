@@ -5,7 +5,7 @@ import { MANAGER_LAMBDA, OpKind } from '@mavrykdynamics/taquito';
 import { OperationContentsAndResultTransaction } from '@mavrykdynamics/taquito-rpc'
 
 CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
 
     describe(`Test wallet.batch using: ${rpc}`, () => {
         beforeEach(async () => {
@@ -13,7 +13,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }
         });
 
         test('Verify wallet.batch simple transfers with origination code in JSON Michelson format', async () => {
-            const batch = Tezos.wallet
+            const batch = Mavryk.wallet
                 .batch()
                 .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
                 .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
@@ -41,7 +41,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }
         });
 
         test('Verify wallet.batch simple transfers with origination code in Michelson format', async () => {
-            const batch = Tezos.wallet
+            const batch = Mavryk.wallet
                 .batch()
                 .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
                 .withTransfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 })
@@ -69,7 +69,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }
         });
 
         test('Verify wallet.batch simple transfers with origination', async () => {
-            const op = await Tezos.wallet
+            const op = await Mavryk.wallet
                 .batch([
                     {
                         kind: OpKind.TRANSACTION,
@@ -104,7 +104,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }
 
         test('Verify wallet.batch simple transfers from an account with low balance', async () => {
             const LocalTez = await createAddress();
-            const op = await Tezos.wallet.transfer({ to: await LocalTez.wallet.pkh(), amount: 2 }).send();
+            const op = await Mavryk.wallet.transfer({ to: await LocalTez.wallet.pkh(), amount: 2 }).send();
             await op.confirmation();
 
             const batchOp = await LocalTez.wallet
@@ -130,18 +130,18 @@ CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }
         });
 
         test('Verify wallet.batch simple transfers with chained contract calls', async () => {
-            const op = await Tezos.wallet
+            const op = await Mavryk.wallet
                 .originate({
                     balance: '1',
                     code: managerCode,
-                    init: { string: await Tezos.signer.publicKeyHash() }
+                    init: { string: await Mavryk.signer.publicKeyHash() }
                 })
                 .send();
 
             const contract = await op.contract();
             expect(await op.status()).toEqual('applied');
 
-            const batch = Tezos.wallet
+            const batch = Mavryk.wallet
                 .batch()
                 .withTransfer({ to: contract.address, amount: 1 })
                 .withContractCall(
@@ -168,8 +168,8 @@ CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }
         });
 
         test('Verify wallet.batch with contract.method call', async () => {
-            const contract = await Tezos.wallet.at(knownContract);
-            const batch = await Tezos.wallet
+            const contract = await Mavryk.wallet.at(knownContract);
+            const batch = await Mavryk.wallet
                 .batch([
                     { kind: OpKind.TRANSACTION, to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 },
                     { kind: OpKind.TRANSACTION, to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 },
@@ -194,7 +194,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }
     });
 
     test('Batch multiple originations and get contract addresses info from getOriginatedContractAddresses member function', async () => {
-        const batch = Tezos.wallet
+        const batch = Mavryk.wallet
             .batch()
             .withOrigination({
                 balance: '1',
@@ -225,23 +225,23 @@ CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }
     });
 
     test('Verify batch contract calls can specify amount, fee, gasLimit and storageLimit', async () => {
-        const op = await Tezos.wallet
+        const op = await Mavryk.wallet
             .originate({
                 balance: '1',
                 code: managerCode,
-                init: { string: await Tezos.signer.publicKeyHash() }
+                init: { string: await Mavryk.signer.publicKeyHash() }
             })
             .send();
         const contract = await op.contract();
 
-        const estimateOp = await Tezos.estimate.batch([
+        const estimateOp = await Mavryk.estimate.batch([
             { ...(contract.methodsObject.do(MANAGER_LAMBDA.transferImplicit("mv1UE4jMeeBM49FjNmyvtE19aBKT73HDvM2m", 5)).toTransferParams()), kind: OpKind.TRANSACTION },
             { ...(contract.methods.do(MANAGER_LAMBDA.setDelegate(knownBaker)).toTransferParams()), kind: OpKind.TRANSACTION },
             { ...(contract.methods.do(MANAGER_LAMBDA.removeDelegate()).toTransferParams()), kind: OpKind.TRANSACTION },
 
         ])
 
-        const batch = Tezos.wallet
+        const batch = Mavryk.wallet
             .batch()
             .withContractCall(
                 contract.methods.do(MANAGER_LAMBDA.transferImplicit('mv1UE4jMeeBM49FjNmyvtE19aBKT73HDvM2m', 5), { fee: estimateOp[0].suggestedFeeMumav, gasLimit: estimateOp[0].gasLimit, storageLimit: estimateOp[0].storageLimit })

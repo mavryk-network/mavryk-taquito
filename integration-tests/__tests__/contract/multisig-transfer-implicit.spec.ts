@@ -3,7 +3,7 @@ import { MANAGER_LAMBDA } from "@mavrykdynamics/taquito";
 import { genericMultisig } from "../../data/multisig";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test multisig contract through contract api for origination, contract interaction, and transfer to an implicit account with: ${rpc}`, () => {
     beforeEach(async () => {
@@ -15,7 +15,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       const account3 = await createAddress();
 
       // Originate the multisig contract
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: genericMultisig,
         storage: {
@@ -46,7 +46,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       // Packing the data that need to be sign by each party of the multi-sig
       // The data passed to this step is specific to this multi-sig implementation
       // file deepcode ignore no-any: any is good enough
-      const { packed } = await Tezos.rpc.packData(pair({
+      const { packed } = await Mavryk.rpc.packData(pair({
         data: {
           prim: 'Pair',
           args: [

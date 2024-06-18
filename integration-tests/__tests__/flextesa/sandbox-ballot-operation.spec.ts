@@ -1,6 +1,6 @@
 import { VotingPeriodBlockResult } from '@mavrykdynamics/taquito-rpc';
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { CONFIGS, isSandbox, sleep } from '../../config';
 
 CONFIGS().forEach(async ({ lib, rpc, protocol, setup }) => {
@@ -11,9 +11,9 @@ CONFIGS().forEach(async ({ lib, rpc, protocol, setup }) => {
 
   // Our ci flexmasa script have 3 bakers Alice, Bob and Charlie (.github/workflows/main.yml)
   const Alice = lib; // Alice's secret key is passed through the command to run test is configured by integration-tests/config.ts
-  const Bob = new TezosToolkit(rpc);
+  const Bob = new MavrykToolkit(rpc);
   Bob.setSignerProvider(new InMemorySigner('edsk3RFfvaFaxbHx8BMtEW1rKQcPtDML3LXjNqMNLCzC3wLC1bWbAt'));
-  const Charlie = new TezosToolkit(rpc);
+  const Charlie = new MavrykToolkit(rpc);
   Charlie.setSignerProvider(new InMemorySigner('edsk3RgWvbKKA1atEUcaGwivge7QtckHkTL9nQJUXQKY5r8WKp4pF4'));
 
   describe(`Test Proposal and Ballot operation in ${protocol.substring(0, 8)} with flexmasa`, () => {

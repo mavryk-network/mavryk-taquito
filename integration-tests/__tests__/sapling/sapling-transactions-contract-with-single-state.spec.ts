@@ -6,7 +6,7 @@ import { singleSaplingStateContractJProtocol } from '../../data/single_sapling_s
 import * as bip39 from 'bip39';
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   let saplingContract: ContractAbstraction<ContractProvider>;
   let bobInmemorySpendingKey: InMemorySpendingKey;
   let bobPaymentAddress: string
@@ -20,7 +20,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       await setup();
 
       // Deploy the sapling contract
-      const saplingContractOrigination = await Tezos.contract.originate({
+      const saplingContractOrigination = await Mavryk.contract.originate({
         code: singleSaplingStateContractJProtocol(),
         init: '{}'
       });
@@ -38,13 +38,13 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
     it('Verify that the initial balance for Alice and Bob are 0 in the sapling contract', async () => {
 
-      const bobSaplingToolkit = new SaplingToolkit({ saplingSigner: bobInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Tezos.rpc))
+      const bobSaplingToolkit = new SaplingToolkit({ saplingSigner: bobInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Mavryk.rpc))
       const bobTxViewer = await bobSaplingToolkit.getSaplingTransactionViewer();
       const bobInitialBalance = await bobTxViewer.getBalance();
 
       expect(bobInitialBalance).toEqual(new BigNumber(0));
 
-      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Tezos.rpc))
+      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Mavryk.rpc))
       const aliceTxViewer = await aliceSaplingToolkit.getSaplingTransactionViewer();
       const aliceInitialBalance = await aliceTxViewer.getBalance();
 
@@ -55,7 +55,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     it('Verify that Alice can shield tokens', async () => {
 
       const amountToAlice = 3;
-      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Tezos.rpc));
+      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Mavryk.rpc));
       const aliceInMemoryViewingKey = await aliceInMemorySpendingKey.getSaplingViewingKeyProvider();
       // Fetch a payment address (zet) for Alice
       alicePaymentAddress = (await aliceInMemoryViewingKey.getAddress()).address;
@@ -67,7 +67,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       }])
 
       // Inject the sapling transaction using the ContractAbstraction by calling the default entrypoint
-      // The amount MUST be specified in the send method in order to transfer the 3 tez to the shielded pool
+      // The amount MUST be specified in the send method in order to transfer the 3 mav to the shielded pool
       const op = await saplingContract.methods.default([shieldedTx]).send({ amount: amountToAlice });
       await op.confirmation();
 
@@ -78,7 +78,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     });
 
     it("Verify that Alice's balance in the sapling pool updated after the shielded tx", async () => {
-      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Tezos.rpc))
+      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Mavryk.rpc))
       const aliceTxViewer = await aliceSaplingToolkit.getSaplingTransactionViewer();
       const aliceBalance = await aliceTxViewer.getBalance();
 
@@ -105,7 +105,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       const bobInMemoryViewingKey = await bobInmemorySpendingKey.getSaplingViewingKeyProvider();
       bobPaymentAddress = (await bobInMemoryViewingKey.getAddress()).address;
 
-      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Tezos.rpc));
+      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Mavryk.rpc));
       const tx = await aliceSaplingToolkit.prepareSaplingTransaction([{
         to: bobPaymentAddress,
         amount: amountToBob,
@@ -123,7 +123,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     });
 
     it("Verify that Alice's balance in the sapling pool updated after the sapling tx", async () => {
-      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Tezos.rpc))
+      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Mavryk.rpc))
       const aliceTxViewer = await aliceSaplingToolkit.getSaplingTransactionViewer();
       const aliceBalance = await aliceTxViewer.getBalance();
 
@@ -139,7 +139,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
             paymentAddress: alicePaymentAddress,
             isSpent: true
           },
-          { // This input is a payback for when Alice sent 2 tz to bob (3tz - 2tz = 1tz).
+          { // This input is a payback for when Alice sent 2 mv to bob (3tz - 2tz = 1tz).
             // Alice consumed the 3tz input and received 1tz back.
             value: new BigNumber(1000000),
             memo: '',
@@ -161,7 +161,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
         ]
       })
 
-      const bobSaplingToolkit = new SaplingToolkit({ saplingSigner: bobInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Tezos.rpc))
+      const bobSaplingToolkit = new SaplingToolkit({ saplingSigner: bobInmemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Mavryk.rpc))
       const bobTxViewer = await bobSaplingToolkit.getSaplingTransactionViewer();
       const bobBalance = await bobTxViewer.getBalance();
 
@@ -185,15 +185,15 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
     it('Verify that Alice can unshield tokens', async () => {
 
       const newAddress = await createAddress();
-      const opToFundNewAddress = await Tezos.contract.transfer({ to: await newAddress.signer.publicKeyHash(), amount: 2 });
+      const opToFundNewAddress = await Mavryk.contract.transfer({ to: await newAddress.signer.publicKeyHash(), amount: 2 });
       await opToFundNewAddress.confirmation();
-      const tezosAddress1 = await newAddress.signer.publicKeyHash();
+      const mavrykAddress1 = await newAddress.signer.publicKeyHash();
 
       const amount = 1;
-      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Tezos.rpc));
-      const tezosInitialBalance = await Tezos.tz.getBalance(tezosAddress1);
+      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Mavryk.rpc));
+      const mavrykInitialBalance = await Mavryk.mv.getBalance(mavrykAddress1);
       const unshieldedTx = await aliceSaplingToolkit.prepareUnshieldedTransaction({
-        to: tezosAddress1,
+        to: mavrykAddress1,
         amount
       })
 
@@ -205,13 +205,13 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       expect(op.hash).toBeDefined();
       expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
 
-      const tezosUpdatedBalance = await Tezos.tz.getBalance(tezosAddress1);
-      expect(tezosUpdatedBalance).toEqual(tezosInitialBalance.plus(new BigNumber(1000000)));
+      const mavrykUpdatedBalance = await Mavryk.mv.getBalance(mavrykAddress1);
+      expect(mavrykUpdatedBalance).toEqual(mavrykInitialBalance.plus(new BigNumber(1000000)));
 
     });
 
     it("Verify that Alice's balance in the sapling pool is updated after the unshielded tx", async () => {
-      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Tezos.rpc))
+      const aliceSaplingToolkit = new SaplingToolkit({ saplingSigner: aliceInMemorySpendingKey }, { contractAddress: saplingContract.address, memoSize }, new RpcReadAdapter(Mavryk.rpc))
       const aliceTxViewer = await aliceSaplingToolkit.getSaplingTransactionViewer();
       const aliceBalance = await aliceTxViewer.getBalance();
 

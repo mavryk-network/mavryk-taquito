@@ -13,7 +13,7 @@ export class Bls12381frValidationError extends TokenValidationError {
 }
 export class Bls12381frToken extends Token {
   // An element of the BLS12-381 scalar field Fr
-  // see https://tezos.gitlab.io/michelson-reference/#type-bls12_381_fr
+  // see https://protocol.mavryk.org/michelson-reference/#type-bls12_381_fr
   static prim: 'bls12_381_fr' = 'bls12_381_fr' as const;
 
   constructor(

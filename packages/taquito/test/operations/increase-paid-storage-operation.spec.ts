@@ -120,7 +120,7 @@ describe('IncreasePaidStorage operation', () => {
         tx
           .withResult({
             status: 'backtracked',
-            errors: [{ kind: 'temporary', id: 'proto.014-PtKathma.tez.subtraction_underflow' }],
+            errors: [{ kind: 'temporary', id: 'proto.014-PtKathma.mav.subtraction_underflow' }],
           })
           .build(),
       ],
@@ -130,7 +130,7 @@ describe('IncreasePaidStorage operation', () => {
     expect(op.errors).toBeDefined();
     expect(op.errors?.[0]).toEqual({
       kind: 'temporary',
-      id: 'proto.014-PtKathma.tez.subtraction_underflow',
+      id: 'proto.014-PtKathma.mav.subtraction_underflow',
     });
   });
 

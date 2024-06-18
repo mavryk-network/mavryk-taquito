@@ -2,7 +2,7 @@ import { Protocols } from "@mavrykdynamics/taquito";
 import { CONFIGS } from "../../../config";
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test register delegate through contract api: ${rpc}`, () => {
 
     beforeEach(async () => {
@@ -10,13 +10,13 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
     })
     it('As a User I want to verify that I can register the current address as delegate using contract.registerDelegate', async () => {
       try {
-        const pkh = await Tezos.signer.publicKeyHash();
-        const op = await Tezos.contract.registerDelegate({});
+        const pkh = await Mavryk.signer.publicKeyHash();
+        const op = await Mavryk.contract.registerDelegate({});
         await op.confirmation()
         expect(op.hash).toBeDefined();
         expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY)
 
-        const account = await Tezos.rpc.getDelegate(pkh)
+        const account = await Mavryk.rpc.getDelegate(pkh)
         expect(account).toEqual(pkh)
       } catch (ex: any) {
         if (protocol === Protocols.PsFLorena) {

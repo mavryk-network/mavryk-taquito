@@ -4294,7 +4294,7 @@ export const script24 = {
                                                     "prim": "string"
                                                   },
                                                   {
-                                                    "string": "WrongCondition: ((params.amount_tokens == sp.to_int(sp.fst(sp.ediv(sp.amount, self.data.price).open_some()))) & (sp.amount == sp.mul(sp.fst(sp.ediv(sp.amount, self.data.price).open_some()) * sp.fst(sp.ediv(self.data.price, sp.mumav(1)).open_some()), sp.mumav(1)))) & (sp.amount > sp.tez(0))"
+                                                    "string": "WrongCondition: ((params.amount_tokens == sp.to_int(sp.fst(sp.ediv(sp.amount, self.data.price).open_some()))) & (sp.amount == sp.mul(sp.fst(sp.ediv(sp.amount, self.data.price).open_some()) * sp.fst(sp.ediv(self.data.price, sp.mumav(1)).open_some()), sp.mumav(1)))) & (sp.amount > sp.mav(0))"
                                                   }
                                                 ]
                                               },
@@ -8695,7 +8695,7 @@ export const script24 = {
                                                     "prim": "string"
                                                   },
                                                   {
-                                                    "string": "WrongCondition: ((params.amount_tokens == sp.to_int(sp.fst(sp.ediv(sp.amount, self.data.price).open_some()))) & (sp.amount == sp.mul(sp.fst(sp.ediv(sp.amount, self.data.price).open_some()) * sp.fst(sp.ediv(self.data.price, sp.mumav(1)).open_some()), sp.mumav(1)))) & (sp.amount > sp.tez(0))"
+                                                    "string": "WrongCondition: ((params.amount_tokens == sp.to_int(sp.fst(sp.ediv(sp.amount, self.data.price).open_some()))) & (sp.amount == sp.mul(sp.fst(sp.ediv(sp.amount, self.data.price).open_some()) * sp.fst(sp.ediv(self.data.price, sp.mumav(1)).open_some()), sp.mumav(1)))) & (sp.amount > sp.mav(0))"
                                                   }
                                                 ]
                                               },

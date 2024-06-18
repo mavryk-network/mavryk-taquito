@@ -1658,3 +1658,186 @@ export const smartRollupExecuteOutboxMessageNoReveal = {
   signature:
     'sigs8LVwSkqcMLzTVZWa1yS8aNz26A8bzR6QUHws5uVELh6kcmH7dWz5aKPqW3RXoFfynf5kVCvLJcsP3ucB5P6DEbD2YcQR',
 };
+
+export const stakeNoReveal = {
+  contents: [
+    {
+      kind: 'transaction',
+      source: 'mv19mocEcQwReAHzqfn2WDxKyUdJyNm9TfZs',
+      fee: '623',
+      counter: '390',
+      gas_limit: '3630',
+      storage_limit: '0',
+      amount: '6000000000',
+      destination: 'mv19mocEcQwReAHzqfn2WDxKyUdJyNm9TfZs',
+      parameters: {
+        entrypoint: 'stake',
+        value: {
+          prim: 'Unit',
+        },
+      },
+      metadata: {
+        balance_updates: [
+          {
+            kind: 'contract',
+            contract: 'mv19mocEcQwReAHzqfn2WDxKyUdJyNm9TfZs',
+            change: '-623',
+            origin: 'block',
+          },
+          {
+            kind: 'accumulator',
+            category: 'block fees',
+            change: '623',
+            origin: 'block',
+          },
+        ],
+        operation_result: {
+          status: 'applied',
+          balance_updates: [
+            {
+              kind: 'contract',
+              contract: 'mv19mocEcQwReAHzqfn2WDxKyUdJyNm9TfZs',
+              change: '-6000000000',
+              origin: 'block',
+            },
+            {
+              kind: 'freezer',
+              category: 'deposits',
+              staker: {
+                baker: 'mv19mocEcQwReAHzqfn2WDxKyUdJyNm9TfZs',
+              },
+              change: '6000000000',
+              origin: 'block',
+            },
+          ],
+          consumed_milligas: '3629020',
+        },
+      },
+    },
+  ],
+  signature:
+    'sigRn6MmipGZEBYYCrN5MYQmc8A6ye8iBJdahUY4gfHwFAP8kFXaoRvEx51bmo2qmfEDobuUJ4Ld9HKyuS9tV45qmKzLhuVE',
+};
+
+export const unstakeNoReveal = {
+  contents: [
+    {
+      kind: 'transaction',
+      source: 'mv1AgxjeJjP682UeWS6AedLTZosT1vqxYpYr',
+      fee: '689',
+      counter: '408',
+      gas_limit: '4250',
+      storage_limit: '0',
+      amount: '99999999999000000',
+      destination: 'mv1AgxjeJjP682UeWS6AedLTZosT1vqxYpYr',
+      parameters: {
+        entrypoint: 'unstake',
+        value: {
+          prim: 'Unit',
+        },
+      },
+      metadata: {
+        balance_updates: [
+          {
+            kind: 'contract',
+            contract: 'mv1AgxjeJjP682UeWS6AedLTZosT1vqxYpYr',
+            change: '-689',
+            origin: 'block',
+          },
+          {
+            kind: 'accumulator',
+            category: 'block fees',
+            change: '689',
+            origin: 'block',
+          },
+        ],
+        operation_result: {
+          status: 'applied',
+          balance_updates: [
+            {
+              kind: 'staking',
+              category: 'delegate_denominator',
+              delegate: 'mv19mocEcQwReAHzqfn2WDxKyUdJyNm9TfZs',
+              change: '-1000000000',
+              origin: 'block',
+            },
+            {
+              kind: 'staking',
+              category: 'delegator_numerator',
+              delegator: 'mv1AgxjeJjP682UeWS6AedLTZosT1vqxYpYr',
+              change: '-1000000000',
+              origin: 'block',
+            },
+            {
+              kind: 'freezer',
+              category: 'deposits',
+              staker: {
+                contract: 'mv1AgxjeJjP682UeWS6AedLTZosT1vqxYpYr',
+                delegate: 'mv19mocEcQwReAHzqfn2WDxKyUdJyNm9TfZs',
+              },
+              change: '-1000000000',
+              origin: 'block',
+            },
+            {
+              kind: 'freezer',
+              category: 'unstaked_deposits',
+              staker: {
+                contract: 'mv1AgxjeJjP682UeWS6AedLTZosT1vqxYpYr',
+                delegate: 'mv19mocEcQwReAHzqfn2WDxKyUdJyNm9TfZs',
+              },
+              cycle: 37,
+              change: '1000000000',
+              origin: 'block',
+            },
+          ],
+          consumed_milligas: '4249152',
+        },
+      },
+    },
+  ],
+  signature:
+    'sighibvGpL1NnZUyBfHPpPqE67tCb3aFK9L5JWhXA1GS9GqcizyZEEUfAGvzLMHxFG9oohhDzCJdMLFxppy3xbS9ZX45tWhM',
+};
+
+export const finalizeUnstakeNoReveal = {
+  contents: [
+    {
+      kind: 'transaction',
+      source: 'mv1AgxjeJjP682UeWS6AedLTZosT1vqxYpYr',
+      fee: '409',
+      counter: '409',
+      gas_limit: '1529',
+      storage_limit: '0',
+      amount: '0',
+      destination: 'mv1AgxjeJjP682UeWS6AedLTZosT1vqxYpYr',
+      parameters: {
+        entrypoint: 'finalize_unstake',
+        value: {
+          prim: 'Unit',
+        },
+      },
+      metadata: {
+        balance_updates: [
+          {
+            kind: 'contract',
+            contract: 'mv1AgxjeJjP682UeWS6AedLTZosT1vqxYpYr',
+            change: '-409',
+            origin: 'block',
+          },
+          {
+            kind: 'accumulator',
+            category: 'block fees',
+            change: '409',
+            origin: 'block',
+          },
+        ],
+        operation_result: {
+          status: 'applied',
+          consumed_milligas: '1528887',
+        },
+      },
+    },
+  ],
+  signature:
+    'sigoVqiaKpRr5jctRcRXmpJaeRFPxKTRAaUyEbhGXWbKyo1EZ1eBCjVzN7Cg7nzSexQLWit75o2cJPd3bfJn1ciwHRHDLCSf',
+};

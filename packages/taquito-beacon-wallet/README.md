@@ -17,35 +17,31 @@ npm install @mavrykdynamics/taquito-beacon-wallet
 
 ## Usage
 
-Create a wallet instance with defined option parameters and set the wallet provider using `setWalletProvider` to the `TezosToolkit` instance
+Create a wallet instance with defined option parameters and set the wallet provider using `setWalletProvider` to the `MavrykToolkit` instance
 
 ```ts
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { BeaconWallet } from '@mavrykdynamics/taquito-beacon-wallet';
 
 const options = {
   name: 'MyAwesomeDapp',
   iconUrl: 'https://taquito.mavryk.org/img/favicon.svg',
-  preferredNetwork: 'chosen_network',
-  eventHandlers: {
-    PERMISSION_REQUEST_SUCCESS: {
-      handler: async (data) => {
-        console.log('permission data:', data);
-      },
-    },
-  },
+  network: { type: 'basenet' },
+  enableMetrics: true,
 };
 const wallet = new BeaconWallet(options);
 
-// The Beacon wallet requires an extra step to set up the network to connect to and the permissions:
-await wallet.requestPermissions({
-  network: {
-    type: 'chosen_network',
+await wallet.client.subscribeToEvent(
+  BeaconEvent.ACTIVE_ACCOUNT_SET,
+  async (account) => {
+    // An active account has been set, update the dApp UI
+    console.log(`${BeaconEvent.ACTIVE_ACCOUNT_SET} triggered: `, account);
   },
-});
+);
+await wallet.requestPermissions();
 
-const Tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
-Tezos.setWalletProvider(wallet);
+const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
+Mavryk.setWalletProvider(wallet);
 ```
 
 ## Additional Info

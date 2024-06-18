@@ -6,7 +6,7 @@ import { CONFIGS } from '../../config';
  */
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const weeklynet = protocol === Protocols.ProtoALpha ? test : test.skip;
 
   describe(`Test contracts using: ${rpc}`, () => {
@@ -18,8 +18,8 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
       'Verify Type "operation" is not duplicable with error internal_operation_replay.',
       async () => {
         try {
-          const publicKeyHash = await Tezos.signer.publicKeyHash();
-          const op = await Tezos.contract.originate({
+          const publicKeyHash = await Mavryk.signer.publicKeyHash();
+          const op = await Mavryk.contract.originate({
             balance: '8',
             code: `{
             parameter unit;

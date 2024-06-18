@@ -17,7 +17,7 @@ const typeOfValueToFind = {
 
 export type BigMapId = { int: string };
 
-export class TezosStorageHandler implements Handler {
+export class MavrykStorageHandler implements Handler {
   private readonly MAVRYK_STORAGE_REGEX = /^(?:\/\/(KT1\w{33})(?:\.(.+))?\/)?([\w|%]+)$/;
 
   async getMetadata(
@@ -25,12 +25,12 @@ export class TezosStorageHandler implements Handler {
     { location }: Tzip16Uri,
     context: Context
   ) {
-    const parsedTezosStorageUri = this.parseTezosStorageUri(location);
-    if (!parsedTezosStorageUri) {
+    const parsedMavrykStorageUri = this.parseMavrykStorageUri(location);
+    if (!parsedMavrykStorageUri) {
       throw new InvalidUriError(`mavryk-storage:${location}`);
     }
     const script = await context.readProvider.getScript(
-      parsedTezosStorageUri.contractAddress || contractAbstraction.address,
+      parsedMavrykStorageUri.contractAddress || contractAbstraction.address,
       'head'
     );
     const bigMapId = Schema.fromRPCResponse({ script }).FindFirstInTopLevelPair<BigMapId>(
@@ -43,14 +43,14 @@ export class TezosStorageHandler implements Handler {
     }
     const bytes = await context.contract.getBigMapKeyByID<string>(
       bigMapId.int.toString(),
-      parsedTezosStorageUri.path,
+      parsedMavrykStorageUri.path,
       new Schema(typeOfValueToFind)
     );
 
     if (!bytes) {
       throw new ContractMetadataNotFoundError(
-        `No '${parsedTezosStorageUri.path}' key found in the big map %metadata of the contract ${
-          parsedTezosStorageUri.contractAddress || contractAbstraction.address
+        `No '${parsedMavrykStorageUri.path}' key found in the big map %metadata of the contract ${
+          parsedMavrykStorageUri.contractAddress || contractAbstraction.address
         }`
       );
     }
@@ -64,10 +64,10 @@ export class TezosStorageHandler implements Handler {
   /**
    * @description Extract the smart contract address, the network and the path pointing to the metadata from the uri
    * @returns an object which contains the properties allowing to find where the metadata are located or it returns undefined if the uri is not valid
-   * @param tezosStorageURI URI (without the mavryk-storage prefix)
+   * @param mavrykStorageURI URI (without the mavryk-storage prefix)
    */
-  private parseTezosStorageUri(tezosStorageURI: string) {
-    const extractor = this.MAVRYK_STORAGE_REGEX.exec(tezosStorageURI);
+  private parseMavrykStorageUri(mavrykStorageURI: string) {
+    const extractor = this.MAVRYK_STORAGE_REGEX.exec(mavrykStorageURI);
     if (!extractor) return;
     return {
       contractAddress: extractor[1],

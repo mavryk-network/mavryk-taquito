@@ -1,10 +1,10 @@
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { InMemorySigner, importKey } from '../src/taquito-signer';
 
 describe('ImportKey', () => {
   let mockRpcClient: any;
   let mockLocalForger: any;
-  let toolkit: TezosToolkit;
+  let toolkit: MavrykToolkit;
 
   const mnemonics = [
     'shoe',
@@ -58,7 +58,7 @@ describe('ImportKey', () => {
     });
 
     mockRpcClient.getManagerKey.mockResolvedValue('test');
-    toolkit = new TezosToolkit('url');
+    toolkit = new MavrykToolkit('url');
     toolkit['_rpcClient'] = mockRpcClient;
     toolkit['_context'].rpc = mockRpcClient;
     toolkit['_options'].rpc = mockRpcClient;

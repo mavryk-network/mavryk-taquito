@@ -2,12 +2,12 @@ import { DefaultContractType } from "@mavrykdynamics/taquito";
 import { CONFIGS } from "../../config";
 
 CONFIGS().forEach(({ lib, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test nested options contract`, () => {
     let nestedOptionsContract: DefaultContractType;
     beforeAll(async () => {
       await setup();
-      const nestedOptionsOriginate = await Tezos.contract.originate({
+      const nestedOptionsOriginate = await Mavryk.contract.originate({
         code: `{
           parameter
             (option (option nat));

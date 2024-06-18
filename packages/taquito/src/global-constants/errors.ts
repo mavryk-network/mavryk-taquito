@@ -1,4 +1,4 @@
-import { TaquitoError, TezosToolkitConfigError } from '@mavrykdynamics/taquito-core';
+import { TaquitoError, MavrykToolkitConfigError } from '@mavrykdynamics/taquito-core';
 
 /**
  *  @category Error
@@ -14,13 +14,13 @@ export class GlobalConstantNotFound extends TaquitoError {
 
 /**
  *  @category Error
- *  @description Error that indicates the global constant provider not being configured under TezosToolkit
+ *  @description Error that indicates the global constant provider not being configured under MavrykToolkit
  */
-export class UnconfiguredGlobalConstantsProviderError extends TezosToolkitConfigError {
+export class UnconfiguredGlobalConstantsProviderError extends MavrykToolkitConfigError {
   constructor() {
     super();
     this.name = 'UnconfiguredGlobalConstantsProviderError';
     this.message =
-      'No global constants provider has been configured. Please configure one by calling setGlobalConstantsProvider({globalConstantsProvider}) on your TezosToolkit instance.';
+      'No global constants provider has been configured. Please configure one by calling setGlobalConstantsProvider({globalConstantsProvider}) on your MavrykToolkit instance.';
   }
 }

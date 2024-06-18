@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { TezosToolkit } from "@mavrykdynamics/taquito";
+  import { MavrykToolkit } from "@mavrykdynamics/taquito";
   import { NetworkType } from "@mavrykdynamics/beacon-types";
   import Select from "svelte-select";
   import { getRpcUrl } from "./config";
@@ -14,6 +14,7 @@
   let availableNetworks = [
     { value: "basenet", label: "Basenet", group: "current testnets" },
     { value: "atlasnet", label: "Atlasnet", group: "current testnets" },
+    { value: "boreasnet", label: "Boreasnet", group: "current testnets" },
     { value: "mainnet", label: "Mainnet", group: "mainnet" },
     { value: "dailynet", label: "Dailynet", group: "other testnets" },
     { value: "weeklynet", label: "Weeklynet", group: "other testnets" },
@@ -42,6 +43,9 @@
       case "atlasnet":
         store.updateNetworkType(NetworkType.ATLASNET);
         break;
+      case "boreasnet":
+        store.updateNetworkType(NetworkType.BOREASNET);
+        break;
       case "custom":
         //TODO: input custom RPC URL
         showCustomNetworkInput = true;
@@ -61,14 +65,14 @@
         store.updateMatrixNode("beacon-node-1.sky.papers.tech");
         break;
       case "taquito":
-        store.updateMatrixNode("matrix.tez.ie");
+        store.updateMatrixNode("matrix.mav.ie");
         break;
       case "custom":
         store.updateMatrixNode("beacon-node-1.sky.papers.tech");
         if (!getRpcUrl(NetworkType.CUSTOM)) {
           // TODO: This logic does not seem right
           // in case the user did not provide any custom network URL
-          store.updateTezos(new TezosToolkit(getRpcUrl(NetworkType.BASENET)));
+          store.updateMavryk(new MavrykToolkit(getRpcUrl(NetworkType.BASENET)));
         }
         break;
     }

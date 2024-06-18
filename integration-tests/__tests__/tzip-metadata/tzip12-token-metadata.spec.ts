@@ -6,7 +6,7 @@ import { fa2TokenFactory } from '../../data/fa2-token-factory';
 import { fa2ForTokenMetadataView } from '../../data/fa2-for-token-metadata-view';
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
-	const Tezos = lib;
+	const Mavryk = lib;
 	let contractAddress: string;
 	let contractAddress2: string;
 
@@ -76,10 +76,10 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 			token_total_supply.set('1', '54000000');
 			token_total_supply.set('2', '10000000');
 
-			const op = await Tezos.contract.originate({
+			const op = await Mavryk.contract.originate({
 				code: fa2TokenFactory,
 				storage: {
-					admin: await Tezos.signer.publicKeyHash(),
+					admin: await Mavryk.signer.publicKeyHash(),
 					exchange_address: 'KT1DGRPQUwLJyCZnM8WKtwDGiKDSMv4hftk4',
 					last_token_id: '2',
 					ledger,
@@ -101,11 +101,11 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 
 		it('Verify contractAbstraction composition, fetch contract and token metadata of the a Fa2 contract having metadata on HTTPS and token metadata inside a bigmap %token_metadata', async () => {
 
-			Tezos.addExtension(new Tzip12Module());
-			// Tezos.addExtension(new Tzip16Module())... one extension is sufficient as they use the same MetadataProvider
+			Mavryk.addExtension(new Tzip12Module());
+			// Mavryk.addExtension(new Tzip16Module())... one extension is sufficient as they use the same MetadataProvider
 
 			// Use the compose function
-			const contract = await Tezos.contract.at(contractAddress, compose(tzip16, tzip12));
+			const contract = await Mavryk.contract.at(contractAddress, compose(tzip16, tzip12));
 
 			// Fetch contract metadata on HTTPs
 			const metadata = await contract.tzip16().getMetadata();
@@ -214,10 +214,10 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 			});
 
 
-			const op = await Tezos.contract.originate({
+			const op = await Mavryk.contract.originate({
 				code: fa2ForTokenMetadataView,
 				storage: {
-					administrator: await Tezos.signer.publicKeyHash(),
+					administrator: await Mavryk.signer.publicKeyHash(),
 					all_tokens: '2',
 					ledger,
 					metadata,
@@ -236,10 +236,10 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 		});
 
 		it('Verify contractAbstraction composition, fetch contract and token metadata of the Fa2 contract having metadata on HTTPS and a view %token_metadata', async () => {
-			Tezos.addExtension(new Tzip16Module());
+			Mavryk.addExtension(new Tzip16Module());
 
 			// Use the compose function
-			const contract = await Tezos.contract.at(contractAddress2, compose(tzip16, tzip12));
+			const contract = await Mavryk.contract.at(contractAddress2, compose(tzip16, tzip12));
 
 			// Fetch contract metadata on HTTPs
 			const metadata = await contract.tzip16().getMetadata();
@@ -258,7 +258,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 				token_id: 0,
 				decimals: 3,
 				name: 'Taquito test URI',
-				symbol: 'XTZ2'
+				symbol: 'MVRK2'
 			});
 
 			const tokenMetadata1 = await contract.tzip12().getTokenMetadata(1);

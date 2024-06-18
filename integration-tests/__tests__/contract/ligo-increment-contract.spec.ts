@@ -2,14 +2,14 @@ import { CONFIGS } from "../../config";
 import { ligoSample } from "../../data/ligo-simple-contract";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test contract origination with simple ligo origination scenario through contract api using: ${rpc}`, () => {
 
     beforeEach(async () => {
       await setup()
     })
     it('Verify contract.originate for a contract in JSON Michelson format produced by LIGO (also increments a counter in the storage)', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: ligoSample,
         storage: 0,
