@@ -51,13 +51,14 @@ export const COST_PER_BYTE = 250;
 
 export enum Protocols {
   PtAtLas = 'PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp',
-  PtBoreas = 'Ps8tUpcuzKw4cTeFT2wJXNCLa9pxkBUWZFDAvb9CXmnAuRE4bzF',
+  PtBoreas = 'PtBzwViMCC1gfm98y5TDKqz2e3vjBXPAUoWu7jfEcN6yj2ZhCyT',
   ProtoALpha = 'ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK',
 }
 
 export const protocols = {
   '019': [Protocols.PtAtLas],
-  '020': [Protocols.ProtoALpha],
+  '020': [Protocols.PtBoreas],
+  '021': [Protocols.ProtoALpha],
 };
 
 export enum ChainIds {
