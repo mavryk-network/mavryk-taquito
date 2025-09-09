@@ -306,10 +306,10 @@ describe('RpcReadAdapter test', () => {
   });
 
   it(`should get the chain id`, async () => {
-    mockRpcClient.getChainId.mockResolvedValue('NetXdQprcVkpaWU');
+    mockRpcClient.getChainId.mockResolvedValue('NetXXAAR1wWQhhe');
 
     const result = await readProvider.getChainId();
-    expect(result).toEqual('NetXdQprcVkpaWU');
+    expect(result).toEqual('NetXXAAR1wWQhhe');
 
     expect(mockRpcClient.getChainId.mock.calls[0][0]).toEqual(undefined);
   });

@@ -495,7 +495,7 @@ describe('RpcClient test', () => {
     it('should query the right url', async () => {
       const sampleResponse = {
         protocol: 'Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd',
-        chain_id: 'NetXdQprcVkpaWU',
+        chain_id: 'NetXXAAR1wWQhhe',
         hash: 'BLjs6BSiYpwV5u6YpNHNSAqr1iuJRGDHXK3Qb6DH1ZkN8QbAitW',
         level: 596467,
         proto: 4,
@@ -520,7 +520,7 @@ describe('RpcClient test', () => {
 
       expect(result).toEqual({
         protocol: 'Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd',
-        chain_id: 'NetXdQprcVkpaWU',
+        chain_id: 'NetXXAAR1wWQhhe',
         hash: 'BLjs6BSiYpwV5u6YpNHNSAqr1iuJRGDHXK3Qb6DH1ZkN8QbAitW',
         level: 596467,
         proto: 4,
@@ -1359,7 +1359,7 @@ describe('RpcClient test', () => {
       httpBackend.createRequest.mockReturnValue(
         Promise.resolve({
           protocol: 'Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd',
-          chain_id: 'NetXdQprcVkpaWU',
+          chain_id: 'NetXXAAR1wWQhhe',
           hash: 'BMJZyYF1aYafqFs7HE6i32XFy9raoye4z93dDi68jiB6swgGztx',
           header: {
             level: 578756,
@@ -1440,7 +1440,7 @@ describe('RpcClient test', () => {
             [
               {
                 protocol: 'Pt24m4xiPbLDhVgVfABUjirbmda3yohdN82Sp9FeuAXJ4eV9otd',
-                chain_id: 'NetXdQprcVkpaWU',
+                chain_id: 'NetXXAAR1wWQhhe',
                 hash: 'oondRNZutoyWCZtXvvxKXcw8Us7ms8vhN8VUet32PopSREiMF1a',
                 branch: 'BMAAqpF8w3qPSDUaGAsJXA3QQTgzeBJbRWerSvnpGjpR9ERGNEX',
                 contents: [
@@ -1497,7 +1497,7 @@ describe('RpcClient test', () => {
     it('should query the right url and property for operation', async () => {
       httpBackend.createRequest.mockReturnValue(
         Promise.resolve({
-          protocol: 'PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp',
+          protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
           chain_id: 'NetXSgo1ZT2DRUG',
           hash: 'BKjqpGqKggVrYbkBmBUYjLx8QdCUxBLaVGr1GWKho4ziBo1KQFX',
           header: {
@@ -1515,8 +1515,8 @@ describe('RpcClient test', () => {
               'sigkj5nVVW6Zq7F9dEstPs5o2s1vTnUfwhsWi3UnmwrjYVwN9gfmXUBArzSLeXEUNQBM4KUYSg385i1ajR9TugSkM2swFzQp',
           },
           metadata: {
-            protocol: 'PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp',
-            next_protocol: 'PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp',
+            protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
+            next_protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
             test_chain_status: {
               status: 'not_running',
             },
@@ -1594,7 +1594,7 @@ describe('RpcClient test', () => {
           operations: [
             [
               {
-                protocol: 'PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp',
+                protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
                 chain_id: 'NetXSgo1ZT2DRUG',
                 hash: 'onefqcSYA5FNfNW68ghLqQajxnM9cZ3vvdNaTDR1Mhv34LBAhaG',
                 branch: 'BMF7j462upRKLRWEdmFYTCMK3kuEfbQdR2Apo7noc1ZwzPZi2ji',
@@ -1740,7 +1740,7 @@ describe('RpcClient test', () => {
       httpBackend.createRequest.mockReturnValue(
         Promise.resolve({
           protocol: 'PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i',
-          chain_id: 'NetXdQprcVkpaWU',
+          chain_id: 'NetXXAAR1wWQhhe',
           hash: 'BLQFAtBgdUtRHoceLfvfVEL6ick7JvZrNoyvAdvqJGD1HWuJ7fV',
           header: {
             level: 1470478,
@@ -1840,7 +1840,7 @@ describe('RpcClient test', () => {
             [
               {
                 protocol: 'PsFLorenaUUuikDWvMDr6fGBRG8kt3e3D3fHoXK1j1BFRxeSH4i',
-                chain_id: 'NetXdQprcVkpaWU',
+                chain_id: 'NetXXAAR1wWQhhe',
                 hash: 'oo4ZXrmij79uZfWKPzxQHsyVS3TLecHDVx8ZrLv6qpeijLLzP3b',
                 branch: 'BKqxeSBXxYZhjjuFc8At4vEtYjZQJKEPxb83iJqetYDU3CGYQ42',
                 contents: [
@@ -2340,7 +2340,7 @@ describe('RpcClient test', () => {
     it('should query the right url and properties (lazy_storage_diff of kind sapling_state) in transaction operation result, proto 8', async () => {
       httpBackend.createRequest.mockReturnValue(
         Promise.resolve({
-          protocol: 'PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp',
+          protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
           chain_id: 'NetXSgo1ZT2DRUG',
           hash: 'BL463rWSReHJRLkwUPdGSS6fDqvJwAVPeaZGTBhEkFbYecAR9Ks',
           header: {},
@@ -2351,7 +2351,7 @@ describe('RpcClient test', () => {
             [],
             [
               {
-                protocol: 'PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp',
+                protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
                 chain_id: 'NetXSgo1ZT2DRUG',
                 hash: 'onhF4PVPmPDJjrRfiFf1Tg1wBM4SjQuk5h2Ucx84f42CfAeQtVe',
                 branch: 'BKkgRGNt4kw7EDZvWXQjYVzCQvMsZYkpUSweepc9HZumQ3qSdnv',

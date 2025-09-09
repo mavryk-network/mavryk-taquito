@@ -280,7 +280,7 @@ export const contractStorage = {
 
 export const blockHeader = {
   protocol: 'PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx',
-  chain_id: 'NetXdQprcVkpaWU',
+  chain_id: 'NetXXAAR1wWQhhe',
   hash: 'BMLSgpbkkpjwPcz4V73DBehuyUiusANELHKPMiQhsb9psm5gTWD',
   level: 2100696,
   proto: 11,

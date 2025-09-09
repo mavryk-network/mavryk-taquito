@@ -79,7 +79,7 @@ The following example shows a valid result when using the mainnet chain id and a
 import { validateChain } from '@mavrykdynamics/taquito-utils';
 
 //valid
-const chainId = 'NetXdQprcVkpaWU';
+const chainId = 'NetXXAAR1wWQhhe';
 const validation = validateChain(chainId);
 println(`Calling the validateChain function with ${chainId} returns ${validation}.`);
 

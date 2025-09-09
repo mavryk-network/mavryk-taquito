@@ -59,7 +59,7 @@ console.log(validateContractAddress(contractAddress));
 ```ts
 import { validateChain } from '@mavrykdynamics/taquito-utils';
 
-const chainId = 'NetXdQprcVkpaWU';
+const chainId = 'NetXXAAR1wWQhhe';
 console.log(validateChain(chainId));
 // output: 3 which is valid
 ```

@@ -98,7 +98,7 @@ export function validateAddress(value: string): ValidationResult {
  * @example
  * ```
  * import { validateChain } from '@mavrykdynamics/taquito-utils';
- * const chainId = 'NetXdQprcVkpaWU'
+ * const chainId = 'NetXXAAR1wWQhhe'
  * const validation = validateChain(chainId)
  * console.log(validation)
  * // This example return 3 which correspond to VALID

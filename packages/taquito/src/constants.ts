@@ -50,7 +50,7 @@ export const ORIGINATION_SIZE = 257;
 export const COST_PER_BYTE = 250;
 
 export enum Protocols {
-  PtAtLas = 'PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp',
+  PtAtLas = 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
   PtBoreas = 'PtBzwViMCC1gfm98y5TDKqz2e3vjBXPAUoWu7jfEcN6yj2ZhCyT',
   ProtoALpha = 'ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK',
 }
@@ -62,7 +62,7 @@ export const protocols = {
 };
 
 export enum ChainIds {
-  MAINNET = 'NetXdQprcVkpaWU',
+  MAINNET = 'NetXXAAR1wWQhhe',
   ATLASNET = 'NetXvyTAafh8goH',
   BOREASNET = 'NetXo8SqH1c38SS',
 }
