@@ -2,8 +2,8 @@ import { CONFIGS } from "../../config";
 import { tzip16, Tzip16Module, BigMapContractMetadataNotFoundError } from '@mavrykdynamics/taquito-tzip16';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
-  Tezos.addExtension(new Tzip16Module());
+  const Mavryk = lib;
+  Mavryk.addExtension(new Tzip16Module());
 
   describe(`Test contract origination of a Tzip16 non-complaint contract through contract api using: ${rpc}`, () => {
 
@@ -25,14 +25,14 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             { "prim": "PAIR" }]]
         }];
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: code,
         storage: value
       });
       await op.confirmation();
       const contractAddress = (await op.contract()).address;
 
-      const contract = await Tezos.contract.at(contractAddress, tzip16);
+      const contract = await Mavryk.contract.at(contractAddress, tzip16);
       try {
         await contract.tzip16().getMetadata();
       } catch (ex) {

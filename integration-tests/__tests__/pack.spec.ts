@@ -1,5 +1,5 @@
 import { CONFIGS } from "../config";
-import { TezosToolkit } from "@mavrykdynamics/taquito";
+import { MavrykToolkit } from "@mavrykdynamics/taquito";
 import { MichelsonType, MichelsonData, ProtocolID, packDataBytes } from "@mavrykdynamics/taquito-michel-codec";
 import { MichelsonV1Expression } from "@mavrykdynamics/taquito-rpc";
 import fs from "fs";
@@ -14,7 +14,7 @@ interface TypedTestData {
 }
 
 CONFIGS().forEach(({ rpc, protocol }) => {
-    const Tezos = new TezosToolkit(rpc);
+    const Mavryk = new MavrykToolkit(rpc);
 
     describe(`Test binary encoding: ${rpc}`, () => {
         const files = [
@@ -31,7 +31,7 @@ CONFIGS().forEach(({ rpc, protocol }) => {
                 const def = (s.proto === undefined || s.proto === protocol) ? test : test.skip;
                 def(`Verify that .pack for local pack will return same result as for network pack: ${JSON.stringify(s.data)} (${rpc})`, async () => {
                     const local = packDataBytes(s.data, s.type);
-                    const rpcResult = await Tezos.rpc.packData({ data: s.data, type: s.type as MichelsonV1Expression }, { block: "head" })
+                    const rpcResult = await Mavryk.rpc.packData({ data: s.data, type: s.type as MichelsonV1Expression }, { block: "head" })
                     expect(local.bytes).toEqual(rpcResult.packed);
                 });
             }

@@ -4,7 +4,7 @@ import { buf2hex } from '@mavrykdynamics/taquito-utils';
 import * as crypto from 'crypto';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   let contractAddress: string;
   let chestBytes: Uint8Array;
   let keyBytes: Uint8Array;
@@ -18,7 +18,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     beforeEach(async () => {
       await setup(true);
 
-      const contract = await Tezos.contract.originate({
+      const contract = await Mavryk.contract.originate({
         code: contractCode,
         storage: null
       });
@@ -34,7 +34,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       crypto.getRandomValues(payload);
 
       const { chest, key: chestKey } = Chest.newChestAndKey(payload, time);
-      const op = await Tezos.contract.transfer({
+      const op = await Mavryk.contract.transfer({
         to: contractAddress,
         amount: 0,
         parameter: {

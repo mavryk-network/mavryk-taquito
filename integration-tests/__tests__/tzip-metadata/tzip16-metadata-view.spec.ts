@@ -4,8 +4,8 @@ import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/taquito-tzi
 import { contractCode, metadataViewsExample1, metadataViewsExample2 } from '../../data/metadataViews';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-	const Tezos = lib;
-	Tezos.addExtension(new Tzip16Module());
+	const Mavryk = lib;
+	Mavryk.addExtension(new Tzip16Module());
 
 	describe(`Test contract origination with metadata having views that return bytes and calls the views from TZComet through contract api using: ${rpc}`, () => {
 		beforeEach(async () => {
@@ -18,7 +18,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 			metadataBigMAp.set("", stringToBytes('mavryk-storage:here'));
 			metadataBigMAp.set("here", stringToBytes(JSON.stringify(metadataViewsExample1)))
 
-			const op = await Tezos.contract.originate({
+			const op = await Mavryk.contract.originate({
 				code: contractCode,
 				storage: {
 					0: 7,
@@ -28,7 +28,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 			await op.confirmation();
 			const contractAddress = (await op.contract()).address;
 
-			const contractAbstraction = await Tezos.contract.at(contractAddress, tzip16);
+			const contractAbstraction = await Mavryk.contract.at(contractAddress, tzip16);
 			const metadataViews = await contractAbstraction.tzip16().metadataViews();
 
 			const viewEmptyBytesResult = await metadataViews.emptyBytes().executeView();
@@ -62,7 +62,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 			metadataBigMAp.set("", stringToBytes('mavryk-storage:here'));
 			metadataBigMAp.set("here", stringToBytes(JSON.stringify(metadataViewsExample2)))
 
-			const op = await Tezos.contract.originate({
+			const op = await Mavryk.contract.originate({
 				code: contractCode,
 				storage: {
 					0: 7,
@@ -71,7 +71,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 			});
 			await op.confirmation();
 			const contractAddress = (await op.contract()).address;
-			const contractAbstraction = await Tezos.contract.at(contractAddress, tzip16);
+			const contractAbstraction = await Mavryk.contract.at(contractAddress, tzip16);
 			const metadataViews = await contractAbstraction.tzip16().metadataViews();
 
 			try {

@@ -3,7 +3,7 @@ import { MANAGER_LAMBDA } from "@mavrykdynamics/taquito";
 import { genericMultisig } from "../../data/multisig";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress, knownContract }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Generic Multisig transfer to contract: ${rpc}`, () => {
     beforeEach(async () => {
@@ -15,7 +15,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress, knownContract }) => {
       const account3 = await createAddress();
 
       // Originate the multisig contract
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: genericMultisig,
         storage: {
@@ -46,7 +46,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress, knownContract }) => {
       // Packing the data that need to be sign by each party of the multi-sig
       // The data passed to this step is specific to this multi-sig implementation
       // file deepcode ignore no-any: any is good enough
-      const { packed } = await Tezos.rpc.packData(pair({
+      const { packed } = await Mavryk.rpc.packData(pair({
         data: {
           prim: 'Pair',
           args: [
@@ -110,7 +110,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress, knownContract }) => {
       const signature1 = await account1.signer.sign(packed, new Uint8Array())
       const signature2 = await account2.signer.sign(packed, new Uint8Array())
 
-      const start_balance = await Tezos.tz.getBalance(knownContract)
+      const start_balance = await Mavryk.mv.getBalance(knownContract)
 
       const op2 = await contract.methods.main(
         // Counter
@@ -126,7 +126,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress, knownContract }) => {
       await op2.confirmation();
       expect(op2.status).toEqual('applied')
 
-      const end_balance = await Tezos.tz.getBalance(knownContract)
+      const end_balance = await Mavryk.mv.getBalance(knownContract)
       expect(end_balance.toNumber()).toEqual((start_balance.toNumber() + 1))
 
     })

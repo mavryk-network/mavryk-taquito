@@ -1,7 +1,7 @@
 import { CONFIGS } from "../../config";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
     describe(`Storage contract with pair as key using: ${rpc}`, () => {
 
         beforeEach(async () => {
@@ -22,13 +22,13 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
                         { "prim": "PAIR" }]]
                 }];
 
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: code,
                 storage: value
             });
             await op.confirmation();
             const contract = await op.contract();
-            const contractAbs = await Tezos.contract.at(contract.address);
+            const contractAbs = await Mavryk.contract.at(contract.address);
 
             const operation = await contractAbs.methods.default(value).send();
             await operation.confirmation();

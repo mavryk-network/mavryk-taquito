@@ -13,7 +13,7 @@ CONFIGS().forEach(({ rpc, setup, createAddress }) => {
       const signer = await LocalTez.signer.publicKeyHash();
 
       expect(await LocalTez.rpc.getDelegate(signer)).toBeNull();
-      expect(await LocalTez.tz.getDelegate(signer)).toBeNull();
+      expect(await LocalTez.mv.getDelegate(signer)).toBeNull();
 
     });
   });

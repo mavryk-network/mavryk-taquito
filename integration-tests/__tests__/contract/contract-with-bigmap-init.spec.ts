@@ -3,7 +3,7 @@ import { MichelsonMap } from "@mavrykdynamics/taquito";
 import { tokenBigmapCode } from "../../data/token_bigmap";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const test = require('jest-retries');
 
   describe(`Test token contract origination with big map and with initial data through contract api using: ${rpc}`, () => {
@@ -12,7 +12,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       await setup()
     })
     test('Verify contract.originate for a token contract with BigMap and with initialized Storage/BigMap', 2, async () => {
-      const addr = await Tezos.signer.publicKeyHash();
+      const addr = await Mavryk.signer.publicKeyHash();
       const initialStorage = {
         owner: addr,
         accounts: MichelsonMap.fromLiteral({
@@ -51,7 +51,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         totalSupply: "6"
       }
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: tokenBigmapCode,
         storage: initialStorage

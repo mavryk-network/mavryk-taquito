@@ -10,7 +10,7 @@ describe('MichelCodec parser', () => {
   };
 
   mockRpcClient.getProtocols.mockResolvedValue({
-    next_protocol: 'PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp',
+    next_protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
   });
 
   it('is instantiable', () => {

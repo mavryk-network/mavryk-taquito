@@ -5,18 +5,19 @@ import {
   RpcClientInterface,
   SaplingDiffResponse,
   ScriptedContracts,
+  AILaunchCycleResponse,
 } from '@mavrykdynamics/taquito-rpc';
 import BigNumber from 'bignumber.js';
-import { BigMapQuery, BlockIdentifier, SaplingStateQuery, TzReadProvider } from './interface';
+import { BigMapQuery, BlockIdentifier, SaplingStateQuery, MvReadProvider } from './interface';
 
 /**
- * @description Converts calls from TzReadProvider into calls to the wrapped RpcClient in a format it can understand.
+ * @description Converts calls from MvReadProvider into calls to the wrapped RpcClient in a format it can understand.
  */
-export class RpcReadAdapter implements TzReadProvider {
+export class RpcReadAdapter implements MvReadProvider {
   constructor(private rpc: RpcClientInterface) {}
 
   /**
-   * @description Access the balance of a contract.
+   * @description Access the spendable balance of a contract, excluding frozen bonds.
    * @param address address from which we want to retrieve the balance
    * @param block from which we want to retrieve the balance
    * @returns the balance in mumav
@@ -211,5 +212,13 @@ export class RpcReadAdapter implements TzReadProvider {
    */
   getLiveBlocks(block: BlockIdentifier): Promise<string[]> {
     return this.rpc.getLiveBlocks({ block: String(block) });
+  }
+
+  /**
+   * @description Returns the cycle at which the launch of the Adaptive Issuance feature is set to happen. A result of null means that the feature is not yet set to launch.
+   * @param block from which we want to retrieve the information
+   */
+  getAdaptiveIssuanceLaunchCycle(block: BlockIdentifier): Promise<AILaunchCycleResponse> {
+    return this.rpc.getAdaptiveIssuanceLaunchCycle({ block: String(block) });
   }
 }

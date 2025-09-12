@@ -3,7 +3,7 @@ export const singleSaplingStateContractJProtocol = (memoSize = 8) => `
 # the mumav, updated by a list of Sapling transactions.
 # As a convention, all unshield transactions must contain in their bound_data
 # field a Micheline encoded public_key_hash which is used as the recipient of
-# the unshielded tez.
+# the unshielded mav.
 
 storage (sapling_state ${memoSize});
 parameter (list (sapling_transaction ${memoSize}));

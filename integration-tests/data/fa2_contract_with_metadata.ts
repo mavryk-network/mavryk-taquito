@@ -1,4 +1,4 @@
-// Code obtained from https://github.com/tqtezos/stablecoin/#tezos-stablecoin
+// Code obtained from https://github.com/tqtezos/stablecoin/#mavryk-stablecoin
 export const fa2ContractTzip16 = `{
     parameter
         (or
@@ -1560,7 +1560,7 @@ export const fa2ContractTzip16 = `{
             CAR;
             DIG 13;
             CDR;
-            PUSH string "XTZ_RECEIVED";
+            PUSH string "MVRK_RECEIVED";
             PUSH mumav 0;
             AMOUNT;
             COMPARE;

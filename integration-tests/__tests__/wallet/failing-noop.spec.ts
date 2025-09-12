@@ -1,49 +1,46 @@
 import { CONFIGS } from "../../config";
-import { OpKind, TezosToolkit } from "@mavrykdynamics/taquito";
+import { OpKind, MavrykToolkit } from "@mavrykdynamics/taquito";
 import { InMemorySigner } from "@mavrykdynamics/taquito-signer";
 import { verifySignature } from "@mavrykdynamics/taquito-utils";
 
-CONFIGS().forEach(({ rpc }) => {
-  const aliceSKey = 'edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq'
-
+CONFIGS().forEach(({ lib, setup, rpc }) => {
   describe(`Test failing_noop through wallet api using: ${rpc}`, () => {
-    let Tezos: TezosToolkit;
+    let Mavryk = lib;
 
     beforeAll(async () => {
-      if(rpc.includes('oxfordnet')){
-        Tezos = new TezosToolkit('https://rpc.tzkt.io/oxfordnet');
+      setup(true)
+      if (rpc.includes('boreasnet')) {
+        Mavryk.setProvider({ rpc: 'https://rpc.tzkt.io/boreasnet' }); // public archive node to fetch genesis block
+      } else if (rpc.includes('ghostnet')) {
+        Mavryk.setProvider({ rpc: 'https://rpc.tzkt.io/ghostnet' }); // public archive node to fetch genesis block
       }
-      if(rpc.includes('ghostnet')){
-        Tezos = new TezosToolkit('https://rpc.tzkt.io/ghostnet');
-      }
-      Tezos.setSignerProvider(new InMemorySigner(aliceSKey));
     });
 
     it('Verify that the wallet.failingNoop signs a text on the genesis block', async () => {
-      const signed = await Tezos.wallet.signFailingNoop({
+      const signed = await Mavryk.wallet.signFailingNoop({
         arbitrary: "48656C6C6F20576F726C64", // Hello World
         basedOnBlock: 0,
       });
-      const pk = await Tezos.wallet.pk();
+      const pk = await Mavryk.wallet.pk();
       expect(verifySignature(signed.bytes, pk!, signed.signature, new Uint8Array([3]))).toBe(true);
     });
 
     it('Verify that the wallet.failingNoop signs a text base on head block', async () => {
-      const signed = await Tezos.wallet.signFailingNoop({
+      const signed = await Mavryk.wallet.signFailingNoop({
         arbitrary: "48656C6C6F20576F726C64", // Hello World
         basedOnBlock: 'head',
       });
-      const pk = await Tezos.wallet.pk();
+      const pk = await Mavryk.wallet.pk();
       expect(verifySignature(signed.bytes, pk!, signed.signature, new Uint8Array([3]))).toBe(true);
     });
   });
 
   describe(`Test failing_noop through wallet api, based on genesis and secret_key on mainnet`, () => {
-    let Mainnet: TezosToolkit;
+    let Mainnet: MavrykToolkit;
 
     beforeAll(async () => {
-      Mainnet = new TezosToolkit('https://rpc.tzkt.io/mainnet'); // this is an archive node public rpc url for mainnet
-      Mainnet.setSignerProvider(new InMemorySigner(aliceSKey));
+      Mainnet = new MavrykToolkit('https://rpc.tzkt.io/mainnet'); // public archive node to fetch genesis block
+      Mainnet.setSignerProvider(new InMemorySigner('edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq')); // alice's secret key
     });
 
     it('Verify that the wallet.failingNoop result is as expected when the block and secret key are kept constant', async () => {

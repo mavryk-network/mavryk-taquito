@@ -227,7 +227,7 @@ describe('Complexe pair token', () => {
         optional: {
           // or null
           3: { int: 4 }, // or {string: 'aaa'}
-          4: { string: 'Tezos' }, // or {int: 5}
+          4: { string: 'Mavryk' }, // or {int: 5}
         },
         last_checked_sig: {
           // or null
@@ -274,7 +274,7 @@ describe('Complexe pair token', () => {
                       prim: 'Right',
                       args: [
                         {
-                          string: 'Tezos',
+                          string: 'Mavryk',
                         },
                       ],
                     },

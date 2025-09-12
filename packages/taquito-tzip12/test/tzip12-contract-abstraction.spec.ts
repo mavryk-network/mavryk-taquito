@@ -131,7 +131,7 @@ describe('Tzip12 contract abstraction test', () => {
       args: [{ prim: 'string' }, { prim: 'bytes' }],
     });
     tokenMap.set('name', stringToBytes('Taquito'));
-    tokenMap.set('symbol', stringToBytes('XTZ'));
+    tokenMap.set('symbol', stringToBytes('MVRK'));
     tokenMap.set('decimals', stringToBytes('3'));
 
     // takes as parameter the nat token-id and returns the (pair nat (map string bytes)) value
@@ -144,7 +144,7 @@ describe('Tzip12 contract abstraction test', () => {
     expect(tokenMetadata).toEqual({
       token_id: 0,
       name: 'Taquito',
-      symbol: 'XTZ',
+      symbol: 'MVRK',
       decimals: 3,
     });
   });
@@ -184,7 +184,7 @@ describe('Tzip12 contract abstraction test', () => {
       metadata: {
         name: 'Taquito test',
         decimals: 3,
-        symbol: 'XTZ!',
+        symbol: 'MVRK!',
         more: 'more data',
       },
     });
@@ -204,7 +204,7 @@ describe('Tzip12 contract abstraction test', () => {
       token_id: 0,
       name: 'Taquito test',
       decimals: 3,
-      symbol: 'XTZ!',
+      symbol: 'MVRK!',
       more: 'more data',
     });
   });
@@ -251,7 +251,7 @@ describe('Tzip12 contract abstraction test', () => {
       args: [{ prim: 'string' }, { prim: 'bytes' }],
     });
     tokenMap.set('name', stringToBytes('Taquito'));
-    tokenMap.set('symbol', stringToBytes('XTZ'));
+    tokenMap.set('symbol', stringToBytes('MVRK'));
     tokenMap.set('decimals', stringToBytes('3'));
 
     // takes as parameter the nat token-id and returns the (pair nat (map string bytes)) value
@@ -264,7 +264,7 @@ describe('Tzip12 contract abstraction test', () => {
     expect(tokenMetadata).toEqual({
       token_id: 0,
       name: 'Taquito',
-      symbol: 'XTZ',
+      symbol: 'MVRK',
       decimals: 3,
     });
   });
@@ -293,7 +293,7 @@ describe('Tzip12 contract abstraction test', () => {
       args: [{ prim: 'string' }, { prim: 'bytes' }],
     });
     tokenMap.set('name', stringToBytes('Taquito'));
-    tokenMap.set('symbol', stringToBytes('XTZ'));
+    tokenMap.set('symbol', stringToBytes('MVRK'));
     tokenMap.set('decimals', stringToBytes('3'));
     mockRpcContractProvider.getBigMapKeyByID.mockResolvedValue({
       token_id: '0',
@@ -304,7 +304,7 @@ describe('Tzip12 contract abstraction test', () => {
     expect(tokenMetadata).toEqual({
       token_id: 0,
       name: 'Taquito',
-      symbol: 'XTZ',
+      symbol: 'MVRK',
       decimals: 3,
     });
   });
@@ -344,7 +344,7 @@ describe('Tzip12 contract abstraction test', () => {
       args: [{ prim: 'string' }, { prim: 'bytes' }],
     });
     tokenMap.set('name', stringToBytes('Taquito'));
-    tokenMap.set('symbol', stringToBytes('XTZ'));
+    tokenMap.set('symbol', stringToBytes('MVRK'));
     tokenMap.set('decimals', stringToBytes('3'));
     mockRpcContractProvider.getBigMapKeyByID.mockResolvedValue({
       token_id: '0',
@@ -355,7 +355,7 @@ describe('Tzip12 contract abstraction test', () => {
     expect(tokenMetadata).toEqual({
       token_id: 0,
       name: 'Taquito',
-      symbol: 'XTZ',
+      symbol: 'MVRK',
       decimals: 3,
     });
   });
@@ -373,7 +373,7 @@ describe('Tzip12 contract abstraction test', () => {
     });
     tokenMap.set('', stringToBytes('https://test'));
     tokenMap.set('name', stringToBytes('Taquito'));
-    tokenMap.set('symbol', stringToBytes('XTZ'));
+    tokenMap.set('symbol', stringToBytes('MVRK'));
     tokenMap.set('decimals', stringToBytes('3'));
     mockRpcContractProvider.getBigMapKeyByID.mockResolvedValue({
       token_id: '0',
@@ -384,7 +384,7 @@ describe('Tzip12 contract abstraction test', () => {
     expect(tokenMetadata).toEqual({
       token_id: 0,
       name: 'Taquito test',
-      symbol: 'XTZ',
+      symbol: 'MVRK',
       decimals: 3,
     });
   });
@@ -411,7 +411,7 @@ describe('Tzip12 contract abstraction test', () => {
     });
     tokenMap.set('', stringToBytes('https://test'));
     tokenMap.set('name', stringToBytes('Taquito'));
-    tokenMap.set('symbol', stringToBytes('XTZ'));
+    tokenMap.set('symbol', stringToBytes('MVRK'));
     tokenMap.set('decimals', stringToBytes('3'));
 
     // takes as parameter the nat token-id and returns the (pair nat (map string bytes)) value
@@ -424,7 +424,7 @@ describe('Tzip12 contract abstraction test', () => {
     expect(tokenMetadata).toEqual({
       token_id: 0,
       name: 'Taquito test',
-      symbol: 'XTZ',
+      symbol: 'MVRK',
       decimals: 3,
     });
   });
@@ -439,7 +439,7 @@ describe('Tzip12 contract abstraction test', () => {
       args: [{ prim: 'string' }, { prim: 'bytes' }],
     });
     tokenMap.set('name', stringToBytes('Taquito'));
-    tokenMap.set('symbol', stringToBytes('XTZ'));
+    tokenMap.set('symbol', stringToBytes('MVRK'));
     mockRpcContractProvider.getBigMapKeyByID.mockResolvedValue({
       token_id: '0',
       token_info: tokenMap,

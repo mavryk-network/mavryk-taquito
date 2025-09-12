@@ -4,6 +4,7 @@ import {
   MichelsonV1Expression,
   SaplingDiffResponse,
   ScriptedContracts,
+  AILaunchCycleResponse,
 } from '@mavrykdynamics/taquito-rpc';
 import BigNumber from 'bignumber.js';
 
@@ -19,9 +20,9 @@ export type SaplingStateQuery = {
 // block identifier can be head, a block relative to head, a block hash or a block level
 export type BlockIdentifier = 'head' | `head~${number}` | `B${string}` | number;
 
-export interface TzReadProvider {
+export interface MvReadProvider {
   /**
-   * @description Access the balance of a contract.
+   * @description Access the spendable balance of a contract, excluding frozen bonds.
    * @param address address from which we want to retrieve the balance
    * @param block from which we want to retrieve the balance
    * @returns the balance in mumav
@@ -151,4 +152,10 @@ export interface TzReadProvider {
    * @param block from which we want to retrieve the information
    */
   getLiveBlocks(block: BlockIdentifier): Promise<string[]>;
+
+  /**
+   * @description Returns the cycle at which the launch of the Adaptive Issuance feature is set to happen. A result of null means that the feature is not yet set to launch.
+   * @param block from which we want to retrieve the information
+   */
+  getAdaptiveIssuanceLaunchCycle(block: BlockIdentifier): Promise<AILaunchCycleResponse>;
 }

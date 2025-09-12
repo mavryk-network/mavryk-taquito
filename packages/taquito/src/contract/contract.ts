@@ -12,7 +12,7 @@ import {
   ValidationResult,
 } from '@mavrykdynamics/taquito-utils';
 import { ChainIds } from '../constants';
-import { TzReadProvider } from '../read-provider/interface';
+import { MvReadProvider } from '../read-provider/interface';
 import { Wallet } from '../wallet';
 import { ContractMethodFactory } from './contract-methods/contract-method-factory';
 import { ContractMethod } from './contract-methods/contract-method-flat-param';
@@ -35,7 +35,7 @@ export class ContractView {
     private parameterSchema: ParameterSchema,
     private args: any[],
     private rpc: RpcClientInterface,
-    private readProvider: TzReadProvider
+    private readProvider: MvReadProvider
   ) {}
 
   async read(chainId?: ChainIds) {
@@ -117,24 +117,24 @@ export class ContractAbstraction<
   private contractMethodFactory: ContractMethodFactory<T>;
   /**
    * @deprecated use methodsObject instead, flat params of methods can't sufficiently represent all Michelson values
-   * @description Contains methods that are implemented by the target Tezos Smart Contract, and offers the user to call the Smart Contract methods as if they were native TS/JS methods.
+   * @description Contains methods that are implemented by the target Mavryk Smart Contract, and offers the user to call the Smart Contract methods as if they were native TS/JS methods.
    * NB: if the contract contains annotation it will include named properties; if not it will be indexed by a number.
    */
   public methods: TMethods = {} as TMethods;
   /**
-   * @description Contains methods that are implemented by the target Tezos Smart Contract, and offers the user to call the Smart Contract methods as if they were native TS/JS methods.
+   * @description Contains methods that are implemented by the target Mavryk Smart Contract, and offers the user to call the Smart Contract methods as if they were native TS/JS methods.
    * `methodsObject` serves the exact same purpose as the `methods` member. The difference is that it allows passing the parameter in an object format when calling the smart contract method (instead of the flattened representation)
    * NB: if the contract contains annotation it will include named properties; if not it will be indexed by a number.
    *
    */
   public methodsObject: TMethodsObject = {} as TMethodsObject;
   /**
-   * @description Contains lamda views (tzip4) that are implemented by the target Tezos Smart Contract, and offers the user to call the lambda views as if they were native TS/JS methods.
+   * @description Contains lamda views (tzip4) that are implemented by the target Mavryk Smart Contract, and offers the user to call the lambda views as if they were native TS/JS methods.
    * NB: These are the view defined in the tzip4 standard, not the views introduced by the Hangzhou protocol.
    */
   public views: TViews = {} as TViews;
   /**
-   * @description Contains on-chain views that are defined by the target Tezos Smart Contract, and offers the user to simulate the views execution as if they were native TS/JS methods.
+   * @description Contains on-chain views that are defined by the target Mavryk Smart Contract, and offers the user to simulate the views execution as if they were native TS/JS methods.
    * NB: the expected format for the parameter when calling a smart contract view is the object format (same format as for the storage) and not the flattened representation.
    *
    */
@@ -153,7 +153,7 @@ export class ContractAbstraction<
     private storageProvider: StorageProvider,
     public readonly entrypoints: EntrypointsResponse,
     private rpc: RpcClientInterface,
-    private readProvider: TzReadProvider
+    private readProvider: MvReadProvider
   ) {
     this.contractMethodFactory = new ContractMethodFactory(provider, address);
     this.schema = Schema.fromRPCResponse({ script: this.script });
@@ -173,7 +173,7 @@ export class ContractAbstraction<
       [key: string]: object;
     },
     rpc: RpcClientInterface,
-    readProvider: TzReadProvider
+    readProvider: MvReadProvider
   ) {
     const parameterSchema = this.parameterSchema;
     const keys = Object.keys(entrypoints);
@@ -282,7 +282,7 @@ export class ContractAbstraction<
   private _initializeOnChainViews(
     currentContract: ContractAbstraction<T>,
     rpc: RpcClientInterface,
-    readProvider: TzReadProvider,
+    readProvider: MvReadProvider,
     allContractViews: ViewSchema[]
   ) {
     const storageType = this.schema.val;
@@ -315,7 +315,7 @@ export class ContractAbstraction<
    *
    * @deprecated getBigMapKey has been deprecated in favor of getBigMapKeyByID
    *
-   * @see https://tezos.gitlab.io/api/rpc.html#post-block-id-context-contracts-contract-id-big-map-get
+   * @see https://protocol.mavryk.org/api/rpc.html#post-block-id-context-contracts-contract-id-big-map-get
    */
   public bigMap(key: string) {
     return this.storageProvider.getBigMapKey(this.address, key, this.schema);

@@ -1,9 +1,9 @@
 import { InMemorySigner } from './taquito-signer';
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 
 /**
  *
- * @description Import a key to sign operation with the side-effect of setting the Tezos instance to use the InMemorySigner provider
+ * @description Import a key to sign operation with the side-effect of setting the Mavryk instance to use the InMemorySigner provider
  *
  * @warn The JSON faucets are no longer available on https://teztnets.com/
  * @param toolkit The toolkit instance to attach a signer
@@ -13,7 +13,7 @@ import { TezosToolkit } from '@mavrykdynamics/taquito';
  * @param secret Faucet secret
  */
 export async function importKey(
-  toolkit: TezosToolkit,
+  toolkit: MavrykToolkit,
   privateKeyOrEmail: string,
   passphrase?: string,
   mnemonic?: string,
@@ -25,7 +25,7 @@ export async function importKey(
     const pkh = await signer.publicKeyHash();
     let op;
     try {
-      op = await toolkit.tz.activate(pkh, secret);
+      op = await toolkit.mv.activate(pkh, secret);
     } catch (ex: any) {
       const isInvalidActivationError = ex && ex.body && /Invalid activation/.test(ex.body);
       if (!isInvalidActivationError) {

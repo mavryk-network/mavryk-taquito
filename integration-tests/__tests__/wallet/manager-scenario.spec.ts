@@ -3,7 +3,7 @@ import { managerCode } from '../../data/manager_code';
 import { DefaultWalletType, MANAGER_LAMBDA, OriginationWalletOperation } from '@mavrykdynamics/taquito';
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   let op: OriginationWalletOperation;
   let contract: DefaultWalletType;
@@ -12,10 +12,10 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract }) => {
     beforeAll(async () => {
       await setup();
 
-      op = await Tezos.wallet.originate({
+      op = await Mavryk.wallet.originate({
         balance: "1",
         code: managerCode,
-        init: { "string": await Tezos.signer.publicKeyHash() },
+        init: { "string": await Mavryk.signer.publicKeyHash() },
       }).send();
 
       contract = await op.contract();
@@ -24,7 +24,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract }) => {
     it('should be able to transfer to originated account', async () => {
       // Transfer from implicit account (mv1) to contract (kt1_alice)
       // A regular transfer operation is made. No smart contract calls required for this scenario.
-      const op = await Tezos.wallet.transfer({ to: contract.address, amount: 0.01 }).send();
+      const op = await Mavryk.wallet.transfer({ to: contract.address, amount: 0.01 }).send();
       await op.confirmation();
 
       expect(op.opHash).toBeDefined();
@@ -53,7 +53,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract }) => {
       const op = await contract.methods.do(MANAGER_LAMBDA.removeDelegate()).send({ amount: 0 })
       await op.confirmation();
 
-      const account = await Tezos.rpc.getDelegate(knownBaker)
+      const account = await Mavryk.rpc.getDelegate(knownBaker)
       expect(account).toEqual(knownBaker)
     });
 
@@ -74,7 +74,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract }) => {
         const op = await contract.methods.do(MANAGER_LAMBDA.transferImplicit('mv1UE4jMeeBM49FjNmyvtE19aBKT73HDvM2m', 50 * 1000000)).send({ amount: 0 });
         await op.confirmation();
       } catch (ex: any) {
-        expect(ex.message).toContain('tez.subtraction_underflow');
+        expect(ex.message).toContain('mav.subtraction_underflow');
       }
     });
   });

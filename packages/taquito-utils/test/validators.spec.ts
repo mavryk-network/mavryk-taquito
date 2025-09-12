@@ -83,7 +83,7 @@ describe('validateSmartRollupAddress', () => {
 
 describe('validateChain', () => {
   it('Validate chain id properly', () => {
-    expect(validateChain('NetXdQprcVkpaWU')).toEqual(ValidationResult.VALID);
+    expect(validateChain('NetXXAAR1wWQhhe')).toEqual(ValidationResult.VALID);
 
     // Invalid checksum
     expect(validateChain('NetXdQprcVkpaWm')).toEqual(ValidationResult.INVALID_CHECKSUM);
@@ -241,7 +241,7 @@ describe('validateOperation', () => {
 
 describe('validateProtocol', () => {
   it('Validate Protocol Hash properly', () => {
-    expect(validateProtocol('PtAtLasomUEW99aVhVTrqjCHjJSpFUa8uHNEAEamx9v2SNeTaNp')).toEqual(
+    expect(validateProtocol('PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero')).toEqual(
       ValidationResult.VALID
     );
     expect(validateProtocol('ProtoALphaALphaALphaALphaALphaALphaALphaALphaDdp3zK')).toEqual(

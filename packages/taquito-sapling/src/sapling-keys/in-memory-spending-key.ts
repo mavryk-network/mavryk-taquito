@@ -30,7 +30,7 @@ export class InMemorySpendingKey {
   /**
    *
    * @param mnemonic string of words
-   * @param derivationPath tezos current standard 'm/'
+   * @param derivationPath mavryk current standard 'm/'
    * @returns InMemorySpendingKey class instantiated
    */
   static async fromMnemonic(mnemonic: string, derivationPath = 'm/') {
@@ -74,7 +74,7 @@ export class InMemorySpendingKey {
    * @param parametersSpendProof.amount The value of the input
    * @param parametersSpendProof.root The root of the merkle tree
    * @param parametersSpendProof.witness The path of the commitment in the tree
-   * @param derivationPath tezos current standard 'm/'
+   * @param derivationPath mavryk current standard 'm/'
    * @returns The unsigned spend description
    */
   async prepareSpendDescription(

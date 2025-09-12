@@ -2,14 +2,14 @@ import { CONFIGS } from "../../config";
 import { booleanCode } from "../../data/boolean_parameter";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test contract origination with set bool prop on init and via call through wallet api using: ${rpc}`, () => {
 
     beforeEach(async () => {
       await setup()
     })
     it('Verify wallet.originate for a contract with bool storage init to true and then sets to false', async () => {
-      const op = await Tezos.wallet.originate({
+      const op = await Mavryk.wallet.originate({
         balance: "1",
         code: booleanCode,
         storage: true,

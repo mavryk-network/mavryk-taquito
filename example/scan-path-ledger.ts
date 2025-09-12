@@ -4,20 +4,20 @@
 // rerun two or three times if needed
 
 import { LedgerSigner, DerivationType } from '@mavrykdynamics/taquito-ledger-signer';
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import TransportNodeHid from "@ledgerhq/hw-transport-node-hid";
 
 async function example() {
 
     const transport = await TransportNodeHid.create();
     let index = 0;
-    const tezos = new TezosToolkit('https://basenet.rpc.mavryk.network')
+    const mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network')
     while (index < 8) {
         const ledgerSigner = new LedgerSigner(transport, `44'/1729'/${index}'/0'`, false, DerivationType.ED25519);
-        tezos.setProvider({ signer: ledgerSigner });
-        const pkh = await tezos.signer.publicKeyHash();
-        const balance = await tezos.tz.getBalance(pkh)
-        const getPublicKey = await tezos.rpc.getManagerKey(pkh)
+        mavryk.setProvider({ signer: ledgerSigner });
+        const pkh = await mavryk.signer.publicKeyHash();
+        const balance = await mavryk.mv.getBalance(pkh)
+        const getPublicKey = await mavryk.rpc.getManagerKey(pkh)
         console.log(`The public key hash related to the derivation path having the account ${index} is ${pkh}.`)
         if (getPublicKey) {
             console.log(`The balance is ${balance.toNumber() / 1000000} ṁ.\n`)

@@ -9,7 +9,7 @@
 ///   Execute this script with
 ///     node -r ts-node/register deploy-docs-live-code-contracts.ts
 
-import { MichelsonMap, TezosToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
 import { tzip7Contract } from '../integration-tests/data/tzip_7_contract';
 import { contractMapPairKey } from './data/contractMapPairKey';
@@ -36,7 +36,7 @@ const provider = 'https://basenet.rpc.mavryk.network/';
 export const signer = new InMemorySigner(
   'edskRtmEwZxRzwd1obV9pJzAoLoxXFWTSHbgqpDBRHx1Ktzo5yVuJ37e2R4nzjLnNbxFU4UiBU1iHzAy52pK5YBRpaFwLbByca'
 );
-export const tezos = new TezosToolkit(provider);
+export const mavryk = new MavrykToolkit(provider);
 
 
 const contract_catalogue = new Map();
@@ -79,31 +79,31 @@ const min_balance = 10000000;
 
 async function checkBalances(users: string | any[]) {
 
-  // IF FAILS try uncommenting below and running with lending other tezos instance funds
+  // IF FAILS try uncommenting below and running with lending other mavryk instance funds
 
   // // used to top up other account so it wouldnt fail
-  //  const tezosLender = new TezosToolkit(provider)
+  //  const mavrykLender = new MavrykToolkit(provider)
   //  await importKey(
-  //    tezosLender,
+  //    mavrykLender,
   //    email,
   //    password,
   //    mnemonic.join(' '),
   //    activation_code
   //  );
 
-  //  console.log("checking fund of tezos instance")
-  //  const tezBalance = await tezos.tz.getBalance(pkh)
+  //  console.log("checking fund of mavryk instance")
+  //  const tezBalance = await mavryk.mv.getBalance(pkh)
   //  console.log("original balance", tezBalance, await signer.publicKeyHash())
-  //  const sendFunds = await tezosLender.contract.transfer({to: await signer.publicKeyHash(), amount: 100})
+  //  const sendFunds = await mavrykLender.contract.transfer({to: await signer.publicKeyHash(), amount: 100})
   //  await sendFunds.confirmation()
-  //  const tezBalance2 = await tezos.tz.getBalance(pkh)
+  //  const tezBalance2 = await mavryk.mv.getBalance(pkh)
   //  console.log("next balance", tezBalance2)
 
-  // console.log("balance of tezos instance", tezBalance)
+  // console.log("balance of mavryk instance", tezBalance)
   console.log('checking funds of users...');
   try {
     for (let i = 0; i < users.length; i++) {
-      const user_balance = await tezos.tz.getBalance(users[i]);
+      const user_balance = await mavryk.mv.getBalance(users[i]);
       if (user_balance < BigNumber(min_balance)) {
         low_balance.push(users[i]);
       }
@@ -114,11 +114,11 @@ async function checkBalances(users: string | any[]) {
   }
 
   console.log(`Low balance addresses : ` + low_balance);
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     for (let i = 0; i < low_balance.length; i++) {
       console.log('Funding low balance address :' + low_balance[i]);
-      const fundAccountFirst = await tezos.contract.transfer({
+      const fundAccountFirst = await mavryk.contract.transfer({
         to: low_balance[i],
         amount: min_balance / 1000000,
       });
@@ -184,9 +184,9 @@ async function originateTheContracts() {
 }
 
 async function originateSaplingLiveCodeContract() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: saplingLiveCodeContract,
       init: `{}`,
     });
@@ -199,9 +199,9 @@ async function originateSaplingLiveCodeContract() {
 }
 
 async function originateIncrementContract() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractIncrementing,
       init: `0`,
     });
@@ -214,7 +214,7 @@ async function originateIncrementContract() {
 }
 
 async function originateLambda1() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const mapAccount1 = new MichelsonMap();
     mapAccount1.set(user_addresses.get('Deborah'), '25');
@@ -234,11 +234,11 @@ async function originateLambda1() {
       allowances: mapAccount2,
     });
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       balance: '1',
       code: tzip7Contract,
       storage: {
-        owner: await tezos.signer.publicKeyHash(),
+        owner: await mavryk.signer.publicKeyHash(),
         totalSupply: '100',
         ledger: bigMapLedger,
       },
@@ -254,7 +254,7 @@ async function originateLambda1() {
 }
 
 async function originateLambda2() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const bigMapLedger = new MichelsonMap();
     bigMapLedger.set('mv1PSUDXfWMnxcofp84crVhQzZk4EX78toYF', {
@@ -282,7 +282,7 @@ async function originateLambda2() {
       extras: new MichelsonMap()
     });
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       balance: "1",
       code: fa2Contract,
       storage: {
@@ -302,7 +302,7 @@ async function originateLambda2() {
 }
 
 async function originateMapWithPairAsMapKeys() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const storageMap = new MichelsonMap();
     storageMap.set(
@@ -327,7 +327,7 @@ async function originateMapWithPairAsMapKeys() {
       { quantity: '30', amount: '300' }
     );
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractMapPairKey,
       storage: {
         theAddress: user_addresses.get('Alice'),
@@ -346,7 +346,7 @@ async function originateMapWithPairAsMapKeys() {
 }
 
 async function originateMapWithComplexKeys() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const storageMap = new MichelsonMap();
     storageMap.set(
@@ -379,7 +379,7 @@ async function originateMapWithComplexKeys() {
       1000
     );
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractMap8pairs,
       storage: storageMap,
     });
@@ -394,7 +394,7 @@ async function originateMapWithComplexKeys() {
 }
 
 async function originateInitialStorageWithMapAndBigMap() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const storageMap = new MichelsonMap();
     storageMap.set(
@@ -428,7 +428,7 @@ async function originateInitialStorageWithMapAndBigMap() {
       200
     );
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractMapBigMap,
       storage: {
         thebigmap: storageBigMap,
@@ -446,14 +446,14 @@ async function originateInitialStorageWithMapAndBigMap() {
 }
 
 async function originateMapWithSingleMapForStorage() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const storageMap = new MichelsonMap();
     storageMap.set('1', { current_stock: '10000', max_price: '50' });
     storageMap.set('2', { current_stock: '120', max_price: '20' });
     storageMap.set('3', { current_stock: '50', max_price: '60' });
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractMapTacoShop,
       storage: storageMap,
     });
@@ -468,16 +468,16 @@ async function originateMapWithSingleMapForStorage() {
 }
 
 async function originateMapValueMultipleBigMaps() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
-    const signer = await tezos.signer.publicKeyHash();
+    const signer = await mavryk.signer.publicKeyHash();
     const bigMapInit = new MichelsonMap();
     bigMapInit.set(signer, { 0: '1', 1: new MichelsonMap() });
     bigMapInit.set(user_addresses.get('Eddy'), { 0: '2', 1: new MichelsonMap() });
     bigMapInit.set(user_addresses.get('Glen'), { 0: '3', 1: new MichelsonMap() });
     bigMapInit.set(user_addresses.get('Freda'), { 0: '4', 1: new MichelsonMap() });
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: tokenCode,
       storage: {
         0: bigMapInit,
@@ -496,7 +496,7 @@ async function originateMapValueMultipleBigMaps() {
 }
 
 async function originateSmartContractComplexStorage() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const dataMap = new MichelsonMap();
     dataMap.set('Hello', { bool: true });
@@ -515,7 +515,7 @@ async function originateSmartContractComplexStorage() {
     const validatorsMap = new MichelsonMap();
     validatorsMap.set('1', user_addresses.get('Deborah'));
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractJson,
       storage: {
         owner: user_addresses.get('Glen'),
@@ -534,9 +534,9 @@ async function originateSmartContractComplexStorage() {
 }
 
 async function originateContractCallFib() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: ` parameter (pair nat address);
       storage nat;
       code { CAR ;
@@ -555,9 +555,9 @@ async function originateContractCallFib() {
 }
 
 async function originateContractTopLevelViews() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractOnChainViews,
       storage: 1,
     });
@@ -571,7 +571,7 @@ async function originateContractTopLevelViews() {
 }
 
 async function originateTzip16Storage() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const metadataJSON = {
       name: 'test',
@@ -588,7 +588,7 @@ async function originateTzip16Storage() {
 
     const tacoShopStorageMap = new MichelsonMap();
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: tacoContractTzip16,
       storage: {
         metadata: metadataBigMap,
@@ -605,7 +605,7 @@ async function originateTzip16Storage() {
 }
 
 async function originateTzip16Https() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const url = 'https://storage.googleapis.com/tzip-16/taco-shop-metadata.json';
     const bytesUrl = stringToBytes(url);
@@ -616,7 +616,7 @@ async function originateTzip16Https() {
     const tacoShopStorageMap = new MichelsonMap();
     tacoShopStorageMap.set('1', { current_stock: '10000', max_price: '50' });
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: tacoContractTzip16,
       storage: {
         metadata: metadataBigMap,
@@ -633,7 +633,7 @@ async function originateTzip16Https() {
 }
 
 async function originateTzip16SHA256() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const urlPercentEncoded = encodeURIComponent(
       '//storage.googleapis.com/tzip-16/taco-shop-metadata.json'
@@ -648,7 +648,7 @@ async function originateTzip16SHA256() {
     const tacoShopStorageMap = new MichelsonMap();
     tacoShopStorageMap.set('1', { current_stock: '10000', max_price: '50' });
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: tacoContractTzip16,
       storage: {
         metadata: metadataBigMap,
@@ -665,7 +665,7 @@ async function originateTzip16SHA256() {
 }
 
 async function originateTzip16IPFS() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const uri = 'ipfs://QmXnASUptTDnfhmcoznFqz3S1Mxu7X1zqo2YwbTN3nW52V';
     const bytesUrl = stringToBytes(uri);
@@ -675,7 +675,7 @@ async function originateTzip16IPFS() {
 
     const tacoShopStorageMap = new MichelsonMap();
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: tacoContractTzip16,
       storage: {
         metadata: metadataBigMap,
@@ -692,13 +692,13 @@ async function originateTzip16IPFS() {
 }
 
 async function originateTzip16OnChainJSON() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const metadataBigMAp = new MichelsonMap();
     metadataBigMAp.set('', stringToBytes('mavryk-storage:here'));
     metadataBigMAp.set('here', stringToBytes(JSON.stringify(metadataViewsExample1)));
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractCode,
       storage: {
         0: 7,
@@ -715,13 +715,13 @@ async function originateTzip16OnChainJSON() {
 }
 
 async function originateTzip16OnChainMultiply() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const metadataBigMAp = new MichelsonMap();
     metadataBigMAp.set('', stringToBytes('mavryk-storage:here'));
     metadataBigMAp.set('here', stringToBytes(JSON.stringify(metadataViewsExample2)));
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: contractCode,
       storage: {
         0: 7,
@@ -738,9 +738,9 @@ async function originateTzip16OnChainMultiply() {
 }
 
 async function originateWalletOriginateContractTransfer() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       balance: '0',
       code: `parameter unit;
       storage int;
@@ -778,9 +778,9 @@ async function originateWalletOriginateContractTransfer() {
 }
 
 async function originateWalletOriginateAreYouThere() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
-    const op = await tezos.wallet
+    const op = await mavryk.wallet
       .originate({
         code: `parameter (or
         (or (or (pair %addName address string) (bool %areYouThere))
@@ -974,12 +974,12 @@ code { DUP ;
 }
 
 async function originateTokenContract() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       balance: '1',
       code: tokenCode,
-      init: tokenInit(await tezos.signer.publicKeyHash()),
+      init: tokenInit(await mavryk.signer.publicKeyHash()),
       fee: 150000,
       storageLimit: 10000,
       gasLimit: 400000,
@@ -994,7 +994,7 @@ async function originateTokenContract() {
 }
 
 async function originateBigMapPackContract() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     const code = [
       { prim: 'parameter', args: [{ prim: 'unit' }] },
@@ -1022,7 +1022,7 @@ async function originateBigMapPackContract() {
       bigmap.set(i, `${i}`);
     }
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code,
       storage: {
         0: '10',
@@ -1041,10 +1041,10 @@ async function originateBigMapPackContract() {
 }
 
 async function originateMichelsonMap() {
-  tezos.setSignerProvider(signer);
+  mavryk.setSignerProvider(signer);
   try {
     console.log('Deploying Michelson Tutorial contract...');
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: `parameter (pair address mumav);
       storage (map address mumav);
       code { DUP ; CAR ; SWAP ; CDR ; SWAP ; DUP ; DUG 2 ; CDR ; DIG 2 ; CAR ; SWAP ; SOME ; SWAP ; UPDATE ; NIL operation ; PAIR }`,

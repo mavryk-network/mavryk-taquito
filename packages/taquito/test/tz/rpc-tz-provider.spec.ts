@@ -1,10 +1,10 @@
-import { RpcTzProvider } from '../../src/tz/rpc-tz-provider';
+import { RpcMvProvider } from '../../src/mv/rpc-mv-provider';
 import BigNumber from 'bignumber.js';
 import { Context } from '../../src/context';
 
-describe('RpcTzProvider test', () => {
+describe('RpcMvProvider test', () => {
   it('is instantiable', () => {
-    expect(new RpcTzProvider(new Context('url'))).toBeInstanceOf(RpcTzProvider);
+    expect(new RpcMvProvider(new Context('url'))).toBeInstanceOf(RpcMvProvider);
   });
 
   describe('getBalance', () => {
@@ -15,7 +15,7 @@ describe('RpcTzProvider test', () => {
 
       mockRpcClient.getBalance.mockResolvedValue(new BigNumber('10000'));
 
-      const provider = new RpcTzProvider(new Context(mockRpcClient as any));
+      const provider = new RpcMvProvider(new Context(mockRpcClient as any));
       const result = await provider.getBalance('mv1NiGqJHiRwivfGULeVz8kV16AnhepCa5rW');
       expect(result).toBeInstanceOf(BigNumber);
       expect(result.toString()).toStrictEqual('10000');
@@ -33,7 +33,7 @@ describe('RpcTzProvider test', () => {
 
       mockRpcClient.getDelegate.mockResolvedValue('KT1G393LjojNshvMdf68XQD24Hwjn7xarzNe');
 
-      const provider = new RpcTzProvider(new Context(mockRpcClient as any));
+      const provider = new RpcMvProvider(new Context(mockRpcClient as any));
       const result = await provider.getDelegate('mv1NiGqJHiRwivfGULeVz8kV16AnhepCa5rW');
       expect(result).toStrictEqual('KT1G393LjojNshvMdf68XQD24Hwjn7xarzNe');
       expect(mockRpcClient.getDelegate.mock.calls[0][0]).toEqual(
@@ -91,7 +91,7 @@ describe('RpcTzProvider test', () => {
 
       const context = new Context(mockRpcClient as any, mockSigner as any);
       context.forger = mockForger;
-      const provider = new RpcTzProvider(context);
+      const provider = new RpcMvProvider(context);
       const result = await provider.activate('mv2ZLWuozgeXpSsauhhLYroGjdjCHuqTSwFC', '123');
       expect(result.raw).toEqual({
         counter: 0,

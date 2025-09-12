@@ -1,7 +1,7 @@
 import { CONFIGS } from "../../config";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Originate contract with timestamp storage/params: ${rpc}`, () => {
 
@@ -13,7 +13,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     it('should originate contract correctly with number passed into timestamp storage', async () => {
       const date = Date.now();
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: `{ parameter timestamp ;
           storage timestamp ;
           code { CAR ; NIL operation ; PAIR } }`,
@@ -32,7 +32,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     it('should originate contract correctly with string passed into timestamp storage', async () => {
       const date = new Date().toISOString();
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: `{ parameter timestamp ;
           storage timestamp ;
           code { CAR ; NIL operation ; PAIR } }`,

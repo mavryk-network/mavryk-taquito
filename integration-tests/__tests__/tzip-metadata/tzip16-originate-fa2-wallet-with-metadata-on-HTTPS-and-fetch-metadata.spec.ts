@@ -4,9 +4,9 @@ import { MichelsonMap } from "@mavrykdynamics/taquito";
 import { fa2ContractTzip16 } from "../../data/fa2_contract_with_metadata";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
-   const Tezos = lib;
+   const Mavryk = lib;
    const test = require('jest-retries');
-   Tezos.addExtension(new Tzip16Module());
+   Mavryk.addExtension(new Tzip16Module());
    let contractAddress: string;
    describe(`Test contract origination of a fa2 contract having Tzip16 metadata and view through wallet api using: ${rpc}`, () => {
 
@@ -39,7 +39,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
          },
             'None');
          // file deepcode ignore object-literal-shorthand: not sure how to fix
-         const op = await Tezos.wallet.originate({
+         const op = await Mavryk.wallet.originate({
             code: fa2ContractTzip16,
             storage: {
                default_expiry: 1000,
@@ -52,7 +52,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
                permits: new MichelsonMap(),
                totalSupply: '100',
                roles: {
-                  master_minter: await Tezos.signer.publicKeyHash(),
+                  master_minter: await Mavryk.signer.publicKeyHash(),
                   owner: localTez1Pkh,
                   pauser: localTez2Pkh,
                   pending_owner: null
@@ -67,7 +67,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       });
 
       test('Verify that metadata for a Fa2 contract can be fetched', 2, async () => {
-         const contract = await Tezos.wallet.at(contractAddress, tzip16);
+         const contract = await Mavryk.wallet.at(contractAddress, tzip16);
          const metadata = await contract.tzip16().getMetadata();
 
          expect(metadata.uri).toEqual('https://storage.googleapis.com/tzip-16/fa2-metadata.json');
@@ -285,7 +285,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
                },
                {
                   "error": {
-                     "string": "XTZ_RECEIVED"
+                     "string": "MVRK_RECEIVED"
                   },
                   "expansion": {
                      "string": "Contract received a non-zero amount of tokens"
@@ -461,7 +461,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
             },
             {
                "error": {
-                  "string": "XTZ_RECEIVED"
+                  "string": "MVRK_RECEIVED"
                },
                "expansion": {
                   "string": "Contract received a non-zero amount of tokens"
@@ -586,7 +586,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       test('Verify that Fa2 contract view can be executed', 2, async () => {
          // edonet: KT1XKs56Z8iXpYAD3pzfyXC3B4maJciob74X
 
-         const contractAbstraction = await Tezos.wallet.at(contractAddress, tzip16);
+         const contractAbstraction = await Mavryk.wallet.at(contractAddress, tzip16);
          const metadataViews = await contractAbstraction.tzip16().metadataViews();
 
          const viewGetCounterResult = await metadataViews.GetCounter().executeView('Unit');

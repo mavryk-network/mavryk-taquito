@@ -2,7 +2,7 @@ import { MichelsonMap } from '@mavrykdynamics/taquito-michelson-encoder';
 import { CONFIGS } from '../../config';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test origination of contract with various types of bigmaps using: ${rpc}`, () => {
     beforeEach(async () => {
@@ -10,7 +10,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     test('Originates a contract having various types of bigmaps', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: ` parameter (or (or (nat %compoundKey) (nat %compoundKeyCompoundValue))
                     (or (nat %compoundValue) (mumav %singleValue)));
                 storage (pair

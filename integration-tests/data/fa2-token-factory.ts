@@ -88,7 +88,7 @@ export const fa2TokenFactory = [
                                                 ],
                                                 annots: ['%buy_from_exchange']
                                             },
-                                            { prim: 'unit', annots: ['%buy_xtz_wrapper'] }
+                                            { prim: 'unit', annots: ['%buy_mvrk_wrapper'] }
                                         ]
                                     }
                                 ]
@@ -261,7 +261,7 @@ export const fa2TokenFactory = [
                                     {
                                         prim: 'or',
                                         args: [
-                                            { prim: 'nat', annots: ['%redeem_xtz_wrapper'] },
+                                            { prim: 'nat', annots: ['%redeem_mvrk_wrapper'] },
                                             {
                                                 prim: 'contract',
                                                 args: [{ prim: 'address' }],

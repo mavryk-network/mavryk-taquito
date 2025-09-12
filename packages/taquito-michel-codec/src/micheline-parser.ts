@@ -65,7 +65,7 @@ const bytesRe = new RegExp('^([0-9a-fA-F]{2})*$');
 
 export interface ParserOptions extends ProtocolOptions {
   /**
-   * Expand [Michelson macros](https://tezos.gitlab.io/whitedoc/michelson.html#macros) during parsing.
+   * Expand [Michelson macros](https://protocol.mavryk.org/whitedoc/michelson.html#macros) during parsing.
    */
   expandMacros?: boolean;
   /**
@@ -90,7 +90,7 @@ export interface ParserOptions extends ProtocolOptions {
  *
  * Pretty Print a Michelson Smart Contract:
  * ```
- * const contract = await Tezos.contract.at("KT1Vsw3kh9638gqWoHTjvHCoHLPKvCbMVbCg");
+ * const contract = await Mavryk.contract.at("KT1Vsw3kh9638gqWoHTjvHCoHLPKvCbMVbCg");
  * const p = new Parser();
  *
  * const michelsonCode = p.parseJSON(contract.script.code);

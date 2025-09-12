@@ -1,15 +1,15 @@
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { CONFIGS } from '../config';
 import * as Bip39 from 'bip39';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  let Funder: TezosToolkit;
+  let Funder: MavrykToolkit;
   describe(`Create signer instances with fromMnemonic: ${rpc}`, () => {
     let mnemonic: string;
-    let Tez1: TezosToolkit,
-      Tez2: TezosToolkit,
-      Tez3: TezosToolkit;
+    let Tez1: MavrykToolkit,
+      Tez2: MavrykToolkit,
+      Tez3: MavrykToolkit;
 
     let funderPKH: string;
 
@@ -22,21 +22,21 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         funderPKH = await Funder.signer.publicKeyHash();
 
         /**
-         * Create 3 TezosToolkits with signer providers of different curves
+         * Create 3 MavrykToolkits with signer providers of different curves
          * and Fund them with the Funder account
          */
-        Tez1 = new TezosToolkit(rpc);
+        Tez1 = new MavrykToolkit(rpc);
         const signer1 = InMemorySigner.fromMnemonic({ mnemonic });
         Tez1.setSignerProvider(signer1);
         const tez1Pkh = await Tez1.signer.publicKeyHash();
 
 
-        Tez2 = new TezosToolkit(rpc);
+        Tez2 = new MavrykToolkit(rpc);
         const signer2 = InMemorySigner.fromMnemonic({ mnemonic, curve: 'secp256k1' });
         Tez2.setSignerProvider(signer2);
         const tez2Pkh = await Tez2.signer.publicKeyHash();
 
-        Tez3 = new TezosToolkit(rpc);
+        Tez3 = new MavrykToolkit(rpc);
         const signer3 = InMemorySigner.fromMnemonic({ mnemonic, curve: 'p256' });
         Tez3.setSignerProvider(signer3);
         const tez3Pkh = await Tez3.signer.publicKeyHash();

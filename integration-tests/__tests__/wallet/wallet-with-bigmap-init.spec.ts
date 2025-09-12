@@ -3,14 +3,14 @@ import { MichelsonMap } from "@mavrykdynamics/taquito";
 import { tokenBigmapCode } from "../../data/token_bigmap";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test token contract origination with big map and with initial data through wallet api using: ${rpc}`, () => {
 
     beforeEach(async () => {
       await setup()
     })
     it('Verify wallet.originate for a token contract with BigMap and with initialized Storage/BigMap', async () => {
-      const addr = await Tezos.signer.publicKeyHash();
+      const addr = await Mavryk.signer.publicKeyHash();
       const initialStorage = {
         owner: addr,
         accounts: MichelsonMap.fromLiteral({
@@ -49,7 +49,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         totalSupply: "6"
       }
 
-      const op = await Tezos.wallet.originate({
+      const op = await Mavryk.wallet.originate({
         balance: "1",
         code: tokenBigmapCode,
         storage: initialStorage

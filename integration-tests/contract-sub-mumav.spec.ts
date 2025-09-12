@@ -1,7 +1,7 @@
 import { CONFIGS } from './config';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test contract call with amount using: ${rpc}`, () => {
     beforeEach(async () => {
@@ -11,7 +11,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     it(
       'originate a contract with SUB MUMAV',
       async () => {
-        const op = await Tezos.contract.originate({
+        const op = await Mavryk.contract.originate({
           code: `{ parameter (or (or (mumav %decrement) (mumav %increment)) (mumav %reset)) ;
                storage mumav ;
                code { UNPAIR ;
@@ -32,7 +32,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     it('fail to originate a contract on Ithaca with SUB', async () => {
       try {
-        await Tezos.contract.originate({
+        await Mavryk.contract.originate({
           code: `{ parameter (or (or (mumav %decrement) (mumav %increment)) (mumav %reset)) ;
                  storage mumav ;
                  code { UNPAIR ;

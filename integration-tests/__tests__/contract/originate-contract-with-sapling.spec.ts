@@ -10,7 +10,7 @@ import {
 } from '../../data/sapling_test_contracts';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   interface StorageType {
     left: SaplingStateAbstraction;
@@ -23,7 +23,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     test('Originates a Sapling Double contract', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: saplingContractDoubleJProto,
         init: `(Pair {} {})`,
       });
@@ -32,7 +32,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
       const contract = await op.contract();
 
-      Tezos.contract.at(contract.address).then((contract) => {
+      Mavryk.contract.at(contract.address).then((contract) => {
         const objects = Object.keys(contract.methodsObject);
         expect(objects).toContain('default');
       });
@@ -47,7 +47,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     test('Originates a Sapling Drop contract', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: saplingContractDropJProto,
         init: { prim: 'Unit' },
       });
@@ -56,14 +56,14 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
       const contract = await op.contract();
 
-      Tezos.contract.at(contract.address).then((contract) => {
+      Mavryk.contract.at(contract.address).then((contract) => {
         const objects = Object.keys(contract.methodsObject);
         expect(objects).toContain('default');
       });
     });
 
     test('Originates a Sapling Send contract', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: saplingContractSendJProto,
         init: { prim: 'Unit' },
       });
@@ -72,14 +72,14 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
       const contract = await op.contract();
 
-      Tezos.contract.at(contract.address).then((contract) => {
+      Mavryk.contract.at(contract.address).then((contract) => {
         const objects = Object.keys(contract.methodsObject);
         expect(objects).toContain('default');
       });
     });
 
     test('Originates a Sapling Contract State as Arg contract', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: saplingContractStateAsArg,
         storage: null,
       });
@@ -92,7 +92,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     test('Should fail to originate a Push Sapling State contract', async () => {
       try {
-        await Tezos.contract.originate({
+        await Mavryk.contract.originate({
           code: saplingContractPushSaplingState,
           init: { prim: 'Unit' },
         });
@@ -104,7 +104,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     });
 
     test('Originates a Use Existing State Sapling contract', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: saplingContractUseExistingStateJProto,
         init: `{}`,
       });
@@ -113,7 +113,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
       const contract = await op.contract();
 
-      Tezos.contract.at(contract.address).then((contract) => {
+      Mavryk.contract.at(contract.address).then((contract) => {
         const objects = Object.keys(contract.methodsObject);
         expect(objects).toContain('default');
       });

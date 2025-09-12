@@ -25,6 +25,9 @@ import {
   SmartRollupOriginateParams,
   SmartRollupExecuteOutboxMessageParams,
   FailingNoopParams,
+  StakeParams,
+  UnstakeParams,
+  FinalizeUnstakeParams,
 } from '../operations/types';
 import { ContractAbstraction, ContractStorageType, DefaultContractType } from './contract';
 import { IncreasePaidStorageOperation } from '../operations/increase-paid-storage-operation';
@@ -48,7 +51,7 @@ export interface StorageProvider {
    * @param contract contract address you want to get the storage from
    * @param schema optional schema can either be the contract script rpc response or a michelson-encoder schema
    *
-   * @see https://tezos.gitlab.io/api/rpc.html#get-block-id-context-contracts-contract-id-script
+   * @see https://protocol.mavryk.org/api/rpc.html#get-block-id-context-contracts-contract-id-script
    */
   getStorage<T>(contract: string, schema?: ContractSchema): Promise<T>;
 
@@ -62,7 +65,7 @@ export interface StorageProvider {
    *
    * @deprecated Deprecated in favor of getBigMapKeyByID
    *
-   * @see https://tezos.gitlab.io/api/rpc.html#post-block-id-context-contracts-contract-id-big-map-get
+   * @see https://protocol.mavryk.org/api/rpc.html#post-block-id-context-contracts-contract-id-big-map-get
    */
   getBigMapKey<T>(contract: string, key: string, schema?: ContractSchema): Promise<T>;
 
@@ -75,7 +78,7 @@ export interface StorageProvider {
    * @param schema Big Map schema (can be determined using your contract type)
    * @param block optional block level to fetch the value from
    *
-   * @see https://tezos.gitlab.io/api/rpc.html#get-block-id-context-big-maps-big-map-id-script-expr
+   * @see https://protocol.mavryk.org/api/rpc.html#get-block-id-context-big-maps-big-map-id-script-expr
    */
   getBigMapKeyByID<T>(
     id: string,
@@ -150,13 +153,43 @@ export interface ContractProvider extends StorageProvider {
 
   /**
    *
-   * @description Transfer tz from current address to a specific address. Will sign and inject an operation using the current context
+   * @description Transfer mv from current address to a specific address. Will sign and inject an operation using the current context
    *
    * @returns An operation handle with the result from the rpc node
    *
    * @param Transfer operation parameter
    */
   transfer(params: TransferParams): Promise<TransactionOperation>;
+
+  /**
+   *
+   * @description Stake mv from current address to a specific address. Built on top of the existing transaction operation
+   *
+   * @returns An operation handle with the result from the rpc node
+   *
+   * @param Stake pseudo-operation parameter
+   */
+  stake(params: StakeParams): Promise<TransactionOperation>;
+
+  /**
+   *
+   * @description Unstake mv from current address to a specific address. Built on top of the existing transaction operation
+   *
+   * @returns An operation handle with the result from the rpc node
+   *
+   * @param Unstake pseudo-operation parameter
+   */
+  unstake(params: UnstakeParams): Promise<TransactionOperation>;
+
+  /**
+   *
+   * @description Finalize unstake mv from current address to a specific address. Built on top of the existing transaction operation
+   *
+   * @returns An operation handle with the result from the rpc node
+   *
+   * @param finalize_unstake pseudo-operation parameter
+   */
+  finalizeUnstake(params: FinalizeUnstakeParams): Promise<TransactionOperation>;
 
   /**
    *

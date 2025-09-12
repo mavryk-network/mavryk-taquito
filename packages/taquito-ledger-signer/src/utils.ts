@@ -37,7 +37,7 @@ export function transformPathToBuffer(path: string): Buffer {
 
 /**
  *
- * @description Converts uncompressed ledger key to standard tezos binary representation
+ * @description Converts uncompressed ledger key to standard mavryk binary representation
  */
 export function compressPublicKey(publicKey: Buffer, curve: DerivationType) {
   if (curve === 0x00 || curve === 0x03) {

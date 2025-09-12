@@ -1,9 +1,9 @@
 {
   "name": "@mavrykdynamics/taquito-http-utils",
-  "version": "19.2.3",
+  "version": "20.0.0",
   "description": "",
   "keywords": [
-    "tezos"
+    "mavryk"
   ],
   "main": "dist/taquito-http-utils.umd.js",
   "module": "dist/taquito-http-utils.es6.js",
@@ -58,7 +58,7 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/taquito-core": "^19.1.0",
+    "@mavrykdynamics/taquito-core": "^20.0.0",
     "node-fetch": "^2.7.0"
   },
   "devDependencies": {

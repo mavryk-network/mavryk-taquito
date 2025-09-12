@@ -2,7 +2,7 @@ import { CONFIGS } from "../../config";
 import { noAnnotCode, noAnnotInit } from "../../data/token_without_annotation";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test call to an entrypoint with no annotations calling methods by index through contract api using: ${rpc}`, () => {
 
     beforeEach(async () => {
@@ -18,14 +18,14 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
       // Actual tests
 
-      const ACCOUNT1_ADDRESS = await Tezos.signer.publicKeyHash()
+      const ACCOUNT1_ADDRESS = await Mavryk.signer.publicKeyHash()
       const ACCOUNT2_ADDRESS = 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM'
 
       // Originate a contract with a known state
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: noAnnotCode,
-        init: noAnnotInit(await Tezos.signer.publicKeyHash())
+        init: noAnnotInit(await Mavryk.signer.publicKeyHash())
       })
       await op.confirmation()
       const contract = await op.contract()

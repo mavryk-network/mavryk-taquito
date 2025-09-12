@@ -6,7 +6,7 @@ import {
   MichelsonType,
   MichelsonTypePair,
 } from './michelson-types';
-import { HexParseError, LongIntegerError, TezosIdEncodeError } from './errors';
+import { HexParseError, LongIntegerError, MavrykIdEncodeError } from './errors';
 import { TaquitoError } from '@mavrykdynamics/taquito-core';
 
 export type Tuple<N extends number, T> = N extends 1
@@ -248,7 +248,7 @@ export function unpackAnnotations(
   return { f: field, t: type, v: vars };
 }
 
-export type TezosIDType =
+export type MavrykIDType =
   | 'BlockHash'
   | 'OperationHash'
   | 'OperationListHash'
@@ -279,9 +279,9 @@ export type TezosIDType =
   | 'ChainID'
   | 'RollupAddress';
 
-export type TezosIDPrefix = [number, number[]]; // payload length, prefix
+export type MavrykIDPrefix = [number, number[]]; // payload length, prefix
 
-export const tezosPrefix: Record<TezosIDType, TezosIDPrefix> = {
+export const mavrykPrefix: Record<MavrykIDType, MavrykIDPrefix> = {
   BlockHash: [32, [1, 52]], // B(51)
   OperationHash: [32, [5, 116]], // o(51)
   OperationListHash: [32, [133, 233]], // Lo(52)
@@ -313,13 +313,13 @@ export const tezosPrefix: Record<TezosIDType, TezosIDPrefix> = {
   RollupAddress: [20, [1, 128, 120, 31]],
 };
 
-export function checkDecodeTezosID<T extends TezosIDType[]>(
+export function checkDecodeMavrykID<T extends MavrykIDType[]>(
   id: string,
   ...types: T
 ): [T[number], number[]] | null {
   const buf = decodeBase58Check(id);
   for (const t of types) {
-    const [plen, p] = tezosPrefix[t];
+    const [plen, p] = mavrykPrefix[t];
     if (buf.length === plen + p.length) {
       let i = 0;
       while (i < p.length && buf[i] === p[i]) {
@@ -333,10 +333,10 @@ export function checkDecodeTezosID<T extends TezosIDType[]>(
   return null;
 }
 
-export function encodeTezosID(id: TezosIDType, data: number[] | Uint8Array): string {
-  const [plen, p] = tezosPrefix[id];
+export function encodeMavrykID(id: MavrykIDType, data: number[] | Uint8Array): string {
+  const [plen, p] = mavrykPrefix[id];
   if (data.length !== plen) {
-    throw new TezosIdEncodeError(`Incorrect data length for ${id}: ${data.length}`);
+    throw new MavrykIdEncodeError(`Incorrect data length for ${id}: ${data.length}`);
   }
   return encodeBase58Check([...p, ...data]);
 }

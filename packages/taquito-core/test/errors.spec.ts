@@ -2,7 +2,7 @@ import {
   TaquitoError,
   ParameterValidationError,
   RpcError,
-  TezosToolkitConfigError,
+  MavrykToolkitConfigError,
   UnsupportedActionError,
   NetworkError,
   PermissionDeniedError,
@@ -45,13 +45,13 @@ describe('parent errors classes', () => {
     }
   });
 
-  it('should throw an TezosToolkitConfigError', () => {
+  it('should throw an MavrykToolkitConfigError', () => {
     try {
-      throw new TezosToolkitConfigError();
+      throw new MavrykToolkitConfigError();
     } catch (error) {
       expect(error).toBeInstanceOf(Error);
       expect(error).toBeInstanceOf(TaquitoError);
-      expect(error).toBeInstanceOf(TezosToolkitConfigError);
+      expect(error).toBeInstanceOf(MavrykToolkitConfigError);
     }
   });
 

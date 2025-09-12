@@ -2,7 +2,7 @@
 
 ![Built with Taquito][logo]
 
-A minimal end-to-end testing setup for developing Tezos DApps with Taquito and Beacon to manage signing and wallet operations.
+A minimal end-to-end testing setup for developing Mavryk DApps with Taquito and Beacon to manage signing and wallet operations.
 ## Getting Started
 #### Initial setup
 1. Clone the Taquito repository: `git clone git@github.com:ecadlabs/taquito.git`

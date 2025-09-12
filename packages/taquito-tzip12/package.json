@@ -1,9 +1,9 @@
 {
   "name": "@mavrykdynamics/taquito-tzip12",
-  "version": "19.2.3",
+  "version": "20.0.0",
   "description": "Tzip12",
   "keywords": [
-    "tezos",
+    "mavryk",
     "blockchain",
     "tzip12"
   ],
@@ -62,10 +62,10 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/taquito": "^19.2.3",
-    "@mavrykdynamics/taquito-core": "^19.1.0",
-    "@mavrykdynamics/taquito-michelson-encoder": "^19.2.3",
-    "@mavrykdynamics/taquito-tzip16": "^19.2.3"
+    "@mavrykdynamics/taquito": "^20.0.0",
+    "@mavrykdynamics/taquito-core": "^20.0.0",
+    "@mavrykdynamics/taquito-michelson-encoder": "^20.0.0",
+    "@mavrykdynamics/taquito-tzip16": "^20.0.0"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.40",

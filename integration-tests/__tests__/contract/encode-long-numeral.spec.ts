@@ -1,7 +1,7 @@
 import { CONFIGS } from '../../config';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
 
     describe(`Test contract origination for a contract having long numeral in storage and calling default entry point with long numeral through contract api using: ${rpc}`, () => {
         beforeEach(async () => {
@@ -9,7 +9,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         });
         test('Verify contract.originate for a contract and then call default method with long int param', async () => {
             const code = `parameter nat; storage nat; code { CAR ; NIL operation ; PAIR }`;
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code,
                 storage: 1000000000000000000000000000000000000000000000000000000
             });
@@ -31,7 +31,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
         test('Verify wallet.originate for a contract and then call default method with long int param', async () => {
             const code = `parameter int; storage int; code { CAR ; NIL operation ; PAIR }`;
-            const op = await Tezos.wallet.originate({
+            const op = await Mavryk.wallet.originate({
                 code,
                 storage: 1000000000000000000000000000000000000000000000000000000
             }).send();

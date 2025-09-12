@@ -78,7 +78,7 @@
           "version": "8.0.4-beta.0",
           "description": "Beacon wallet provider",
           "keywords": [
-            "tezos",
+            "mavryk",
             "blockchain",
             "websocket"
           ],

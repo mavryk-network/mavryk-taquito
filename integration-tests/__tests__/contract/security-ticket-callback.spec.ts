@@ -5,7 +5,7 @@ import { CONFIGS } from '../../config';
 // To see why the test fails with error message {\"prim\":\"Unit\"}, look at the Micheline form of the contract.
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const weeklynet = protocol === Protocols.ProtoALpha ? test : test.skip;
 
   describe(`Test contracts using: ${rpc}`, () => {
@@ -15,7 +15,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet('Verify ticket is not easily created by a callback', async () => {
       try {
-        const opCaller = await Tezos.contract.originate({
+        const opCaller = await Mavryk.contract.originate({
           code: ` { parameter (or (address %init) (ticket %setToken string)) ;
             storage unit ;
             code { UNPAIR ;
@@ -40,7 +40,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
         const opCallerContract = await opCaller.contract();
         expect(await opCallerContract.storage()).toBeTruthy();
 
-        const opGetter = await Tezos.contract.originate({
+        const opGetter = await Mavryk.contract.originate({
           code: `        { parameter unit;
             storage unit;
             code

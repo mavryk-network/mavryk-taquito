@@ -1,17 +1,17 @@
-import { MichelsonMap, TezosToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
 import { tokenCode } from '../integration-tests/data/tokens';
 
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network';
     const signer = new InMemorySigner('edskRtmEwZxRzwd1obV9pJzAoLoxXFWTSHbgqpDBRHx1Ktzo5yVuJ37e2R4nzjLnNbxFU4UiBU1iHzAy52pK5YBRpaFwLbByca');
-    const tezos = new TezosToolkit(provider);
-    tezos.setSignerProvider(signer);
+    const mavryk = new MavrykToolkit(provider);
+    mavryk.setSignerProvider(signer);
   
   try {
     console.log('Deploying MapValuesMultipleBigMaps contract...');
     
-    const signer = await tezos.signer.publicKeyHash();
+    const signer = await mavryk.signer.publicKeyHash();
 
             const bigMapInit = new MichelsonMap();
             bigMapInit.set(signer, { 0: '1', 1: new MichelsonMap() });
@@ -19,7 +19,7 @@ async function example() {
             bigMapInit.set('mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ', { 0: '3', 1: new MichelsonMap() });
             bigMapInit.set('mv3WNhwFRPV4fCkK2iBDWZtLNsDg4tecU5X5', { 0: '4', 1: new MichelsonMap() });
             // Deploy a contract with a big map
-            const op = await tezos.contract.originate({
+            const op = await mavryk.contract.originate({
                 code: tokenCode,
                 storage: {
                     0: bigMapInit,

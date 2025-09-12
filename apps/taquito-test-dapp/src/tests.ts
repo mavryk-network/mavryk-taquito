@@ -1,5 +1,5 @@
 import {
-  TezosToolkit,
+  MavrykToolkit,
   ContractAbstraction,
   Wallet,
   MichelsonMap,
@@ -23,7 +23,7 @@ const preparePayloadToSign = (
   payload: RequestSignPayloadInput;
   formattedInput: string;
 } => {
-  const formattedInput = `Tezos Signed Message: taquito-test-dapp.netlify.app/ ${new Date().toISOString()} ${input}`;
+  const formattedInput = `Mavryk Signed Message: taquito-test-dapp.netlify.app/ ${new Date().toISOString()} ${input}`;
   const bytes = stringToBytes(formattedInput);
   const payload: RequestSignPayloadInput = {
     signingType: SigningType.MICHELINE,
@@ -36,11 +36,90 @@ const preparePayloadToSign = (
   };
 };
 
-const sendTez = async (Tezos: TezosToolkit): Promise<TestResult> => {
+const sendTezToEtherlink = async (
+  amount: number,
+  address: string,
+  mavryk: MavrykToolkit,
+): Promise<TestResult> => {
   let opHash = "";
   try {
-    const op = await Tezos.wallet
+    const contract = await mavryk.wallet.at('KT1VEjeQfDBSfpDH5WeBM5LukHPGM2htYEh3')
+    let op = await contract.methodsObject.deposit({ evm_address: 'sr18wx6ezkeRjt1SZSeZ2UQzQN3Uc3YLMLqg', l2_address: address }).send({ amount });
+    await op.confirmation()
+    opHash = op.hasOwnProperty("opHash") ? op["opHash"] : op["hash"];
+    console.log("Operation successful with op hash:", opHash);
+    return { success: true, opHash };
+  } catch (error) {
+    console.log(error);
+    return { success: false, opHash: "" };
+  }
+};
+
+const sendTez = async (Mavryk: MavrykToolkit): Promise<TestResult> => {
+  let opHash = "";
+  try {
+    const op = await Mavryk.wallet
       .transfer({ to: "mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv", amount: 0.1 })
+      .send();
+    await op.confirmation();
+    opHash = op.opHash;
+    return { success: true, opHash };
+  } catch (error) {
+    console.log(error);
+    return { success: false, opHash: "" };
+  }
+};
+
+const setDelegate = async (delegate: string, Mavryk: MavrykToolkit): Promise<TestResult> => {
+  let opHash = "";
+  try {
+    const op = await Mavryk.wallet
+      .setDelegate({ delegate })
+      .send();
+    await op.confirmation();
+    opHash = op.opHash;
+    return { success: true, opHash };
+  } catch (error) {
+    console.log(error);
+    return { success: false, opHash: "" };
+  }
+};
+
+const stake = async (amount: number, Mavryk: MavrykToolkit): Promise<TestResult> => {
+  let opHash = "";
+  try {
+    const op = await Mavryk.wallet
+      .stake({ amount })
+      .send();
+    await op.confirmation();
+    opHash = op.opHash;
+    return { success: true, opHash };
+  } catch (error) {
+    console.log(error);
+    return { success: false, opHash: "" };
+  }
+};
+
+const unstake = async (amount: number, Mavryk: MavrykToolkit): Promise<TestResult> => {
+  let opHash = "";
+  try {
+    const op = await Mavryk.wallet
+      .unstake({ amount })
+      .send();
+    await op.confirmation();
+    opHash = op.opHash;
+    return { success: true, opHash };
+  } catch (error) {
+    console.log(error);
+    return { success: false, opHash: "" };
+  }
+};
+
+const finalizeUnstake = async (Mavryk: MavrykToolkit): Promise<TestResult> => {
+  let opHash = "";
+  try {
+    const op = await Mavryk.wallet
+      .finalizeUnstake({})
       .send();
     await op.confirmation();
     opHash = op.opHash;
@@ -169,12 +248,12 @@ const callFaiWithPair = async (
   }
 };
 
-const originateSuccess = async (Tezos: TezosToolkit): Promise<TestResult> => {
+const originateSuccess = async (Mavryk: MavrykToolkit): Promise<TestResult> => {
   let opHash = "";
   try {
     // fetches contract code
     const storage = new MichelsonMap();
-    const op = await Tezos.wallet
+    const op = await Mavryk.wallet
       .originate({ code: contractToOriginate, storage })
       .send();
     opHash = op.opHash;
@@ -186,10 +265,10 @@ const originateSuccess = async (Tezos: TezosToolkit): Promise<TestResult> => {
   }
 };
 
-const batchApiTest = async (Tezos: TezosToolkit): Promise<TestResult> => {
+const batchApiTest = async (Mavryk: MavrykToolkit): Promise<TestResult> => {
   let opHash = "";
   try {
-    const op = await Tezos.wallet
+    const op = await Mavryk.wallet
       .batch([
         {
           kind: OpKind.TRANSACTION,
@@ -221,14 +300,14 @@ const batchApiTest = async (Tezos: TezosToolkit): Promise<TestResult> => {
 };
 
 const batchApiContractCallsTest = async (
-  Tezos: TezosToolkit,
+  Mavryk: MavrykToolkit,
   contract: ContractAbstraction<Wallet> | ContractAbstraction<ContractProvider>,
   callToContract
 ): Promise<TestResult> => {
   let opHash = "";
   try {
     const storage: any = await contract.storage();
-    /*const batch = Tezos.wallet
+    /*const batch = Mavryk.wallet
         .batch()
         .withContractCall(contract.methodsObject.simple_param(5))
         .withContractCall(contract.methodsObject.simple_param(6))
@@ -302,7 +381,7 @@ const signPayloadAndSend = async (
     const publicKey = activeAccount.publicKey;
     // sends transaction to contract
     const op = await contract.methodsObject
-      .check_signature({0: publicKey, 1: signedPayload.signature, 2: payload.payload})
+      .check_signature({ 0: publicKey, 1: signedPayload.signature, 2: payload.payload })
       .send();
     await op.confirmation();
     return {
@@ -318,11 +397,11 @@ const signPayloadAndSend = async (
 
 const signFailingNoop = async (
   input: string,
-  tezos: TezosToolkit,
+  mavryk: MavrykToolkit,
 ): Promise<TestResult> => {
   const bytes = stringToBytes(input);
   try {
-    const signedPayload = await tezos.wallet.signFailingNoop({
+    const signedPayload = await mavryk.wallet.signFailingNoop({
       arbitrary: bytes,
       basedOnBlock: 'head'
     });
@@ -409,7 +488,7 @@ const tryConfirmationObservable = async (
 ): Promise<TestResult> => {
   let opHash = "";
   try {
-    /*const op = await Tezos.wallet
+    /*const op = await Mavryk.wallet
         .transfer({ to: "mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv", amount: 1 })
         .send();*/
     store.resetConfirmationObservableTest();
@@ -444,7 +523,7 @@ const tryConfirmationObservable = async (
   }
 };
 
-const permit = async (Tezos: TezosToolkit, wallet: BeaconWallet) => {
+const permit = async (Mavryk: MavrykToolkit, wallet: BeaconWallet) => {
   const store = get(localStore);
 
   const expectedBytes =
@@ -452,14 +531,14 @@ const permit = async (Tezos: TezosToolkit, wallet: BeaconWallet) => {
 
   try {
     const contractAddress = "KT1ShFVQPoLvekQu21pvuJst7cG1TjtnzdvW";
-    const contract = await Tezos.wallet.at(contractAddress);
+    const contract = await Mavryk.wallet.at(contractAddress);
     // hashes the parameter for the contract call
     const mintParam: any = contract.methodsObject
-      .mint({0: store.userAddress, 1: 100})
+      .mint({ 0: store.userAddress, 1: 100 })
       .toTransferParams().parameter?.value;
     const mintParamType = contract.entrypoints.entrypoints["mint"];
     // packs the entrypoint call
-    const rawPacked = await Tezos.rpc.packData({
+    const rawPacked = await Mavryk.rpc.packData({
       data: mintParam,
       type: mintParamType
     });
@@ -468,7 +547,7 @@ const permit = async (Tezos: TezosToolkit, wallet: BeaconWallet) => {
     /*"05" +
         buf2hex(blake.blake2b(hex2buf(packedParam), null, 32).buffer as Buffer);*/
     // hashes the parameter for the signature
-    const chainId = await Tezos.rpc.getChainId();
+    const chainId = await Mavryk.rpc.getChainId();
     const contractStorage: any = await contract.storage();
     const counter = contractStorage.counter;
     const sigParamData: any = {
@@ -516,7 +595,7 @@ const permit = async (Tezos: TezosToolkit, wallet: BeaconWallet) => {
         }
       ]
     };
-    const sigParamPacked = await Tezos.rpc.packData({
+    const sigParamPacked = await Mavryk.rpc.packData({
       data: sigParamData,
       type: sigParamType
     });
@@ -547,7 +626,12 @@ const saplingShielded = async (
 };
 
 export const list = [
-  "Send tez",
+  "Send mav",
+  "Set Delegate",
+  "[boreasnet] Stake",
+  "[boreasnet] Unstake",
+  "[boreasnet] Finalize Unstake",
+  "[ghostnet] Send mav from Ghostnet to Etherlink",
   "Contract call with int",
   "Contract call with (pair nat string)",
   "Contract call that fails",
@@ -562,24 +646,89 @@ export const list = [
   "Verify a provided signature",
   "Set the transaction limits",
   "Subscribe to confirmations",
-  "Permit contract",
-  "Sapling"
+  "[wip] Permit contract",
+  "[wip] Sapling"
 ];
 
 export const init = (
-  Tezos: TezosToolkit,
+  Mavryk: MavrykToolkit,
   contract: ContractAbstraction<Wallet> | ContractAbstraction<ContractProvider>,
   wallet: BeaconWallet | undefined
 ): TestSettings[] => [
     {
-      id: "send-tez",
-      name: "Send tez",
-      description: "This test sends 0.1 tez to Alice's address",
+      id: "send-mav",
+      name: "Send mav",
+      description: "This test sends 0.1 mav to Alice's address",
       documentation: 'https://taquito.mavryk.org/docs/wallet_API#making-transfers',
       keyword: 'transfer',
-      run: () => sendTez(Tezos),
+      run: () => sendTez(Mavryk),
       showExecutionTime: false,
       inputRequired: false,
+      lastResult: { option: "none", val: false }
+    },
+    {
+      id: "set-delegate",
+      name: "Set Delegate",
+      description: "This test sets delegate to your specified address",
+      documentation: 'https://taquito.io/docs/set_delegate/#setdelegate',
+      keyword: 'delegate',
+      run: input => setDelegate(input.delegate, Mavryk),
+      showExecutionTime: false,
+      inputRequired: true,
+      inputType: "delegate",
+      lastResult: { option: "none", val: false }
+    },
+    {
+      id: "stake",
+      name: "[boreasnet] Stake",
+      description: "This test stake your spendable balance into frozen staked balance",
+      documentation: 'https://taquito.io/docs/staking',
+      keyword: 'stake',
+      run: input => stake(input.stake, Mavryk),
+      showExecutionTime: false,
+      inputRequired: true,
+      inputType: "stake",
+      lastResult: { option: "none", val: false }
+    },
+    {
+      id: "unstake",
+      name: "[boreasnet] Unstake",
+      description: "This test unstake amount from your frozen staked balance into unstaked frozen balance which after 4 cycles will become unstaked finalizable balance",
+      documentation: 'https://taquito.io/docs/staking',
+      keyword: 'unstake',
+      run: input => unstake(input.unstake, Mavryk),
+      showExecutionTime: false,
+      inputRequired: true,
+      inputType: "unstake",
+      lastResult: { option: "none", val: false }
+    },
+    {
+      id: "finalize-unstake",
+      name: "[boreasnet] Finalize unstake",
+      description: "This test transfer all unstaked finalizable balance back into spendable balance",
+      documentation: 'https://taquito.io/docs/staking',
+      keyword: 'finalizeUnstake',
+      run: () => finalizeUnstake(Mavryk),
+      showExecutionTime: false,
+      inputRequired: false,
+      lastResult: { option: "none", val: false }
+    },
+    {
+      id: "send-mav-to-etherlink",
+      name: "[ghostnet] Send mav from Ghostnet to Etherlink",
+      description:
+        "This test allows you send your ghostnet mav to etherlink address",
+      documentation: '',
+      keyword: 'etherlink',
+      run: input =>
+        sendTezToEtherlink(
+          input.amount,
+          input.address,
+          Mavryk
+        ),
+      showExecutionTime: false,
+      inputRequired: true,
+      inputType: "etherlink",
       lastResult: { option: "none", val: false }
     },
     {
@@ -645,7 +794,7 @@ export const init = (
       description: "This test successfully originates a smart contract",
       documentation: 'https://taquito.mavryk.org/docs/originate/#originate-the-contract-using-taquito',
       keyword: 'originate',
-      run: () => originateSuccess(Tezos),
+      run: () => originateSuccess(Mavryk),
       showExecutionTime: false,
       inputRequired: false,
       lastResult: { option: "none", val: false }
@@ -653,10 +802,10 @@ export const init = (
     {
       id: "batch-api",
       name: "Use the Batch API with a wallet",
-      description: "This test sends 0.3 tez to 3 different addresses",
+      description: "This test sends 0.3 mav to 3 different addresses",
       documentation: 'https://taquito.mavryk.org/docs/batch_api/#--the-withtransfer-method',
       keyword: 'withTransfer',
-      run: () => batchApiTest(Tezos),
+      run: () => batchApiTest(Mavryk),
       showExecutionTime: false,
       inputRequired: false,
       lastResult: { option: "none", val: false }
@@ -669,9 +818,9 @@ export const init = (
       keyword: 'withcontractcall',
       run: () =>
         batchApiContractCallsTest(
-          Tezos,
+          Mavryk,
           contract,
-          wallet ? Tezos.wallet : Tezos.contract
+          wallet ? Mavryk.wallet : Mavryk.contract
         ),
       showExecutionTime: false,
       inputRequired: false,
@@ -708,7 +857,7 @@ export const init = (
       description: "This test signs the payload provided by the user wrapped in a failing noop",
       documentation: 'https://taquito.mavryk.org/docs/failing_noop',
       keyword: 'failingNoop',
-      run: input => signFailingNoop(input.text, Tezos),
+      run: input => signFailingNoop(input.text, Mavryk),
       showExecutionTime: false,
       inputRequired: true,
       inputType: "string",
@@ -761,17 +910,17 @@ export const init = (
     },
     {
       id: "permit",
-      name: "Permit contract",
+      name: "[wip] Permit contract",
       description: "This test implements TZIP-17",
       keyword: 'permit',
-      run: () => permit(Tezos, wallet),
+      run: () => permit(Mavryk, wallet),
       showExecutionTime: false,
       inputRequired: false,
       lastResult: { option: "none", val: false }
     },
     {
       id: "sapling-shielded",
-      name: "Sapling shielded transaction",
+      name: "[wip] Sapling shielded transaction",
       description: "This test prepares and sends a shielded transaction to a Sapling pool",
       documentation: 'https://taquito.mavryk.org/docs/sapling/',
       keyword: 'sapling',

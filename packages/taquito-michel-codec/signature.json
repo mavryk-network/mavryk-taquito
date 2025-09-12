@@ -225,7 +225,7 @@
           "version": "8.0.4-beta.0",
           "description": "Michelson parser/validator/formatter",
           "keywords": [
-            "tezos",
+            "mavryk",
             "blockchain",
             "signer"
           ],

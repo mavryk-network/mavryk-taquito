@@ -7,7 +7,7 @@ import {
   RPCRunScriptViewParam,
 } from '@mavrykdynamics/taquito-rpc';
 import { validateAddress, ValidationResult } from '@mavrykdynamics/taquito-utils';
-import { TzReadProvider } from '../../read-provider/interface';
+import { MvReadProvider } from '../../read-provider/interface';
 import {
   InvalidViewSimulationContext,
   ViewSimulationError,
@@ -23,7 +23,7 @@ export interface ExecutionContextParams {
 export class OnChainView {
   constructor(
     private _rpc: RpcClientInterface,
-    private _readProvider: TzReadProvider,
+    private _readProvider: MvReadProvider,
     private _contractAddress: string,
     private _smartContractViewSchema: ViewSchema,
     private _contractStorageType: MichelsonV1Expression,

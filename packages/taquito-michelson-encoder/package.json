@@ -1,9 +1,9 @@
 {
   "name": "@mavrykdynamics/taquito-michelson-encoder",
-  "version": "19.2.3",
+  "version": "20.0.0",
   "description": "converts michelson data and types into convenient JS/TS objects",
   "keywords": [
-    "tezos",
+    "mavryk",
     "blockchain",
     "michelson",
     "smart-contract"
@@ -67,9 +67,9 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/taquito-core": "^19.1.0",
-    "@mavrykdynamics/taquito-rpc": "^19.2.3",
-    "@mavrykdynamics/taquito-utils": "^19.2.3",
+    "@mavrykdynamics/taquito-core": "^20.0.0",
+    "@mavrykdynamics/taquito-rpc": "^20.0.0",
+    "@mavrykdynamics/taquito-utils": "^20.0.0",
     "bignumber.js": "^9.1.2",
     "fast-json-stable-stringify": "^2.1.0"
   },

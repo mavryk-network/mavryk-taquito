@@ -1,4 +1,4 @@
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { stringToBytes } from '@mavrykdynamics/taquito-utils';
 import { tacoContractTzip16 } from "../integration-tests/data/modified-taco-contract"
 import { MichelsonMap } from "@mavrykdynamics/taquito";
@@ -7,8 +7,8 @@ import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network';
   const signer = new InMemorySigner('edskRtmEwZxRzwd1obV9pJzAoLoxXFWTSHbgqpDBRHx1Ktzo5yVuJ37e2R4nzjLnNbxFU4UiBU1iHzAy52pK5YBRpaFwLbByca');
-  const tezos = new TezosToolkit(provider);
-  tezos.setSignerProvider(signer);
+  const mavryk = new MavrykToolkit(provider);
+  mavryk.setSignerProvider(signer);
 
   try {
     console.log('Deploying Tzip16 contract with hostile strings...');
@@ -38,7 +38,7 @@ async function example() {
 
     const tacoShopStorageMap = new MichelsonMap();
 
-    const op = await tezos.contract.originate({
+    const op = await mavryk.contract.originate({
       code: tacoContractTzip16,
       storage: {
         metadata: metadataBigMAp,

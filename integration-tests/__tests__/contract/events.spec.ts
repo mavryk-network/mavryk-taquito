@@ -2,7 +2,7 @@ import { CONFIGS } from "../../config";
 import { mainContractWithDuplicateEvents } from "../../data/main-contract-with-duplicate-events";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Events using contract API: ${rpc}`, () => {
 
@@ -11,7 +11,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     })
     it(`We should be able to access events of an originated contract`, async () => {
       // Contract origination
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: mainContractWithDuplicateEvents,
         storage: 42,
       });

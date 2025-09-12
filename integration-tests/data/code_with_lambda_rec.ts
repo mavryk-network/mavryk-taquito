@@ -1,4 +1,4 @@
-// https://gitlab.com/tezos/tezos/-/blob/master/src/proto_018_Proxford/lib_protocol/test/regression/contracts/rec_id_unit.tz
+// https://gitlab.com/mavryk-network/mavryk-protocol/-/blob/master/src/proto_018_Proxford/lib_protocol/test/regression/contracts/rec_id_unit.mv
 export const lambdaRecCode = [
   { prim: 'parameter', args: [ { prim: 'unit' } ] },
   { prim: 'storage', args: [ { prim: 'unit' } ] },

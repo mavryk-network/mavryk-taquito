@@ -18,7 +18,7 @@ import {
 } from '../types';
 import { SaplingDiffResponse } from '@mavrykdynamics/taquito-rpc';
 import { b58cdecode, Prefix, prefix } from '@mavrykdynamics/taquito-utils';
-import { TzReadProvider } from '@mavrykdynamics/taquito';
+import { MvReadProvider } from '@mavrykdynamics/taquito';
 import { convertValueToBigNumber } from '../sapling-tx-viewer/helpers';
 import { SaplingState } from '../sapling-state/sapling-state';
 import { SaplingWrapper } from '../sapling-module-wrapper';
@@ -32,7 +32,7 @@ export class SaplingTransactionBuilder {
   #contractAddress: string;
   #saplingId: string | undefined;
   #memoSize: number;
-  #readProvider: TzReadProvider;
+  #readProvider: MvReadProvider;
   #saplingWrapper: SaplingWrapper;
   #chainId: string | undefined;
   #saplingState: SaplingState;
@@ -44,7 +44,7 @@ export class SaplingTransactionBuilder {
     },
     saplingForger: SaplingForger,
     saplingContractDetails: SaplingContractDetails,
-    readProvider: TzReadProvider,
+    readProvider: MvReadProvider,
     saplingWrapper = new SaplingWrapper()
   ) {
     this.#saplingForger = saplingForger;

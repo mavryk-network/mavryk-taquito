@@ -1,9 +1,9 @@
-import { PollingSubscribeProvider, TezosToolkit } from '@mavrykdynamics/taquito';
+import { PollingSubscribeProvider, MavrykToolkit } from '@mavrykdynamics/taquito';
 
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network/';
-  const tezos = new TezosToolkit(provider)
-  tezos.setStreamProvider(tezos.getFactory(PollingSubscribeProvider)({ shouldObservableSubscriptionRetry: true, pollingIntervalMilliseconds: 15000 }));
+  const mavryk = new MavrykToolkit(provider)
+  mavryk.setStreamProvider(mavryk.getFactory(PollingSubscribeProvider)({ shouldObservableSubscriptionRetry: true, pollingIntervalMilliseconds: 15000 }));
   try {
 
     const bakerAttestationFilter = {
@@ -18,7 +18,7 @@ async function example() {
       and: [{ destination: 'mv1JcvcbLirx2oH94vjT62SXaTbStyDwsVx5' }, { kind: 'delegation' }]
     }
 
-    const sub = tezos.stream.subscribeOperation({
+    const sub = mavryk.stream.subscribeOperation({
       or: [bakerAttestationFilter, bakerEndorsementFilter, bakerDelegation]
     })
 

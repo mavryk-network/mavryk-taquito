@@ -742,9 +742,9 @@
         "packageJson": {
           "name": "@mavrykdynamics/taquito",
           "version": "8.0.4-beta.0",
-          "description": "High level functionality that builds upon the other packages in the Tezos Typescript Library Suite.",
+          "description": "High level functionality that builds upon the other packages in the Mavryk Typescript Library Suite.",
           "keywords": [
-            "tezos",
+            "mavryk",
             "blockchain"
           ],
           "main": "dist/taquito.umd.js",

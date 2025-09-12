@@ -21,9 +21,9 @@ export class RpcError extends TaquitoError {}
 
 /**
  *  @category Error
- *  @description Error that indicates TezosToolKit has not been configured appropriately
+ *  @description Error that indicates MavrykToolKit has not been configured appropriately
  */
-export class TezosToolkitConfigError extends TaquitoError {}
+export class MavrykToolkitConfigError extends TaquitoError {}
 
 /**
  *  @category Error
@@ -62,6 +62,28 @@ export class InvalidAddressError extends ParameterValidationError {
   }
 }
 
+export class InvalidStakingAddressError extends ParameterValidationError {
+  constructor(
+    public readonly address: string,
+    public readonly errorDetail?: string
+  ) {
+    super();
+    this.name = 'InvalidStakingAddressError';
+    this.message = `Invalid staking address "${address}", you can only set destination as your own address`;
+  }
+}
+
+export class InvalidFinalizeUnstakeAmountError extends ParameterValidationError {
+  constructor(
+    public readonly address: string,
+    public readonly errorDetail?: string
+  ) {
+    super();
+    this.name = 'InvalidFinalizeUnstakeAmountError';
+    this.message = `The amount can only be 0 when finalizing an unstake`;
+  }
+}
+
 /**
  *  @category Error
  *  @description Error that indicates an invalid block hash being passed or used
@@ -80,7 +102,7 @@ export class InvalidBlockHashError extends ParameterValidationError {
 
 /**
  * @category Error
- * @description Error that indicates an invalid amount of tez being passed as a parameter
+ * @description Error that indicates an invalid amount of mav being passed as a parameter
  */
 export class InvalidAmountError extends ParameterValidationError {
   constructor(public readonly amount: string) {

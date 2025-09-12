@@ -51,18 +51,18 @@ const ledgerSigner = new LedgerSigner(
 ```ts
 import { LedgerSigner } from '@mavrykdynamics/taquito-ledger-signer';
 import TransportWeb from '@ledgerhq/hw-transport-webhid';
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 
-const Tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
+const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
 
 const transport = await TransportWeb.create();
 const ledgerSigner = new LedgerSigner(transport);
 
-Tezos.setProvider({ signer: ledgerSigner });
+Mavryk.setProvider({ signer: ledgerSigner });
 
 //Get the public key and the public key hash from the Ledger
-const publicKey = await Tezos.signer.publicKey();
-const publicKeyHash = await Tezos.signer.publicKeyHash();
+const publicKey = await Mavryk.signer.publicKey();
+const publicKeyHash = await Mavryk.signer.publicKeyHash();
 ```
 
 ## Additional Info

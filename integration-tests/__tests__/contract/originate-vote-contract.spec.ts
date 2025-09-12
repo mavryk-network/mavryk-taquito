@@ -4,7 +4,7 @@ import { CONFIGS } from "../../config";
 import { voteSample } from "../../data/vote-contract";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test contract origination of a vote contract through contract api using: ${rpc}`, () => {
 
     beforeEach(async () => {
@@ -12,17 +12,17 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     })
     it('Verify contract.originate for a voting contract and init the storage', async () => {
       // TODO: probably remove this as very expensive
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: voteSample,
         storage: {
           mgr1: {
-            addr: await Tezos.signer.publicKeyHash(),
+            addr: await Mavryk.signer.publicKeyHash(),
             key: null,
           },
           mgr2: {
-            addr: await Tezos.signer.publicKeyHash(),
-            key: await Tezos.signer.publicKeyHash(),
+            addr: await Mavryk.signer.publicKeyHash(),
+            key: await Mavryk.signer.publicKeyHash(),
           },
         }
       })

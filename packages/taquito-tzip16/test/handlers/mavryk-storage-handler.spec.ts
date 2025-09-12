@@ -1,4 +1,4 @@
-import { TezosStorageHandler } from '../../src/handlers/mavryk-storage-handler';
+import { MavrykStorageHandler } from '../../src/handlers/mavryk-storage-handler';
 import {
   InvalidContractMetadataTypeError,
   InvalidUriError,
@@ -7,31 +7,31 @@ import {
 } from '../../src/errors';
 
 describe('Parse Mavryk storage URI test', () => {
-  const tezosStorageHandler = new TezosStorageHandler();
+  const mavrykStorageHandler = new MavrykStorageHandler();
 
   it('Should extract smart contract address, network and path from the URI properly', () => {
     expect(
-      tezosStorageHandler['parseTezosStorageUri']('//KT1RF4nXUitQb2G8TE5H9zApatxeKLtQymtg/here')
+      mavrykStorageHandler['parseMavrykStorageUri']('//KT1RF4nXUitQb2G8TE5H9zApatxeKLtQymtg/here')
     ).toMatchObject({
       contractAddress: 'KT1RF4nXUitQb2G8TE5H9zApatxeKLtQymtg',
       network: undefined,
       path: 'here',
     });
 
-    expect(tezosStorageHandler['parseTezosStorageUri']('hello%2Fworld')).toMatchObject({
+    expect(mavrykStorageHandler['parseMavrykStorageUri']('hello%2Fworld')).toMatchObject({
       contractAddress: undefined,
       network: undefined,
       path: 'hello/world',
     });
 
-    expect(tezosStorageHandler['parseTezosStorageUri']('hello')).toMatchObject({
+    expect(mavrykStorageHandler['parseMavrykStorageUri']('hello')).toMatchObject({
       contractAddress: undefined,
       network: undefined,
       path: 'hello',
     });
 
     expect(
-      tezosStorageHandler['parseTezosStorageUri']('//KT1QDFEu8JijYbsJqzoXq7mKvfaQQamHD1kX/%2Ffoo')
+      mavrykStorageHandler['parseMavrykStorageUri']('//KT1QDFEu8JijYbsJqzoXq7mKvfaQQamHD1kX/%2Ffoo')
     ).toMatchObject({
       contractAddress: 'KT1QDFEu8JijYbsJqzoXq7mKvfaQQamHD1kX',
       network: undefined,
@@ -39,7 +39,7 @@ describe('Parse Mavryk storage URI test', () => {
     });
 
     expect(
-      tezosStorageHandler['parseTezosStorageUri'](
+      mavrykStorageHandler['parseMavrykStorageUri'](
         '//KT1GPDQvmV37orH1XH3SZmVVKFaMuzzqsmN7.mainnet/contents'
       )
     ).toMatchObject({
@@ -48,7 +48,7 @@ describe('Parse Mavryk storage URI test', () => {
       path: 'contents',
     });
 
-    expect(tezosStorageHandler['parseTezosStorageUri']('hello/world')).toBeUndefined();
+    expect(mavrykStorageHandler['parseMavrykStorageUri']('hello/world')).toBeUndefined();
   });
 });
 
@@ -65,7 +65,7 @@ describe('Tzip16 mavryk storage handler test', () => {
     getBigMapKeyByID: jest.Mock<any, any>;
   };
 
-  const tezosStorageHandler = new TezosStorageHandler();
+  const mavrykStorageHandler = new MavrykStorageHandler();
 
   beforeEach(() => {
     mockReadProvider = {
@@ -112,7 +112,7 @@ describe('Tzip16 mavryk storage handler test', () => {
       protocol: 'mavryk-storage',
       location: '//KT1RF4nXUitQb2G8TE5H9zApatxeKLtQymtg/here',
     };
-    const metadata = await tezosStorageHandler.getMetadata(
+    const metadata = await mavrykStorageHandler.getMetadata(
       mockContractAbstraction,
       tzip16Uri,
       mockContext as any
@@ -130,7 +130,7 @@ describe('Tzip16 mavryk storage handler test', () => {
       location: 'hello/world', // invalid
     };
     try {
-      await tezosStorageHandler.getMetadata(
+      await mavrykStorageHandler.getMetadata(
         mockContractAbstraction,
         tzip16Uri as any,
         mockContext as any
@@ -152,7 +152,7 @@ describe('Tzip16 mavryk storage handler test', () => {
       location: '//KT1RF4nXUitQb2G8TE5H9zApatxeKLtQymtg/here',
     };
     try {
-      await tezosStorageHandler.getMetadata(mockContractAbstraction, tzip16Uri, mockContext as any);
+      await mavrykStorageHandler.getMetadata(mockContractAbstraction, tzip16Uri, mockContext as any);
     } catch (ex) {
       expect(ex).toBeInstanceOf(BigMapContractMetadataNotFoundError);
     }
@@ -167,7 +167,7 @@ describe('Tzip16 mavryk storage handler test', () => {
       location: '//KT1RF4nXUitQb2G8TE5H9zApatxeKLtQymtg/here',
     };
     try {
-      await tezosStorageHandler.getMetadata(
+      await mavrykStorageHandler.getMetadata(
         mockContractAbstraction,
         tzip16Uri as any,
         mockContext as any
@@ -186,7 +186,7 @@ describe('Tzip16 mavryk storage handler test', () => {
       location: '//KT1RF4nXUitQb2G8TE5H9zApatxeKLtQymtg/here',
     };
     try {
-      await tezosStorageHandler.getMetadata(
+      await mavrykStorageHandler.getMetadata(
         mockContractAbstraction,
         tzip16Uri as any,
         mockContext as any

@@ -1,9 +1,9 @@
 {
   "name": "@mavrykdynamics/taquito-michel-codec",
-  "version": "19.2.3",
+  "version": "20.0.0",
   "description": "Michelson parser/validator/formatter",
   "keywords": [
-    "tezos",
+    "mavryk",
     "blockchain",
     "signer"
   ],
@@ -66,7 +66,7 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/taquito-core": "^19.1.0"
+    "@mavrykdynamics/taquito-core": "^20.0.0"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.40",

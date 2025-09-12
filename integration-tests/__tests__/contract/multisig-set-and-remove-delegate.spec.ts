@@ -1,22 +1,22 @@
 import { CONFIGS, isSandbox } from "../../config";
-import { MANAGER_LAMBDA, TezosToolkit } from "@mavrykdynamics/taquito";
+import { MANAGER_LAMBDA, MavrykToolkit } from "@mavrykdynamics/taquito";
 import { genericMultisig } from "../../data/multisig";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
   const Funder = lib;
-  let Tezos: TezosToolkit;
+  let Mavryk: MavrykToolkit;
   describe(`Generic Multisig set delegate: ${rpc}`, () => {
     beforeAll(async () => {
       await setup(true);
       // Checks if test is being run in Flextesa or not
       // If it is, fund the signer account using using 'Funder', which is the flextesa_bootstrap account
       if (isSandbox({ rpc })) {
-        Tezos = await createAddress();
-        const pkh = await Tezos.signer.publicKeyHash();
+        Mavryk = await createAddress();
+        const pkh = await Mavryk.signer.publicKeyHash();
         const fund = await Funder.contract.transfer({ amount: 10000, to: pkh });
         await fund.confirmation();
       } else {
-        Tezos = Funder;
+        Mavryk = Funder;
       }
     })
     test('test manager transfers set delegate scenarios', async () => {
@@ -25,17 +25,17 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       const account2 = await createAddress();
       const account3 = await createAddress();
 
-      const pkh = await Tezos.signer.publicKeyHash();
-      const delegateInfo = await Tezos.rpc.getDelegate(pkh);
+      const pkh = await Mavryk.signer.publicKeyHash();
+      const delegateInfo = await Mavryk.rpc.getDelegate(pkh);
 
       if (delegateInfo === null) {
-        const op = await Tezos.contract.registerDelegate({});
+        const op = await Mavryk.contract.registerDelegate({});
         await op.confirmation();
         expect(op.hash).toBeDefined();
         expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
       }
 
-      const op2 = await Tezos.contract.originate({
+      const op2 = await Mavryk.contract.originate({
         balance: "1",
         code: genericMultisig,
         storage: {
@@ -48,7 +48,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       const contract = await op2.contract();
       expect(op2.status).toEqual('applied')
 
-      const delegate = await Tezos.rpc.getDelegate(contract.address)
+      const delegate = await Mavryk.rpc.getDelegate(contract.address)
       expect(delegate).toEqual(null)
 
       const pair = ({ data, type }: any, value: any) => {
@@ -64,7 +64,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
         }
       }
 
-      const packed = await Tezos.rpc.packData(pair({
+      const packed = await Mavryk.rpc.packData(pair({
         data: {
           prim: 'Pair',
           args: [
@@ -135,10 +135,10 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       ).send()
       await op3.confirmation();
 
-      const check_the_delegate = await Tezos.rpc.getDelegate(contract.address)
+      const check_the_delegate = await Mavryk.rpc.getDelegate(contract.address)
       expect(check_the_delegate).toEqual(pkh)
 
-      const packed2 = await Tezos.rpc.packData(pair({
+      const packed2 = await Mavryk.rpc.packData(pair({
         data: {
           prim: 'Pair',
           args: [
@@ -209,7 +209,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
       ).send()
 
       await op4.confirmation();
-      const check_the_delegate_again = await Tezos.rpc.getDelegate(contract.address)
+      const check_the_delegate_again = await Mavryk.rpc.getDelegate(contract.address)
       expect(check_the_delegate_again).toEqual(null)
 
     })

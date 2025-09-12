@@ -1,3 +1,4 @@
+// ref https://gitlab.com/mavryk-network/mavryk-protocol/-/blob/master/src/lib_crypto/base58.ml
 export enum Prefix {
   MV1 = 'mv1',
   MV2 = 'mv2',
@@ -45,6 +46,8 @@ export enum Prefix {
 
   SR1 = 'sr1',
   SRC1 = 'src1',
+
+  SH = 'sh',
 }
 
 export const prefix = {
@@ -94,6 +97,8 @@ export const prefix = {
 
   [Prefix.SR1]: new Uint8Array([6, 124, 117]),
   [Prefix.SRC1]: new Uint8Array([17, 165, 134, 138]),
+
+  [Prefix.SH]: new Uint8Array([2, 116, 180]),
 };
 
 export const prefixLength: { [key: string]: number } = {
@@ -124,4 +129,6 @@ export const prefixLength: { [key: string]: number } = {
 
   [Prefix.SR1]: 20,
   [Prefix.SRC1]: 32,
+
+  [Prefix.SH]: 48,
 };

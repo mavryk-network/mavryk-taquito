@@ -85,7 +85,7 @@ export class OperationBatch extends Provider {
 
   /**
    *
-   * @description Transfer tickets from a Tezos address (mv1,mv2 or mv3) to a smart contract address( KT1)
+   * @description Transfer tickets from a Mavryk address (mv1,mv2 or mv3) to a smart contract address( KT1)
    *
    * @param params Transfer operation parameter
    */

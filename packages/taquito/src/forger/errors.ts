@@ -1,4 +1,4 @@
-import { TaquitoError, TezosToolkitConfigError } from '@mavrykdynamics/taquito-core';
+import { TaquitoError, MavrykToolkitConfigError } from '@mavrykdynamics/taquito-core';
 
 /**
  *  @category Error
@@ -16,11 +16,11 @@ export class ForgingMismatchError extends TaquitoError {
  *  @category Error
  *  @description Error that indicates no forger has been configured for CompositeForger
  */
-export class UnspecifiedForgerError extends TezosToolkitConfigError {
+export class UnspecifiedForgerError extends MavrykToolkitConfigError {
   constructor() {
     super();
     this.name = 'UnspecifiedForgerError';
     this.message =
-      'No forger has been configured. Please configure new CompositeForger([rpcForger, localForger]) with your TezosToolkit instance.';
+      'No forger has been configured. Please configure new CompositeForger([rpcForger, localForger]) with your MavrykToolkit instance.';
   }
 }

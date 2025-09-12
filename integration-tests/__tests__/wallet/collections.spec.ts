@@ -3,14 +3,14 @@ import { MichelsonMap } from "@mavrykdynamics/taquito";
 import { collection_code } from "../../data/collection_contract";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test contract origination with collection through wallet api using: ${rpc}`, () => {
 
     beforeEach(async () => {
       await setup()
     })
     it('Verify wallet.originate for a contract with set, list, map and then exercise all collections', async () => {
-      const addr = await Tezos.signer.publicKeyHash();
+      const addr = await Mavryk.signer.publicKeyHash();
 
       const initialStorage = {
         set1: ['2', '1', '3'],
@@ -18,7 +18,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         map1: MichelsonMap.fromLiteral({ "2": "1", "1": "1" })
       }
 
-      const op = await Tezos.wallet.originate({
+      const op = await Mavryk.wallet.originate({
         balance: "1",
         code: collection_code,
         storage: initialStorage

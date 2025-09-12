@@ -3,7 +3,7 @@ import { CONFIGS } from '../../config';
 import { voteSampleGlobalConstants } from '../../data/vote_contract_global_constant_storage';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-    const Tezos = lib;
+    const Mavryk = lib;
 
     describe(`Originate a voting contract having two global constants in the storage section of its code: ${rpc}`, () => {
         const globalConstant1 = {
@@ -52,7 +52,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         beforeEach(async () => {
             await setup(true);
 
-            // We need to set up a global constants provider on the TezosToolkit
+            // We need to set up a global constants provider on the MavrykToolkit
             // We use an instance of DefaultGlobalConstantsProvider where the global constant hash and its corresponding expression need to be loaded manually
             // Taquito use the globalConstantProvider to properly transform the storage object into the corresponding Michelson data on contract origination
             const globalConstantProvider = new DefaultGlobalConstantsProvider();
@@ -60,12 +60,12 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
                 [constantHash1]: globalConstant1,
                 [constantHash2]: globalConstant2,
             })
-            Tezos.setGlobalConstantsProvider(globalConstantProvider);
+            Mavryk.setGlobalConstantsProvider(globalConstantProvider);
         })
         test('deploy a voting contract having global constants in the storage part of its code using the contract API', async () => {
             try {
                 // First, we need to register the expression (globalConstant1) as global constants
-                const op = await Tezos.contract.registerGlobalConstant({
+                const op = await Mavryk.contract.registerGlobalConstant({
                     value: globalConstant1
                 });
                 await op.confirmation();
@@ -76,7 +76,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
                 expect(ex.message).toMatch(/context.storage_error/);
             }
             try {
-                const op = await Tezos.contract.registerGlobalConstant({
+                const op = await Mavryk.contract.registerGlobalConstant({
                     value: globalConstant2
                 });
                 await op.confirmation();
@@ -85,7 +85,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
                 expect(ex.message).toMatch(/context.storage_error/);
             }
 
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 balance: "1",
                 code: voteSampleGlobalConstants,
                 storage: storageArg
@@ -103,7 +103,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
         test('deploy a voting contract having global constants in the storage part of its code using the wallet API', async () => {
 
-            const op = await Tezos.wallet.originate({
+            const op = await Mavryk.wallet.originate({
                 balance: "1",
                 code: voteSampleGlobalConstants,
                 storage: storageArg
@@ -120,7 +120,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         });
 
         test('deploy a voting contract having global constants in the storage part of its code using the batch method of the contract API', async () => {
-            const op = await Tezos.contract.batch().withOrigination({
+            const op = await Mavryk.contract.batch().withOrigination({
                 balance: "1",
                 code: voteSampleGlobalConstants,
                 storage: storageArg
@@ -131,7 +131,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         });
 
         test('deploy a voting contract having global constants in the storage part of its code using the batch method of the wallet API', async () => {
-            const op = await Tezos.wallet.batch().withOrigination({
+            const op = await Mavryk.wallet.batch().withOrigination({
                 balance: "1",
                 code: voteSampleGlobalConstants,
                 storage: storageArg

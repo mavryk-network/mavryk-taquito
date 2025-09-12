@@ -1,16 +1,16 @@
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
 
 async function example() {
     const provider = 'https://basenet.rpc.mavryk.network';
     const signer = new InMemorySigner('edskRtmEwZxRzwd1obV9pJzAoLoxXFWTSHbgqpDBRHx1Ktzo5yVuJ37e2R4nzjLnNbxFU4UiBU1iHzAy52pK5YBRpaFwLbByca');
-    const tezos = new TezosToolkit(provider);
-    tezos.setSignerProvider(signer);
+    const mavryk = new MavrykToolkit(provider);
+    mavryk.setSignerProvider(signer);
 
     try {
         console.log("signer pkh:");
         console.log(await signer.publicKeyHash());
-        const contract = await tezos.contract.at('KT1MhpoMPmvT3mNbxNTjL5M6kqJ5morXY5UC');
+        const contract = await mavryk.contract.at('KT1MhpoMPmvT3mNbxNTjL5M6kqJ5morXY5UC');
         console.log("Printing contract methods...");
         console.log(contract.methodsObject);
         console.log("Showing initial storage...");

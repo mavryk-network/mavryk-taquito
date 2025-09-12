@@ -4,7 +4,7 @@
 
 This package can:
 
-- Retrieve Michelson in JSON form from the Tezos Node RPC and convert it to plain Michelson.
+- Retrieve Michelson in JSON form from the Mavryk Node RPC and convert it to plain Michelson.
 - Parse plain Michelson (including Macros) and expand/convert it to JSON Michelson suitable for injection into the Tezo Blockchain.
 - Validate Michelson to ensure correctness
 
@@ -68,7 +68,7 @@ Output:
 ### Pretty Print a Michelson contract
 
 ```js
-    const contract = await Tezos.contract.at('KT1EctCuorV2NfVb1XTQgvzJ88MQtWP8cMMv')
+    const contract = await Mavryk.contract.at('KT1EctCuorV2NfVb1XTQgvzJ88MQtWP8cMMv')
     const p = new Parser()
 
     const michelsonCode = p.parseJSON(contract.script.code as JSON[])
@@ -79,7 +79,7 @@ Output:
 
 Serializes any value of packable type to its optimized binary representation identical to the one used by PACK and UNPACK Michelson instructions.
 Without a type definition (not recommended) the data will be encoded as a binary form of a generic Michelson expression.
-Type definition allows some types like `timestamp` and `address` and other base58 representable types to be encoded to corresponding optimized binary forms borrowed from the Tezos protocol.
+Type definition allows some types like `timestamp` and `address` and other base58 representable types to be encoded to corresponding optimized binary forms borrowed from the Mavryk protocol.
 
 ```js
 const data: MichelsonData = {

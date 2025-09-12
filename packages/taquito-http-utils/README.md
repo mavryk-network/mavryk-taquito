@@ -9,7 +9,7 @@ The `HttpBackend` class contains a `createRequest` method which accepts options 
 
 Parameters for `createRequest`:
 
-`url`(string): RPC URL pointing to the Tezos node 
+`url`(string): RPC URL pointing to the Mavryk node 
 `method`(string): HTTP method of the request
 `timeout`(number): request timeout 
 `json`(boolean): Parse response into JSON when set to `true`; defaults to `true`

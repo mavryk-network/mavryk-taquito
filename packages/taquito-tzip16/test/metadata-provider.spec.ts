@@ -9,7 +9,7 @@ describe('Metadata provider test', () => {
   let mockHttpHandler: {
     getMetadata: jest.Mock<any, any>;
   };
-  let mockTezosStorageHandler: {
+  let mockMavrykStorageHandler: {
     getMetadata: jest.Mock<any, any>;
   };
   let mockIpfsHttpHandler: {
@@ -20,7 +20,7 @@ describe('Metadata provider test', () => {
     mockHttpHandler = {
       getMetadata: jest.fn(),
     };
-    mockTezosStorageHandler = {
+    mockMavrykStorageHandler = {
       getMetadata: jest.fn(),
     };
     mockIpfsHttpHandler = {
@@ -29,7 +29,7 @@ describe('Metadata provider test', () => {
     handlers = new Map<string, Handler>([
       ['http', mockHttpHandler],
       ['https', mockHttpHandler],
-      ['mavryk-storage', mockTezosStorageHandler],
+      ['mavryk-storage', mockMavrykStorageHandler],
       ['ipfs', mockIpfsHttpHandler],
     ]);
     metadataProvider = new MetadataProvider(handlers);
@@ -79,7 +79,7 @@ describe('Metadata provider test', () => {
   });
 
   it('Should succesfully fetch metadata for mavryk-storage', async () => {
-    mockTezosStorageHandler.getMetadata.mockResolvedValue(
+    mockMavrykStorageHandler.getMetadata.mockResolvedValue(
       `{"name":"test","description":"A metadata test","version":"0.1","license":"MIT","authors":["Taquito <https://taquito.mavryk.org/>"],"homepage":"https://taquito.mavryk.org/"}`
     );
 

@@ -6,7 +6,7 @@ import { tokenCode, tokenInit } from '../../data/tokens';
 import BigNumber from 'bignumber.js';
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test contract origination with initialized Maps with variants of data through contract api using: ${rpc}`, () => {
     /** The purpose of the test is to make sure that the keys in the map are properly ordered by Taquito before injection of the operation,
@@ -17,7 +17,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
     })
 
     it('Verify contract.originate with initialized Map with variants of data', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: '1',
         code: storageContract,
         storage: {
@@ -78,7 +78,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
     test(
       'originates a contract with empty bigmap and fetches the storage/bigmap',
       async () => {
-        const signer = await Tezos.signer.publicKeyHash();
+        const signer = await Mavryk.signer.publicKeyHash();
 
         const bigMapInit = new MichelsonMap();
         bigMapInit.set(signer, { 0: '1', 1: new MichelsonMap() });
@@ -86,7 +86,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
         bigMapInit.set('mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ', { 0: '3', 1: new MichelsonMap() });
         bigMapInit.set('mv3WNhwFRPV4fCkK2iBDWZtLNsDg4tecU5X5', { 0: '4', 1: new MichelsonMap() });
         // Deploy a contract with a big map
-        const op = await Tezos.contract.originate({
+        const op = await Mavryk.contract.originate({
           code: tokenCode,
           storage: {
             0: bigMapInit,
@@ -147,7 +147,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
         );
 
         // Specify a level
-        const { header } = await Tezos.rpc.getBlock();
+        const { header } = await Mavryk.rpc.getBlock();
 
         // Fetch multiples keys
         const bigMapValuesWithLevel = await bigMap.getMultipleValues<BigMapVal>(
@@ -171,11 +171,11 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
       }
     );
     it('Originate contract and init bigmap to empty map', async () => {
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: '1',
         code: tokenBigmapCode,
         storage: {
-          owner: await Tezos.signer.publicKeyHash(),
+          owner: await Mavryk.signer.publicKeyHash(),
           accounts: new MichelsonMap(),
           totalSupply: '0',
         },
@@ -186,10 +186,10 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
     });
     it('originates a contract with empty bigmap and fetches the storage/bigmap', async () => {
       // Deploy a contract with a big map
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: '1',
         code: tokenCode,
-        init: tokenInit(`${await Tezos.signer.publicKeyHash()}`),
+        init: tokenInit(`${await Mavryk.signer.publicKeyHash()}`),
       });
       await op.confirmation();
       const contract = await op.contract();
@@ -201,27 +201,27 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
       const bigMap = storage['0'];
 
       // Fetch the key (current pkh that is running the test)
-      const bigMapValue = await bigMap.get(await Tezos.signer.publicKeyHash());
+      const bigMapValue = await bigMap.get(await Mavryk.signer.publicKeyHash());
       expect(bigMapValue['0'].toString()).toEqual('2');
       expect(bigMapValue['1']).toEqual(expect.objectContaining(new MichelsonMap()));
     });
 
     it('Return undefined when BigMap key is not found', async () => {
-      const myContract = await Tezos.contract.at(knownBigMapContract);
+      const myContract = await Mavryk.contract.at(knownBigMapContract);
       const contractStorage: any = await myContract.storage();
       const value = await contractStorage.ledger.get('mv19g9pKpuXGNKHv9unEpUHY1UBiAfhzX1dj');
       expect(value).toBeUndefined();
     });
 
     it('originates a contract with empty bigmap and fetches value in the bigMap using local packing', async () => {
-      // Configure the Tezostoolkit to use the MichelCodecPacker (the data will be packed locally instead of using the rpc)
-      Tezos.setPackerProvider(new MichelCodecPacker());
+      // Configure the mavrykToolkit to use the MichelCodecPacker (the data will be packed locally instead of using the rpc)
+      Mavryk.setPackerProvider(new MichelCodecPacker());
 
       // Deploy a contract with a big map
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: '1',
         code: tokenCode,
-        init: tokenInit(`${await Tezos.signer.publicKeyHash()}`),
+        init: tokenInit(`${await Mavryk.signer.publicKeyHash()}`),
       });
       await op.confirmation();
       const contract = await op.contract();
@@ -233,20 +233,20 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
       const bigMap = storage['0'];
 
       // Fetch the key (current pkh that is running the test)
-      const bigMapValue = await bigMap.get(await Tezos.signer.publicKeyHash());
+      const bigMapValue = await bigMap.get(await Mavryk.signer.publicKeyHash());
       expect(bigMapValue['0'].toString()).toEqual('2');
       expect(bigMapValue['1']).toEqual(expect.objectContaining(new MichelsonMap()));
     });
 
     it('originate a contract with empty bigMap but represented with object literal', async () => {
-      const signer = await Tezos.signer.publicKeyHash();
+      const signer = await Mavryk.signer.publicKeyHash();
       const objLitAsMichelsonMap = {
         [signer]: { 0: '1', 1: {} },
         'mv3Bk6yGMcuVGYqzJ31iMQyhNhmfSJAJJina': { 0: '2', 1: {} },
         'mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ': { 0: '3', 1: {} },
         'mv3WNhwFRPV4fCkK2iBDWZtLNsDg4tecU5X5': { 0: '4', 1: {} },
       }
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         code: tokenCode,
         storage: {
           0: objLitAsMichelsonMap,

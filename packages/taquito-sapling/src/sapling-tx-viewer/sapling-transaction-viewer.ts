@@ -9,7 +9,7 @@ import { bufToUint8Array, convertValueToBigNumber, readableFormat } from './help
 import { KDF_KEY, OCK_KEY } from '../constants';
 import { Input, SaplingContractId, SaplingIncomingAndOutgoingTransaction } from '../types';
 import { SaplingTransactionViewerError } from '../errors';
-import { TzReadProvider } from '@mavrykdynamics/taquito';
+import { MvReadProvider } from '@mavrykdynamics/taquito';
 
 /**
  * @description Allows to retrieve and decrypt sapling transactions using on a viewing key
@@ -20,13 +20,13 @@ import { TzReadProvider } from '@mavrykdynamics/taquito';
  */
 export class SaplingTransactionViewer {
   #viewingKeyProvider: InMemoryViewingKey;
-  #readProvider: TzReadProvider;
+  #readProvider: MvReadProvider;
   #saplingContractId: SaplingContractId;
 
   constructor(
     inMemoryViewingKey: InMemoryViewingKey,
     saplingContractId: SaplingContractId,
-    readProvider: TzReadProvider
+    readProvider: MvReadProvider
   ) {
     this.#viewingKeyProvider = inMemoryViewingKey;
     this.#saplingContractId = saplingContractId;

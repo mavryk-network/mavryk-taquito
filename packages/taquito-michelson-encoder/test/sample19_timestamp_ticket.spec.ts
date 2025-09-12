@@ -14,7 +14,7 @@ describe('Schema with a ticket of type timestamp inside a big map %tickets in st
         current_pot: new BigNumber('0'),
         opened_at: '2019-09-09T12:09:37.000Z',
         settings: {
-          pool_type: 'XTZ-USD',
+          pool_type: 'MVRK-USD',
           entrance_fee: new BigNumber('2'),
           minimum_bet: new BigNumber('2'),
           open_period: new BigNumber('86400'),

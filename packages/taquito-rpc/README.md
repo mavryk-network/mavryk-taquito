@@ -2,11 +2,11 @@
 *Documentation can be found [here](https://taquito.mavryk.org/docs/rpc_package)*  
 *TypeDoc style documentation is available on-line [here](https://taquito.mavryk.org/typedoc/modules/_taquito_rpc.html)*
 
-`@mavrykdynamics/taquito-rpc` is an npm package that provides low-level methods and types to invoke RPC calls from a Nomadic Tezos RPC node.
+`@mavrykdynamics/taquito-rpc` is an npm package that provides low-level methods and types to invoke RPC calls from a Nomadic Mavryk RPC node.
 
 ## General Information
 
-The RPC package can be used to query the RPC API of your chosen node. Methods in the RPC package map one-to-one to the corresponding Tezos RPC API endpoints. All responses from the RPC are returns with TypeScript types.
+The RPC package can be used to query the RPC API of your chosen node. Methods in the RPC package map one-to-one to the corresponding Mavryk RPC API endpoints. All responses from the RPC are returns with TypeScript types.
 
 The higher-level `@mavrykdynamics/taquito` package builds on this RPC package.
 
@@ -32,14 +32,14 @@ const balance = await client.getBalance('mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv');
 
 ### RpcClientCache
 
-The `RpcClientCache` class aims to improve the performance of dApps built using Taquito by reducing the number of calls made to the RPC. Its constructor takes a RpcClient instance as a parameter and an optional ttl (time to live). The RpcClient responses will be cached for the period defined by the ttl (default is of 1000 milliseconds). The `RpcClientCache` can be injected to the TezosToolkit as follow:
+The `RpcClientCache` class aims to improve the performance of dApps built using Taquito by reducing the number of calls made to the RPC. Its constructor takes a RpcClient instance as a parameter and an optional ttl (time to live). The RpcClient responses will be cached for the period defined by the ttl (default is of 1000 milliseconds). The `RpcClientCache` can be injected to the MavrykToolkit as follow:
 
 ```ts
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 import { RpcClient, RpcClientCache } from '@mavrykdynamics/taquito-rpc';
 
 const rpcClient = new RpcClient('https://YOUR_PREFERRED_RPC_URL');
-const tezos = new TezosToolkit(new RpcClientCache(rpcClient));
+const mavryk = new MavrykToolkit(new RpcClientCache(rpcClient));
 ```
 ## Additional info
 

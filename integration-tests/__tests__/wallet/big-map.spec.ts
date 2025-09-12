@@ -3,7 +3,7 @@ import { storageContract } from "../../data/storage-contract";
 import { MichelsonMap } from "@mavrykdynamics/taquito";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test contract origination with initialized Map with variants of data through wallet api using: ${rpc}`, () => {
 
@@ -13,7 +13,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     it('Verify wallet.originate with initialized Map with variants of data', async () => {
 
-      const op = await Tezos.wallet.originate({
+      const op = await Mavryk.wallet.originate({
         balance: "1",
         code: storageContract,
         storage: {

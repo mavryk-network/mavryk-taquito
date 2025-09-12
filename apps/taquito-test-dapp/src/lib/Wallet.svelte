@@ -1,20 +1,23 @@
 <script lang="ts">
   import { onMount, afterUpdate } from "svelte";
   import { fly } from "svelte/transition";
-  import { TezosToolkit } from "@mavrykdynamics/taquito";
+  import { MavrykToolkit } from "@mavrykdynamics/taquito";
   import { BeaconWallet } from "@mavrykdynamics/taquito-beacon-wallet";
   import { BeaconEvent, type DAppClientOptions } from "@mavrykdynamics/beacon-sdk";
   import store from "../store";
   import { formatTokenAmount, shortenHash } from "../utils";
-  import { defaultMatrixNode, getRpcUrl, defaultNetworkType, type SupportedNetworks } from "../config";
-  import type { TezosAccountAddress } from "../types";
+  import {
+    defaultMatrixNode,
+    getRpcUrl,
+    defaultNetworkType,
+    type SupportedNetworks,
+  } from "../config";
+  import type { MavrykAccountAddress } from "../types";
 
   let showDialog = false;
   let connectedWallet = "";
 
-  const createNewWallet = (config: {
-    networkType: SupportedNetworks,
-  }) => {
+  const createNewWallet = (config: { networkType: SupportedNetworks }) => {
     const options: DAppClientOptions = {
       name: "Taquito Test Dapp",
       matrixNodes: [defaultMatrixNode] as any,
@@ -23,7 +26,7 @@
         rpcUrl: getRpcUrl(config.networkType),
       },
       walletConnectOptions: {
-        projectId: 'ba97fd7d1e89eae02f7c330e14ce1f36',
+        projectId: "ba97fd7d1e89eae02f7c330e14ce1f36",
       },
       enableMetrics: $store.enableMetrics,
     };
@@ -52,14 +55,14 @@
     try {
       await wallet.requestPermissions();
 
-      const userAddress = (await wallet.getPKH()) as TezosAccountAddress;
+      const userAddress = (await wallet.getPKH()) as MavrykAccountAddress;
       store.updateUserAddress(userAddress);
       const url = getRpcUrl($store.networkType);
-      const Tezos = new TezosToolkit(url);
-      Tezos.setWalletProvider(wallet);
-      store.updateTezos(Tezos);
+      const Mavryk = new MavrykToolkit(url);
+      Mavryk.setWalletProvider(wallet);
+      store.updateMavryk(Mavryk);
 
-      const balance = await Tezos.tz.getBalance(userAddress);
+      const balance = await Mavryk.mv.getBalance(userAddress);
       if (balance) {
         store.updateUserBalance(balance.toNumber());
       }
@@ -87,16 +90,16 @@
     const wallet = createNewWallet(config);
     store.updateWallet(wallet);
     const url = getRpcUrl(config.networkType);
-    const Tezos = new TezosToolkit(url);
-    Tezos.setWalletProvider(wallet);
-    store.updateTezos(Tezos);
+    const Mavryk = new MavrykToolkit(url);
+    Mavryk.setWalletProvider(wallet);
+    store.updateMavryk(Mavryk);
 
     const activeAccount = await wallet.client.getActiveAccount();
     if (activeAccount) {
-      const userAddress = (await wallet.getPKH()) as TezosAccountAddress;
+      const userAddress = (await wallet.getPKH()) as MavrykAccountAddress;
       store.updateUserAddress(userAddress);
 
-      const balance = await Tezos.tz.getBalance(userAddress);
+      const balance = await Mavryk.mv.getBalance(userAddress);
       if (balance) {
         store.updateUserBalance(balance.toNumber());
       }

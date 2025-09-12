@@ -40,7 +40,7 @@ describe('SaplingToolkit', () => {
     };
 
     mockReadProvider.getSaplingDiffById.mockResolvedValue(saplingState);
-    mockReadProvider.getChainId.mockResolvedValue('NetXLH1uAxK7CCh');
+    mockReadProvider.getChainId.mockResolvedValue('NetXmtMsNf69w1w');
 
     mockReadProvider.getSaplingDiffById.mockResolvedValue({
       root: '5de3573fbee0b1c59f7f02da3a5b30d0dd51f64b65ddd6fe21bb0c5b1e185e27',
@@ -495,7 +495,7 @@ describe('SaplingToolkit', () => {
     );
   });
 
-  it('should throw when preparing an unshielded transaction if the `to` parameter is not a Tezos address', async () => {
+  it('should throw when preparing an unshielded transaction if the `to` parameter is not a Mavryk address', async () => {
     await expect(
       saplingToolkit.prepareUnshieldedTransaction({
         to: 'zet12mVvzJ4QJhnNQetGHzdwTMcLgNrdC4SFact6BB5jpeqGAefWip3iGgEjvDA9z7b9Y',

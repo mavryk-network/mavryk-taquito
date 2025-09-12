@@ -13,7 +13,7 @@ import { CONFIGS } from '../../config';
 **/
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const weeklynet = protocol === Protocols.ProtoALpha ? test : test.skip;
 
   describe(`Test contracts using: ${rpc}`, () => {
@@ -23,7 +23,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet("Verify we can access the stack of the caller by using the instruction add.", async () => {
       try {
-        const opGetter = await Tezos.contract.originate({
+        const opGetter = await Mavryk.contract.originate({
           code: ` { parameter unit;
                     storage unit;
                     code
@@ -64,7 +64,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet("Verify we can access the stack of the caller by using the instruction dig n", async () => {
       try {
-        const opGetter = await Tezos.contract.originate({
+        const opGetter = await Mavryk.contract.originate({
           code: ` { parameter unit;
                     storage unit;
                     code
@@ -101,7 +101,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet("Verify we can access the stack of the caller by using the instruction dup.", async () => {
       try {
-        const opGetter = await Tezos.contract.originate({
+        const opGetter = await Mavryk.contract.originate({
           code: ` { parameter unit;
                     storage unit;
                     code

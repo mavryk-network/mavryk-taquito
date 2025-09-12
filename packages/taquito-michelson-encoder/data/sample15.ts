@@ -125,7 +125,7 @@ export const setChildRecordParam = {
                             {
                               "prim": "mumav",
                               "annots": [
-                                "%tez"
+                                "%mav"
                               ]
                             }
                           ]

@@ -24,11 +24,11 @@ npm i --save @mavrykdynamics/taquito-signer
 
 ```js
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 
-const Tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
+const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
 
-Tezos.setProvider({ signer: await InMemorySigner.fromSecretKey('edsk...') });
+Mavryk.setProvider({ signer: await InMemorySigner.fromSecretKey('edsk...') });
 ```
 
 ### Loading an encrypted private key with a passphrase
@@ -37,10 +37,10 @@ If your private key is encrypted, you can specify a passphrase to decrypt it. Do
 
 ```js
 import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { TezosToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/taquito';
 
-const Tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
-Tezos.setProvider({
+const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
+Mavryk.setProvider({
   signer: await InMemorySigner.fromSecretKey('your_private_key', 'your_passphrase'),
 });
 ```

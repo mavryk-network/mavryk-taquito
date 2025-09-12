@@ -3,7 +3,7 @@ import { managerCode } from '../../data/manager_code';
 import { DefaultContractType, MANAGER_LAMBDA, OriginationOperation } from '@mavrykdynamics/taquito';
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   let op: OriginationOperation;
   let contract: DefaultContractType;
@@ -11,10 +11,10 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract }) => {
     beforeAll(async () => {
       await setup();
 
-      op = await Tezos.contract.originate({
+      op = await Mavryk.contract.originate({
         balance: "1",
         code: managerCode,
-        init: { "string": await Tezos.signer.publicKeyHash() },
+        init: { "string": await Mavryk.signer.publicKeyHash() },
       });
 
       await op.confirmation();
@@ -24,7 +24,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract }) => {
     it('should be able to transfer from implicit to originated contracts', async () => {
       // Transfer from implicit account (mv1) to contract (kt1_alice)
       // A regular transfer operation is made. No smart contract calls required for this scenario.
-      const op = await Tezos.contract.transfer({ to: contract.address, amount: 1 });
+      const op = await Mavryk.contract.transfer({ to: contract.address, amount: 1 });
       await op.confirmation();
       expect(op.status).toEqual('applied');
     });
@@ -68,7 +68,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract }) => {
         const op = await contract.methods.do(MANAGER_LAMBDA.transferImplicit('mv1UE4jMeeBM49FjNmyvtE19aBKT73HDvM2m', 50 * 1000000)).send({ amount: 0 });
         await op.confirmation();
       } catch (ex: any) {
-        expect(ex.message).toContain('tez.subtraction_underflow')
+        expect(ex.message).toContain('mav.subtraction_underflow')
       }
     });
   });

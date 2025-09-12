@@ -9,7 +9,7 @@ import { ligoSample } from "../../data/ligo-simple-contract";
  */
 
 CONFIGS().forEach(({ lib, setup }) => {
-    const tezos = lib;
+    const mavryk = lib;
 
     describe('Test LedgerSigner declining operations to verify that Ledger throw a proper error', () => {
         let transport: LedgerTransport;
@@ -64,9 +64,9 @@ CONFIGS().forEach(({ lib, setup }) => {
                         false,
                         DerivationType.ED25519
                     );
-                    tezos.setSignerProvider(signer);
+                    mavryk.setSignerProvider(signer);
                     try {
-                        const op = await tezos.wallet.transfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.1 }).send()
+                        const op = await mavryk.wallet.transfer({ to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.1 }).send()
                         await op.confirmation()
                     }
                     catch (error: any) {
@@ -84,9 +84,9 @@ CONFIGS().forEach(({ lib, setup }) => {
                         false,
                         DerivationType.ED25519
                     );
-                    tezos.setSignerProvider(signer);
+                    mavryk.setSignerProvider(signer);
                     try {
-                        const op = await tezos.contract.originate({
+                        const op = await mavryk.contract.originate({
                             balance: "1",
                             code: ligoSample,
                             storage: 0,

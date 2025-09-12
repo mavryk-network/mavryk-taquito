@@ -280,7 +280,7 @@ export const contractStorage = {
 
 export const blockHeader = {
   protocol: 'PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx',
-  chain_id: 'NetXdQprcVkpaWU',
+  chain_id: 'NetXXAAR1wWQhhe',
   hash: 'BMLSgpbkkpjwPcz4V73DBehuyUiusANELHKPMiQhsb9psm5gTWD',
   level: 2100696,
   proto: 11,
@@ -720,3 +720,5 @@ export const liveBlocks = [
   'BMcczQyMnGAzM2WJPQ2vbgyzryg52GQgNWLggpHDKPqhQzJUeT8',
   'BMdaQruY6gep3cmRwGoxEUqx2XJ79XQKqpTT7jusKLA1bSTowRc',
 ];
+
+export const aiLaunchCycle = 6;

@@ -11,7 +11,7 @@ import { CONFIGS } from '../../config';
 // We think of the underlying architecture (type system, stack separation, etc.) as a black box.
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const weeklynet = protocol === Protocols.ProtoALpha ? test : test.skip;
 
   describe(`Test contracts using: ${rpc}`, () => {
@@ -21,7 +21,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet("Verify ticket is not easily created by a callback - address and option", async () => {
       try {
-        const opCaller = await Tezos.contract.originate({
+        const opCaller = await Mavryk.contract.originate({
           code: ` { parameter (or (address %init) (option %setToken (ticket string))) ;
                     storage (option (ticket string)) ;
                     code { UNPAIR ;
@@ -45,7 +45,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
         expect(opCaller.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
         const opCallerContract = await opCaller.contract();
 
-        const opGetter = await Tezos.contract.originate({
+        const opGetter = await Mavryk.contract.originate({
           code: `        {  parameter unit;
                             storage unit;
                             code
@@ -88,7 +88,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet("Verify ticket is not easily created by a callback - string and option ", async () => {
       try {
-        const opCaller = await Tezos.contract.originate({
+        const opCaller = await Mavryk.contract.originate({
           code: ` { parameter
                       (or (pair %init (address %adrAdr) (string %strAdr)) (option %setToken (ticket string))) ;
                     storage unit ;
@@ -117,7 +117,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
         expect(opCaller.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
         const opCallerContract = await opCaller.contract();
 
-        const opGetter = await Tezos.contract.originate({
+        const opGetter = await Mavryk.contract.originate({
           code: `     { parameter string;
                         storage unit;
                         code
@@ -159,7 +159,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
 
     weeklynet("Verify ticket is not easily created by a callback - string", async () => {
       try {
-        const opCaller = await Tezos.contract.originate({
+        const opCaller = await Mavryk.contract.originate({
           code: ` { parameter
                     (or (pair %init (address %adrAdr) (string %strAdr)) (ticket %setToken string)) ;
                     storage unit ;
@@ -188,7 +188,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
         expect(opCaller.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
         const opCallerContract = await opCaller.contract();
 
-        const opGetter = await Tezos.contract.originate({
+        const opGetter = await Mavryk.contract.originate({
           code: `     { parameter string;
                         storage unit;
                         code

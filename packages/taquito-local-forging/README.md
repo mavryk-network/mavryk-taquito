@@ -42,11 +42,11 @@ npm install @mavrykdynamics/taquito-local-forging
 ```
 ## Usage
 ```ts
-import { TezosToolkit } from '@mavrykdynamics/taquito'
+import { MavrykToolkit } from '@mavrykdynamics/taquito'
 import { LocalForger } from '@mavrykdynamics/taquito-local-forging'
 
-const Tezos = new TezosToolkit('https://YOUR_PREFERRED_RPC_URL');
-Tezos.setProvider({ forger: localForger })
+const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
+Mavryk.setProvider({ forger: localForger })
 ```
 
 ## Additional Info

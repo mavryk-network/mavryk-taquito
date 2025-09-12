@@ -133,7 +133,7 @@ describe('ContractView test', () => {
   });
 
   it('Should be able to execute tzip4 views by calling the read method (without passing chainId)', async () => {
-    mockRpcClient.getChainId.mockResolvedValue('NetXnHfVqm9iesp');
+    mockRpcClient.getChainId.mockResolvedValue('NetXmtMsNf69w1w');
 
     const contractView = await rpcContractProvider.at('KT1Fe71jyjrxFg9ZrYqtvaX7uQjcLo7svE4D');
     const result = await contractView.views

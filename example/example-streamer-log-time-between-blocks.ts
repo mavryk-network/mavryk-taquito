@@ -1,4 +1,4 @@
-import { PollingSubscribeProvider, TezosToolkit } from '@mavrykdynamics/taquito';
+import { PollingSubscribeProvider, MavrykToolkit } from '@mavrykdynamics/taquito';
 
 // To run this script, run the following command in the example folder: `npm run example:streamer-block-time`
 // This script polls on the head block at an interval of `pollingIntervalMilliseconds`.
@@ -25,12 +25,12 @@ function logLevelAndTime(data: number) {
 }
 
 async function example() {
-  const tezos = new TezosToolkit(provider)
+  const mavryk = new MavrykToolkit(provider)
 
   console.log(provider)
-  tezos.setStreamProvider(tezos.getFactory(PollingSubscribeProvider)({ pollingIntervalMilliseconds }));
+  mavryk.setStreamProvider(mavryk.getFactory(PollingSubscribeProvider)({ pollingIntervalMilliseconds }));
   try {
-    const sub = tezos.stream.subscribeBlock('head')
+    const sub = mavryk.stream.subscribeBlock('head')
     sub.on('data', (data) => logLevelAndTime(data.header.level))
   }
   catch (ex) {

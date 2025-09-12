@@ -18,7 +18,7 @@ Methods in the RPC package map one-to-one to the corresponding Tezos RPC API end
 
 import { RpcClient } from '@mavrykdynamics/taquito-rpc';
 
-const client = new RpcClient(' https://basenet.rpc.mavryk.network/', 'NetXLH1uAxK7CCh');
+const client = new RpcClient(' https://basenet.rpc.mavryk.network/', 'NetXmtMsNf69w1w');
 ```
 
 The `RpcClient` constructor takes the URL of the node you want to use and the chain ID.
@@ -113,4 +113,4 @@ const view = await client.runView({
 
 ## Full documentation
 
-You can find the full documentation at the following address: [https://taquito.mavryk.org/typedoc/classes/\_taquito_rpc.rpcclient.html](https://taquito.mavryk.org/typedoc/classes/_taquito_rpc.rpcclient.html)
+You can find the full documentation at the following address: [https://taquito.mavryk.org/typedoc/classes/_taquito_rpc.RpcClient](https://taquito.mavryk.org/typedoc/classes/_taquito_rpc.RpcClient)

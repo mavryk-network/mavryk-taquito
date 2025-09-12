@@ -4,8 +4,8 @@ import { tacoContractTzip16 } from "../../data/modified-taco-contract"
 import { MichelsonMap } from "@mavrykdynamics/taquito";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-    const Tezos = lib;
-    Tezos.addExtension(new Tzip16Module());
+    const Mavryk = lib;
+    Mavryk.addExtension(new Tzip16Module());
     let contractAddress: string;
     let contractAddressInvalidHash: string;
 
@@ -34,7 +34,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             const tacoShopStorageMap = new MichelsonMap();
             tacoShopStorageMap.set("1", { current_stock: "10000", max_price: "50" });
 
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: tacoContractTzip16,
                 storage: {
                     metadata: metadataBigMap,
@@ -49,7 +49,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
         test('Verify that the metadata for the contract having a sha256 hash in URI can be fetched', 2, async () => {
 
-            const contract = await Tezos.contract.at(contractAddress, tzip16);
+            const contract = await Mavryk.contract.at(contractAddress, tzip16);
             const metadata = await contract.tzip16().getMetadata();
 
             expect(metadata.uri).toEqual('sha256://0x18b983a4cc78d7c15d53f7642461176c1366fbdb83960ea432188130db1f8c9d/https:%2F%2Fstorage.googleapis.com%2Ftzip-16%2Ftaco-shop-metadata.json');
@@ -112,7 +112,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             const tacoShopStorageMap = new MichelsonMap();
             tacoShopStorageMap.set("1", { current_stock: "10000", max_price: "50" });
 
-            const op = await Tezos.contract.originate({
+            const op = await Mavryk.contract.originate({
                 code: tacoContractTzip16,
                 storage: {
                     metadata: metadataBigMAp,
@@ -127,7 +127,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
         test('Verify that the metadata for the contract having an invalid sha256 hash in URI can be fetched', 2, async () => {
 
-            const contract = await Tezos.contract.at(contractAddressInvalidHash, tzip16);
+            const contract = await Mavryk.contract.at(contractAddressInvalidHash, tzip16);
             const metadata = await contract.tzip16().getMetadata();
 
             expect(metadata.uri).toEqual('sha256://0x7e99ecf3a4491e3044ccdf319898d77380a2fc20aae36b6e40327d678399d17b/https:%2F%2Fstorage.googleapis.com%2Ftzip-16%2Ftaco-shop-metadata.json');

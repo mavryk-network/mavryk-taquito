@@ -1,7 +1,7 @@
 import { CONFIGS } from "../../config";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   describe(`Test contract origination with invalid data through wallet api using: ${rpc}`, () => {
 
     beforeEach(async () => {
@@ -10,7 +10,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     it('Verify that wallet.originate for a contract with non-ascii (invalid string) in the init data will fail', async () => {
       expect.assertions(1);
       try {
-        await Tezos.wallet.originate({
+        await Mavryk.wallet.originate({
           balance: "1",
           code: `parameter string;
           storage string;

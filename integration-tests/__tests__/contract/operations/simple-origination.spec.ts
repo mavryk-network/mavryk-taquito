@@ -1,7 +1,7 @@
 import { CONFIGS } from "../../../config";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
 
   describe(`Test contract origination of a simple contract through contract api using: ${rpc}`, () => {
 
@@ -11,7 +11,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
     it('Verify contract.originate for a simple contract', async () => {
 
-      const op = await Tezos.contract.originate({
+      const op = await Mavryk.contract.originate({
         balance: "1",
         code: `parameter string;
         storage string;

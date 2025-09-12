@@ -99,7 +99,7 @@ describe('Sapling transactions builder', () => {
     mockInMemoryViewingKey.getFullViewingKey.mockResolvedValue('vk');
     mockInMemoryViewingKey.getOutgoingViewingKey.mockResolvedValue('ovk');
     mockReadProvider.getSaplingDiffById.mockResolvedValue(saplingState);
-    mockReadProvider.getChainId.mockResolvedValue('NetXLH1uAxK7CCh');
+    mockReadProvider.getChainId.mockResolvedValue('NetXmtMsNf69w1w');
 
     saplingTransactionBuilder = new SaplingTransactionBuilder(
       { saplingSigner: mockInMemorySpendingKey as any },
@@ -122,7 +122,7 @@ describe('Sapling transactions builder', () => {
     ).toBeDefined();
   });
 
-  it('should prepare a shielded transaction of 8 tez', async () => {
+  it('should prepare a shielded transaction of 8 mav', async () => {
     mockSaplingWrapper.randR.mockResolvedValue(
       Buffer.from('66222a13e6050a18325b63e0beaed5a864c33a34cdcf7c53a74fb53e4be3a202', 'hex')
     );
@@ -157,7 +157,7 @@ describe('Sapling transactions builder', () => {
     });
   });
 
-  it('should prepare an unshielded transaction of 1 tez', async () => {
+  it('should prepare an unshielded transaction of 1 mav', async () => {
     mockSaplingWrapper.randR.mockResolvedValue(
       Buffer.from('8b038b981085a1af8cb209216873a4f43dd0059ca9dd29390e8af1e2fdffc604', 'hex')
     );
@@ -684,7 +684,7 @@ describe('Sapling transactions builder', () => {
     const antiReplay = await saplingTransactionBuilder.getAntiReplay();
     expect(antiReplay).toEqual(
       Buffer.from(
-        '4b543147326b766466506f6176675236466a646436384d327661506b3134714a386268434e6574584c48317541784b37434368',
+        '4b543147326b766466506f6176675236466a646436384d327661506b3134714a386268434e6574586d744d734e663639773177',
         'hex'
       )
     );

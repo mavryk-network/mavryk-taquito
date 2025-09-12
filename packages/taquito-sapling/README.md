@@ -21,16 +21,16 @@ npm install @mavrykdynamics/taquito-sapling
 The returned balance is in mumav.
 
 ```ts
-import { TezosToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
+import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
 import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/taquito-sapling';
 
-const tezos = new TezosToolkit('https://basenet.rpc.mavryk.network/');
+const mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network/');
 
-const saplingContract = await tezos.contract.at('KT1UYwMR6Q6LZnwQEi77DSBrAjKT1tEJb245');
+const saplingContract = await mavryk.contract.at('KT1UYwMR6Q6LZnwQEi77DSBrAjKT1tEJb245');
 
 const inMemorySpendingKey = await InMemorySpendingKey.fromMnemonic('YOUR_MNEMONIC');
 
-const readProvider = new RpcReadAdapter(tezos.rpc);
+const readProvider = new RpcReadAdapter(mavryk.rpc);
 
 const saplingToolkit = new SaplingToolkit(
     { saplingSigner: inMemorySpendingKey },
@@ -44,19 +44,19 @@ const initialBalance = await txViewer.getBalance();
 
 **Prepare a shielded transaction**
 
-A shielded transaction allows sending tokens from a Tezos account (mv1, mv2, mv3) to a Sapling address (zet).
+A shielded transaction allows sending tokens from a Mavryk account (mv1, mv2, mv3) to a Sapling address (zet).
 
 ```ts
-import { TezosToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
+import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
 import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/taquito-sapling';
 
-const tezos = new TezosToolkit('https://basenet.rpc.mavryk.network/');
-// set up your signer on the TezosToolkit as usual
-const saplingContract = await tezos.contract.at('KT1UYwMR6Q6LZnwQEi77DSBrAjKT1tEJb245');
+const mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network/');
+// set up your signer on the MavrykToolkit as usual
+const saplingContract = await mavryk.contract.at('KT1UYwMR6Q6LZnwQEi77DSBrAjKT1tEJb245');
 
 const inMemorySpendingKey = await InMemorySpendingKey.fromMnemonic('YOUR_MNEMONIC');
 
-const readProvider = new RpcReadAdapter(tezos.rpc);
+const readProvider = new RpcReadAdapter(mavryk.rpc);
 
 const saplingToolkit = new SaplingToolkit(
     { saplingSigner: inMemorySpendingKey },
@@ -77,7 +77,7 @@ const shieldedTx = await saplingToolkit.prepareShieldedTransaction([{
 }])
 
 // Inject the sapling transaction using the ContractAbstraction
-// The amount MUST be specified in the send method to transfer the 3 tez to the shielded pool
+// The amount MUST be specified in the send method to transfer the 3 mav to the shielded pool
 const op = await saplingContract.methodsObject.default([shieldedTx]).send({ amount: 3 });
 await op.confirmation();
 ```

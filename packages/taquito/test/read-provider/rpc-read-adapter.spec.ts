@@ -11,6 +11,7 @@ import {
   contractResponse,
   contractStorage,
   liveBlocks,
+  aiLaunchCycle,
   saplingState,
 } from './data';
 import { RpcClient } from '@mavrykdynamics/taquito-rpc';
@@ -34,6 +35,7 @@ describe('RpcReadAdapter test', () => {
     getManagerKey: jest.Mock<any, any>;
     getBlock: jest.Mock<any, any>;
     getLiveBlocks: jest.Mock<any, any>;
+    getAdaptiveIssuanceLaunchCycle: jest.Mock<any, any>;
   };
 
   beforeEach(() => {
@@ -54,6 +56,7 @@ describe('RpcReadAdapter test', () => {
       getManagerKey: jest.fn(),
       getBlock: jest.fn(),
       getLiveBlocks: jest.fn(),
+      getAdaptiveIssuanceLaunchCycle: jest.fn(),
     };
     readProvider = new RpcReadAdapter(mockRpcClient as any);
   });
@@ -289,13 +292,24 @@ describe('RpcReadAdapter test', () => {
 
       expect(mockRpcClient.getLiveBlocks.mock.calls[0][0]).toEqual({ block: `${block}` });
     });
+
+    it(`should get adaptive issuance launch cycle at block: ${block}`, async () => {
+      mockRpcClient.getAdaptiveIssuanceLaunchCycle.mockResolvedValue(aiLaunchCycle);
+
+      const result = await readProvider.getAdaptiveIssuanceLaunchCycle(block);
+      expect(result).toEqual(aiLaunchCycle);
+
+      expect(mockRpcClient.getAdaptiveIssuanceLaunchCycle.mock.calls[0][0]).toEqual({
+        block: `${block}`,
+      });
+    });
   });
 
   it(`should get the chain id`, async () => {
-    mockRpcClient.getChainId.mockResolvedValue('NetXdQprcVkpaWU');
+    mockRpcClient.getChainId.mockResolvedValue('NetXXAAR1wWQhhe');
 
     const result = await readProvider.getChainId();
-    expect(result).toEqual('NetXdQprcVkpaWU');
+    expect(result).toEqual('NetXXAAR1wWQhhe');
 
     expect(mockRpcClient.getChainId.mock.calls[0][0]).toEqual(undefined);
   });

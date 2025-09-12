@@ -3,7 +3,7 @@
 *Documentation can be found [here](https://taquito.mavryk.org/docs/michelson_encoder)*  
 *TypeDoc style documentation is available on-line [here](https://taquito.mavryk.org/typedoc/modules/_taquito_michelson_encoder.html)*
 
-`@mavrykdynamics/taquito-michelson-encoder` provides a JavaScript abstraction based on a Tezos Smart contracts code, parameters, storage, and views.
+`@mavrykdynamics/taquito-michelson-encoder` provides a JavaScript abstraction based on a Mavryk Smart contracts code, parameters, storage, and views.
 
 ## General Information
 
@@ -22,7 +22,7 @@ npm i --save @mavrykdynamics/taquito-michelson-encoder
 
 ## Example
 
-The constructor of the `Schema` class takes a Michelson type as a parameter which is retrieved from a Tezos Nodes RPC:
+The constructor of the `Schema` class takes a Michelson type as a parameter which is retrieved from a Mavryk Nodes RPC:
 
 ```ts
 const storageType = {

@@ -1,14 +1,14 @@
-import { TezosToolkit } from "@mavrykdynamics/taquito";
+import { MavrykToolkit } from "@mavrykdynamics/taquito";
 import { CONFIGS, sleep, isSandbox } from "../../config";
 
 CONFIGS().forEach(({ lib, rpc, protocol, setup, createAddress }) => {
-  const Tezos = lib;
+  const Mavryk = lib;
   const flexmasanet = isSandbox({ rpc }) ? test : test.skip;
 
   describe(`Test Drain Delegate in ${protocol}`, () => {
-    let Delegate: TezosToolkit;
+    let Delegate: MavrykToolkit;
     let delegatePkh: string;
-    let Destination: TezosToolkit;
+    let Destination: MavrykToolkit;
     let destinationPkh: string;
     beforeAll(async () => {
       await setup();
@@ -20,7 +20,7 @@ CONFIGS().forEach(({ lib, rpc, protocol, setup, createAddress }) => {
         destinationPkh = await Destination.signer.publicKeyHash();
 
         // fund the delegate
-        const transferOp = await Tezos.contract.transfer({ to: delegatePkh, amount: 5 });
+        const transferOp = await Mavryk.contract.transfer({ to: delegatePkh, amount: 5 });
         await transferOp.confirmation();
 
         // register as delegate
