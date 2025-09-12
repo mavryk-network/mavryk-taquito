@@ -18,7 +18,7 @@ Methods in the RPC package map one-to-one to the corresponding Mavryk RPC API en
 
 import { RpcClient } from '@mavrykdynamics/taquito-rpc';
 
-const client = new RpcClient(' https://basenet.rpc.mavryk.network/', 'NetXLH1uAxK7CCh');
+const client = new RpcClient(' https://basenet.rpc.mavryk.network/', 'NetXmtMsNf69w1w');
 ```
 
 The `RpcClient` constructor takes the URL of the node you want to use and the chain ID.

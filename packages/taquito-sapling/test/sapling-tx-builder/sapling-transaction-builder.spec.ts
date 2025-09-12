@@ -99,7 +99,7 @@ describe('Sapling transactions builder', () => {
     mockInMemoryViewingKey.getFullViewingKey.mockResolvedValue('vk');
     mockInMemoryViewingKey.getOutgoingViewingKey.mockResolvedValue('ovk');
     mockReadProvider.getSaplingDiffById.mockResolvedValue(saplingState);
-    mockReadProvider.getChainId.mockResolvedValue('NetXLH1uAxK7CCh');
+    mockReadProvider.getChainId.mockResolvedValue('NetXmtMsNf69w1w');
 
     saplingTransactionBuilder = new SaplingTransactionBuilder(
       { saplingSigner: mockInMemorySpendingKey as any },

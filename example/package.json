@@ -1,7 +1,7 @@
 {
   "name": "@mavrykdynamics/taquito-example",
   "private": true,
-  "version": "20.0.4",
+  "version": "20.1.0",
   "scripts": {
     "example": "node -r ts-node/register --preserve-symlinks example-node.ts",
     "example:activation": "node -r ts-node/register --preserve-symlinks example-activate.ts",

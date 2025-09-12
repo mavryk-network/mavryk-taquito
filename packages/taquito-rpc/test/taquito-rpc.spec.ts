@@ -2770,7 +2770,7 @@ describe('RpcClient test', () => {
     it('should query the right url and property for operation, proto 20, attestation_with_dal', async () => {
       httpBackend.createRequest.mockReturnValue(
         Promise.resolve({
-          protocol: 'PtBzwViMCC1gfm98y5TDKqz2e3vjBXPAUoWu7jfEcN6yj2ZhCyT',
+          protocol: 'PtBoreasK2KPuKbeYtXeEdudEHS7YcMFHE9amwheUc4kejTxgRi',
           chain_id: 'NetXo8SqH1c38SS',
           hash: 'BKsCfYZrh417adJiKbGsyhVG2XrvUBJDhhkCAkZQzWzkEHCejXr',
           header: {
@@ -2794,7 +2794,7 @@ describe('RpcClient test', () => {
           operations: [
             [
               {
-                protocol: 'PtBzwViMCC1gfm98y5TDKqz2e3vjBXPAUoWu7jfEcN6yj2ZhCyT',
+                protocol: 'PtBoreasK2KPuKbeYtXeEdudEHS7YcMFHE9amwheUc4kejTxgRi',
                 chain_id: 'NetXo8SqH1c38SS',
                 hash: 'opSmHyeasw4QcJ4Jc2qi6arNeSQMhFRjHBdFYWXGoMydLkgVRtb',
                 branch: 'BLHyjaqV2FhuHLQL3CBjWJqgZZ77BxcNxh3ehXcNYMQjjqAPwqA',
@@ -2837,7 +2837,7 @@ describe('RpcClient test', () => {
     it('should query the right url and property for operation, proto 20, dal_publish_commitment', async () => {
       httpBackend.createRequest.mockReturnValue(
         Promise.resolve({
-          protocol: 'PtBzwViMCC1gfm98y5TDKqz2e3vjBXPAUoWu7jfEcN6yj2ZhCyT',
+          protocol: 'PtBoreasK2KPuKbeYtXeEdudEHS7YcMFHE9amwheUc4kejTxgRi',
           chain_id: 'NetXo8SqH1c38SS',
           hash: 'BKsCfYZrh417adJiKbGsyhVG2XrvUBJDhhkCAkZQzWzkEHCejXr',
           header: {

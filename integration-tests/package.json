@@ -13,7 +13,7 @@
     "originate-known-contracts": "node -r ts-node/register originate-known-contracts.ts",
     "originate-known-contracts-and-run-test": "node -r ts-node/register originate-known-contracts.ts && jest"
   },
-  "version": "20.0.4",
+  "version": "20.1.0",
   "dependencies": {
     "@ledgerhq/devices": "8.2.2",
     "@ledgerhq/hw-transport": "6.30.5",
