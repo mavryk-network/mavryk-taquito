@@ -684,7 +684,7 @@ describe('Sapling transactions builder', () => {
     const antiReplay = await saplingTransactionBuilder.getAntiReplay();
     expect(antiReplay).toEqual(
       Buffer.from(
-        '4b543147326b766466506f6176675236466a646436384d327661506b3134714a386268434e6574584c48317541784b37434368',
+        '4b543147326b766466506f6176675236466a646436384d327661506b3134714a386268434e6574586d744d734e663639773177',
         'hex'
       )
     );
