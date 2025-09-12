@@ -130,7 +130,7 @@ export class MavrykToolkit {
    *
    * @param options rpc url or rpcClient to use to interact with the Mavryk network
    *
-   * @example Mavryk.setProvider({rpc: 'https://mainnet.ecadinfra.com/', signer: new InMemorySigner.fromSecretKey(“edsk...”)})
+   * @example Mavryk.setProvider({rpc: 'https://mainnet.rpc.mavryk.network/', signer: new InMemorySigner.fromSecretKey(“edsk...”)})
    * @example Mavryk.setProvider({ config: { confirmationPollingTimeoutSecond: 300 }})
    *
    */
@@ -189,7 +189,7 @@ export class MavrykToolkit {
    *
    * @param options rpc url or rpcClient to use to interact with the Mavryk network
    *
-   * @example Mavryk.setRpcProvider('https://mainnet.ecadinfra.com/')
+   * @example Mavryk.setRpcProvider('https://mainnet.rpc.mavryk.network/')
    *
    */
   setRpcProvider(rpc?: SetProviderOptions['rpc']) {

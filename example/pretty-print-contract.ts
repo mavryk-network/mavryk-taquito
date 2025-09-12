@@ -1,7 +1,7 @@
 import { Parser, emitMicheline } from '@mavrykdynamics/taquito-michel-codec'
 import { MavrykToolkit } from '@mavrykdynamics/taquito';
 
-const provider = 'https://mainnet.ecadinfra.com/';
+const provider = 'https://mainnet.rpc.mavryk.network/';
 
 const example = async () => {
 

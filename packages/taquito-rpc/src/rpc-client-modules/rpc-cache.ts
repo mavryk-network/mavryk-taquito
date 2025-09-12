@@ -90,7 +90,7 @@ export class RpcClientCache implements RpcClientInterface {
    * @param rpcClient rpcClient responsible of the interaction with Mavryk network through an rpc node
    * @param ttl number representing the time to live (default 1000 milliseconds)
    *
-   * @example new RpcClientCache(new RpcClient('https://mainnet.ecadinfra.com/'))
+   * @example new RpcClientCache(new RpcClient('https://mainnet.rpc.mavryk.network/'))
    */
   constructor(
     private rpcClient: RpcClientInterface,

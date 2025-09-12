@@ -2312,7 +2312,7 @@ In version 9.2.0-beta of Taquito, the ability to send more than one operation in
 The default streamer set on the `MavrykToolkit` used a hardcoded polling interval of 20 seconds, and there was no easy way to change this. To reduce the probability of missing blocks, it is now possible to configure the interval as follow:
 
 ```ts
-const mavryk = new MavrykToolkit('https://mainnet.ecadinfra.com')
+const mavryk = new MavrykToolkit('https://mainnet.rpc.mavryk.network')
 mavryk.setProvider({ config: { streamerPollingIntervalMilliseconds: 15000 } });
 
 const sub = mavryk.stream.subscribeOperation(filter)

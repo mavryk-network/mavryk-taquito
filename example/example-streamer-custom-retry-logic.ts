@@ -3,7 +3,7 @@ import { delay, retryWhen, tap, scan } from 'rxjs/operators';
 
 async function example() {
   // This example will intentionally fail after two attempts as the RPC URL is invalid.
-  const provider = 'https://mainnet.ecadinfra.com/notValid';
+  const provider = 'https://mainnet.rpc.mavryk.network/notValid';
   const mavryk = new MavrykToolkit(provider);
   mavryk.setStreamProvider(mavryk.getFactory(PollingSubscribeProvider)({
     shouldObservableSubscriptionRetry: true, observableSubscriptionRetryFunction:

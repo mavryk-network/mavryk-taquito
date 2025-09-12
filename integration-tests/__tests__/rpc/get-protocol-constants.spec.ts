@@ -8,7 +8,7 @@ CONFIGS().forEach(({ lib, protocol, rpc, networkType }) => {
   const boreasnet = (networkType == NetworkType.TESTNET && protocol === Protocols.PtBoreas) ? test : test.skip;
   const weeklynet = (networkType == NetworkType.TESTNET && protocol === Protocols.ProtoALpha) ? test : test.skip;
   describe('Test fetching constants for all protocols on Mainnet', () => {
-    const rpcUrl = 'https://mainnet.ecadinfra.com/';
+    const rpcUrl = 'https://mainnet.rpc.mavryk.network/';
     Mavryk.setRpcProvider(rpcUrl);
     it(`should successfully fetch Proto19(atlas) constants at head`, async () => {
       const constants: ConstantsResponseProto019 = await Mavryk.rpc.getConstants();

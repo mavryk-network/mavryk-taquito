@@ -22,7 +22,7 @@ const domainContractAddress = "KT1GBZmSxmnKJXGMdMLbugPfLyUPmuLSMwKS";
 
 // the function returns the domain name if found or the provided address
 const fetchMavrykDomainFromAddress = async (address: string): Promise<string> => {
-    const Mavryk = new MavrykToolkit("https://mainnet.ecadinfra.com");
+    const Mavryk = new MavrykToolkit("https://mainnet.rpc.mavryk.network");
     const contract = await Mavryk.wallet.at(domainContractAddress);
     const storage: any = await contract.storage();
     const domain = await storage.store.reverse_records.get(address);
@@ -53,7 +53,7 @@ const contractAddress = "KT1GBZmSxmnKJXGMdMLbugPfLyUPmuLSMwKS";
 
 // the function returns the address if found or the provided domain name
 const fetchAddressFromMavrykDomain = async (domainName: string): Promise<string> => {
-    const Mavryk = new MavrykToolkit("https://mainnet.ecadinfra.com");
+    const Mavryk = new MavrykToolkit("https://mainnet.rpc.mavryk.network");
     const contract = await Mavryk.wallet.at(contractAddress);
     const storage: any = await contract.storage();
     const domain = await storage.store.records.get(stringToBytes(domainName));
@@ -82,7 +82,7 @@ const contractAddress = "KT1GBZmSxmnKJXGMdMLbugPfLyUPmuLSMwKS";
 
 // this function return the expiry date of a domain name
 const fetchExpiryDate = async (domainName: string): Promise<string> => {
-    const Mavryk = new MavrykToolkit("https://mainnet.ecadinfra.com");
+    const Mavryk = new MavrykToolkit("https://mainnet.rpc.mavryk.network");
     const contract = await Mavryk.wallet.at(contractAddress);
     const storage: any = await contract.storage();
     const expiryDate = await storage.store.expiry_map.get(stringToBytes(domainName));
