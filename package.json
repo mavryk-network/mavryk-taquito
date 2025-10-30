@@ -122,5 +122,6 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
-  }
+  },
+  "license": "Apache-2.0"
 }

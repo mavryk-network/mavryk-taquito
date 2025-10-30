@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { OptionToken } from '../../src/tokens/option';
 import { createToken } from '../../src/tokens/createToken';
 import { UnitValue } from '../../src/taquito-michelson-encoder';

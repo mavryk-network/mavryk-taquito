@@ -1,3 +1,7 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 
 # Taquito Local Forging package
 *TypeDoc style documentation is available [here](https://taquito.mavryk.org/typedoc/modules/_taquito_local_forging.html)*

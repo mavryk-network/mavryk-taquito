@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 export const singleSaplingStateContractJProtocol = (memoSize = 8) => `
 # This contract manages a shielded pool with a 1 to 1 conversion with respect to
 # the mumav, updated by a list of Sapling transactions.

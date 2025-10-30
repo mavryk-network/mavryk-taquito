@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { Context } from '../context';
 import { ContractStorageType, DefaultContractType } from '../contract/contract';
 import { ContractMethod } from '../contract/contract-methods/contract-method-flat-param';

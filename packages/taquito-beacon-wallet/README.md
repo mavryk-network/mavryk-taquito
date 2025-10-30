@@ -1,3 +1,7 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 # Taquito Beacon Wallet package
 
 _Documentation can be found [here](https://taquito.mavryk.org/docs/wallet_API)_  

@@ -13,7 +13,9 @@
   "files": [
     "signature.json",
     "dist",
-    "patch.js"
+    "patch.js",
+    "LICENSE",
+    "NOTICE"
   ],
   "publishConfig": {
     "access": "public"

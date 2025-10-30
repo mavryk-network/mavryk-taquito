@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 
 // This example can be flaky as the result depends on the state of the ledger device.
 // Sometimes the transport will fail before all the paths have been scanned

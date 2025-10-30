@@ -1,4 +1,10 @@
 /**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+/**
  * Some code in this file was originally written or inspired by Airgap-it
  * https://github.com/airgap-it/airgap-coin-lib/blob/master/LICENSE.md
  *

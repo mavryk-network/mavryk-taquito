@@ -1,4 +1,8 @@
 #!/bin/sh
+# SPDX-License-Identifier: Apache-2.0
+# This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+# Original project: Taquito by ECAD Labs Inc.
+
 export RUN_ATLASNET_WITH_SECRET_KEY=true
 export SECRET_KEY=edsk3RFgDiCt7tWB2oe96w1eRw72iYiiqZPLu9nnEY23MYRp2d8Kkx
 export MAVRYK_RPC_NAIROBINET=http://localhost:20000

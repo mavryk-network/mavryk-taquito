@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 export const concat = (...arr: Uint8Array[]) => {
   return arr.reduce((a: Uint8Array, b: Uint8Array) => {
     const c = new Uint8Array(a.length + b.length);

@@ -39,5 +39,6 @@
   },
   "prettier": {
     "svelteSortOrder": "options-scripts-styles-markup"
-  }
+  },
+  "license": "Apache-2.0"
 }

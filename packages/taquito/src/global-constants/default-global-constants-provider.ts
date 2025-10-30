@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { GlobalConstantHashAndValue } from '@mavrykdynamics/taquito-michel-codec';
 import { GlobalConstantNotFound } from './errors';
 import { GlobalConstantHash, GlobalConstantsProvider } from './interface-global-constants-provider';

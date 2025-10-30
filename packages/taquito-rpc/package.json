@@ -12,7 +12,9 @@
   "typings": "dist/types/taquito-rpc.d.ts",
   "files": [
     "signature.json",
-    "dist"
+    "dist",
+    "LICENSE",
+    "NOTICE"
   ],
   "publishConfig": {
     "access": "public"

@@ -1,3 +1,7 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 <svg width="198" height="34" viewBox="0 0 198 34" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g opacity="0.8">
 <path opacity="0.8" d="M16.9927 3.32479C17.809 3.32479 18.4708 2.66303 18.4708 1.84672C18.4708 1.03041 17.809 0.368652 16.9927 0.368652C16.1764 0.368652 15.5146 1.03041 15.5146 1.84672C15.5146 2.66303 16.1764 3.32479 16.9927 3.32479Z" fill="#2C7DF7"/>

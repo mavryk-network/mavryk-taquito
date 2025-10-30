@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ForgedBytes, BatchOperation } from '@mavrykdynamics/taquito';
 import { defaultConfigConfirmation } from '../../src/context';

@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { DefaultContractType, OriginationOperation } from "@mavrykdynamics/taquito";
 import { CONFIGS } from "../../config";
 import { buf2hex } from "@mavrykdynamics/taquito-utils";

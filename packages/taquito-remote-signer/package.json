@@ -11,7 +11,9 @@
   "typings": "dist/types/taquito-remote-signer.d.ts",
   "files": [
     "signature.json",
-    "dist"
+    "dist",
+    "LICENSE",
+    "NOTICE"
   ],
   "publishConfig": {
     "access": "public"

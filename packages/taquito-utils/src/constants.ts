@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 // ref https://gitlab.com/mavryk-network/mavryk-protocol/-/blob/master/src/lib_crypto/base58.ml
 export enum Prefix {
   MV1 = 'mv1',

@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { Schema } from '../src/schema/storage';
 import { storage as storageDexter, params, rpcContractResponse } from '../data/sample11_dexter';
 import {

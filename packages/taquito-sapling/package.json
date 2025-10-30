@@ -12,7 +12,9 @@
   "files": [
     "signature.json",
     "dist",
-    "fetch-sapling-params.js"
+    "fetch-sapling-params.js",
+    "LICENSE",
+    "NOTICE"
   ],
   "publishConfig": {
     "access": "public"

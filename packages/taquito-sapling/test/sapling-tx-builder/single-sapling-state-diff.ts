@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 export const saplingState = {
   root: 'cd198134d6caf62fde4ff1ad6be7c1485217d84a3992c70d1df71e02e650ef43',
   commitments_and_ciphertexts: [

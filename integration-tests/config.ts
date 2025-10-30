@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CompositeForger, RpcForger, MavrykToolkit, Protocols, TaquitoLocalForger, PollingSubscribeProvider } from '@mavrykdynamics/taquito';
 import { RemoteSigner } from '@mavrykdynamics/taquito-remote-signer';
 import { HttpBackend } from '@mavrykdynamics/taquito-http-utils';

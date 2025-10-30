@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 export const saplingContractDouble = `storage (pair (sapling_state :left 8) (sapling_state :right 8) );
 parameter (pair bool (pair (sapling_transaction :left 8) (sapling_transaction :right 8)) );
 code { UNPAIR ;

@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { RpcClientInterface } from '@mavrykdynamics/taquito-rpc';
 import { ContractAbstraction, ContractProvider, Wallet, MvReadProvider } from '@mavrykdynamics/taquito';
 import { ViewImplementation, ViewImplementationType } from '../metadata-interface';

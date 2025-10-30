@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { PollingSubscribeProvider, MavrykToolkit } from '@mavrykdynamics/taquito';
 
 // To run this script, run the following command in the example folder: `npm run example:streamer-block-time`

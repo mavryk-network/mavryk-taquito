@@ -1,4 +1,10 @@
 /**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+/**
  *
  * @param leaves nodes in the tree that we would like to make pairs from
  * @returns a paired/chunked array: [a, b, c, d] => [[a, b], [c, d]]

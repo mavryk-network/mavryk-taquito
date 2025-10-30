@@ -1,3 +1,7 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 # Taquito Contracts Library package
 
 `@mavrykdynamics/taquito-contracts-library` allows developers to specify static data related to contracts (i.e., script and entrypoints) avoiding Taquito to fetch them from the network. The `contracts-library` module provide a `ContractsLibrary` class that can be injected as an extension to a MavrykToolkit instance in order to increase dApps performance.

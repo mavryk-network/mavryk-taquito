@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { Bls12381g2ValidationError, Bls12381g2Token } from '../../src/tokens/bls12-381-g2';
 
 describe('Bls12-381-g2 token', () => {

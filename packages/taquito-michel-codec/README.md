@@ -1,3 +1,7 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 # Taquito michel-codec package
 
 `@mavrykdynamics/taquito-michel-codec` Converts and validates Michelson expressions between JSON based Michelson and Micheline.

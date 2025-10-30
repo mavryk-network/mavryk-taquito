@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from '../../config';
 import { LedgerSigner, LedgerTransport, DerivationType } from '@mavrykdynamics/taquito-ledger-signer';
 import TransportNodeHid from "@ledgerhq/hw-transport-node-hid";

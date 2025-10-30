@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { PreapplyResponse, ConstantsResponse, RPCSimulateOperationParam } from '@mavrykdynamics/taquito-rpc';
 import BigNumber from 'bignumber.js';
 import { flattenErrors, flattenOperationResult, MavrykOperationError } from '../operations/errors';

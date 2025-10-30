@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { SaplingTransactionViewer } from '../../src/sapling-tx-viewer/sapling-transaction-viewer';
 import { InMemoryViewingKey } from '../../src/sapling-keys/in-memory-viewing-key';
 import { saplingStateDiff, saplingStateDiffMemo4 } from '../data';

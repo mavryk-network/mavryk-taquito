@@ -1,9 +1,20 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 ![Taquito Logo](/img/Taquito.png)
 
 [![Node.js CI](https://github.com/ecadlabs/taquito/workflows/Node.js%20CI/badge.svg)](https://github.com/ecadlabs/taquito/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/ecadlabs/taquito/branch/master/graph/badge.svg)](https://codecov.io/gh/ecadlabs/taquito)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3204/badge)](https://bestpractices.coreinfrastructure.org/projects/3204)
 [![npm version](https://badge.fury.io/js/%40taquito%2Ftaquito.svg)](https://badge.fury.io/js/%40taquito%2Ftaquito)
+
+## Fork notice
+
+WebMavryk is a fork of Taquito originally developed by ECAD Labs Inc. This fork is maintained by Mavryk Dynamics and includes modifications made in 2025.
+
+- License: Apache-2.0. See `LICENSE` and `NOTICE` for details and attributions.
+- Trademarks: This project does not imply any endorsement by, or affiliation with, ECAD Labs Inc. Names and logos remain the property of their respective owners.
 
 Welcome, Web3 developer!
 

@@ -1,3 +1,7 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 :::info
 This feature is a work in progress, and might be refined in the near future. We encourage Taquito users to try this feature and reach out to us if you have any issues or concerns.
 :::

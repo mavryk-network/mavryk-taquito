@@ -13,7 +13,9 @@
   "typings": "dist/types/taquito-michelson-encoder.d.ts",
   "files": [
     "signature.json",
-    "dist"
+    "dist",
+    "LICENSE",
+    "NOTICE"
   ],
   "publishConfig": {
     "access": "public"

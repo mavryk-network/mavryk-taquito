@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 export const securityWrongAnnotations = `{ parameter
   (or (or (or (pair %add (nat %valueA) (nat %valueB)) (pair %addNoAnnot nat nat))
           (or (pair %addWrongAnnot (nat %a) (nat %b))

@@ -1,3 +1,7 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 ---
 title: Versions
 author: Jev Bjorsell
@@ -81,7 +85,7 @@ New behaviour - inner object's field number will start with '0'
 
 ### Documentation
 - Updated documentation for new Adaptive Issuance related features [PR#2928](https://github.com/ecadlabs/taquito/pull/2928)
-- Added Mavryk Foundation public testnet nodes to rpc_nodes on website #2933
+- Added Mavryk Dynamics public testnet nodes to rpc_nodes on website #2933
 
 
 ### `@mavrykdynamics/taquito` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Contract API

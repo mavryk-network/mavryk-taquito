@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { b58cencode, prefix } from '@mavrykdynamics/taquito-utils';
 import { PrivateKey as PrivateKeyEd } from './derivation-tools/ed25519';
 import { PrivateKey as PrivateKeyEc } from './derivation-tools/ecdsa';

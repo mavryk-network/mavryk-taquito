@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { BigMapAbstraction, MavrykToolkit } from '../packages/taquito/src/taquito';
 import { RpcClient } from '../packages/taquito-rpc/src/taquito-rpc';
 import { castToString } from '../packages/taquito-rpc/src/utils/utils';

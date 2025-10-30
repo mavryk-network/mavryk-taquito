@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 export const singleSaplingStateContract = `storage (sapling_state 8);
 parameter (list (pair (sapling_transaction 8) (option key_hash) ) );
 code { # Stack manipulation

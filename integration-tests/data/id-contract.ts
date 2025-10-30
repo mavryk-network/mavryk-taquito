@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 // Michelson code from https://ide-staging.ligolang.org/p/SHUGuQ2nTVpinYoQ0uW2_Q
 export const idInitData = `(Pair (Pair { Elt 1
                   (Pair (Pair "mv1JQ19UKK5w264P8SDJmwjHsrXZASegkXrH" "mv18Cw7psUrAAPBpXYd9CtCpHg9EgjHP9KTe")

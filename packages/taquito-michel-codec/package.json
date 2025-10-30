@@ -12,7 +12,9 @@
   "typings": "./dist/types/taquito-michel-codec.d.ts",
   "files": [
     "dist",
-    "signature.json"
+    "signature.json",
+    "LICENSE",
+    "NOTICE"
   ],
   "publishConfig": {
     "access": "public"
@@ -22,7 +24,7 @@
     "type": "git",
     "url": "git+https://github.com/ecadlabs/taquito.git"
   },
-  "license": "MIT",
+  "license": "Apache-2.0",
   "engines": {
     "node": ">=18"
   },

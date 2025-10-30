@@ -10,7 +10,9 @@
   "typings": "dist/types/taquito-http-utils.d.ts",
   "files": [
     "signature.json",
-    "dist"
+    "dist",
+    "LICENSE",
+    "NOTICE"
   ],
   "author": "Simon Boissonneault-Robert <simon@ecadlabs.com>",
   "repository": {

@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 /// How to use:
 ///   Ensure the Testfunder account mv1QKLY6XJjb6uD9vdXmtW6aUfP4C7h66aTg has at least 2k tokens
 ///   for the testnet in use. The script will first check if addresses used in the script are funded,

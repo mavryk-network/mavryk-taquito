@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from './config';
 import { MichelsonMap, OriginateParams, RpcForger, MavrykToolkit } from '@mavrykdynamics/taquito';
 import { singleSaplingStateContractJProtocol } from './data/single_sapling_state_contract_jakarta_michelson';

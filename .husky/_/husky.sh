@@ -1,4 +1,8 @@
 #!/bin/sh
+# SPDX-License-Identifier: Apache-2.0
+# This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+# Original project: Taquito by ECAD Labs Inc.
+
 if [ -z "$husky_skip_init" ]; then
   debug () {
     if [ "$HUSKY_DEBUG" = "1" ]; then

@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 /* eslint-disable no-dupe-class-members */
 import { Observable, Subject, NEVER, OperatorFunction } from 'rxjs';
 import { Subscription } from './interface';

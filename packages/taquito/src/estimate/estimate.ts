@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 const MINIMAL_FEE_MUMAV = 100;
 const MINIMAL_FEE_PER_BYTE_MUMAV = 1;
 const MINIMAL_FEE_PER_GAS_MUMAV = 0.1;

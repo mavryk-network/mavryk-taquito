@@ -10,7 +10,9 @@
   "typings": "dist/types/taquito-contracts-library.d.ts",
   "files": [
     "signature.json",
-    "dist"
+    "dist",
+    "LICENSE",
+    "NOTICE"
   ],
   "author": "Roxane Letourneau <roxane@ecadlabs.com>",
   "repository": {
