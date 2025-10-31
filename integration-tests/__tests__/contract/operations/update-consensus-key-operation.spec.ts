@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../../config';
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {

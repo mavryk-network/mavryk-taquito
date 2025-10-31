@@ -1,10 +1,10 @@
-# Docker to run Taquito integration tests
+# Docker to run Webmavryk integration tests
 FROM node:18
 
-COPY tsconfig.base.json /taquito/
-COPY ./integration-tests /taquito/integration-tests/
+COPY tsconfig.base.json /webmavryk/
+COPY ./integration-tests /webmavryk/integration-tests/
 
-WORKDIR /taquito/integration-tests
+WORKDIR /webmavryk/integration-tests
 
 RUN npm install
 

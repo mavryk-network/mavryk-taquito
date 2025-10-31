@@ -11,9 +11,9 @@ author: Roxane Letourneau
 This document was recently modified to reflect the switch from Axios to Fetch
 :::
 
-Having Taquito implemented in composable modules is a design choice to allow users to customize the modules to meet some of their specific needs.
+Having Webmavryk implemented in composable modules is a design choice to allow users to customize the modules to meet some of their specific needs.
 
-One of these needs might be the ability to **cancel** HTTP requests to optimize the network. Indeed, Taquito has heavy methods that make a lot of requests to the RPC. For example, in some cases, users might want to cancel almost immediately a call when using it in user interfaces. It is possible to incorporate some logic into the `HttpBackend` and `RpcClient` classes to fulfill this need.
+One of these needs might be the ability to **cancel** HTTP requests to optimize the network. Indeed, Webmavryk has heavy methods that make a lot of requests to the RPC. For example, in some cases, users might want to cancel almost immediately a call when using it in user interfaces. It is possible to incorporate some logic into the `HttpBackend` and `RpcClient` classes to fulfill this need.
 
 Here is one example to override `HttpBackend` and/or `RpcClient`:
 
@@ -84,7 +84,7 @@ class CancellableHttpBackend extends HttpBackend {
 Create a class called `CancellableRpcClient` which extends the `RpcClient` class. Pass its constructor an instance of our `CancellableHttpBackend` class. And lastly, add the `cancelRequest` method which is used to trigger the abort signal.
 
 ``` ts
-import { RpcClient } from '@mavrykdynamics/taquito-rpc';
+import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
 
 class CancellableRpcClient extends RpcClient {
   httpBackend: CancellableHttpBackend;
@@ -108,8 +108,8 @@ class CancellableRpcClient extends RpcClient {
 Set `CancellableRpcClient` on our `MavrykToolkit` instance instead of using the default `RpcClient` class:
 
 ``` ts
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 
 const signer: any = new InMemorySigner('your_key');
 const customRpcClient = new CancellableRpcClient('your_RPC_URL')  
@@ -123,4 +123,4 @@ Now that we've setup the customRpcClient, we can trigger request cancellations b
 await customRpcClient.cancelRequest();
 ```   
 
-**Note** that this example we provided will abort all RPC calls when triggered. There are unquestionably other methods to override and modify Taquito, and this example is just one of many possible implementations.
+**Note** that this example we provided will abort all RPC calls when triggered. There are unquestionably other methods to override and modify Webmavryk, and this example is just one of many possible implementations.

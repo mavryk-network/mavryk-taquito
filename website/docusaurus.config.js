@@ -8,12 +8,12 @@
 require('dotenv').config();
 
 module.exports = {
-  title: 'Taquito',
+  title: 'Webmavryk',
   tagline: 'A TypeScript library suite for development on the Mavryk blockchain.',
   favicon: 'img/favicon.svg',
-  url: 'https://taquito.mavryk.org',
+  url: 'https://webmavryk.mavryk.org',
   baseUrl: '/',
-  projectName: 'taquito',
+  projectName: 'webmavryk',
   organizationName: 'ecadlabs',
   markdown: {
     mermaid: true,
@@ -30,7 +30,7 @@ module.exports = {
     'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css',
   ],
   customFields: {
-    repoUrl: 'https://github.com/mavryk-network/mavryk-taquito',
+    repoUrl: 'https://github.com/mavryk-network/webmavryk',
     description:
       'A TypeScript library suite made available as a set of npm packages aiming to make building on top of Mavryk easier and more enjoyable.',
   },
@@ -57,8 +57,8 @@ module.exports = {
     navbar: {
       hideOnScroll: true,
       logo: {
-        alt: 'Taquito Logo',
-        src: 'img/taquito_header.svg',
+        alt: 'Webmavryk Logo',
+        src: 'img/webmavryk_header.svg',
       },
       items: [
         {
@@ -91,7 +91,7 @@ module.exports = {
           'aria-label': 'X',
         },
         {
-          href: 'https://github.com/mavryk-network/mavryk-taquito',
+          href: 'https://github.com/mavryk-network/webmavryk',
           position: 'right',
           className: 'header-link header-github-link',
           'aria-label': 'GitHub repository',
@@ -105,11 +105,11 @@ module.exports = {
           items: [
             {
               label: 'Report Issues',
-              to: 'https://github.com/mavryk-network/mavryk-taquito/issues/new/choose',
+              to: 'https://github.com/mavryk-network/webmavryk/issues/new/choose',
             },
             {
               label: 'Contribute',
-              to: 'https://github.com/mavryk-network/mavryk-taquito/blob/master/CONTRIBUTING.md',
+              to: 'https://github.com/mavryk-network/webmavryk/blob/master/CONTRIBUTING.md',
             },
           ],
         },
@@ -119,7 +119,7 @@ module.exports = {
           items: [
             // {
             //   label: 'Stack Exchange',
-            //   to: 'https://tezos.stackexchange.com/questions/tagged/taquito',
+            //   to: 'https://tezos.stackexchange.com/questions/tagged/webmavryk',
             // },
             {
               label: 'Discord',
@@ -131,11 +131,11 @@ module.exports = {
             },
             {
               label: 'Code of Conduct',
-              to: 'https://github.com/mavryk-network/mavryk-taquito/blob/master/code-of-conduct.md',
+              to: 'https://github.com/mavryk-network/webmavryk/blob/master/code-of-conduct.md',
             },
             {
               label: 'GitHub',
-              to: 'https://github.com/mavryk-network/mavryk-taquito',
+              to: 'https://github.com/mavryk-network/webmavryk',
             },
           ],
         },
@@ -148,7 +148,7 @@ module.exports = {
             },
             {
               label: 'TypeDoc Reference',
-              to: 'https://taquito.mavryk.org/typedoc',
+              to: 'https://webmavryk.mavryk.org/typedoc',
             },
           ],
         },
@@ -166,7 +166,7 @@ module.exports = {
             },
             {
               html: `
-									<a class='footerButton' href='https://github.com/mavryk-network/mavryk-taquito'>
+									<a class='footerButton' href='https://github.com/mavryk-network/webmavryk'>
 										GITHUB
 									</a>
 								  `,
@@ -180,7 +180,7 @@ module.exports = {
     },
     algolia: {
       apiKey: process.env.ALGOLIA_SEARCH_API_KEY,
-      indexName: 'taquito',
+      indexName: 'webmavryk',
       appId: process.env.ALGOLIA_APPLICATION_ID,
       contextualSearch: false,
     },

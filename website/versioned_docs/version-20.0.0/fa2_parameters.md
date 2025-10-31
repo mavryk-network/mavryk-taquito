@@ -8,7 +8,7 @@ id: fa2_parameters
 author: Claude Barde
 ---
 
-## Formatting the parameters for FA2 entrypoints with Taquito
+## Formatting the parameters for FA2 entrypoints with Webmavryk
 
 Based on the [TZIP-12 standard](https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-12/tzip-12.md), FA 2 contracts are contracts that handle tokens, whether it be non-fungible or fungible tokens.
 
@@ -17,14 +17,14 @@ In order to be compliant with the standard, a contract (among other requirements
 - **balance_of**: an entrypoint meant to be called on-chain in order to get the balance of a specific account
 - **update_operators**: a list of parameters to give or withdraw access to users' tokens from third-parties
 
-Because the *transfer* and *update_operators* entrypoints require complex Michelson data, it can sometimes be complicated to find the right formatting for the parameters in JavaScript using Taquito.
+Because the *transfer* and *update_operators* entrypoints require complex Michelson data, it can sometimes be complicated to find the right formatting for the parameters in JavaScript using Webmavryk.
 
 ## Reminder: calling the entrypoint of an FA2 contract
 
 Once you have the address of the contract you want to update, calling the `transfer` or the `update_operators` entrypoint follows the same steps as with any other contract:
 
 ```typescript
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
 
 const Mavryk = await new MavrykTooolkit(RPC_URL);
 const contract = await Mavryk.wallet.at(FA2_CONTRACT_ADDRESS);
@@ -54,7 +54,7 @@ This means that the entrypoint takes a list of pairs annotated with `%transfer`.
 
 > Note: Incidentally, this means that the contract can process multiple transfers at the same time, with one spender sending transfers to multiple recipients for one or different token ids.
 
-In order to format the transfer parameters properly for Taquito, there are only 2 rules to remember:
+In order to format the transfer parameters properly for Webmavryk, there are only 2 rules to remember:
 - Michelson lists are represented as arrays
 - Pairs in lists are represented as objects whose properties match the field annotations of the pair
 
@@ -163,8 +163,8 @@ Here is the type signature for the entrypoint parameter in Michelson:
 )
 ```
 
-As mentioned above, Michelson lists are represented as arrays in Taquito.
-A union value inside a list is represented as an object with one property: the annotation of the left or right side. The value is then represented as usual in Taquito. In the case of the `update_operators` entrypoint, the value is an object whose properties are the annotations of the right-combed pair:
+As mentioned above, Michelson lists are represented as arrays in Webmavryk.
+A union value inside a list is represented as an object with one property: the annotation of the left or right side. The value is then represented as usual in Webmavryk. In the case of the `update_operators` entrypoint, the value is an object whose properties are the annotations of the right-combed pair:
 
 ```typescript
 const operator_params = [
@@ -191,7 +191,7 @@ Just like a transfer operation, it is possible to add and remove multiple operat
 It can sometimes be useful or more practical to set an operator before sending a transfer transaction. If your dapp is built on a contract that will handle users' transfer operations on their behalf, it can be more convenient for your users to approve your contract and let it transfer their tokens in one click. In this case, you can use the Batch API to first approve the contract and then call an entrypoint of the contract that will transfer the user's tokens on his behalf:
 
 ```typescript
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
 
 const Mavryk = await new MavrykToolkit(RPC_URL);
 const dappContract = await Mavryk.wallet.at(DAPP_CONTRACT_ADDRESS);

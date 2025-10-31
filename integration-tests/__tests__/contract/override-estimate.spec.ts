@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from "../../config";
-import { InvalidEstimateValueError } from '@mavrykdynamics/taquito';
+import { InvalidEstimateValueError } from '@mavrykdynamics/webmavryk';
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
   const Mavryk = lib;

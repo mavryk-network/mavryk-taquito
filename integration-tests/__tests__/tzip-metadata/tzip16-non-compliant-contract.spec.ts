@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from "../../config";
-import { tzip16, Tzip16Module, BigMapContractMetadataNotFoundError } from '@mavrykdynamics/taquito-tzip16';
+import { tzip16, Tzip16Module, BigMapContractMetadataNotFoundError } from '@mavrykdynamics/webmavryk-tzip16';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;

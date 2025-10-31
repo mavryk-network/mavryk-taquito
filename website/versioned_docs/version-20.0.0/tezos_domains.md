@@ -19,8 +19,8 @@ Let's have a look at the Mavryk domain contract on testnet to see how we can fin
 If you have an address and you want to find the domain tied to it, the storage of the Mavryk domain contract holds a bigmap called `reverse_records` whose keys are addresses and whose values include the corresponding Mavryk domain. Here is a little function to fetch it:
 
 ```typescript
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
-import { bytesToString } from "@mavrykdynamics/taquito-utils";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
+import { bytesToString } from "@mavrykdynamics/webmavryk-utils";
 
 const domainContractAddress = "KT1GBZmSxmnKJXGMdMLbugPfLyUPmuLSMwKS";
 
@@ -41,17 +41,17 @@ const fetchMavrykDomainFromAddress = async (address: string): Promise<string> =>
 
 2 things to remember when you are looking for a Mavryk domain in the storage of the contract:
 - the `reverse_records` bigmap is nested inside the `store` property
-- the domain name is stored as bytes, so you can use the `bytesToString` function from `@mavrykdynamics/taquito-utils` to decode it as a string.
+- the domain name is stored as bytes, so you can use the `bytesToString` function from `@mavrykdynamics/webmavryk-utils` to decode it as a string.
 
-If we call the `fetchMavrykDomainFromAddress` function with `mv1TfAvXWDtT4Q8sVrqiLzLEhpa9fjteEKgK`, it will return `taquito.mav`.
+If we call the `fetchMavrykDomainFromAddress` function with `mv1TfAvXWDtT4Q8sVrqiLzLEhpa9fjteEKgK`, it will return `webmavryk.mav`.
 
 ## Looking up a Mavryk domain
 
 It is also possible to look up a domain name to find the address it references. In this case, you will use the `records` bigmap that you can also find under the `store` property of the storage:
 
 ```typescript
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
-import { bytesToString } from "@mavrykdynamics/taquito-utils";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
+import { bytesToString } from "@mavrykdynamics/webmavryk-utils";
 
 const contractAddress = "KT1GBZmSxmnKJXGMdMLbugPfLyUPmuLSMwKS";
 
@@ -79,8 +79,8 @@ The Mavryk domains have an expiry date after which they must be renewed or they 
 To find the expiry date, you can check the `expiry_map` bigmap under the `store` property of the storage where the keys are the domain names encoded into bytes:
 
 ```typescript
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
-import { bytesToString } from "@mavrykdynamics/taquito-utils";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
+import { bytesToString } from "@mavrykdynamics/webmavryk-utils";
 
 const contractAddress = "KT1GBZmSxmnKJXGMdMLbugPfLyUPmuLSMwKS";
 
@@ -98,4 +98,4 @@ const fetchExpiryDate = async (domainName: string): Promise<string> => {
 }
 ```
 
-If you provide `taquito.mav` as a parameter, the function will return `2023-04-30T00:00:00Z`, meaning that the domain name expires in April 9th, 2023.
+If you provide `webmavryk.mav` as a parameter, the function will return `2023-04-30T00:00:00Z`, meaning that the domain name expires in April 9th, 2023.

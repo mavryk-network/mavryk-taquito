@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from '../../../config';
-import { OpKind } from '@mavrykdynamics/taquito';
+import { OpKind } from '@mavrykdynamics/webmavryk';
 import { ligoSample } from '../../../data/ligo-simple-contract';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {

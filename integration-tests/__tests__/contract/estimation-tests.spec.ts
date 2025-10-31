@@ -4,13 +4,13 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MANAGER_LAMBDA, getRevealFee, MavrykToolkit } from '@mavrykdynamics/taquito';
-import { Contract } from '@mavrykdynamics/taquito';
+import { MANAGER_LAMBDA, getRevealFee, MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { Contract } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
 import { originate, originate2, transferImplicit2 } from '../../data/lambda';
 import { ligoSample } from '../../data/ligo-simple-contract';
 import { managerCode } from '../../data/manager_code';
-import { InvalidAmountError } from '@mavrykdynamics/taquito-core';
+import { InvalidAmountError } from '@mavrykdynamics/webmavryk-core';
 
 CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
   const Mavryk = lib;

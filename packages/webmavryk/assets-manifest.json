@@ -1,0 +1,10 @@
+{
+  "dist/webmavryk.min.js.LICENSE.txt": {
+    "src": "dist/webmavryk.min.js.LICENSE.txt",
+    "integrity": "sha256-NSg6SLXzg4ejzjuFM6vq6ypfZrVSgiQ8yQWVKcfT1GM= sha384-owo1hqQqi6k0ECb6/CUv5s4caGj8QGHkgNrYHcAf148ya/vO+Wp6hngvLYI7lRkp sha512-tdhrFHDP6PDpxTwVHgyYE2SlP9BlCYBds8n0TUraGYZ/+sgzB9WXboTBbIQa1k88gSMVgUhGpuciT4hle6OzTw=="
+  },
+  "main.js": {
+    "src": "dist/webmavryk.min.js",
+    "integrity": "sha256-HbLfbrIf0epXsYQ4ZwchLdqoIsx3BVMtyt5i2eg9uno= sha384-KHMviAW/BJwwVODKQKukhbsXBVB21PYOtauM6DCBVJFi9kMwkM1czAYWmyk6jbVY sha512-zW/rNKV53zhtlhvpEvGI8Zq27hz0YVm3X6RrsjBPAhqR/PbL1wVwx4MBeZ4VlDyksmJ5M0sa0wE36RA71UAR0A=="
+  }
+}

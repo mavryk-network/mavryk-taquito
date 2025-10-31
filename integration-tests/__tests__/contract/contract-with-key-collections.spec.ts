@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from "../../config";
-import { MichelsonMap } from "@mavrykdynamics/taquito";
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
 import { contractWithKeyCollections } from "../../data/contract-with-key-collections";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {

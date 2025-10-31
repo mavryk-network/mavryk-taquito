@@ -5,9 +5,9 @@
  */
 
 import { CONFIGS } from "../../config";
-import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/taquito-tzip16';
+import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/webmavryk-tzip16';
 import { tacoContractTzip16 } from "../../data/modified-taco-contract"
-import { MichelsonMap } from "@mavrykdynamics/taquito";
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;
@@ -28,9 +28,9 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         "version": "0.1",
         "license": "MIT",
         "authors": [
-          "Taquito <https://taquito.mavryk.org/>"
+          "Webmavryk <https://webmavryk.mavryk.org/>"
         ],
-        "homepage": "https://taquito.mavryk.org/"
+        "homepage": "https://webmavryk.mavryk.org/"
       };
 
       const metadataBigMAp = new MichelsonMap();
@@ -68,17 +68,17 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         "version": "0.1",
         "license": "MIT",
         "authors": [
-          "Taquito <https://taquito.mavryk.org/>"
+          "Webmavryk <https://webmavryk.mavryk.org/>"
         ],
-        "homepage": "https://taquito.mavryk.org/"
+        "homepage": "https://webmavryk.mavryk.org/"
       });
 
       expect(await (await contract.tzip16()).metadataName()).toEqual('test')
       expect(await (await contract.tzip16()).metadataDescription()).toEqual('A metadata test')
       expect(await (await contract.tzip16()).metadataVersion()).toEqual('0.1')
       expect(await (await contract.tzip16()).metadataLicense()).toEqual('MIT')
-      expect(await (await contract.tzip16()).metadataAuthors()).toEqual(["Taquito <https://taquito.mavryk.org/>"])
-      expect(await (await contract.tzip16()).metadataHomepage()).toEqual('https://taquito.mavryk.org/')
+      expect(await (await contract.tzip16()).metadataAuthors()).toEqual(["Webmavryk <https://webmavryk.mavryk.org/>"])
+      expect(await (await contract.tzip16()).metadataHomepage()).toEqual('https://webmavryk.mavryk.org/')
       expect(await (await contract.tzip16()).metadataSource()).toBeUndefined()
       expect(await (await contract.tzip16()).metadataInterfaces()).toBeUndefined()
       expect(await (await contract.tzip16()).metadataErrors()).toBeUndefined()
@@ -119,17 +119,17 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         "version": "0.1",
         "license": "MIT",
         "authors": [
-          "Taquito <https://taquito.mavryk.org/>"
+          "Webmavryk <https://webmavryk.mavryk.org/>"
         ],
-        "homepage": "https://taquito.mavryk.org/"
+        "homepage": "https://webmavryk.mavryk.org/"
       });
 
       expect(await (await contract.tzip16()).metadataName()).toEqual('test')
       expect(await (await contract.tzip16()).metadataDescription()).toEqual('A metadata test')
       expect(await (await contract.tzip16()).metadataVersion()).toEqual('0.1')
       expect(await (await contract.tzip16()).metadataLicense()).toEqual('MIT')
-      expect(await (await contract.tzip16()).metadataAuthors()).toEqual(["Taquito <https://taquito.mavryk.org/>"])
-      expect(await (await contract.tzip16()).metadataHomepage()).toEqual('https://taquito.mavryk.org/')
+      expect(await (await contract.tzip16()).metadataAuthors()).toEqual(["Webmavryk <https://webmavryk.mavryk.org/>"])
+      expect(await (await contract.tzip16()).metadataHomepage()).toEqual('https://webmavryk.mavryk.org/')
       expect(await (await contract.tzip16()).metadataSource()).toBeUndefined()
       expect(await (await contract.tzip16()).metadataInterfaces()).toBeUndefined()
       expect(await (await contract.tzip16()).metadataErrors()).toBeUndefined()

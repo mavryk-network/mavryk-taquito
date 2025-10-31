@@ -10,7 +10,7 @@ import styles from './CardsGrid.module.scss';
 
 const FeatureList = [
   {
-    title: 'What makes Taquito so amazing?',
+    title: 'What makes Webmavryk so amazing?',
     link: {
       title: 'Get Started',
       url: '/docs/quick_start',
@@ -22,13 +22,13 @@ const FeatureList = [
         icon: require('../../../static/img/briefcase.svg').default,
         title: 'Easy to use',
         description:
-          "Taquito's abstractions are simple to understand and use. Working with Mavryk contracts feels like working with JavaScript objects.",
+          "Webmavryk's abstractions are simple to understand and use. Working with Mavryk contracts feels like working with JavaScript objects.",
       },
       {
         icon: require('../../../static/img/key.svg').default,
         title: 'Catch Errors Early',
         description:
-          'Taquito uses TypeScript to extend JavaScript so that you can catch errors earlier.',
+          'Webmavryk uses TypeScript to extend JavaScript so that you can catch errors earlier.',
       },
       {
         icon: require('../../../static/img/box.svg').default,
@@ -40,7 +40,7 @@ const FeatureList = [
         icon: require('../../../static/img/credit_card.svg').default,
         title: 'Well Supported',
         description:
-          'Taquito has a well-documented API, runs continuous integration tests against the Mavryk Node and a set of Beacon wallets.',
+          'Webmavryk has a well-documented API, runs continuous integration tests against the Mavryk Node and a set of Beacon wallets.',
       },
     ],
   },

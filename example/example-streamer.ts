@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { PollingSubscribeProvider, MavrykToolkit } from '@mavrykdynamics/taquito';
+import { PollingSubscribeProvider, MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network/';

@@ -27,7 +27,7 @@ In the following example, we have not revealed the account that we want to empty
 
 ```js live noInline
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
-// import { getRevealFee } from "@mavrykdynamics/taquito";
+// import { getRevealFee } from "@mavrykdynamics/webmavryk";
 
 Mavryk.signer
     .publicKeyHash()
@@ -86,7 +86,7 @@ Mavryk.signer
 
 In the following example, we first originate a contract with a starting balance of 8 ṁ. Then, we transfer all of its tokens to an implicit account.
 
-The contract we originate is a `manager contract.` It has a `do` method taking a lambda function as a parameter. We call the smart contract by passing a function called `transferImplicit` to its `do` method to transfer its tokens to the implicit address. More information on transfers involving originated KT1 addresses can be found [here](https://taquito.mavryk.org/docs/making_transfers#transfers-involving-originated-kt1-addresses).
+The contract we originate is a `manager contract.` It has a `do` method taking a lambda function as a parameter. We call the smart contract by passing a function called `transferImplicit` to its `do` method to transfer its tokens to the implicit address. More information on transfers involving originated KT1 addresses can be found [here](https://webmavryk.mavryk.org/docs/making_transfers#transfers-involving-originated-kt1-addresses).
 
 In the example, we estimate the transfer operation before doing it. The associated fees are deducted from the manager's address when draining the account. Thus, for the operation to be successful, the manager's address for that account must contain funds to cover the gas.
 

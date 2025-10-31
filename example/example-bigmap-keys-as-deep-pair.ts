@@ -4,8 +4,8 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { Parser } from '@mavrykdynamics/taquito-michel-codec'
-import { Schema } from '@mavrykdynamics/taquito-michelson-encoder';
+import { Parser } from '@mavrykdynamics/webmavryk-michel-codec'
+import { Schema } from '@mavrykdynamics/webmavryk-michelson-encoder';
 
 const example = async () => {
     try {

@@ -4,8 +4,8 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { Parser, emitMicheline } from '@mavrykdynamics/taquito-michel-codec'
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { Parser, emitMicheline } from '@mavrykdynamics/webmavryk-michel-codec'
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const provider = 'https://mainnet.rpc.mavryk.network/';
 

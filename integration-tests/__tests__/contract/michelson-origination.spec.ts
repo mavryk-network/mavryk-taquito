@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { InvalidBalanceError, MichelCodecParser, NoopParser, Context, InvalidCodeParameter } from '@mavrykdynamics/taquito';
+import { InvalidBalanceError, MichelCodecParser, NoopParser, Context, InvalidCodeParameter } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from "../../config";
 import { idMichelsonCode, idInitData } from "../../data/id-contract"
 

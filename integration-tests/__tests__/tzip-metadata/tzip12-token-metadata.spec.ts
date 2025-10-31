@@ -5,9 +5,9 @@
  */
 
 import { CONFIGS } from '../../config';
-import { compose, MichelsonMap, ViewSimulationError } from '@mavrykdynamics/taquito';
-import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/taquito-tzip16';
-import { tzip12, Tzip12Module, TokenIdNotFound, InvalidTokenMetadata } from '@mavrykdynamics/taquito-tzip12';
+import { compose, MichelsonMap, ViewSimulationError } from '@mavrykdynamics/webmavryk';
+import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/webmavryk-tzip16';
+import { tzip12, Tzip12Module, TokenIdNotFound, InvalidTokenMetadata } from '@mavrykdynamics/webmavryk-tzip12';
 import { fa2TokenFactory } from '../../data/fa2-token-factory';
 import { fa2ForTokenMetadataView } from '../../data/fa2-for-token-metadata-view';
 
@@ -119,7 +119,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 			expect(metadata.integrityCheckResult).toBeUndefined();
 			expect(metadata.sha256Hash).toBeUndefined();
 			expect(metadata.metadata).toEqual({
-				name: 'Test Taquito FA2 token Factory',
+				name: 'Test Webmavryk FA2 token Factory',
 				description:
 					'This is a test to retrieve tokens metadata when they are located in the storage of the contract in the big map %token_metadata',
 				source: {
@@ -263,7 +263,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 			expect(tokenMetadata0).toEqual({
 				token_id: 0,
 				decimals: 3,
-				name: 'Taquito test URI',
+				name: 'Webmavryk test URI',
 				symbol: 'MVRK2'
 			});
 

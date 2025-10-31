@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MichelsonMap } from '@mavrykdynamics/taquito-michelson-encoder';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk-michelson-encoder';
 import { CONFIGS } from '../../config';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {

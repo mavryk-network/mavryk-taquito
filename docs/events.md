@@ -15,7 +15,7 @@ Contract events is a way for contracts to deliver event-like information to thir
 
 For more details and examples of how the EMIT instruction works, refer to [this article](https://protocol.mavryk.org/active/event.html).
 
-## Getting contract events in Taquito
+## Getting contract events in Webmavryk
 You can get the events in a contract through the `eventSchema` field of the `ContractAbstraction`.
 
 ### Example
@@ -52,8 +52,8 @@ If the contract has events this might log something similar to:
 ```
 
 
-## Subscribing to Events in Taquito
-Taquito provides a simple way for users to subscribe to certain events on the blockchain via the `PollingSubscribeProvider`.
+## Subscribing to Events in Webmavryk
+Webmavryk provides a simple way for users to subscribe to certain events on the blockchain via the `PollingSubscribeProvider`.
 
 ### Example
 #### Usage

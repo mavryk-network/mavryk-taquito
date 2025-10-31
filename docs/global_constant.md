@@ -26,7 +26,7 @@ This feature brings the following:
 - Alice replaces the newly registered expression in the code of her contract with the primitive `constant` and the corresponding hash.
 - Alice can now originate her contract, as its size has been compressed.
 
-## How to register a global constant with Taquito?
+## How to register a global constant with Webmavryk?
 
 ### Contract API
 
@@ -34,7 +34,7 @@ A `registerGlobalConstant` method is available on the `ContractProvider` class. 
 
 *Note that an expression can only be registered once and will result in an error from the node if trying to register the same constant multiple times.*
 
-*Note that the conversion between Micheline and its JSON format can be achieved using the `@mavrykdynamics/taquito-michel-codec` if needed.*
+*Note that the conversion between Micheline and its JSON format can be achieved using the `@mavrykdynamics/webmavryk-michel-codec` if needed.*
 
 **Here is a simple example:**
 
@@ -129,7 +129,7 @@ It is also possible to register global constants using the batch API.
 Here is an example using the `withRegisterGlobalConstant` method: 
 
 ```ts
-import { OpKind } from '@mavrykdynamics/taquito';
+import { OpKind } from '@mavrykdynamics/webmavryk';
 
 const batchOp = await Mavryk.contract.batch()
 .withRegisterGlobalConstant({
@@ -151,7 +151,7 @@ await batchOp.confirmation();
 Here is an example without using the `withRegisterGlobalConstant` method: 
 
 ```ts
-import { OpKind } from '@mavrykdynamics/taquito';
+import { OpKind } from '@mavrykdynamics/webmavryk';
 
 const batchOp = await Mavryk.contract.batch([
     {
@@ -169,15 +169,15 @@ await batchOp.confirmation();
 
 ## How to deploy a contract using the storage property if I use global constant in the storage part of the code?
 
-Taquito needs the Michelson value of global constants to encode the storage argument properly into the corresponding Michelson data. To do so, you will need to set a global constant provider on the `MavrykToolkit` instance. 
+Webmavryk needs the Michelson value of global constants to encode the storage argument properly into the corresponding Michelson data. To do so, you will need to set a global constant provider on the `MavrykToolkit` instance. 
 
-Note that there is no RPC endpoint available at that time (v11.1.0) that allows fetching global constant values based on their hashes. Taquito provides a default global constant provider named `DefaultGlobalConstantsProvider` where the hash and corresponding JSON Michelson value must be manually provisioned using its `loadGlobalConstant` method. 
+Note that there is no RPC endpoint available at that time (v11.1.0) that allows fetching global constant values based on their hashes. Webmavryk provides a default global constant provider named `DefaultGlobalConstantsProvider` where the hash and corresponding JSON Michelson value must be manually provisioned using its `loadGlobalConstant` method. 
 
-Instead of using the `DefaultGlobalConstantsProvider`, a user can inject a custom provider. The global constant provider needs to implement the `GlobalConstantsProvider` interface and define a `getGlobalConstantByHash` method. Different global constant providers (i.e., built on the RPC or indexers) will be included in Taquito in the future.
+Instead of using the `DefaultGlobalConstantsProvider`, a user can inject a custom provider. The global constant provider needs to implement the `GlobalConstantsProvider` interface and define a `getGlobalConstantByHash` method. Different global constant providers (i.e., built on the RPC or indexers) will be included in Webmavryk in the future.
 
 **Here is a complete example:**
 ```ts
-import { MavrykToolkit, DefaultGlobalConstantsProvider } from '@mavrykdynamics/taquito';
+import { MavrykToolkit, DefaultGlobalConstantsProvider } from '@mavrykdynamics/webmavryk';
 
 // create an instance of the `DefaultGlobalConstantsProvider`, load the global constants used in the contract, inject the instance on the MavrykToolkit
 const expression = { "prim": "int" }

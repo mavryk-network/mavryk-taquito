@@ -5,13 +5,13 @@
  */
 
 import { CONFIGS } from '../../config';
-import { DefaultContractType, Protocols } from "@mavrykdynamics/taquito";
-import { RpcClientCache, RpcClient, RPCRunViewParam, RPCRunScriptViewParam, PendingOperationsV1, PendingOperationsV2, PvmKind } from '@mavrykdynamics/taquito-rpc';
-import { encodeExpr } from '@mavrykdynamics/taquito-utils';
-import { Schema } from '@mavrykdynamics/taquito-michelson-encoder';
+import { DefaultContractType, Protocols } from "@mavrykdynamics/webmavryk";
+import { RpcClientCache, RpcClient, RPCRunViewParam, RPCRunScriptViewParam, PendingOperationsV1, PendingOperationsV2, PvmKind } from '@mavrykdynamics/webmavryk-rpc';
+import { encodeExpr } from '@mavrykdynamics/webmavryk-utils';
+import { Schema } from '@mavrykdynamics/webmavryk-michelson-encoder';
 import { tokenBigmapCode, tokenBigmapStorage } from '../../data/token_bigmap';
 import { ticketCode, ticketStorage } from '../../data/code_with_ticket';
-import { ProtoGreaterOrEqual } from '@mavrykdynamics/taquito-michel-codec';
+import { ProtoGreaterOrEqual } from '@mavrykdynamics/webmavryk-michel-codec';
 
 CONFIGS().forEach(
   ({

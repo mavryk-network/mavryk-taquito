@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from "../../config";
-import { getRevealFee } from "@mavrykdynamics/taquito";
+import { getRevealFee } from "@mavrykdynamics/webmavryk";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
   const Mavryk = lib;

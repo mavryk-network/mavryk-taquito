@@ -4,10 +4,10 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { Protocols } from "@mavrykdynamics/taquito";
+import { Protocols } from "@mavrykdynamics/webmavryk";
 import { CONFIGS, NetworkType } from "../../config";
 import BigNumber from 'bignumber.js';
-import { ConstantsResponseProto019, ConstantsResponseProto020 } from '@mavrykdynamics/taquito-rpc';
+import { ConstantsResponseProto019, ConstantsResponseProto020 } from '@mavrykdynamics/webmavryk-rpc';
 
 CONFIGS().forEach(({ lib, protocol, rpc, networkType }) => {
   const Mavryk = lib;

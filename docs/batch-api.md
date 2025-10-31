@@ -10,7 +10,7 @@ author: Claude Barde
 
 ## What is the Batch API?
 
-Taquito provides a simple way of forging and sending transactions to the blockchain, whether you wish to send a few mav to a certain address or interact with a smart contract. Each Mavryk account holds a counter that increments every time an operation is included in a block on the network. This feature prevents users from sending two or multiple transactions in a row as illustrated in this code snippet:
+Webmavryk provides a simple way of forging and sending transactions to the blockchain, whether you wish to send a few mav to a certain address or interact with a smart contract. Each Mavryk account holds a counter that increments every time an operation is included in a block on the network. This feature prevents users from sending two or multiple transactions in a row as illustrated in this code snippet:
 
 ```js
 /*
@@ -41,7 +41,7 @@ await op2.confirmation();
 The `contract` or `wallet` property of the `MavrykToolkit` object exposes a method called `batch` (the choice between `contract` or `wallet` depends on your use case, whether the transaction will be signed by a wallet or not). Subsequently, the returned object exposes six different methods that you can concatenate according to the number of transactions to emit.
 
 ```js
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const Mavryk = new MavrykToolkit('RPC address here');
 const batch = Mavryk.wallet.batch(); // or Mavryk.contract.batch()
@@ -53,7 +53,7 @@ console.log('Operation hash:', batchOp.hash);
 await batchOp.confirmation();
 ```
 
-After concatenating the different methods to batch operations together, a single transaction is created and broadcast with a single operation hash returned. As for any other transaction created by Taquito, you then wait for a determined number of confirmations.
+After concatenating the different methods to batch operations together, a single transaction is created and broadcast with a single operation hash returned. As for any other transaction created by Webmavryk, you then wait for a determined number of confirmations.
 
 #### - The `withTransfer` method
 
@@ -104,10 +104,10 @@ const batch = await Mavryk.wallet.batch()
 
 #### - The `array of transactions` method
 
-If you prefer having an array that contains objects with the different transactions you want to emit, you can use the `with` method. It allows you to group transactions as objects instead of concatenating function calls. The object you use expects the same properties as the parameter of the corresponding method with an additional `kind` property that indicates the kind of transaction you want to emit (a handy `opKind` enum is [exported from the Taquito package](https://github.com/mavryk-network/mavryk-taquito/blob/master/packages/taquito-rpc/src/opkind.ts) with the valid values for the `kind` property).
+If you prefer having an array that contains objects with the different transactions you want to emit, you can use the `with` method. It allows you to group transactions as objects instead of concatenating function calls. The object you use expects the same properties as the parameter of the corresponding method with an additional `kind` property that indicates the kind of transaction you want to emit (a handy `opKind` enum is [exported from the Webmavryk package](https://github.com/mavryk-network/webmavryk/blob/master/packages/webmavryk-rpc/src/opkind.ts) with the valid values for the `kind` property).
 
 ```js
-import { OpKind, UnitValue } from '@mavrykdynamics/taquito';
+import { OpKind, UnitValue } from '@mavrykdynamics/webmavryk';
 
 const batch = await Mavryk.wallet.batch([
   {
@@ -146,7 +146,7 @@ console.log('Operation hash:', batchOp.hash);
 await batchOp.confirmation();
 ```
 
-Like with other operations created by Taquito, the `send` method is a promise that returns an object where the operation hash is available under the `hash` property and where you can wait for the `confirmation` method to confirm the transaction (taking as a parameter the number of confirmations you would like to receive).
+Like with other operations created by Webmavryk, the `send` method is a promise that returns an object where the operation hash is available under the `hash` property and where you can wait for the `confirmation` method to confirm the transaction (taking as a parameter the number of confirmations you would like to receive).
 
 ## What are the limitations?
 
@@ -155,5 +155,5 @@ In addition to that, only a single account can sign batched operations.
 
 ## References
 
-- [Integration tests](https://github.com/mavryk-network/mavryk-taquito/blob/master/integration-tests/batch-api.spec.ts)
-- [Documentation](https://taquito.mavryk.org/typedoc/classes/_taquito_taquito.walletoperationbatch.html)
+- [Integration tests](https://github.com/mavryk-network/webmavryk/blob/master/integration-tests/batch-api.spec.ts)
+- [Documentation](https://webmavryk.mavryk.org/typedoc/classes/_webmavryk_webmavryk.walletoperationbatch.html)

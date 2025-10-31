@@ -5,9 +5,9 @@
  */
 
 import { CONFIGS } from '../../config';
-import { Protocols } from '@mavrykdynamics/taquito';
-import { ProtoGreaterOrEqual } from '@mavrykdynamics/taquito-michel-codec';
-import { InvalidStakingAddressError, InvalidFinalizeUnstakeAmountError } from '@mavrykdynamics/taquito-core';
+import { Protocols } from '@mavrykdynamics/webmavryk';
+import { ProtoGreaterOrEqual } from '@mavrykdynamics/webmavryk-michel-codec';
+import { InvalidStakingAddressError, InvalidFinalizeUnstakeAmountError } from '@mavrykdynamics/webmavryk-core';
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol, knownBaker }) => {
   const Mavryk = lib;

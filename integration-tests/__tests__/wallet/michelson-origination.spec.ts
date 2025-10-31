@@ -6,7 +6,7 @@
 
 import { CONFIGS } from "../../config";
 import { idMichelsonCode, idInitData } from "../../data/id-contract";
-import { MichelCodecParser, NoopParser, Context, InvalidCodeParameter } from '@mavrykdynamics/taquito';
+import { MichelCodecParser, NoopParser, Context, InvalidCodeParameter } from '@mavrykdynamics/webmavryk';
 
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {

@@ -4,12 +4,12 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { CompositeForger, RpcForger, MavrykToolkit, Protocols, TaquitoLocalForger, PollingSubscribeProvider } from '@mavrykdynamics/taquito';
-import { RemoteSigner } from '@mavrykdynamics/taquito-remote-signer';
-import { HttpBackend } from '@mavrykdynamics/taquito-http-utils';
-import { b58cencode, Prefix, prefix } from '@mavrykdynamics/taquito-utils';
-import { importKey, InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { RpcClient, RpcClientCache } from '@mavrykdynamics/taquito-rpc';
+import { CompositeForger, RpcForger, MavrykToolkit, Protocols, WebmavrykLocalForger, PollingSubscribeProvider } from '@mavrykdynamics/webmavryk';
+import { RemoteSigner } from '@mavrykdynamics/webmavryk-remote-signer';
+import { HttpBackend } from '@mavrykdynamics/webmavryk-http-utils';
+import { b58cencode, Prefix, prefix } from '@mavrykdynamics/webmavryk-utils';
+import { importKey, InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { RpcClient, RpcClientCache } from '@mavrykdynamics/webmavryk-rpc';
 import { KnownContracts } from './known-contracts';
 import { knownContractsProtoALph } from './known-contracts-ProtoALph';
 import { knownContractsPtBasenet } from './known-contracts-PtBasenet';
@@ -94,7 +94,7 @@ export const defaultSecretKey: SecretKeyConfig = {
 const defaultEphemeralConfig = (keyUrl: string): EphemeralConfig => ({
   type: SignerType.EPHEMERAL_KEY as SignerType.EPHEMERAL_KEY,
   keyUrl: keyUrl,
-  requestHeaders: { Authorization: 'Bearer taquito-example' },
+  requestHeaders: { Authorization: 'Bearer webmavryk-example' },
 });
 
 // Named parameters for defaultConfig below
@@ -204,10 +204,10 @@ if (process.env['RUN_WITH_SECRET_KEY']) {
 
 const setupForger = (Mavryk: MavrykToolkit, forger: ForgerType): void => {
   if (forger === ForgerType.LOCAL) {
-    Mavryk.setProvider({ forger: Mavryk.getFactory(TaquitoLocalForger)() });
+    Mavryk.setProvider({ forger: Mavryk.getFactory(WebmavrykLocalForger)() });
   } else if (forger === ForgerType.COMPOSITE) {
     const rpcForger = Mavryk.getFactory(RpcForger)();
-    const localForger = Mavryk.getFactory(TaquitoLocalForger)()
+    const localForger = Mavryk.getFactory(WebmavrykLocalForger)()
     const composite = new CompositeForger([rpcForger, localForger]);
     Mavryk.setProvider({ forger: composite });
   } else if (forger === ForgerType.RPC) {

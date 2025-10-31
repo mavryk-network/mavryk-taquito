@@ -2,12 +2,12 @@
      This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
      Original project: Taquito by ECAD Labs Inc. -->
 
-![Taquito Logo](/img/Taquito.png)
+![WebMavryk Logo](/img/WebMavryk.png)
 
-[![Node.js CI](https://github.com/ecadlabs/taquito/workflows/Node.js%20CI/badge.svg)](https://github.com/ecadlabs/taquito/actions/workflows/main.yml)
-[![codecov](https://codecov.io/gh/ecadlabs/taquito/branch/master/graph/badge.svg)](https://codecov.io/gh/ecadlabs/taquito)
+[![Node.js CI](https://github.com/mavryk-network/webmavryk/workflows/Node.js%20CI/badge.svg)](https://github.com/mavryk-network/webmavryk/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/mavryk-network/webmavryk/branch/master/graph/badge.svg)](https://codecov.io/gh/mavryk-network/webmavryk)
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/3204/badge)](https://bestpractices.coreinfrastructure.org/projects/3204)
-[![npm version](https://badge.fury.io/js/%40taquito%2Ftaquito.svg)](https://badge.fury.io/js/%40taquito%2Ftaquito)
+[![npm version](https://badge.fury.io/js/%40webmavryk%2Fwebmavryk.svg)](https://badge.fury.io/js/%40webmavryk%2Fwebmavryk)
 
 ## Fork notice
 
@@ -18,35 +18,35 @@ WebMavryk is a fork of Taquito originally developed by ECAD Labs Inc. This fork 
 
 Welcome, Web3 developer!
 
-## What is Taquito?
+## What is Webmavryk?
 
-Taquito is a fast and lightweight [TypeScript](https://www.typescriptlang.org/) library to accelerate DApp development on the [Mavryk](https://tezos.com/developers) blockchain. With it, you can easily interact with Smart Contracts deployed to Mavryk. It is distributed as a suite of individual `npm` packages, to reduce bloat and improve application startup times.
+Webmavryk is a fast and lightweight [TypeScript](https://www.typescriptlang.org/) library to accelerate DApp development on the [Mavryk](https://tezos.com/developers) blockchain. With it, you can easily interact with Smart Contracts deployed to Mavryk. It is distributed as a suite of individual `npm` packages, to reduce bloat and improve application startup times.
 
-## What is Included in Taquito?
+## What is Included in Webmavryk?
 
-Taquito is primarily targeted at Front-End Web3 developers, so it comes with batteries included, such as a [React Template Project](https://github.com/ecadlabs/taquito-react-template), an extensible framework, and many helpful utilities. It can be used in *many* execution contexts, including Serverless, Node.js, Deno, and Electron (to name a few) and has minimal dependencies.
+Webmavryk is primarily targeted at Front-End Web3 developers, so it comes with batteries included, such as a [React Template Project](https://github.com/mavryk-network/webmavryk-react-template), an extensible framework, and many helpful utilities. It can be used in *many* execution contexts, including Serverless, Node.js, Deno, and Electron (to name a few) and has minimal dependencies.
 
-## Who uses Taquito?
+## Who uses Webmavryk?
 
-Taquito is used by **over 80% of DApps** in the Mavryk ecosystem. It is easy to use, [proven secure](https://bestpractices.coreinfrastructure.org/en/projects/3204#security) and [tested continuously](https://github.com/ecadlabs/taquito/actions/workflows/main.yml) against current versions of Mavryk (both Mainnet *and* Testnets).
+Webmavryk is used by **over 80% of DApps** in the Mavryk ecosystem. It is easy to use, [proven secure](https://bestpractices.coreinfrastructure.org/en/projects/3204#security) and [tested continuously](https://github.com/mavryk-network/webmavryk/actions/workflows/main.yml) against current versions of Mavryk (both Mainnet *and* Testnets).
 
-## Why should I use Taquito?
+## Why should I use Webmavryk?
 
-Taquito provides convenient abstractions for a multitude of common operations, including wallet interactions (with [WalletConnect2](https://docs.walletconnect.com/2.0) in the works), batching operations, calling into contracts, querying the blockchain, and more. Taquito will isolate your code from subtle - and some not-so-subtle - changes made to the underlying Mavryk protocol.
+Webmavryk provides convenient abstractions for a multitude of common operations, including wallet interactions (with [WalletConnect2](https://docs.walletconnect.com/2.0) in the works), batching operations, calling into contracts, querying the blockchain, and more. Webmavryk will isolate your code from subtle - and some not-so-subtle - changes made to the underlying Mavryk protocol.
 
 ...Not to mention our thriving, helpful, and welcoming community!
 
 ## Ok, I'm Ready!
 
-To get started with Taquito quickly, visit the [Taquito QuickStart](https://taquito.mavryk.org/docs/quick_start).
+To get started with Webmavryk quickly, visit the [Webmavryk QuickStart](https://webmavryk.mavryk.org/docs/quick_start).
 
-If you prefer to start with a skeleton project, check out our [Taquito React Template](https://github.com/ecadlabs/taquito-react-template).
+If you prefer to start with a skeleton project, check out our [Webmavryk React Template](https://github.com/mavryk-network/webmavryk-react-template).
 
-Do you wish to make a contribution to Taquito? See below, [Contributing to Taquito](#contributors-getting-started).
+Do you wish to make a contribution to Webmavryk? See below, [Contributing to Webmavryk](#contributors-getting-started).
 
 ## Supported versions of Node
 
-Taquito currently supports the following versions of Node.js®:
+Webmavryk currently supports the following versions of Node.js®:
 
 | Version          | Supported? |
 | ---------------- | ---------- |
@@ -67,55 +67,55 @@ We are active and enthusiastic participants of the following community support c
 
 ## Project Organization
 
-Taquito is organized as a [monorepo](https://en.wikipedia.org/wiki/Monorepo), and is composed of several npm packages that are [published to npmjs.org](https://www.npmjs.com/package/@mavrykdynamics/taquito) under the `@mavrykdynamics` handle. Each package has its own README which can be found in the corresponding directory within `packages/`.
+Webmavryk is organized as a [monorepo](https://en.wikipedia.org/wiki/Monorepo), and is composed of several npm packages that are [published to npmjs.org](https://www.npmjs.com/package/@mavrykdynamics/webmavryk) under the `@mavrykdynamics` handle. Each package has its own README which can be found in the corresponding directory within `packages/`.
 
 | High-Level Packages                                            | Responsibility                                                                                         |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| [@mavrykdynamics/taquito](packages/taquito)                           | [Facade](https://en.wikipedia.org/wiki/Facade_pattern) to lower-level, package-specific functionality  |
+| [@mavrykdynamics/webmavryk](packages/webmavryk)                           | [Facade](https://en.wikipedia.org/wiki/Facade_pattern) to lower-level, package-specific functionality  |
 
 | Low-Level Packages                                               | Responsibility                                                                                       |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| [@mavrykdynamics/taquito-local-forging](packages/taquito-local-forging)         | Local "forging": serialization of Mavryk operations as bytes                                          |
-| [@mavrykdynamics/taquito-michelson-encoder](packages/taquito-michelson-encoder) | Creates JS abstractions of Smart Contracts                                                           |
-| [@mavrykdynamics/taquito-michel-codec](packages/taquito-michel-codec)           | Converts Michelson between forms, expands Macros, etc                                                |
-| [@mavrykdynamics/taquito-remote-signer](packages/taquito-remote-signer)         | Provides the facility to use a remote signer, such as https://signatory.io                           |
-| [@mavrykdynamics/taquito-rpc](packages/taquito-rpc)                             | RPC client library: every rpc endpoint has its own method                                            |
-| [@mavrykdynamics/taquito-signer](packages/taquito-signer)                       | Provides functionality to sign data using mavryk keys                                                 |
-| [@mavrykdynamics/taquito-utils](packages/taquito-utils)                         | Provides different encoding and decoding utilities                                                   |
-| [@mavrykdynamics/taquito-tzip12](packages/taquito-tzip12)                       | TZIP-12 allows retrieving NFT/token metadata                                                         |
-| [@mavrykdynamics/taquito-tzip16](packages/taquito-tzip16)                       | TZIP-16 allows retrieving contract metadata and executing off-chain views                            |
-| [@mavrykdynamics/taquito-beacon-wallet](packages/taquito-beacon-wallet)         | TZIP-10 implementation of a Wallet API                                                               |
-| [@mavrykdynamics/taquito-http-utils](packages/taquito-http-utils)               | Provides functionality to configure and customize http requests                                      |
-| [@mavrykdynamics/taquito-core](packages/taquito-core)                           | Provides parent and core types, classes, and interfaces for other Taquito packages or external uses  |
-| [@mavrykdynamics/taquito-sapling](packages/taquito-sapling)                     | Provides functionality to prepare and read sapling transactions                                      |
-| [@mavrykdynamics/taquito-contracts-library](packages/taquito-contracts-library) | Provides functionality specify static data related to contracts                                      |
-| [@mavrykdynamics/taquito-ledger-signer](packages/taquito-ledger-signer)         | Provides functionality for ledger signer provider                                                    |
-| [@mavrykdynamics/taquito-timelock](packages/taquito-timelock)                   | Provides functionality to create and open timelocks                                                  |
+| [@mavrykdynamics/webmavryk-local-forging](packages/webmavryk-local-forging)         | Local "forging": serialization of Mavryk operations as bytes                                          |
+| [@mavrykdynamics/webmavryk-michelson-encoder](packages/webmavryk-michelson-encoder) | Creates JS abstractions of Smart Contracts                                                           |
+| [@mavrykdynamics/webmavryk-michel-codec](packages/webmavryk-michel-codec)           | Converts Michelson between forms, expands Macros, etc                                                |
+| [@mavrykdynamics/webmavryk-remote-signer](packages/webmavryk-remote-signer)         | Provides the facility to use a remote signer, such as https://signatory.io                           |
+| [@mavrykdynamics/webmavryk-rpc](packages/webmavryk-rpc)                             | RPC client library: every rpc endpoint has its own method                                            |
+| [@mavrykdynamics/webmavryk-signer](packages/webmavryk-signer)                       | Provides functionality to sign data using mavryk keys                                                 |
+| [@mavrykdynamics/webmavryk-utils](packages/webmavryk-utils)                         | Provides different encoding and decoding utilities                                                   |
+| [@mavrykdynamics/webmavryk-tzip12](packages/webmavryk-tzip12)                       | TZIP-12 allows retrieving NFT/token metadata                                                         |
+| [@mavrykdynamics/webmavryk-tzip16](packages/webmavryk-tzip16)                       | TZIP-16 allows retrieving contract metadata and executing off-chain views                            |
+| [@mavrykdynamics/webmavryk-beacon-wallet](packages/webmavryk-beacon-wallet)         | TZIP-10 implementation of a Wallet API                                                               |
+| [@mavrykdynamics/webmavryk-http-utils](packages/webmavryk-http-utils)               | Provides functionality to configure and customize http requests                                      |
+| [@mavrykdynamics/webmavryk-core](packages/webmavryk-core)                           | Provides parent and core types, classes, and interfaces for other Webmavryk packages or external uses  |
+| [@mavrykdynamics/webmavryk-sapling](packages/webmavryk-sapling)                     | Provides functionality to prepare and read sapling transactions                                      |
+| [@mavrykdynamics/webmavryk-contracts-library](packages/webmavryk-contracts-library) | Provides functionality specify static data related to contracts                                      |
+| [@mavrykdynamics/webmavryk-ledger-signer](packages/webmavryk-ledger-signer)         | Provides functionality for ledger signer provider                                                    |
+| [@mavrykdynamics/webmavryk-timelock](packages/webmavryk-timelock)                   | Provides functionality to create and open timelocks                                                  |
 
 ## API Documentation
 
-TypeDoc API documentation for Taquito [is available here](https://taquito.mavryk.org/typedoc).
+TypeDoc API documentation for Webmavryk [is available here](https://webmavryk.mavryk.org/typedoc).
 
 
 ## Versioning Strategy
 
-Supported versions of Taquito packages are maintained for the *current* and *next* (beta) protocol versions.
+Supported versions of Webmavryk packages are maintained for the *current* and *next* (beta) protocol versions.
 
-Taquito uses [Semantic Versioning](TODO), (or, "SemVer") but with a small twist: the *Major* version number that we use tracks the latest version of Mavryk (the *Minor* and *Patch* numbers do however follow SemVer norms).
+Webmavryk uses [Semantic Versioning](TODO), (or, "SemVer") but with a small twist: the *Major* version number that we use tracks the latest version of Mavryk (the *Minor* and *Patch* numbers do however follow SemVer norms).
 
-For example, in a past release the protocol was at `004-...`, and `005-...` was being promoted through the *on-chain amendment process* (a feature unique to Mavryk). So at that time, the current version for Taquito was `v4.0.0`, and work commenced on version `v5.0.0-beta.1`.
+For example, in a past release the protocol was at `004-...`, and `005-...` was being promoted through the *on-chain amendment process* (a feature unique to Mavryk). So at that time, the current version for Webmavryk was `v4.0.0`, and work commenced on version `v5.0.0-beta.1`.
 
 ### Release Timing
 
 When it becomes clear that the next protocol proposal will be promoted, AND we have implemented and tested interoperability with the new protocol, we release the next version (`v5.0.0-beta.1` in this example) BEFORE the chain transitions to the new protocol.
 
-It is essential for updated packages to be released before the protocol changes, so that Taquito developers have time to update and test their projects.
+It is essential for updated packages to be released before the protocol changes, so that Webmavryk developers have time to update and test their projects.
 
-During "Major" version updates, the Taquito public APIs MAY include breaking changes; we endeavor to make this clear, and document it in our release notes.
+During "Major" version updates, the Webmavryk public APIs MAY include breaking changes; we endeavor to make this clear, and document it in our release notes.
 
 Note that all previous releases are *backwards compatible* with chain data, all the way back to the *genesis protocol*. Support for older Mavryk node RPCs is maintained where feasible, but are eventually dropped.
 
-We encourage you to update older versions of Taquito, and you are encouraged to contact us with any technical issues that preclude doing so.
+We encourage you to update older versions of Webmavryk, and you are encouraged to contact us with any technical issues that preclude doing so.
 
 ## Releases
 
@@ -125,9 +125,9 @@ Releases (git tags and npm packages) are signed either by [keybase/jevonearth][2
 
 ## Contributors Getting Started
 
-You would like to make a contribution to Taquito? Wonderful! Please read on.
+You would like to make a contribution to Webmavryk? Wonderful! Please read on.
 
-### Setup and build the Taquito project
+### Setup and build the Webmavryk project
 
 *It is important to perform the following in the stated order*
 
@@ -145,7 +145,7 @@ You would like to make a contribution to Taquito? Wonderful! Please read on.
 
     `npm install --global lerna`
 
-### Setup and build Taquito
+### Setup and build Webmavryk
 
 Now that your prerequisites have been installed, run the following commands:
 ```sh
@@ -164,7 +164,7 @@ npm run test
 
 * **Do not delete `node_modules/` manually, as this will confuse the build system**
 
-The taquito build system is based on `nx`, which uses caching extensively; please use `npm run clean` instead.
+The webmavryk build system is based on `nx`, which uses caching extensively; please use `npm run clean` instead.
 
 * **Do not use `npm install`, as it will unnecessarily update `package.json`**
 
@@ -182,11 +182,11 @@ See the top-level `package.json` "scripts" section. Common targets include:
 
 ### Running Integration Tests
 
-The Taquito integration tests are located in the `integration-tests/` directory. Please see the README.md in that directory for further information.
+The Webmavryk integration tests are located in the `integration-tests/` directory. Please see the README.md in that directory for further information.
 
-#### Modifying Taquito source
+#### Modifying Webmavryk source
 
-After making your changes to Taquito, lint and run the unit test suite; this will let you know if your changes are working well with the rest of the project:
+After making your changes to Webmavryk, lint and run the unit test suite; this will let you know if your changes are working well with the rest of the project:
 ```sh
 npm run lint
 npm run test
@@ -197,12 +197,12 @@ Please use `npm run commit` for your last commit before you push, as this will a
 
 ### Running the website locally
 
-You may wish to contribute to the live code examples, this explains how to do that. Note that the Mavryk Taquito [website][4] is built using [Docusaurus][5].
+You may wish to contribute to the live code examples, this explains how to do that. Note that the Mavryk Webmavryk [website][4] is built using [Docusaurus][5].
 
-To run the Taquito website in development mode locally, run the following commands from top-level:
+To run the Webmavryk website in development mode locally, run the following commands from top-level:
 
 * Run `npm clean-install`
-* Run `npm -w @mavrykdynamics/taquito-website start`
+* Run `npm -w @mavrykdynamics/webmavryk-website start`
 
 ## Contributions / Reporting Issues
 
@@ -212,7 +212,7 @@ To report a security issue, please contact security@ecadlabs.com or via [keybase
 
 ### Bug or Feature Requests
 
-Please use our [GitHub Issue Tracker](https://github.com/ecadlabs/taquito/issues) to report bugs or request new features.
+Please use our [GitHub Issue Tracker](https://github.com/mavryk-network/webmavryk/issues) to report bugs or request new features.
 
 To contribute, please check the issue tracker to see if an existing issue exists for your planned contribution. If there's no issue, please create one first and then submit a pull request with your contribution.
 
@@ -226,7 +226,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 ## Credits
 
-Special thanks to these libraries, which have been excellent references for developing Taquito
+Special thanks to these libraries, which have been excellent references for developing Webmavryk
 
 - https://github.com/AndrewKishino/sotez
 - https://github.com/TezTech/eztz
@@ -234,7 +234,5 @@ Special thanks to these libraries, which have been excellent references for deve
 [0]: https://github.com/ecadlabs/tezos-indexer-api
 [2]: https://keybase.io/jevonearth
 [3]: https://keybase.io/simrob
-[4]: https://taquito.mavryk.org
+[4]: https://webmavryk.mavryk.org
 [5]: https://docusaurus.io/
-[stackexchange]: https://tezos.stackexchange.com/questions/tagged/taquito
-[discord]: https://discord.com/channels/934567382700146739/939205889901092874

@@ -16,7 +16,7 @@ const FeatureList = [
     title: 'Developing on Mavryk can be delicious!',
     description: (
       <>
-        Use our popular Taquito TypeScript library to develop your Mavryk blockchain apps faster and
+        Use our popular Webmavryk TypeScript library to develop your Mavryk blockchain apps faster and
         easier
       </>
     ),

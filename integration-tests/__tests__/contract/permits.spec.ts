@@ -5,13 +5,13 @@
  */
 
 import { CONFIGS } from '../../config';
-import { MichelsonMap, MichelCodecPacker, MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap, MichelCodecPacker, MavrykToolkit } from '@mavrykdynamics/webmavryk';
 import { permit_admin_42_expiry } from '../../data/permit_admin_42_expiry';
 import { permit_admin_42_set } from '../../data/permit_admin_42_set';
 import { permit_fa12_smartpy } from '../../data/permit_fa12_smartpy';
-import { buf2hex, stringToBytes, hex2buf } from '@mavrykdynamics/taquito-utils';
-import { tzip16, Tzip16Module } from '@mavrykdynamics/taquito-tzip16';
-import { packDataBytes } from "@mavrykdynamics/taquito-michel-codec"
+import { buf2hex, stringToBytes, hex2buf } from '@mavrykdynamics/webmavryk-utils';
+import { tzip16, Tzip16Module } from '@mavrykdynamics/webmavryk-tzip16';
+import { packDataBytes } from "@mavrykdynamics/webmavryk-michel-codec"
 
 const blake = require('blakejs');
 const bob_address = 'mv1JzsKuzj5RFo68zyW6TG7aHx6p5gzoNuuU';

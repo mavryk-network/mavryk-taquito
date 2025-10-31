@@ -13,12 +13,12 @@ import TabItem from '@theme/TabItem';
 
 ## Introduction
 
-In this tutorial, we will walk through the process of creating a simple dApp (short for "Decentralized Application") using Taquito. We will:
+In this tutorial, we will walk through the process of creating a simple dApp (short for "Decentralized Application") using Webmavryk. We will:
 
 1. Create a simple command-line application that reads the balance of an address from the blockchain
-1. Establish a high-level understanding of the blockchain, Mavryk, dApps, and Taquito
-1. Send a `Transfer` operation to the blockchain using Taquito
-1. Interact with a smart contract using Taquito
+1. Establish a high-level understanding of the blockchain, Mavryk, dApps, and Webmavryk
+1. Send a `Transfer` operation to the blockchain using Webmavryk
+1. Interact with a smart contract using Webmavryk
 1. Implement a simple GUI dApp
 
 ## Prerequisites
@@ -44,7 +44,7 @@ If you are using windows, there are two ways to run the commands in this tutoria
 
 ## Let's start with a simple command-line application {#start-coding}
 
-In this section, we will create a simple command-line application that shows the balance of an address. This will help us understand the basics of Taquito and the flow of events in a dApp.
+In this section, we will create a simple command-line application that shows the balance of an address. This will help us understand the basics of Webmavryk and the flow of events in a dApp.
 
 Open a terminal and run the following commands:
 
@@ -90,17 +90,17 @@ npx ts-node index.ts
 ```
 
 If everything is done right, you should be able to see the output `Hello Blockchain!` in the terminal.
-Now, we can start using Taquito to interact with the Mavryk blockchain.
-Run the following command to install Taquito:
+Now, we can start using Webmavryk to interact with the Mavryk blockchain.
+Run the following command to install Webmavryk:
 
 ```bash
-npm i @mavrykdynamics/taquito
+npm i @mavrykdynamics/webmavryk
 ```
 
 Now, open the file `index.ts` and replace the code with the following:
 
 ```ts
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
 
 var mavrykToolkit = new MavrykToolkit("https://basenet.rpc.mavryk.network");
 
@@ -111,7 +111,7 @@ mavrykToolkit.mv.getBalance("mv1RK8FjLrVza385ZaeszhTeMiJcDjJk9ZLr").then(balance
 
 Running `npx ts-node index.ts` should now show the spendable balance of the specified address. This balance is in units of Mumav (micro Mav). Mav is the currency of Mavryk, its code is `MVRK`, and the symbol is `ṁ`. 1 Mav is 1,000,000 Mumav.
 
-Congratulations! You have just interacted with the Mavryk blockchain using Taquito. In the next section, we will establish a high-level understanding of the blockchain, Mavryk, dApps, and Taquito. If you are already familiar with these concepts, you can skip to [Sending a Transfer operation to the blockchain using Taquito](#sending-operations).
+Congratulations! You have just interacted with the Mavryk blockchain using Webmavryk. In the next section, we will establish a high-level understanding of the blockchain, Mavryk, dApps, and Webmavryk. If you are already familiar with these concepts, you can skip to [Sending a Transfer operation to the blockchain using Webmavryk](#sending-operations).
 
 ## What is a blockchain?
 The blockchain is a way to trust a network of computers run by strangers (so you don't have to trust the individual people). It might seem impossible, but it works. How?
@@ -170,11 +170,11 @@ The "mainnet" is the actual Mavryk Blockchain. However, there are several "testn
 
 A dApp is a web application that interacts with a blockchain. The blockchain is the source of truth for the dApp. The dApp usually interacts with the user, reads data from, and writes to the blockchain. The dApp might also communicate with other services, notably a blockchain indexer. But dApps are not limited to these ideas. For instance, one might create a dApp that works as part of an industrial process, and interacts with the blockchain to benefit from its features, like transparency, immutability, and provability.
 
-## What is Taquito?
+## What is Webmavryk?
 
-Taquito is a JavaScript library that makes it easy to interact with the Mavryk blockchain. It is designed to be used in dApps. It is also used in some wallets and other tools. It is open-source, developed and maintained by ECAD Labs.
+Webmavryk is a JavaScript library that makes it easy to interact with the Mavryk blockchain. It is designed to be used in dApps. It is also used in some wallets and other tools. It is open-source, developed and maintained by ECAD Labs.
 
-Without Taquito, sending operations to the Mavryk blockchain requires you to write a lot of code. Some of that is to:
+Without Webmavryk, sending operations to the Mavryk blockchain requires you to write a lot of code. Some of that is to:
 1. Estimate the costs for the operation
 1. Properly encode the operation
 1. Sign the operation
@@ -182,24 +182,24 @@ Without Taquito, sending operations to the Mavryk blockchain requires you to wri
 1. Get the operation receipt
 1. Monitor the chain for inclusion of the operation
 
-And to implement all these, you need detailed information about different data types, protocols, constants, and algorithms used in the Mavryk blockchain. Taquito abstracts away all this complexity and provides a simple API for interacting with the blockchain.
+And to implement all these, you need detailed information about different data types, protocols, constants, and algorithms used in the Mavryk blockchain. Webmavryk abstracts away all this complexity and provides a simple API for interacting with the blockchain.
 
-## Sending a `Transfer` operation to the blockchain using Taquito {#sending-operations}
+## Sending a `Transfer` operation to the blockchain using Webmavryk {#sending-operations}
 Now, we want to send an operation to the blockchain. When reading, we just sent a read request. When sending an operation, we need to prove that we own the address. To do this, we need to sign the operation with the private key of the address.
 
 In the next step, we will simply store the private key in the source code. This is not secure, and you should never do this in a production application.
 
-Taquito provides an "In Memory Signer" functionality. Use the following command to add that to your project:
+Webmavryk provides an "In Memory Signer" functionality. Use the following command to add that to your project:
 
 ```bash
-npm i @mavrykdynamics/taquito-signer
+npm i @mavrykdynamics/webmavryk-signer
 ```
 
 Open the file `index.ts` and replace the code with the following:
 
 ```ts
-import { InMemorySigner } from "@mavrykdynamics/taquito-signer";
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
+import { InMemorySigner } from "@mavrykdynamics/webmavryk-signer";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
 
 async function main() {
     var mavrykToolkit = new MavrykToolkit("https://basenet.rpc.mavryk.network");
@@ -229,7 +229,7 @@ What is happening here? Let's break it down:
 1. We create a new instance of `InMemorySigner` and pass the private key of the address we want to use to sign the operation.
 1. We get the public key hash of the address.
 1. We set the provider of the `MavrykToolkit` instance to the signer we created in step 2.
-1. We send a `Transfer` operation to the blockchain. Taquito will automatically do the following behind the scenes:
+1. We send a `Transfer` operation to the blockchain. Webmavryk will automatically do the following behind the scenes:
     1. Estimate the cost of the operation.
     1. Encode the operation.
     1. Sign the operation with the private key.
@@ -256,11 +256,11 @@ For the purpose of this section, I have created a new address and funded it on t
   The new address you just created has a balance of zero. For the testnet, You can go to [basenet faucet](https://basenet.faucet.mavryk.network/) and send some ṁ to it for free. On mainnet, you need to buy actual Mav on an exchange.
 </details>
 
-Congratulations! You have just sent an operation to the Mavryk blockchain using Taquito.
+Congratulations! You have just sent an operation to the Mavryk blockchain using Webmavryk.
 
-## Interacting with a smart contract using Taquito
+## Interacting with a smart contract using Webmavryk
 
-In this section, we will interact with a smart contract using Taquito. We will mint an NFT on [objkt.com](https://objkt.com) NFT marketplace.
+In this section, we will interact with a smart contract using Webmavryk. We will mint an NFT on [objkt.com](https://objkt.com) NFT marketplace.
 
 Well, objk.com is the production service. We will use the testnet one: [basenet.objkt.com](https://basenet.objkt.com/), because to mint NFT on it, you only need basenet ṁ, which is free. Also, because I want to put my test secret key here, and I don't like to share my mainnet secret key with actual ṁ in it with everyone.
 
@@ -298,13 +298,13 @@ async function main() {
 What happens here? Let's break it down:
 1- We set up the Mavryk Toolkit, and the signer as before.
 1- We get the contract metadata from the blockchain. This metadata contains information about the contract, including its entrypoints.
-1- We call the `mint_artist` entrypoint of the contract. We need to provide the data it expects, which is provided as a javascript object. Taquito will automatically encode this data to be sent to the contract.
+1- We call the `mint_artist` entrypoint of the contract. We need to provide the data it expects, which is provided as a javascript object. Webmavryk will automatically encode this data to be sent to the contract.
 1- We wait for the confirmation and print the hash as before.
 
 Now, if you run your code, you should be able to see the hash of the operation in the terminal.
 After about a minute, you should be able to see the new NFT in the collection from [this link](https://basenet.objkt.com/collection/KT1XmD31NdBrTcL7bPF3md6i5g4BbE6s2YLv). Because everyone following this tutorial is minting NFTs with the same metadata, all the NFTs in this collection will look the same. However, the number of tokens in the collection should increase by one.
 
-Congratulations! You have just interacted with a smart contract using Taquito. Additionally, you programmatically minted an NFT.
+Congratulations! You have just interacted with a smart contract using Webmavryk. Additionally, you programmatically minted an NFT.
 
 Up until now, we have created programs that run in a terminal. While some of the code written to interact with the blockchain might actually be such an application, most of the time, we will usually create dApps that can be accessed in the browser.
 
@@ -316,7 +316,7 @@ As it turns out, there is an elegant solution to this problem.
 
 The wallet is a program that stores the user's secrets (like the private key) and signs operations on behalf of the user. The wallet is not part of the dApp. It is a separate program. The wallet is usually a browser extension, a website, a mobile app, or a hardware wallet. The wallet is also responsible for showing the operations to the user and asking them to approve the operation. The user only needs to fully trust the wallet. The dApp cannot make any write operations to the blockchain unless it is signed by the wallet.
 
-The beacon SDK is a library that provides a standard way for dApps to connect to wallets. The beacon SDK supports several wallets, including Thanos, Temple, and Kukai. You don't need to use the beacon SDK directly. Taquito uses the beacon SDK internally.
+The beacon SDK is a library that provides a standard way for dApps to connect to wallets. The beacon SDK supports several wallets, including Thanos, Temple, and Kukai. You don't need to use the beacon SDK directly. Webmavryk uses the beacon SDK internally.
 
 Another interesting component is the indexer/explorer. The way data is stored on the blockchain is optimized for storage, and to facilitate data retrieval that's essential for new operations (like checking the balance of an account). But some other operations might be slow. A blockchain indexer reads all the data from the blockchain and stores it in an optimized way for fast retrieval. Users can interact with that data through the explorer, which is a web application that shows the data in a user-friendly way. Also, dApps can read the data from the indexer to reduce the load on the blockchain and/or to have a faster response time.
 
@@ -381,7 +381,7 @@ Alternatively, in a slightly different flow, the wallet sends the signed operati
 
 ## Creating a simple dApp that transfers ṁ from the user's wallet to another address
 
-We will start by creating a simple dApp that transfers ṁ from the user's wallet to another address. This will help us understand the flow of events in a dApp and the role of Taquito and Beacon SDK in the process.
+We will start by creating a simple dApp that transfers ṁ from the user's wallet to another address. This will help us understand the flow of events in a dApp and the role of Webmavryk and Beacon SDK in the process.
 
 ### creating the React app
 
@@ -408,12 +408,12 @@ git commit -m "initial commit"
 
 </details>
 
-### adding Taquito and Beacon SDK to the React app
+### adding Webmavryk and Beacon SDK to the React app
 
-In the next step, we add Taquito and Beacon SDK to the React app, and create a minimal UI to connect to the wallet and transfer ṁ.
+In the next step, we add Webmavryk and Beacon SDK to the React app, and create a minimal UI to connect to the wallet and transfer ṁ.
 
 ```bash
-npm i @mavrykdynamics/taquito @mavrykdynamics/taquito-beacon-wallet @mavrykdynamics/beacon-dapp
+npm i @mavrykdynamics/webmavryk @mavrykdynamics/webmavryk-beacon-wallet @mavrykdynamics/beacon-dapp
 ```
 
 Open the file `index.html` and make the following changes:
@@ -427,11 +427,11 @@ Open the file `src/App.tsx` and replace the content with the following code:
 
 ```tsx
 import { useState } from "react";
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
 import "./App.css";
 import ConnectButton from "./components/ConnectWallet";
 import Transfer from "./components/Transfer";
-import { BeaconWallet } from "@mavrykdynamics/taquito-beacon-wallet";
+import { BeaconWallet } from "@mavrykdynamics/webmavryk-beacon-wallet";
 
 const App = () => {
   const [Mavryk] = useState<MavrykToolkit>(
@@ -459,14 +459,14 @@ export default App;
 
 ### Connecting to the wallet
 
-The first step in interacting with the blockchain is connecting to the user's wallet. Taquito provides a BeaconWallet class that abstracts away the complexity of connecting to the wallet. The BeaconWallet class is a wrapper around the Beacon SDK.
+The first step in interacting with the blockchain is connecting to the user's wallet. Webmavryk provides a BeaconWallet class that abstracts away the complexity of connecting to the wallet. The BeaconWallet class is a wrapper around the Beacon SDK.
 
 Create a new file `src/components/ConnectWallet.tsx` and add the following code:
 
 ```tsx
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
-import { BeaconWallet } from "@mavrykdynamics/taquito-beacon-wallet";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
+import { BeaconWallet } from "@mavrykdynamics/webmavryk-beacon-wallet";
 import {
   NetworkType,
 } from "@airgap/beacon-dapp";
@@ -535,7 +535,7 @@ Create a new file `src/components/Transfer.tsx` and add the following code:
 
 ```tsx
 import { useState } from "react";
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
 
 const Transfer = ({
   Mavryk,
@@ -603,7 +603,7 @@ export default Transfer;
 
 ### Fixing node-specific dependencies in the browser
 
-The libraries Taquito and Beacon SDK are designed to run in a Node.js environment. However, we are running them in a browser. This causes some issues. For example, the Beacon SDK uses the Node.js `buffer`, `stream`, and `util` modules. These modules are not available in the browser. Fortunately, there are browser-compatible versions of these modules. We can use these versions instead of the Node.js versions. To do this, we need to install the following packages:
+The libraries Webmavryk and Beacon SDK are designed to run in a Node.js environment. However, we are running them in a browser. This causes some issues. For example, the Beacon SDK uses the Node.js `buffer`, `stream`, and `util` modules. These modules are not available in the browser. Fortunately, there are browser-compatible versions of these modules. We can use these versions instead of the Node.js versions. To do this, we need to install the following packages:
 
 ```bash
 npm i -D vite-plugin-node-polyfills
@@ -633,14 +633,14 @@ If you have not set up a wallet before, clicking on the Kukai wallet opens a pag
 
 We've come a long way:
  1. We started with a simple command-line application that reads the balance of an address from the blockchain.
- 1. Then, we established a high-level understanding of the blockchain, Mavryk, dApps, and Taquito.
- 1. After that, we sent a `Transfer` operation to the blockchain using Taquito.
- 1. Then, we interacted with a smart contract using Taquito.
+ 1. Then, we established a high-level understanding of the blockchain, Mavryk, dApps, and Webmavryk.
+ 1. After that, we sent a `Transfer` operation to the blockchain using Webmavryk.
+ 1. Then, we interacted with a smart contract using Webmavryk.
  1. Finally, we implemented a simple GUI dApp.
 
 Your journey does not end here. There are many more things to learn. Here are some ideas:
 
-- Check out the [Taquito documentation](quick_start) to learn more about Taquito.
+- Check out the [Webmavryk documentation](quick_start) to learn more about Webmavryk.
 - Learn a smart contract language like [Ligo](https://ligolang.org/).
 - Learn more about Mavryk and its ecosystem, check out the [Mavryk Developer Portal](https://tezos.com/developers/).
 - See what others are doing: Join Mavryk community on [Discord](https://discord.gg/tezos), [Reddit](https://www.reddit.com/r/tezos/), [Twitter](https://twitter.com/tezos), and [Telegram](https://t.me/tezosplatform).

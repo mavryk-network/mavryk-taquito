@@ -20,7 +20,7 @@ Staking changes this by allowing any user to participate in the "Proof of Stake"
 
 Users can control their staked funds using the `stake`, `unstake`, and `finalize_unstake` operations. These are implemented as pseudo-entrypoints, and the parameters are passed to a transfer operation with the same destination as the sender.
 
-To accept staked funds, a delegate needs to have opted in to staking. This is done by `set_delegate_parameters`. This part is not supported by Taquito, as it is not a dApp operation. More information [here](https://protocol.mavryk.org/boreas/adaptive_issuance.html#staking-policy-configuration).
+To accept staked funds, a delegate needs to have opted in to staking. This is done by `set_delegate_parameters`. This part is not supported by Webmavryk, as it is not a dApp operation. More information [here](https://protocol.mavryk.org/boreas/adaptive_issuance.html#staking-policy-configuration).
 
 :::info
 After protocol Boreas is activated, the adaptive issuance will still be disabled for about two weeks. During this period, staking operations will result in this error: `proto.002-PtBoreas.operation.manual_staking_forbidden`.

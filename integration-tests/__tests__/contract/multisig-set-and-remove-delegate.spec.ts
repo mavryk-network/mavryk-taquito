@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS, isSandbox } from "../../config";
-import { MANAGER_LAMBDA, MavrykToolkit } from "@mavrykdynamics/taquito";
+import { MANAGER_LAMBDA, MavrykToolkit } from "@mavrykdynamics/webmavryk";
 import { genericMultisig } from "../../data/multisig";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {

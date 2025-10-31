@@ -15,7 +15,7 @@ import ArrowLeft from '../../../static/img/carousel-arrow-left.svg';
 
 const FeatureList = [
   {
-    title: 'Teams Building With Taquito',
+    title: 'Teams Building With Webmavryk',
     // Svg: require("../../../static/img/taq_orange.svg").default,
     images: [
       {

@@ -2,15 +2,15 @@
      This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
      Original project: Taquito by ECAD Labs Inc. -->
 
-# Taquito Integration Tests
+# Webmavryk Integration Tests
 
 
-The `taquito/integration-tests` directory contains the integration test suite for Taquito. These tests are executed against live Mavryk testnets, ensuring a comprehensive evaluation of various Taquito use cases.
+The `webmavryk/integration-tests` directory contains the integration test suite for Webmavryk. These tests are executed against live Mavryk testnets, ensuring a comprehensive evaluation of various Webmavryk use cases.
 
 The tests may also be run using Flexmasa. This is useful for testing new features not in current test nets and for testing features around governance that benefit from shortened block processing times. As well Flexmasa tests offer a secondary confirmation of the test net results.
 
-Internally Taquito is tested with tests running in parallel. This is achieved using an application that generates new keys and funds them as needed per test.
-The application is not publicly available. External users, therefore, must run the Taquito Integration Tests in sequence, one test at a time.
+Internally Webmavryk is tested with tests running in parallel. This is achieved using an application that generates new keys and funds them as needed per test.
+The application is not publicly available. External users, therefore, must run the Webmavryk Integration Tests in sequence, one test at a time.
 
 ## Running Integration Tests Against a Mavryk Testnet
 
@@ -18,15 +18,15 @@ The application is not publicly available. External users, therefore, must run t
 To run tests in this environment, make sure you have:
 
 
-- Taquito source code cloned to your local machine
+- Webmavryk source code cloned to your local machine
 - A compatible version of Node.js installed (see the top-level README.md)
-- Successfully compiled Taquito (see the top-level README)
+- Successfully compiled Webmavryk (see the top-level README)
 
 
 ### Running all tests against all pre-configured testnets
 
 
-From the `taquito/integration-tests` directory, run the following:
+From the `webmavryk/integration-tests` directory, run the following:
 
 
 ```
@@ -37,7 +37,7 @@ npm run test # This runs all tests against all pre-configured testnets
 ### Running all tests against a specific testnet
 
 
-Depending on the current Mavryk upgrade cycle, multiple testnet networks may be configured in the Taquito integration tests. To target a specific testnet, use environment variables found in `taquito/integration-tests/config.ts` (see the Configuration section below):
+Depending on the current Mavryk upgrade cycle, multiple testnet networks may be configured in the Webmavryk integration tests. To target a specific testnet, use environment variables found in `webmavryk/integration-tests/config.ts` (see the Configuration section below):
 
 
 ```
@@ -46,7 +46,7 @@ BOREASNET=true npm run test
 
 ## Configuration
 
-Refer to the `taquito/integration-tests/config.ts` file for details on test configurations and target networks. Some configurations have default values that can be overridden using environment variables. Sometimes, you can use CLI commands to invoke a configuration instead of exporting it.
+Refer to the `webmavryk/integration-tests/config.ts` file for details on test configurations and target networks. Some configurations have default values that can be overridden using environment variables. Sometimes, you can use CLI commands to invoke a configuration instead of exporting it.
 
 
 ## CLI Options
@@ -71,7 +71,7 @@ npm run test:boreasnet -- -t "Verify contract.originate for a contract and call 
 ## Running Tests Against a Specific RPC URL
 
 
-To run tests against a node that is not pre-configured in Taquito, use:
+To run tests against a node that is not pre-configured in Webmavryk, use:
 
 
 `export MAVRYK_RPC_BOREASNET='http://localhost:8732'`.
@@ -101,10 +101,10 @@ If running the test with a configured secret key, ensure that the account balanc
 ## Test Report
 
 
-To review the graphical report of the test run, open the index.html file in ~/taquito/integration-tests/jest-stare after each test run.
+To review the graphical report of the test run, open the index.html file in ~/webmavryk/integration-tests/jest-stare after each test run.
 
 
-## Taquito Integration Tests with Flexmasa
+## Webmavryk Integration Tests with Flexmasa
 
 :::warning
 Due to the discontinuation of Flextesa support from Protocol Oxford onwards, we unfortunately will not be testing against sandboxes anymore.
@@ -114,9 +114,9 @@ The only sandbox tests we're running points to the latest Nairobibox to specific
 
 ## The Keygen API
 
-The Keygen API in Taquito is specifically designed for testing purposes. It allows developers to generate and manage key pairs (public and private keys) for Mavryk accounts during the testing phase of their applications. This is useful for simulating various scenarios, such as transactions, smart contract interactions, and other on-chain operations, without the need to use real Mavryk accounts or real funds.
+The Keygen API in Webmavryk is specifically designed for testing purposes. It allows developers to generate and manage key pairs (public and private keys) for Mavryk accounts during the testing phase of their applications. This is useful for simulating various scenarios, such as transactions, smart contract interactions, and other on-chain operations, without the need to use real Mavryk accounts or real funds.
 
-This tool is employed internally for Taquito Integration tests within the Continuous Integration and Continuous Delivery (CI/CD) system.
+This tool is employed internally for Webmavryk Integration tests within the Continuous Integration and Continuous Delivery (CI/CD) system.
 
 ### How the Keygen API works
 

@@ -10,11 +10,11 @@ author: Roxane Letourneau
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The `@mavrykdynamics/taquito-tzip16` package allows retrieving metadata associated with a smart contract. These metadata can be stored on-chain (mavryk-storage) or off-chain (HTTP(S) or IPFS). The package also provides a way to execute the `MichelsonStorageView` found in the metadata. More information about the TZIP-16 standard can be found [here](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-16/tzip-16.md#introduction).
+The `@mavrykdynamics/webmavryk-tzip16` package allows retrieving metadata associated with a smart contract. These metadata can be stored on-chain (mavryk-storage) or off-chain (HTTP(S) or IPFS). The package also provides a way to execute the `MichelsonStorageView` found in the metadata. More information about the TZIP-16 standard can be found [here](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-16/tzip-16.md#introduction).
 
 ## How to use the tzip16 package
 
-The package can be used as an extension to the well known Taquito contract abstraction.
+The package can be used as an extension to the well known Webmavryk contract abstraction.
 
 1. **We first need to create an instance of `Tzip16Module` and add it as an extension to our `MavrykToolkit`**
 
@@ -26,11 +26,11 @@ values={[
 ]}>
 <TabItem value="defaultMetadataProvider">
 
-The constructor of the `Tzip16Module` takes an optional `MetadataProvider` as a parameter. When none is passed, the default `MetadataProvider` of Taquito is instantiated and the default handlers (`HttpHandler`, `IpfsHandler`, and `MavrykStorageHandler`) are used.
+The constructor of the `Tzip16Module` takes an optional `MetadataProvider` as a parameter. When none is passed, the default `MetadataProvider` of Webmavryk is instantiated and the default handlers (`HttpHandler`, `IpfsHandler`, and `MavrykStorageHandler`) are used.
 
 ```js
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
-import { Tzip16Module } from '@mavrykdynamics/taquito-tzip16';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { Tzip16Module } from '@mavrykdynamics/webmavryk-tzip16';
 
 const Mavryk = new MavrykToolkit('rpcUrl');
 Mavryk.addExtension(new Tzip16Module());
@@ -42,7 +42,7 @@ Mavryk.addExtension(new Tzip16Module());
 In some cases, we may want to use a customized metadata provider. The constructor of the `Tzip16Module` class takes an optional metadata provider as a parameter. This allows to inject a custom metadata provider with custom protocol handlers if desired. For example, if we want to use a different IPFS gateway than the default one, which is `ipfs.io`, or if we want to use a different HTTP handler to support authentication or custom headers. Here is an example:
 
 ```js
-import { Handler, IpfsHttpHandler, MavrykStorageHandler, MetadataProvider } from '@mavrykdynamics/taquito-tzip16';
+import { Handler, IpfsHttpHandler, MavrykStorageHandler, MetadataProvider } from '@mavrykdynamics/webmavryk-tzip16';
 
 const Mavryk = new MavrykToolkit('rpcUrl');
 
@@ -97,8 +97,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -121,8 +121,8 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -155,8 +155,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -178,8 +178,8 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -211,8 +211,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -235,8 +235,8 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -269,8 +269,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -293,8 +293,8 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -359,8 +359,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16, bytesToString } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16, bytesToString } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -388,8 +388,8 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16, bytesToString } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16, bytesToString } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -429,8 +429,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -460,8 +460,8 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -503,8 +503,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
-// import { MichelsonStorageView } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+// import { MichelsonStorageView } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 const contractAddress = 'KT1CVoo3PxuvH3BuBpNTYRDafAQ7aRTfj8bd';
@@ -540,8 +540,8 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
-// import { MichelsonStorageView } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+// import { MichelsonStorageView } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 const contractAddress = 'KT1CVoo3PxuvH3BuBpNTYRDafAQ7aRTfj8bd';

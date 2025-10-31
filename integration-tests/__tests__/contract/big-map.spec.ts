@@ -6,7 +6,7 @@
 
 import { CONFIGS } from '../../config';
 import { storageContract } from '../../data/storage-contract';
-import { MichelsonMap, BigMapAbstraction, MichelCodecPacker } from '@mavrykdynamics/taquito';
+import { MichelsonMap, BigMapAbstraction, MichelCodecPacker } from '@mavrykdynamics/webmavryk';
 import { tokenBigmapCode } from '../../data/token_bigmap';
 import { tokenCode, tokenInit } from '../../data/tokens';
 import BigNumber from 'bignumber.js';
@@ -15,7 +15,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
   const Mavryk = lib;
 
   describe(`Test contract origination with initialized Maps with variants of data through contract api using: ${rpc}`, () => {
-    /** The purpose of the test is to make sure that the keys in the map are properly ordered by Taquito before injection of the operation,
+    /** The purpose of the test is to make sure that the keys in the map are properly ordered by Webmavryk before injection of the operation,
     *   If the keys are not ordered, the node will reject the operation. */
 
     beforeEach(async () => {

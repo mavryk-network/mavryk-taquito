@@ -696,7 +696,7 @@ export const code = [
                                     "int": "6"
                                   },
                                   {
-                                    "string": "taquito"
+                                    "string": "webmavryk"
                                   }
                                 ]
                               }

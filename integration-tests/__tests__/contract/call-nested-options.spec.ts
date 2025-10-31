@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { DefaultContractType } from "@mavrykdynamics/taquito";
+import { DefaultContractType } from "@mavrykdynamics/webmavryk";
 import { CONFIGS } from "../../config";
 
 CONFIGS().forEach(({ lib, setup }) => {

@@ -14,7 +14,7 @@ This section serves as a guide to get the operation hash without injecting it in
 
 There might come a time when you, the developer, would like to grab the operation hash without injecting it into the blockchain.
 
-To accomplish that, we have a utility function called `encodeOpHash()` in the `@mavrykdynamics/taquito-utils` package. This function takes in the signed operation bytes in the form of a `string`, and outputs the operation hash of said transaction without injecting it.
+To accomplish that, we have a utility function called `encodeOpHash()` in the `@mavrykdynamics/webmavryk-utils` package. This function takes in the signed operation bytes in the form of a `string`, and outputs the operation hash of said transaction without injecting it.
 
 ### Usage example
 
@@ -22,9 +22,9 @@ Here is a simple example on getting the operation hash of a transaction (transfe
 
 ```js
 
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { encodeOpHash } from '@mavrykdynamics/taquito-utils';
-// import { LocalForger } from '@mavrykdynamics/taquito-local-forging';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { encodeOpHash } from '@mavrykdynamics/webmavryk-utils';
+// import { LocalForger } from '@mavrykdynamics/webmavryk-local-forging';
 
 // const Mavryk = new MavrykToolkit('RPC_ENDPOINT');
 

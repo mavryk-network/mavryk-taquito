@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { OpKind } from '@mavrykdynamics/taquito';
+import { OpKind } from '@mavrykdynamics/webmavryk';
 import { CONFIGS, SignerType } from '../../../config';
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBaker, signerConfig }) => {

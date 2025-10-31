@@ -61,7 +61,7 @@ Both APIs should return a signed object of the form:
 You can verify the signature:
 
 ```typescript
-//import { verifySignature } from "@mavrykdynamics/taquito-utils";
+//import { verifySignature } from "@mavrykdynamics/webmavryk-utils";
 
 verifySignature(signed.bytes, await Mavryk.signer.publicKey(), signed.prefixSig, new Uint8Array([3]))
 ```

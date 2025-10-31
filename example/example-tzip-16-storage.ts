@@ -4,10 +4,10 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/webmavryk';
 import { tacoContractTzip16 } from "../integration-tests/data/modified-taco-contract"
-import { stringToBytes } from '@mavrykdynamics/taquito-utils';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
+import { stringToBytes } from '@mavrykdynamics/webmavryk-utils';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network';
@@ -24,9 +24,9 @@ async function example() {
       "version": "0.1",
       "license": "MIT",
       "authors": [
-        "Taquito <https://taquito.mavryk.org/>"
+        "Webmavryk <https://webmavryk.mavryk.org/>"
       ],
-      "homepage": "https://taquito.mavryk.org/"
+      "homepage": "https://webmavryk.mavryk.org/"
     };
 
     const metadataBigMap = new MichelsonMap();

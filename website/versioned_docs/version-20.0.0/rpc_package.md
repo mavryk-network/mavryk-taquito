@@ -7,11 +7,11 @@ title: RPC
 author: Claude Barde
 ---
 
-Taquito RPC Package Documentation
+Webmavryk RPC Package Documentation
 
 ## Description
 
-You can use the RPC client package to query the RPC API of your chosen node. The higher-level [`@mavrykdynamics/taquito`](https://taquito.mavryk.org/typedoc/modules/_taquito_rpc.html) package builds on this RPC package, in general, you won't need to use this package directly, but it is available for use should you want some specific data and bypass the higher-level abstractions in Taquito.
+You can use the RPC client package to query the RPC API of your chosen node. The higher-level [`@mavrykdynamics/webmavryk`](https://webmavryk.mavryk.org/typedoc/modules/_webmavryk_rpc.html) package builds on this RPC package, in general, you won't need to use this package directly, but it is available for use should you want some specific data and bypass the higher-level abstractions in Webmavryk.
 
 Methods in the RPC package map one-to-one to the corresponding Mavryk RPC API endpoints. All responses from the RPC are returns with TypeScript types. It doesn't do any other parsing or compositions at this level.
 
@@ -20,7 +20,7 @@ Methods in the RPC package map one-to-one to the corresponding Mavryk RPC API en
 ```js
 // Initializing the RPC client
 
-import { RpcClient } from '@mavrykdynamics/taquito-rpc';
+import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
 
 const client = new RpcClient(' https://basenet.rpc.mavryk.network/', 'NetXmtMsNf69w1w');
 ```
@@ -117,4 +117,4 @@ const view = await client.runView({
 
 ## Full documentation
 
-You can find the full documentation at the following address: [https://taquito.mavryk.org/typedoc/classes/\_taquito_rpc.RpcClient](https://taquito.mavryk.org/typedoc/classes/_taquito_rpc.RpcClient)
+You can find the full documentation at the following address: [https://webmavryk.mavryk.org/typedoc/classes/\_webmavryk_rpc.RpcClient](https://webmavryk.mavryk.org/typedoc/classes/_webmavryk_rpc.RpcClient)

@@ -9,8 +9,8 @@
 // Sometimes the transport will fail before all the paths have been scanned
 // rerun two or three times if needed
 
-import { LedgerSigner, DerivationType } from '@mavrykdynamics/taquito-ledger-signer';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { LedgerSigner, DerivationType } from '@mavrykdynamics/webmavryk-ledger-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 import TransportNodeHid from "@ledgerhq/hw-transport-node-hid";
 
 async function example() {

@@ -7,7 +7,7 @@ title: Liquidity Baking interactions
 author: Claude Barde
 ---
 
-# Liquidity Baking contract and Taquito
+# Liquidity Baking contract and Webmavryk
 
 The goal of this document is to acquaint yourself with the different values in the storage of the contract as well as its entrypoints and the JavaScript code necessary to interact with them.
 
@@ -58,12 +58,12 @@ _Parameters_: no parameter, only the subsidy in mav is sent with the transaction
     - __minTokensWithdrawn__: the minimum amount of tzBTC tokens expected to be credited
     - __deadline__: the expiry time of the transaction
 
-### Interacting with the entrypoints with Taquito
+### Interacting with the entrypoints with Webmavryk
 The main friction point of interacting with the LB contract in JavaScript is about simulating the calculations of the expected token outputs Michelson does.
 
 - __%tokenToMvrk__:
 ```ts
-import { MavrykToolkit } from "@mavrykdynamics/taquito"
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk"
 
 // to take into account the subsidy added to the LB contract
 // when the transaction will be baked
@@ -147,7 +147,7 @@ This code sends a transaction to the `%tokenToMvrk` entrypoint of the contract t
 
 - __%mvrkToToken__:
 ```ts
-import { MavrykToolkit, OpKind } from "@mavrykdynamics/taquito"
+import { MavrykToolkit, OpKind } from "@mavrykdynamics/webmavryk"
 
 // outputs the amount of tzBTC tokens for a given amount of MVRK
 const mvrkToTokenTokenOutput = (p: {
@@ -209,7 +209,7 @@ This code sends a transaction to the `%mvrkToToken` entrypoint of the contract t
 
 - __%addLiquidity__:
 ```ts
-import { MavrykToolkit, OpKind } from "@mavrykdynamics/taquito"
+import { MavrykToolkit, OpKind } from "@mavrykdynamics/webmavryk"
 
 const Mavryk = new MavrykToolkit(RPC_URL);
 const lbContract = await Mavryk.wallet.at(LB_CONTRACT_ADDRESS);
@@ -264,7 +264,7 @@ The maximum amount of tzBTC tokens to be sold is calculated using this formula: 
 
 - __%removeLiquidity__:
 ```ts
-import { MavrykToolkit } from "@mavrykdynamics/taquito"
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk"
 
 const calculateLqtOutput = ({
   lqTokens,

@@ -6,8 +6,8 @@
 
 import { CONFIGS } from "../../config";
 import { tacoContractTzip16 } from "../../data/modified-taco-contract"
-import { MichelsonMap } from "@mavrykdynamics/taquito";
-import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/taquito-tzip16';
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
+import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/webmavryk-tzip16';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;
@@ -127,14 +127,14 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       expect(metadata.integrityCheckResult).toBeUndefined();
       expect(metadata.sha256Hash).toBeUndefined();
       expect(metadata.metadata).toEqual({
-        "name": "Taquito test with valid metadata containing emoji 😀 🤩",
-        "description": "👋 This is metadata test for Taquito integration tests 🧐 with the Ligo Taco shop contract modified to include metadata URI in the storage",
+        "name": "Webmavryk test with valid metadata containing emoji 😀 🤩",
+        "description": "👋 This is metadata test for Webmavryk integration tests 🧐 with the Ligo Taco shop contract modified to include metadata URI in the storage",
         "version": "7.1.0-beta.0",
         "license": {
           "name": "MIT",
           "details": "The MIT License"
         },
-        "homepage": "https://github.com/ecadlabs/taquito",
+        "homepage": "https://github.com/mavryk-network/webmavryk",
         "source": {
           "tools": [
             "Ligo",
@@ -144,15 +144,15 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
         }
       });
 
-      expect(await (await contract.tzip16()).metadataName()).toBe('Taquito test with valid metadata containing emoji 😀 🤩')
-      expect(await (await contract.tzip16()).metadataDescription()).toBe('👋 This is metadata test for Taquito integration tests 🧐 with the Ligo Taco shop contract modified to include metadata URI in the storage')
+      expect(await (await contract.tzip16()).metadataName()).toBe('Webmavryk test with valid metadata containing emoji 😀 🤩')
+      expect(await (await contract.tzip16()).metadataDescription()).toBe('👋 This is metadata test for Webmavryk integration tests 🧐 with the Ligo Taco shop contract modified to include metadata URI in the storage')
       expect(await (await contract.tzip16()).metadataVersion()).toBe('7.1.0-beta.0')
       expect(await (await contract.tzip16()).metadataLicense()).toEqual({
         "name": "MIT",
         "details": "The MIT License"
       })
       expect(await (await contract.tzip16()).metadataAuthors()).toBeUndefined()
-      expect(await (await contract.tzip16()).metadataHomepage()).toBe('https://github.com/ecadlabs/taquito')
+      expect(await (await contract.tzip16()).metadataHomepage()).toBe('https://github.com/mavryk-network/webmavryk')
       expect(await (await contract.tzip16()).metadataSource()).toEqual({
         "tools": [
           "Ligo",

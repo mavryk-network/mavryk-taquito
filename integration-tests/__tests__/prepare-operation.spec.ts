@@ -4,10 +4,10 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { OperationContentsBallot, OperationContentsTransaction } from '@mavrykdynamics/taquito-rpc';
-import { OpKind } from '@mavrykdynamics/taquito';
+import { OperationContentsBallot, OperationContentsTransaction } from '@mavrykdynamics/webmavryk-rpc';
+import { OpKind } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../config';
-import { LocalForger } from '@mavrykdynamics/taquito-local-forging';
+import { LocalForger } from '@mavrykdynamics/webmavryk-local-forging';
 
 CONFIGS().forEach(({ lib, setup, protocol, createAddress }) => {
   const Mavryk = lib;

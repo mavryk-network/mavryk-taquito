@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from "../../config";
-import { COST_PER_BYTE } from "@mavrykdynamics/taquito";
+import { COST_PER_BYTE } from "@mavrykdynamics/webmavryk";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 

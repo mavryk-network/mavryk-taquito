@@ -5,11 +5,11 @@
  */
 
 import { CONFIGS } from '../../config';
-import { LedgerSigner, LedgerTransport, DerivationType } from '@mavrykdynamics/taquito-ledger-signer';
+import { LedgerSigner, LedgerTransport, DerivationType } from '@mavrykdynamics/webmavryk-ledger-signer';
 import TransportNodeHid from "@ledgerhq/hw-transport-node-hid";
 import { ligoSample } from "../../data/ligo-simple-contract";
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
-import { localForger } from '@mavrykdynamics/taquito-local-forging';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { localForger } from '@mavrykdynamics/webmavryk-local-forging';
 import { rpcToForge } from '../../data/contract_origination';
 
 // PLEASE NOTE MAY NEED TO TEST ONE TEST AT A TIME

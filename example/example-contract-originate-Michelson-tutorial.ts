@@ -4,8 +4,8 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network';

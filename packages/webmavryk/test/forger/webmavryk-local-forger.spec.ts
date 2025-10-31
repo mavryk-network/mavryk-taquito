@@ -1,0 +1,51 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { WebMavrykLocalForger } from '../../src/forger/webmavryk-local-forger';
+import { Context, Protocols } from '../../src/webmavryk';
+
+describe('WebMavryk local forger', () => {
+  const mockRpcClient = {
+    getProtocols: jest.fn(),
+  };
+
+  beforeEach(() => {
+    mockRpcClient.getProtocols.mockResolvedValue({
+      next_protocol: 'PtJakart2xVj7pYXJBXrqHgd82rdkLey5ZeeGwDgPp9rhQUbSqY',
+    });
+  });
+
+  it('is instantiable', () => {
+    expect(new WebMavrykLocalForger(new Context('url'))).toBeInstanceOf(WebMavrykLocalForger);
+  });
+
+  it('should take the protocol hash from context.proto if it is defined', async () => {
+    const context = new Context(mockRpcClient as any);
+    context.proto = Protocols.PtAtLas;
+    const forger = new WebMavrykLocalForger(context);
+
+    // When calling the forge method, an instance of LocalForger is created
+    // which required the protocol hash in its constructor
+    await forger.forge({
+      branch: 'BMbqNeX9fZKsuKmu5B2gX7ayA9ZUNjbHEeHCgYd7VdTMsTCALFF',
+      contents: [],
+    });
+    expect(mockRpcClient.getProtocols).toHaveBeenCalledTimes(0);
+  });
+
+  it('should fetch protocol hash from the Rpc', async () => {
+    const forger = new WebMavrykLocalForger(new Context(mockRpcClient as any));
+
+    // When calling the forge method, an instance of LocalForger is created
+    // which required the protocol hash in its constructor
+    // fetch the protocol hash from the RPC if context.proto is undefined
+    await forger.forge({
+      branch: 'BMbqNeX9fZKsuKmu5B2gX7ayA9ZUNjbHEeHCgYd7VdTMsTCALFF',
+      contents: [],
+    });
+    expect(mockRpcClient.getProtocols).toHaveBeenCalledTimes(1);
+  });
+});

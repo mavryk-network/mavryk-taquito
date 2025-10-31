@@ -7,7 +7,7 @@
 import { codeViewsTopLevel } from "../../data/contract_views_top_level";
 import { CONFIGS } from "../../config";
 import BigNumber from 'bignumber.js';
-import { ViewSimulationError } from "@mavrykdynamics/taquito";
+import { ViewSimulationError } from "@mavrykdynamics/webmavryk";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;

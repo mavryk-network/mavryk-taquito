@@ -10,7 +10,7 @@ author: Claude Barde
 
 Developers may wish to set themselves the different limits of a transaction before broadcasting it, for example to give it a better chance to be included first or to prevent the transaction from being backtracked due to an insufficient storage limit.
 
-Before Taquito version 9, this was not possible, but as wallets start to accept custom limits, this feature has been included in Taquito.
+Before Webmavryk version 9, this was not possible, but as wallets start to accept custom limits, this feature has been included in Webmavryk.
 
 ## Setting the limits
 

@@ -16,7 +16,7 @@ Sapling was introduced in Mavryk in the Edo protocol. Refer to the Mavryk docume
 
 The spending key is used to spend tokens. It must be handled securely to prevent funds from being lost or stolen.
 
-Taquito offers support for encrypted/unencrypted spending keys and mnemonics. Refer to the following link for more information: [InMemorySpendingKey](./sapling_in_memory_spending_key.md)
+Webmavryk offers support for encrypted/unencrypted spending keys and mnemonics. Refer to the following link for more information: [InMemorySpendingKey](./sapling_in_memory_spending_key.md)
 
 **Proving key**
 
@@ -37,7 +37,7 @@ Here is an example on how to retrieve addresses: [InMemoryViewingKey](./sapling_
 
 # Sapling toolkit
 
-The `@mavrykdynamics/taquito-sapling` package provides a `SaplingToolkit` class that surfaces all of the Sapling capabilities, allowing it to read from a Sapling state and prepare transactions.
+The `@mavrykdynamics/webmavryk-sapling` package provides a `SaplingToolkit` class that surfaces all of the Sapling capabilities, allowing it to read from a Sapling state and prepare transactions.
 
 The constructor of the `SaplingToolkit` takes the following properties:
 - the first parameter is an object containing:
@@ -53,9 +53,9 @@ The constructor of the `SaplingToolkit` takes the following properties:
 Here is an example of how to instantiate a `SaplingToolkit`:
 
 ```ts
-import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
-import { SaplingToolkit } from '@mavrykdynamics/taquito-sapling';
-import { RpcClient } from '@mavrykdynamics/taquito-rpc';
+import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+import { SaplingToolkit } from '@mavrykdynamics/webmavryk-sapling';
+import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
 
 const mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network/');
 const readProvider = new RpcReadAdapter(new RpcClient('https://YOUR_PREFERRED_RPC_URL'));
@@ -81,9 +81,9 @@ Note that the balance is represented in mumav.
 The balance can be retrieved as follows:
 
 ```js live noInline
-import { RpcReadAdapter } from '@mavrykdynamics/taquito';
-import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/taquito-sapling';
-import { RpcClient } from '@mavrykdynamics/taquito-rpc';
+import { RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/webmavryk-sapling';
+import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
 
 // Alice spending key
 const aliceSk = 'sask27SLmU9herddHz4qFJBLMjWYMbJF8RtS579w9ej9mfCYK7VUdyCJPHK8AzW9zMsopGZEkYeNjAY7Zz1bkM7CGu8eKLzrjBLTMC5wWJDhxiK91ahA29rhDRsHdJDV2u2jFwb2MNUix8JW7sAkAqYVaJpCehTBPgRQ1KqKwqqUaNmuD8kazd4Q8MCWmgbWs21Yuomdqyi9FLigjRp7oY4m5adaVU19Nj1AHvsMY2tePeU2L';
@@ -114,9 +114,9 @@ The `SaplingTransactionViewer` class exposes a method called `getIncomingAndOutg
 Example:
 
 ```js live noInline
-import { RpcReadAdapter } from '@mavrykdynamics/taquito';
-import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/taquito-sapling';
-import { RpcClient } from '@mavrykdynamics/taquito-rpc';
+import { RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/webmavryk-sapling';
+import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
 
 // Alice spending key
 const aliceSk = 'sask27SLmU9herddHz4qFJBLMjWYMbJF8RtS579w9ej9mfCYK7VUdyCJPHK8AzW9zMsopGZEkYeNjAY7Zz1bkM7CGu8eKLzrjBLTMC5wWJDhxiK91ahA29rhDRsHdJDV2u2jFwb2MNUix8JW7sAkAqYVaJpCehTBPgRQ1KqKwqqUaNmuD8kazd4Q8MCWmgbWs21Yuomdqyi9FLigjRp7oY4m5adaVU19Nj1AHvsMY2tePeU2L';
@@ -152,12 +152,12 @@ The `ParametersSaplingTransaction` is an object made of:
 
 The `prepareShieldedTransaction` method returns the crafted Sapling transaction parameter but does not perform any change on the shielded pool. A subsequent step where the Sapling transaction parameter is submitted to the smart contract must be done. Note that in a case of a shielded transaction, the shielded amount must be sent along when calling the smart contract to transfer the mav to the shielded pool, or it will result in an error.
 
-Here is an example of how to prepare and inject a shielded transaction using Taquito:
+Here is an example of how to prepare and inject a shielded transaction using Webmavryk:
 
 ```js live noInline
-// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
-// import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/taquito-sapling';
-// import { RpcClient } from '@mavrykdynamics/taquito-rpc';
+// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+// import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/webmavryk-sapling';
+// import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
 
 const saplingContractAddress = 'KT1ToBD7bovonshNrxs3i4KMFuZ8PE2LUmQf'
 const rpcUrl = 'https://basenet.rpc.mavryk.network/';
@@ -224,12 +224,12 @@ The `prepareSaplingTransaction` method returns the crafted Sapling transaction p
 A user should not use their own implicit account (mv1, mv2, mv3) to submit a Sapling transaction but rather have a third party inject it.
 :::
 
-Here is an example of how to prepare and inject a Sapling transaction using Taquito:
+Here is an example of how to prepare and inject a Sapling transaction using Webmavryk:
 
 ```js live noInline
-// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
-// import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/taquito-sapling';
-// import { RpcClient } from '@mavrykdynamics/taquito-rpc';
+// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+// import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/webmavryk-sapling';
+// import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
 
 const saplingContractAddress = 'KT1ToBD7bovonshNrxs3i4KMFuZ8PE2LUmQf'
 const rpcUrl = 'https://basenet.rpc.mavryk.network/';
@@ -282,12 +282,12 @@ The `ParametersUnshieldedTransaction` is an object made of:
 
 The `prepareUnshieldedTransaction` method returns the crafted Sapling transaction parameter but does not perform any change on the shielded pool. A subsequent step where the Sapling transaction parameter is submitted to the smart contract must be done to retrieve the tokens from the pool.
 
-Here is an example of how to prepare and inject an unshielded transaction using Taquito:
+Here is an example of how to prepare and inject an unshielded transaction using Webmavryk:
 
 ```js live noInline
-// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
-// import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/taquito-sapling';
-// import { RpcClient } from '@mavrykdynamics/taquito-rpc';
+// import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+// import { SaplingToolkit, InMemorySpendingKey } from '@mavrykdynamics/webmavryk-sapling';
+// import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
 
 const saplingContractAddress = 'KT1ToBD7bovonshNrxs3i4KMFuZ8PE2LUmQf'
 const rpcUrl = 'https://basenet.rpc.mavryk.network/';
@@ -341,9 +341,9 @@ The constructor of the `SaplingTransactionViewer` takes the following properties
 Here is an example of how to instantiate a `SaplingTransactionViewer`:
 
 ```ts
-import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
-import { InMemoryViewingKey } from '@mavrykdynamics/taquito-sapling';
-import { RpcClient } from '@mavrykdynamics/taquito-rpc';
+import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+import { InMemoryViewingKey } from '@mavrykdynamics/webmavryk-sapling';
+import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
 
 const readProvider = new RpcReadAdapter(new RpcClient('https://YOUR_PREFERRED_RPC_URL'));
 const mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network/');

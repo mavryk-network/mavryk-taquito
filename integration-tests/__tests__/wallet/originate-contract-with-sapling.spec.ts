@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from "../../config";
-import { SaplingStateValue } from '@mavrykdynamics/taquito-michelson-encoder';
+import { SaplingStateValue } from '@mavrykdynamics/webmavryk-michelson-encoder';
 import { saplingContractDoubleJProto } from "../../data/sapling_test_contracts";
 
 CONFIGS().forEach(({ lib, rpc, setup, }) => {

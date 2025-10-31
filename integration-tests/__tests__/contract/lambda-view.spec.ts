@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MichelsonMap, UnitValue } from '@mavrykdynamics/taquito';
+import { MichelsonMap, UnitValue } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
 import { tzip7Contract } from '../../data/tzip_7_contract';
 import { testContract } from '../../data/test_lambda_view';

@@ -57,7 +57,7 @@ class SemiLiveProvider extends LiveProvider {
       } else {
         return `fetch('https://keygen.ecadinfra.com/basenet', {
           method: 'POST',
-          headers: { Authorization: 'Bearer taquito-example' },
+          headers: { Authorization: 'Bearer webmavryk-example' },
         })
         .then(response => response.text())
         .then(privateKey => {

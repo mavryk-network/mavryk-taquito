@@ -4,9 +4,9 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 import { ligoSample } from '../integration-tests/data/ligo-simple-contract';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network';

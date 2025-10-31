@@ -4,8 +4,8 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 import { voteInitSample, voteSample } from '../integration-tests/data/vote-contract';
 
 async function example() {

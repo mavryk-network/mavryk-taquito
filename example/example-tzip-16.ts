@@ -4,8 +4,8 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
-import { tzip16, Tzip16Module } from '@mavrykdynamics/taquito-tzip16';
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
+import { tzip16, Tzip16Module } from '@mavrykdynamics/webmavryk-tzip16';
 
 async function example() {
   try {

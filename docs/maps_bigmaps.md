@@ -9,7 +9,7 @@ author: Roxane Letourneau
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import { MichelsonMap } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
 
 Learn how to:
 
@@ -19,7 +19,7 @@ Learn how to:
 - Use Pairs as a key to access `Map` and `BigMap` values
 - Why Michelson `Map` and `BigMap` don't look like a Javascript `Map`
 
-Taquito provides `MichelsonMap` to make it easy for developers to work with the native Michelson map datatypes. `MichelsonMap` supports initialization, get and set methods to `Maps` using primitive datatypes and pairs as keys.
+Webmavryk provides `MichelsonMap` to make it easy for developers to work with the native Michelson map datatypes. `MichelsonMap` supports initialization, get and set methods to `Maps` using primitive datatypes and pairs as keys.
 
 Michelson offers two variants of `Maps` that are semantically the same but have different implementations and trade-offs in terms of `gas` and `storage` costs on a contract. A `Map` uses more storage but costs less gas, whereas a `BigMap` consumes less storage but has higher gas costs during the Smart Contract's execution.
 
@@ -43,8 +43,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-import { MichelsonMap } from '@mavrykdynamics/taquito';
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
 
 const storageMap = new MichelsonMap();
@@ -72,8 +72,8 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-import { MichelsonMap } from '@mavrykdynamics/taquito';
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
 
 const storageMap = new MichelsonMap();
@@ -112,7 +112,7 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-import { MichelsonMap } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
 
 Mavryk.contract
   .originate({
@@ -137,7 +137,7 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-import { MichelsonMap } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
 
 Mavryk.wallet
   .originate({
@@ -164,7 +164,7 @@ Mavryk.wallet
 
 ### Accessing the values of the map
 
-This example loads the same type of Taco Shop contract (we created this one earlier). Taquito provides a `get` method of the `MichelsonMap` on storage of type `Map`, and in this case, we access the value stored with a key of `1`.
+This example loads the same type of Taco Shop contract (we created this one earlier). Webmavryk provides a `get` method of the `MichelsonMap` on storage of type `Map`, and in this case, we access the value stored with a key of `1`.
 
 The example calls the Contracts `main` function of the contract using the key `1` as its parameter. Remember, we can only change contract storage by calling the function provided by the contract. The `main` function on this Smart Contract is decreasing the value of the `current_stock` associated with the key `1`. We use the `get` method of the `MichelsonMap` class to see the difference in storage after the method call.
 
@@ -287,7 +287,7 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-import { MichelsonMap } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
 
 const storageMap = new MichelsonMap();
 //First entry of the map
@@ -343,7 +343,7 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-import { MichelsonMap } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
 
 const storageMap = new MichelsonMap();
 //First entry of the map
@@ -592,7 +592,7 @@ Mavryk.wallet
 The `get` method of the `MichelsonMap` class accesses values of the map for a specified key.
 
 :::caution Reminder
-** Taquito will handle timestamps with the milliseconds as 2019-09-06T15:08:29.000Z rather than 2019-09-06T15:08:29Z which is crucial when accessing maps with complex keys **
+** Webmavryk will handle timestamps with the milliseconds as 2019-09-06T15:08:29.000Z rather than 2019-09-06T15:08:29Z which is crucial when accessing maps with complex keys **
 :::
 
 <Tabs
@@ -678,7 +678,7 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-import { MichelsonMap } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
 
 const storageMap = new MichelsonMap();
 storageMap.set(
@@ -734,7 +734,7 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-import { MichelsonMap } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
 
 const storageMap = new MichelsonMap();
 storageMap.set(
@@ -870,28 +870,28 @@ Mavryk.wallet
 
 ## Local packing for big maps
 
-By default, a call to an RPC node is used to pack data when fetching values from a big map. Big map keys need to be serialized or packed and Taquito relies on the PACK functionality of a Mavryk RPC node to pack the big map keys. This may be considered inefficient as it adds a request to a remote node to fetch data.
+By default, a call to an RPC node is used to pack data when fetching values from a big map. Big map keys need to be serialized or packed and Webmavryk relies on the PACK functionality of a Mavryk RPC node to pack the big map keys. This may be considered inefficient as it adds a request to a remote node to fetch data.
 
-Now, Taquito allows you to pack the required data locally to fetch values from a big map. By relying on the local pack implementation, Taquito eliminates one RPC roundtrip when fetching big map values. This feature makes fetching big map values **50% faster**.
+Now, Webmavryk allows you to pack the required data locally to fetch values from a big map. By relying on the local pack implementation, Webmavryk eliminates one RPC roundtrip when fetching big map values. This feature makes fetching big map values **50% faster**.
 
 Implementing this feature is a very easy 2 step process:
 
-1. Importing the `MichelCodecPacker` class from `@mavrykdynamics/taquito`
+1. Importing the `MichelCodecPacker` class from `@mavrykdynamics/webmavryk`
 2. Creating an instance of the `MichelCodecPacker` class and passing it to the `setPackerProvider` method of the `MavrykToolkit` instance.
 
 Here is an example:
 
 ```js
-import { MichelCodecPacker } from '@mavrykdynamics/taquito';
+import { MichelCodecPacker } from '@mavrykdynamics/webmavryk';
 const Mavryk = new MavrykToolkit(RPC_URL);
 Mavryk.setPackerProvider(new MichelCodecPacker());
 ```
 
-After that, Taquito will automatically pack the keys locally when you want to fetch the values of a big map.
+After that, Webmavryk will automatically pack the keys locally when you want to fetch the values of a big map.
 
 ## Fetch multiple big map values at once
 
-It is possible to fetch multiple big map values using Taquito with one call using the `getMultipleValues` method of the `BigMapAbstraction` class. Taquito will ensure that all fetched big maps come from the same block to ensure a consistent state.
+It is possible to fetch multiple big map values using Webmavryk with one call using the `getMultipleValues` method of the `BigMapAbstraction` class. Webmavryk will ensure that all fetched big maps come from the same block to ensure a consistent state.
 
 The method takes an `array` of keys to query as a parameter and an optional block level and returns a `MichelsonMap` containing the keys and their value in a well-formatted JSON object format. The accepted types for the keys are `string`, `number` or `object` (the last one is used when the type of the keys in the big map is a Michelson `pair`).
 
@@ -906,7 +906,7 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 Mavryk.contract
@@ -936,7 +936,7 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 Mavryk.wallet

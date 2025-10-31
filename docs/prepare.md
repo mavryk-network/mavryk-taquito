@@ -13,7 +13,7 @@ This feature is currently a work in progress and may be updated in the near futu
 
 Before operations are _forged_, _signed_, and then _injected_, they first need to go through a _Prepare_ step.
 
-In Taquito, the act of preparing an operation is to create the Operation Object and the counter in one single object that we name `PreparedOperation`.
+In Webmavryk, the act of preparing an operation is to create the Operation Object and the counter in one single object that we name `PreparedOperation`.
 
 An example of `PreparedOperation` object for a `ballot` operation looks something like this:
 ```typescript
@@ -38,7 +38,7 @@ The `PreparedOperation` object used to be abstracted from the user and would req
 - The ability to retrieve information about the operation before injecting (operation hash, etc)
 - The ability to simulate an operation before injecting
 
-The `PrepareProvider` class affords extension and control to users when preparing operations while also promoting modularity in Taquito as a design principle.
+The `PrepareProvider` class affords extension and control to users when preparing operations while also promoting modularity in Webmavryk as a design principle.
 
 ## Usage example
 

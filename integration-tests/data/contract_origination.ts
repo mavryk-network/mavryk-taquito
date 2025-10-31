@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { OperationContentsOrigination } from "@mavrykdynamics/taquito-rpc"
+import { OperationContentsOrigination } from "@mavrykdynamics/webmavryk-rpc"
 
 export const rpcToForge = {
   "branch": "BLQ6JyEEzUNkA7WEDSAbyFYLoEK7RVcNcjbjrN5LrmqoUW4qmu3",

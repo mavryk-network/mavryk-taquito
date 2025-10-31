@@ -4,9 +4,9 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { VotingPeriodBlockResult } from '@mavrykdynamics/taquito-rpc';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { VotingPeriodBlockResult } from '@mavrykdynamics/webmavryk-rpc';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 import { CONFIGS, isSandbox, sleep } from '../../config';
 
 CONFIGS().forEach(async ({ lib, rpc, protocol, setup }) => {

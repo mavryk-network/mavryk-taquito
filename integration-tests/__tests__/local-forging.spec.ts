@@ -6,9 +6,9 @@
 
 import { CONFIGS } from "../config";
 import { commonCases, boreasCases } from '../data/allTestsCases';
-import { LocalForger, ProtocolsHash } from '@mavrykdynamics/taquito-local-forging'
-import { Protocols, MavrykToolkit } from "@mavrykdynamics/taquito";
-import { ProtoGreaterOrEqual } from '@mavrykdynamics/taquito-michel-codec';
+import { LocalForger, ProtocolsHash } from '@mavrykdynamics/webmavryk-local-forging'
+import { Protocols, MavrykToolkit } from "@mavrykdynamics/webmavryk";
+import { ProtoGreaterOrEqual } from '@mavrykdynamics/webmavryk-michel-codec';
 
 CONFIGS().forEach(({ rpc, protocol }) => {
   const Mavryk = new MavrykToolkit(rpc);

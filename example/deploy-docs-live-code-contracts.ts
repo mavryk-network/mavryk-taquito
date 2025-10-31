@@ -8,15 +8,15 @@
 ///   Ensure the Testfunder account mv1QKLY6XJjb6uD9vdXmtW6aUfP4C7h66aTg has at least 2k tokens
 ///   for the testnet in use. The script will first check if addresses used in the script are funded,
 ///   and top them up if needed. The script will then originate each contract needed for Live Code
-///   examples in Taquito Docs and produce a JSON file with each Contract Identifier and its PKH.
+///   examples in Webmavryk Docs and produce a JSON file with each Contract Identifier and its PKH.
 ///   Use the testpad script Docs Live Code Contract Origination (in https://ecadlabs.ontestpad.com/project/18/)
 ///   with the desired chain (e.g. kathmandu) to match the originated scripts with their locations in the Docs.
-///   The script will also print to console a json file of contracts to use in the code examples in taquito/examples
+///   The script will also print to console a json file of contracts to use in the code examples in webmavryk/examples
 ///   Execute this script with
 ///     node -r ts-node/register deploy-docs-live-code-contracts.ts
 
-import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 import { tzip7Contract } from '../integration-tests/data/tzip_7_contract';
 import { contractMapPairKey } from './data/contractMapPairKey';
 import { contractIncrementing } from './data/contractIncrementing';
@@ -33,7 +33,7 @@ import {
 } from '../integration-tests/data/metadataViews';
 import { saplingLiveCodeContract } from './data/sapling_live_code_contract';
 import { contractMap8pairs } from './data/contractMap8pairs';
-import { stringToBytes } from '@mavrykdynamics/taquito-utils';
+import { stringToBytes } from '@mavrykdynamics/webmavryk-utils';
 import { fa2Contract } from '../integration-tests/data/fa2_contract';
 import BigNumber from 'bignumber.js';
 
@@ -584,8 +584,8 @@ async function originateTzip16Storage() {
       description: 'A metadata test',
       version: '0.1',
       license: 'MIT',
-      authors: ['Taquito <https://taquito.mavryk.org/>'],
-      homepage: 'https://taquito.mavryk.org/',
+      authors: ['Webmavryk <https://webmavryk.mavryk.org/>'],
+      homepage: 'https://webmavryk.mavryk.org/',
     };
 
     const metadataBigMap = new MichelsonMap();

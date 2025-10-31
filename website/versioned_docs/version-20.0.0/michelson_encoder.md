@@ -9,7 +9,7 @@ author: Roxane Letourneau
 
 The purpose of the `Michelson-Encoder` package is to create an abstraction over the Michelson Language. It allows converting Michelson data into javascript-looking objects which are easier to use and reason about.
 
-Its integration into the main `Taquito` package makes it easier to write the storage when deploying a contract and the parameter when calling a contract entry-point.
+Its integration into the main `Webmavryk` package makes it easier to write the storage when deploying a contract and the parameter when calling a contract entry-point.
 
 ## How it works?
 
@@ -18,7 +18,7 @@ There are three main classes in the Michelson Encoder:
 - `ParameterSchema`
 - `Schema`
 
-[Here](/img/taquito-michelson-encoder.png) is a class diagram showing their members, methods, and relations.
+[Here](/img/webmavryk-michelson-encoder.png) is a class diagram showing their members, methods, and relations.
 
 A specific token class in the package represents each different Michelson type (i.e., `nat`, `list`, `pair`, `or`, ...). Each of these classes extends the abstract class `Token` and needs to implement these four inherited abstract methods:
 - `Execute`: To convert Michelson data into familiar-looking javascript data
@@ -356,7 +356,7 @@ The `Execute` method takes an optional parameter of type `Semantic`. It allows o
 
 Here is an example for the `big_map` type:
 If we have a contract having a big map in its storage, when we fetch the contract's storage with the RPC, the returned value looks like the following `{ int: big_map_id }`.
-In the Taquito main package, the `getStorage` method of the `ContractProvider` class uses the semantic parameter to override the representation of big map in the storage. When we fetch the storage of a contract using `Mavryk.contract.getStorage('contractAddress')`, an instance of the `BigMapAbstraction` class is returned for the big map instead of its id.
+In the Webmavryk main package, the `getStorage` method of the `ContractProvider` class uses the semantic parameter to override the representation of big map in the storage. When we fetch the storage of a contract using `Mavryk.contract.getStorage('contractAddress')`, an instance of the `BigMapAbstraction` class is returned for the big map instead of its id.
 
 ```js live noInline
 const schema = new Schema({ prim: 'big_map', args: [{ prim: 'address' }, { prim: 'int' }] });
@@ -384,9 +384,9 @@ const dataCustom = schema.Execute(dataMichelson, { ticket: (val) => val.args[1].
 println(`Customized representation of the ticket value: ${JSON.stringify(dataCustom)}`);
 ```
 
-### How the Schema class is used inside Taquito
+### How the Schema class is used inside Webmavryk
 
-The `Schema` class is internally used in Taquito:
+The `Schema` class is internally used in Webmavryk:
 - When calling `Mavryk.contract.getStorage()`:
     It allows returning a well-formatted JSON object of the contract storage using the `Execute` method to convert the Michelson data into familiar-looking javascript data.
 - When fetching a bigmap key with `BigMapAbstraction.get()` or `RpcContractProvider.getBigMapKey()`:
@@ -421,9 +421,9 @@ const michelsonData = parameterSchema.EncodeObject({
 println(JSON.stringify(michelsonData, null, 2));
 ```
 
-### How the ParameterSchema class is used inside Taquito
+### How the ParameterSchema class is used inside Webmavryk
 
-The `ParameterSchema` class is internally used in Taquito:
+The `ParameterSchema` class is internally used in Webmavryk:
 - When we call a method, or a view of a contract using the `ContractAbstraction` class, the `Encode` method is used to transform the parameters into Michelson data.
 - In the `tzip16` package, when we execute a Michelson view, the `Encode` method is used to transform the parameters into Michelson data.
 
@@ -468,7 +468,7 @@ const noAnnotationsSchema = storageSchema.ExtractSchema();
 println(JSON.stringify(noAnnotationsSchema, null, 2));
 ```
 
-In Taquito, we will flatten these nested `pair`s to make it easier to use them in typescript dApps. Please note how the result of `generateSchema` is different in the annotated vs non-annotated cases:
+In Webmavryk, we will flatten these nested `pair`s to make it easier to use them in typescript dApps. Please note how the result of `generateSchema` is different in the annotated vs non-annotated cases:
 
 ```js
 //annotatedSchema:
@@ -490,7 +490,7 @@ In Taquito, we will flatten these nested `pair`s to make it easier to use them i
 }
 ```
 
-Here, Taquito developers have made two decisions:
+Here, Webmavryk developers have made two decisions:
 1. The elements of the nested `pair`s are flattened into a single object.
 2. The keys of the object are:
    1. the annotations, if they exist

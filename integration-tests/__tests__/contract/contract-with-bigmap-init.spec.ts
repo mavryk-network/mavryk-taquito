@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from "../../config";
-import { MichelsonMap } from "@mavrykdynamics/taquito";
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
 import { tokenBigmapCode } from "../../data/token_bigmap";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {

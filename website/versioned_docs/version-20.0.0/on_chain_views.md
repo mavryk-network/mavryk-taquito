@@ -112,7 +112,7 @@ code {
      }
 ```
 
-**Example of calling a contract entrypoint that makes a call to a view using Taquito:**
+**Example of calling a contract entrypoint that makes a call to a view using Webmavryk:**
 
 The following live code example shows a contract (`contractCallFib`) calling the view `fib` of another contract (`contractTopLevelViews`). 
 
@@ -184,9 +184,9 @@ Mavryk.wallet.at(contractCallFib)
   </TabItem>
 </Tabs>
 
-## How to simulate a view execution using Taquito
+## How to simulate a view execution using Webmavryk
 
-Taquito offers the ability to simulate the result of on-chain views. 
+Webmavryk offers the ability to simulate the result of on-chain views. 
 
 The user can create an instance of `ContractAbstraction` using the `at` method of the Contract or Wallet API with the contract's address that defines the views. The `contractViews` member of the `ContractAbstraction` instance is dynamically populated with methods that match the on-chain view names. 
 

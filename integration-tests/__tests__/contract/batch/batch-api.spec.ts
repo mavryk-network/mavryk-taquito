@@ -7,11 +7,11 @@
 import { CONFIGS } from "../../../config";
 import { ligoSample, ligoSampleMichelson } from "../../../data/ligo-simple-contract";
 import { managerCode } from "../../../data/manager_code";
-import { MANAGER_LAMBDA, OpKind } from "@mavrykdynamics/taquito";
+import { MANAGER_LAMBDA, OpKind } from "@mavrykdynamics/webmavryk";
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBaker, createAddress }) => {
   const Mavryk = lib;
-  describe(`Test the Taquito batch api using: ${rpc}`, () => {
+  describe(`Test the Webmavryk batch api using: ${rpc}`, () => {
 
     beforeEach(async () => {
       await setup()
@@ -35,8 +35,8 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, createAddress }) => {
     it('Verify a batch of transfers and origination operations using a combination of the two notations (array of operation with kind mixed with withTransfer method)', async () => {
       /** Tests the usage of a mix of the 2 possible notations for batched operations
        *  See for details on the 2 notations: 
-       *  https://taquito.mavryk.org/docs/batch_API#--the-array-of-transactions-method 
-       *  https://taquito.mavryk.org/docs/batch_API#--the-withtransfer-method
+       *  https://webmavryk.mavryk.org/docs/batch_API#--the-array-of-transactions-method 
+       *  https://webmavryk.mavryk.org/docs/batch_API#--the-withtransfer-method
        */
       const op = await Mavryk.batch([
         {

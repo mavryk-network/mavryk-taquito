@@ -4,11 +4,11 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
-import { stringToBytes } from '@mavrykdynamics/taquito-utils';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { stringToBytes } from '@mavrykdynamics/webmavryk-utils';
 import { tacoContractTzip16 } from "../integration-tests/data/modified-taco-contract"
-import { MichelsonMap } from "@mavrykdynamics/taquito";
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network';

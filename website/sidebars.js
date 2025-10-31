@@ -33,13 +33,13 @@ const sidebars = {
         'tutorial',
         'operation_flow',
         'rpc_nodes',
-        'web3js_taquito',
+        'web3js_webmavryk',
         'chatbot',
       ],
     },
     {
       type: 'category',
-      label: 'Taquito Providers',
+      label: 'Webmavryk Providers',
       className: 'sidebarHeader',
       collapsed: false,
       collapsible: false,
@@ -150,7 +150,7 @@ const sidebars = {
         'michelson_encoder',
         'contracts-library',
         'timelock',
-        'taquito_utils',
+        'webmavryk_utils',
         {
           type: 'category',
           label: 'Sapling',
@@ -208,7 +208,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Taquito Public API',
+      label: 'Webmavryk Public API',
       className: 'sidebarHeader',
       collapsed: false,
       collapsible: false,
@@ -233,7 +233,7 @@ const sidebars = {
     {
       type: 'link',
       label: 'TypeDoc Reference',
-      href: 'https://taquito.mavryk.org/typedoc',
+      href: 'https://webmavryk.mavryk.org/typedoc',
     },
   ],
 };

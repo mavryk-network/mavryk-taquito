@@ -24,7 +24,7 @@ jobs:
         node-version: lts/hydrogen
     - run: npm ci
     - run: npm run build
-    - run: npm -w taquito-test-dapp-vite run build
+    - run: npm -w webmavryk-test-dapp-vite run build
 
     - name: Publish to Cloudflare Pages
       id: cloudflare_publish
@@ -32,8 +32,8 @@ jobs:
       with:
         apiToken: ${{ secrets.CF_API_TOKEN }}
         accountId: ${{ secrets.CF_ACCOUNT_ID }}
-        projectName: taquito-test-dapp
-        directory: apps/taquito-test-dapp/dist
+        projectName: webmavryk-test-dapp
+        directory: apps/webmavryk-test-dapp/dist
         gitHubToken: ${{ secrets.GITHUB_TOKEN }}
         wranglerVersion: '3'
 

@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { opMapping, ForgeParams } from '@mavrykdynamics/taquito-local-forging';
+import { opMapping, ForgeParams } from '@mavrykdynamics/webmavryk-local-forging';
 import {
   rpcContractResponse,
   rpcContractResponse2,
@@ -25,7 +25,7 @@ import {
   codeContractWithConstant,
 } from './contract_with_constant';
 import { codeViewsTopLevel, storageViewsTopLevel } from './contract_views_top_level';
-import { MichelsonV1Expression, OpKind, PvmKind } from '@mavrykdynamics/taquito-rpc';
+import { MichelsonV1Expression, OpKind, PvmKind } from '@mavrykdynamics/webmavryk-rpc';
 import { emitCode } from './code_with_emit';
 import { lambdaRecCode } from './code_with_lambda_rec';
 import { timelockCode, timelockStorage, timelockExpected } from './timelock-flip-contract';

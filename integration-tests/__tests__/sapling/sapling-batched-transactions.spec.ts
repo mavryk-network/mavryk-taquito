@@ -4,9 +4,9 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { ContractAbstraction, ContractProvider, RpcReadAdapter } from '@mavrykdynamics/taquito';
+import { ContractAbstraction, ContractProvider, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
-import { InMemorySpendingKey, InMemoryViewingKey, SaplingToolkit, SaplingTransactionViewer } from '@mavrykdynamics/taquito-sapling';
+import { InMemorySpendingKey, InMemoryViewingKey, SaplingToolkit, SaplingTransactionViewer } from '@mavrykdynamics/webmavryk-sapling';
 import BigNumber from 'bignumber.js';
 import { singleSaplingStateContractJProtocol } from '../../data/single_sapling_state_contract_jakarta_michelson';
 import * as bip39 from 'bip39';

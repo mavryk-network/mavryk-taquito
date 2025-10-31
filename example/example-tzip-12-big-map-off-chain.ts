@@ -4,10 +4,10 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
-import { importKey, InMemorySigner } from '@mavrykdynamics/taquito-signer';
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { importKey, InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 import { fa2ForTokenMetadataView } from '../integration-tests/data/fa2-for-token-metadata-view';
-import { b58cencode, stringToBytes, Prefix, prefix } from '@mavrykdynamics/taquito-utils';
+import { b58cencode, stringToBytes, Prefix, prefix } from '@mavrykdynamics/webmavryk-utils';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const nodeCrypto = require('crypto');
 

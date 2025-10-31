@@ -8,7 +8,7 @@ id: tutorial_links
 author: Claude Barde
 ---
 
-Below is a list of different tutorials about Taquito written on various platforms. These tutorials explain core concepts of Taquito and how to implement them and use them in a Mavryk dapp.
+Below is a list of different tutorials about Webmavryk written on various platforms. These tutorials explain core concepts of Webmavryk and how to implement them and use them in a Mavryk dapp.
 
 - **[Build your first dapp on Mavryk](https://medium.com/better-programming/build-your-first-dapp-on-tezos-270c568d4fe9)**  
   A guide to build a simple React dapp on Mavryk with wallet support using Taquito
@@ -29,4 +29,4 @@ Below is a list of different tutorials about Taquito written on various platform
 - **[SmartPy lecture about Taquito](https://training.blockmatics.io/courses/tezos-smartpy-developer-course/lectures/13126359)**  
   Introduction to Taquito within SmartPy dapp developer course
 
-If you want to add a link to this page, please do not hesitate to [open an issue](https://github.com/mavryk-network/mavryk-taquito/issues) with the missing resource.
+If you want to add a link to this page, please do not hesitate to [open an issue](https://github.com/mavryk-network/webmavryk/issues) with the missing resource.

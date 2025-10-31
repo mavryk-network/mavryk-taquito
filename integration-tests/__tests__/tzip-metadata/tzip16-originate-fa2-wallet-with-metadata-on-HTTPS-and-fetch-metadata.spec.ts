@@ -5,8 +5,8 @@
  */
 
 import { CONFIGS } from "../../config";
-import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/taquito-tzip16';
-import { MichelsonMap } from "@mavrykdynamics/taquito";
+import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/webmavryk-tzip16';
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
 import { fa2ContractTzip16 } from "../../data/fa2_contract_with_metadata";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
@@ -81,7 +81,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
          expect(metadata.sha256Hash).toBeUndefined();
          expect(metadata.metadata).toEqual({
             "name": "FA2 having metadata",
-            "description": "This is a test for Taquito integration tests of a Fa2 contract having metadata stored on an HTTPS URL",
+            "description": "This is a test for Webmavryk integration tests of a Fa2 contract having metadata stored on an HTTPS URL",
             "source": {
                "tools": [
                   "stablecoin 1.4.0"
@@ -414,7 +414,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
          });
 
          expect(await (await contract.tzip16()).metadataName()).toEqual('FA2 having metadata')
-         expect(await (await contract.tzip16()).metadataDescription()).toEqual('This is a test for Taquito integration tests of a Fa2 contract having metadata stored on an HTTPS URL')
+         expect(await (await contract.tzip16()).metadataDescription()).toEqual('This is a test for Webmavryk integration tests of a Fa2 contract having metadata stored on an HTTPS URL')
          expect(await (await contract.tzip16()).metadataVersion()).toBeUndefined()
          expect(await (await contract.tzip16()).metadataLicense()).toEqual({
             "name": "MIT"

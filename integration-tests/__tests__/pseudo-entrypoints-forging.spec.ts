@@ -5,8 +5,8 @@
  */
 
 import { CONFIGS } from "../config";
-import { DefaultContractType, UnitValue } from "@mavrykdynamics/taquito";
-import { LocalForger, ProtocolsHash } from '@mavrykdynamics/taquito-local-forging'
+import { DefaultContractType, UnitValue } from "@mavrykdynamics/webmavryk";
+import { LocalForger, ProtocolsHash } from '@mavrykdynamics/webmavryk-local-forging'
 
 CONFIGS().forEach(({ rpc, protocol, setup, lib }) => {
   const Mavryk = lib;

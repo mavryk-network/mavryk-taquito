@@ -9,19 +9,19 @@ author: Roxane Letourneau
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The `@mavrykdynamics/taquito-tzip12` package allows retrieving metadata associated with tokens of FA2 contract. You can find more information about the TZIP-12 standard [here](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-12/tzip-12.md).
+The `@mavrykdynamics/webmavryk-tzip12` package allows retrieving metadata associated with tokens of FA2 contract. You can find more information about the TZIP-12 standard [here](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-12/tzip-12.md).
 
 ## How to use the tzip12 package
 
-The package can act as an extension to the well-known Taquito contract abstraction. 
+The package can act as an extension to the well-known Webmavryk contract abstraction. 
 
 1. **We first need to create an instance of `Tzip12Module` and add it as an extension to our `MavrykToolkit`**
 
-The constructor of the `Tzip12Module` takes an optional `MetadataProvider` as a parameter. When none is passed, the default `MetadataProvider` of Taquito is instantiated, and the default handlers (`HttpHandler,` `IpfsHandler,` and `MavrykStorageHandler`) are used.
+The constructor of the `Tzip12Module` takes an optional `MetadataProvider` as a parameter. When none is passed, the default `MetadataProvider` of Webmavryk is instantiated, and the default handlers (`HttpHandler,` `IpfsHandler,` and `MavrykStorageHandler`) are used.
 
 ```js
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
-import { Tzip12Module } from '@mavrykdynamics/taquito-tzip12';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { Tzip12Module } from '@mavrykdynamics/webmavryk-tzip12';
 
 const Mavryk = new MavrykToolkit('rpcUrl');
 Mavryk.addExtension(new Tzip12Module());
@@ -41,7 +41,7 @@ The contract abstraction can also be extended to a `Tzip12ContractAbstraction` a
 Thus, all methods of the `ContractAbstraction`, `Tzip12ContractAbstraction` and `Tzip16ContractAbstraction` classes will be available on the contract abstraction instance.
 
 ```js
-import { compose } from '@mavrykdynamics/taquito';
+import { compose } from '@mavrykdynamics/webmavryk';
 
 const contract = await Mavryk.contract.at('contractAddress', compose(tzip16, tzip12));
 
@@ -89,9 +89,9 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit, compose } from '@mavrykdynamics/taquito';
-// import { Tzip12Module, tzip12 } from "@mavrykdynamics/taquito-tzip12";
-// import { tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit, compose } from '@mavrykdynamics/webmavryk';
+// import { Tzip12Module, tzip12 } from "@mavrykdynamics/webmavryk-tzip12";
+// import { tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip12Module());
@@ -113,9 +113,9 @@ Mavryk.contract.at(contractAddress, compose(tzip12, tzip16))
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit, compose } from '@mavrykdynamics/taquito';
-// import { Tzip12Module, tzip12 } from "@mavrykdynamics/taquito-tzip12";
-// import { tzip16 } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit, compose } from '@mavrykdynamics/webmavryk';
+// import { Tzip12Module, tzip12 } from "@mavrykdynamics/webmavryk-tzip12";
+// import { tzip16 } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip12Module());
@@ -136,7 +136,7 @@ Mavryk.wallet.at(contractAddress, compose(tzip12, tzip16))
   </TabItem>
 </Tabs>
 
-The same result can also be obtained by calling the off-chain view `token_metadata` using the `taquito-tzip16` package:
+The same result can also be obtained by calling the off-chain view `token_metadata` using the `webmavryk-tzip16` package:
 
 <Tabs
 defaultValue="contractAPI"
@@ -147,8 +147,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16, bytesToString } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16, bytesToString } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -176,8 +176,8 @@ Mavryk.contract.at(contractAddress, tzip16)
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip16Module, tzip16, bytesToString } from "@mavrykdynamics/taquito-tzip16";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip16Module, tzip16, bytesToString } from "@mavrykdynamics/webmavryk-tzip16";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip16Module());
@@ -255,8 +255,8 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip12Module, tzip12 } from "@mavrykdynamics/taquito-tzip12";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip12Module, tzip12 } from "@mavrykdynamics/webmavryk-tzip12";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip12Module());
@@ -278,8 +278,8 @@ Mavryk.contract.at(contractAddress, tzip12)
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Tzip12Module, tzip12 } from "@mavrykdynamics/taquito-tzip12";
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Tzip12Module, tzip12 } from "@mavrykdynamics/webmavryk-tzip12";
 // const Mavryk = new MavrykToolkit('rpc_url');
 
 Mavryk.addExtension(new Tzip12Module());

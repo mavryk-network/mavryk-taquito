@@ -5,8 +5,8 @@
  */
 
 import { CONFIGS } from '../../config';
-import { MichelsonMap } from '@mavrykdynamics/taquito';
-import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/taquito-tzip16';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
+import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/webmavryk-tzip16';
 import { contractCode, metadataViewsExample1, metadataViewsExample2 } from '../../data/metadataViews';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {

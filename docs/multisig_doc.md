@@ -12,7 +12,7 @@ The `mavkit-client` provides a simple multisig contract that you can originate a
 
 However, you may want to build a dapp that interacts with the contract, and writing the JavaScript to do so turns out to be tricky.  
 
-After understanding the structure of the contract, you will be able to use Taquito to write code that will send a `transfer` transaction and a `change_keys` transaction to your originated multisig contract.
+After understanding the structure of the contract, you will be able to use Webmavryk to write code that will send a `transfer` transaction and a `change_keys` transaction to your originated multisig contract.
 
 ## What is the multisig contract?
 A multisig contract is a smart contract that allows a group of users to agree and control different actions executed through the contract.  
@@ -57,17 +57,17 @@ const lambda = `{
 
 First, we write the Michelson lambda that will be executed to transfer the mav, where `RECIPIENT_ADDRESS` is the public key hash of the recipient of the mav and `AMOUNT` is the amount of mumav to be sent.
 
-The lambda for this particular use case is already offered by Taquito, so you don't have to write it every time, you can just import it:
+The lambda for this particular use case is already offered by Webmavryk, so you don't have to write it every time, you can just import it:
 ```typescript
-import { MANAGER_LAMBDA } from "@mavrykdynamics/taquito";
+import { MANAGER_LAMBDA } from "@mavrykdynamics/webmavryk";
 
 const lambda = MANAGER_LAMBDA.transferImplicit(RECIPIENT_ADDRESS, AMOUNT);
 ``` 
 
 Next, we will use the lambda to create the required payload for this action:
 ```typescript
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
-import { Parser, packDataBytes } from "@mavrykdynamics/taquito-michel-codec";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
+import { Parser, packDataBytes } from "@mavrykdynamics/webmavryk-michel-codec";
 
 const Mavryk = new MavrykToolkit(RPC_URL);
 const chainId = await Mavryk.rpc.getChainId();
@@ -91,7 +91,7 @@ const dataToPack = p.parseMichelineExpression(michelsonData);
 
 The payload expected by the multisig contract is a nested pair that contains the chain id, the address of the contract, the current counter (from the contract storage) and the option set to `Left` with the lambda as a value.  
 
-The payload is then parsed using the parser from the `@mavrykdynamics/taquito-michel-codec` package.
+The payload is then parsed using the parser from the `@mavrykdynamics/webmavryk-michel-codec` package.
 
 After that, we need to parse the payload type in a similar fashion:
 ```typescript
@@ -124,7 +124,7 @@ const { bytes: payload } = packDataBytes(
 );
 ```
 
-This action uses the `packDataBytes` method that you can find in the `@mavrykdynamics/taquito-michel-codec` package to pack the data we created above locally. This will output the payload that will be signed.
+This action uses the `packDataBytes` method that you can find in the `@mavrykdynamics/webmavryk-michel-codec` package to pack the data we created above locally. This will output the payload that will be signed.
 
 >Note:
 > `packDataBytes` allows local packing, which removes any risk of data corruption that may exist when using the packing feature of a remote RPC node.
@@ -178,8 +178,8 @@ const michelineListOfKeys = `{ ${listOfKeys
 
 Next, we are going to pack the required nested pair in the same way we did earlier while changing some values in the pair:
 ```typescript
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
-import { Parser } from "@mavrykdynamics/taquito-michel-codec";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
+import { Parser } from "@mavrykdynamics/webmavryk-michel-codec";
 
 const Mavryk = new MavrykToolkit(RPC_URL);
 const chainId = await Mavryk.rpc.getChainId();

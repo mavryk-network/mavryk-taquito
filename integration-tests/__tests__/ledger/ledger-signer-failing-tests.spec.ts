@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from '../../config';
-import { LedgerSigner, LedgerTransport, DerivationType } from '@mavrykdynamics/taquito-ledger-signer';
+import { LedgerSigner, LedgerTransport, DerivationType } from '@mavrykdynamics/webmavryk-ledger-signer';
 import TransportNodeHid from "@ledgerhq/hw-transport-node-hid";
 import { ligoSample } from "../../data/ligo-simple-contract";
 

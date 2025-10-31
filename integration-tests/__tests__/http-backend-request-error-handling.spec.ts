@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { HttpBackend } from '@mavrykdynamics/taquito-http-utils';
+import { HttpBackend } from '@mavrykdynamics/webmavryk-http-utils';
 
 describe('HttpBackend request', () => {
   it('should fail with url and error message with a timeout error', async () => {

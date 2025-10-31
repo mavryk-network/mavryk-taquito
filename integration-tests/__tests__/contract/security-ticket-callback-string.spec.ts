@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { Protocols } from '@mavrykdynamics/taquito';
+import { Protocols } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
 
 // TC-T-009 - Create Ticket - callback case 2 - address and option
@@ -236,4 +236,4 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
   });
 });
 
-// This test was transcribed to Taquito from bash scripts at https://github.com/InferenceAG/TezosSecurityBaselineChecking
+// This test was transcribed to Webmavryk from bash scripts at https://github.com/InferenceAG/TezosSecurityBaselineChecking

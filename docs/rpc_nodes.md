@@ -15,7 +15,7 @@ import TabItem from '@theme/TabItem';
     - It should not alter your requests, for example, changing the operation data before forging it.
     - It should not censor your operations; you want to know that your operations will reach the network.
 - **Reliability**: Consider your requirements for uptime, and choose your node option accordingly. If node availability is critical for your user-case,  consider self-hosting a node or contracting someone to operate a node specifically for you.
-- ** End-points support**: Public nodes have different policies on the end-points that they expose. Your use case may require specific end-points to be available to your app. We have made a suite of [integration tests](rpc_nodes_integration_test.md) for the Taquito RPC package. These tests show what RPC end-points are available on a given node. These tests are available here: [integration-tests/rpc-nodes.spec.ts](https://github.com/mavryk-network/mavryk-taquito/blob/master/integration-tests/rpc-nodes.spec.ts).
+- ** End-points support**: Public nodes have different policies on the end-points that they expose. Your use case may require specific end-points to be available to your app. We have made a suite of [integration tests](rpc_nodes_integration_test.md) for the Webmavryk RPC package. These tests show what RPC end-points are available on a given node. These tests are available here: [integration-tests/rpc-nodes.spec.ts](https://github.com/mavryk-network/webmavryk/blob/master/integration-tests/rpc-nodes.spec.ts).
 
 <Tabs
 defaultValue="communityNodes"

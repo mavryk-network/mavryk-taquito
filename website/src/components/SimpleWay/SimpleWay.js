@@ -6,7 +6,7 @@
 
 import React from 'react';
 import styles from './SimpleWay.module.scss';
-import SimpleWaySvg from '../../../static/img/logo-taquito-color.svg';
+import SimpleWaySvg from '../../../static/img/logo-webmavryk-color.svg';
 import StartNowButton from '../StartNowButton/StartNowButton';
 
 const FeatureList = [

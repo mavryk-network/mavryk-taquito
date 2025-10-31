@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { BigMapAbstraction, MavrykToolkit, MichelCodecPacker } from '@mavrykdynamics/taquito';
+import { BigMapAbstraction, MavrykToolkit, MichelCodecPacker } from '@mavrykdynamics/webmavryk';
 import BigNumber from 'bignumber.js';
 
 const rpc = 'https://basenet.rpc.mavryk.network';

@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from '../../config';
-import { Protocols } from '@mavrykdynamics/taquito';
+import { Protocols } from '@mavrykdynamics/webmavryk';
 
 // TC-007 - A 0tez transaction to an implicit account should fail.
 
@@ -57,4 +57,4 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
   });
 });
 
-// This test was transcribed to Taquito from bash scripts at https://github.com/InferenceAG/TezosSecurityBaselineChecking
+// This test was transcribed to Webmavryk from bash scripts at https://github.com/InferenceAG/TezosSecurityBaselineChecking

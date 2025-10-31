@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { Parser } from '@mavrykdynamics/taquito-michel-codec'
+import { Parser } from '@mavrykdynamics/webmavryk-michel-codec'
 
 const example = async () => {
 

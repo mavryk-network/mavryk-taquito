@@ -5,7 +5,7 @@
  */
 
 
-import { MichelsonMap } from '@mavrykdynamics/taquito';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
 import { contractWithNever } from '../../data/contract-with-never-in-param';
 

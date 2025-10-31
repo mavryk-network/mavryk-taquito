@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { Estimate } from '@mavrykdynamics/taquito';
+import { Estimate } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;

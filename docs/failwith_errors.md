@@ -8,9 +8,9 @@ id: failwith_errors
 author: Claude Barde
 ---
 
-# Catching `FAILWITH` errors with Taquito
+# Catching `FAILWITH` errors with Webmavryk
 
-When a contract call fails because of the `FAILWITH` instruction, an error is returned by the node. This error is made available by Taquito as an instance of the `MavrykOperationError` class.
+When a contract call fails because of the `FAILWITH` instruction, an error is returned by the node. This error is made available by Webmavryk as an instance of the `MavrykOperationError` class.
 
 ```ts
 try {

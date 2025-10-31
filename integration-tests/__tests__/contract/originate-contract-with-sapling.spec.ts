@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from '../../config';
-import { SaplingStateAbstraction } from '@mavrykdynamics/taquito';
+import { SaplingStateAbstraction } from '@mavrykdynamics/webmavryk';
 import {
   saplingContractStateAsArg,
   saplingContractPushSaplingState,

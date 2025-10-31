@@ -11,7 +11,7 @@ author: Davis Sawali & Andrew Skubarenko
 
 Rollups are a permissionless scaling implementation for the Mavryk blockchain. The idea is that anyone can originate and operate one or more rollups, increasing the overall throughput of the Mavryk blockchain.
 
-In Taquito, we have implemented some of the operations included in Mumbai protocol update in regards to smart rollups. In this document, we will go through the operations we support. We also won't go too detailed on how rollups work behind the scenes, if you'd like to understand the feature a bit deeper, you can refer to [this document](https://protocol.mavryk.org/active/smart_rollups.html).
+In Webmavryk, we have implemented some of the operations included in Mumbai protocol update in regards to smart rollups. In this document, we will go through the operations we support. We also won't go too detailed on how rollups work behind the scenes, if you'd like to understand the feature a bit deeper, you can refer to [this document](https://protocol.mavryk.org/active/smart_rollups.html).
 
 ## `smart_rollup_originate`
 

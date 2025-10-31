@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { PollingSubscribeProvider } from "@mavrykdynamics/taquito";
+import { PollingSubscribeProvider } from "@mavrykdynamics/webmavryk";
 import BigNumber from "bignumber.js";
 import { CONFIGS } from "../../config";
 

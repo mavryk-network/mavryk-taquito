@@ -5,7 +5,7 @@
  */
 
 import { CONFIGS } from '../../../config';
-import { InvalidAmountError } from '@mavrykdynamics/taquito-core';
+import { InvalidAmountError } from '@mavrykdynamics/webmavryk-core';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;

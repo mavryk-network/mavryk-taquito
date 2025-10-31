@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { PvmKind } from "@mavrykdynamics/taquito-rpc";
+import { PvmKind } from "@mavrykdynamics/webmavryk-rpc";
 import { CONFIGS } from "../../../config";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {

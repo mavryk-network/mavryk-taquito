@@ -7,7 +7,7 @@
 import { CONFIGS } from "../../config";
 import { failwithContractCode } from "../../data/failwith";
 import { managerCode } from "../../data/manager_code";
-import { DefaultContractType, MANAGER_LAMBDA, OriginationOperation } from "@mavrykdynamics/taquito";
+import { DefaultContractType, MANAGER_LAMBDA, OriginationOperation } from "@mavrykdynamics/webmavryk";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;

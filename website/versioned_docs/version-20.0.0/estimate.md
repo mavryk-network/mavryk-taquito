@@ -9,7 +9,7 @@ author: Edmond Lee & Roxane Letourneau
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Taquito's estimate method can be used to estimate fees, gas, and storage associated with an operation.
+Webmavryk's estimate method can be used to estimate fees, gas, and storage associated with an operation.
 
 :::note
 Our estimation of `fee`, `gasLimit` and `storageLimit` is based on the RPC call response to `simulate_operation` plus a small buffer. The context and volume at the time of `simulate_operation` might differ from `preapply/operations` and `injection/operation`, potentially causing errors like `fees_too_low`, `storage_exhausted.operation` and `gas_exhausted.operation`.
@@ -46,7 +46,7 @@ values={[
 <TabItem value="signer">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 const amount = 2;
@@ -71,7 +71,7 @@ Mavryk.estimate
   <TabItem value="wallet">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 const amount = 2;
@@ -112,7 +112,7 @@ We have updated the estimate provider to have a `contractCall()` method.
 The `contractCall()` member method can now be used to estimate contract calls as such:
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 Mavryk.contract
   .at('KT1BJadpDyLCACMH7Tt9xtpx4dQZVKw9cDF7')
@@ -140,7 +140,7 @@ Mavryk.contract
   <TabItem value="wallet">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
       
 Mavryk.wallet
@@ -170,7 +170,7 @@ Mavryk.wallet
 
 ### Estimate a contract origination
 
-In this example, we will use the estimate method of Taquito on a contract origination. The `genericMultisigJSONfile` variable contains a Michelson Smart Contract.
+In this example, we will use the estimate method of Webmavryk on a contract origination. The `genericMultisigJSONfile` variable contains a Michelson Smart Contract.
 
 <Tabs
 defaultValue="signer"
@@ -181,7 +181,7 @@ values={[
 <TabItem value="signer">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 println(`Estimating the contract origination : `);
@@ -211,7 +211,7 @@ Mavryk.estimate
 
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 println(`Estimating the contract origination : `);

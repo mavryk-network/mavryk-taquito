@@ -13,7 +13,7 @@ In Mavryk, a transfer operation transfers tokens between two addresses.
 
 When the `Babylon/proto005` protocol amendment came into effect, it changed how token transfer involving KT1 addresses work. The transfer of tokens _from_ a KT1 account is completed by calling the KT1's smart contract `do` method. The `do` method takes a lambda function, and it is the logic of this function that causes the desired transfer of tokens to happen.
 
-The Taquito [integration tests](https://github.com/mavryk-network/mavryk-taquito/blob/master/integration-tests/contract-manager-scenario.spec.ts) can be useful to see how this works.
+The Webmavryk [integration tests](https://github.com/mavryk-network/webmavryk/blob/master/integration-tests/contract-manager-scenario.spec.ts) can be useful to see how this works.
 
 ## Transfer from an implicit mv1 address to a mv1 address
 
@@ -26,13 +26,13 @@ await Mavryk.contract.transfer({ to: contract.address, amount: 1 });
 In the following example, we transfer 0.5ṁ from a `mv1PYMQXgRiJBMsrEaM9Yre4JyvcLVbUr8pv` address that signs the operation to `mv1UrqbBFBXnEdHnvSrMpt2BQnZzFMA9HQnc`.
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 render(`Fetching a private key...`);
 fetch('https://keygen.ecadinfra.com/basenet/', {
   method: 'POST',
-  headers: { Authorization: 'Bearer taquito-example' },
+  headers: { Authorization: 'Bearer webmavryk-example' },
 })
   .then((response) => response.text())
   .then((privateKey) => {

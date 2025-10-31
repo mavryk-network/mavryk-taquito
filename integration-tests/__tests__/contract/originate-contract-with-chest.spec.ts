@@ -4,10 +4,10 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { DefaultContractType, OriginationOperation } from "@mavrykdynamics/taquito";
+import { DefaultContractType, OriginationOperation } from "@mavrykdynamics/webmavryk";
 import { CONFIGS } from "../../config";
-import { buf2hex } from "@mavrykdynamics/taquito-utils";
-import { Chest } from '@mavrykdynamics/taquito-timelock';
+import { buf2hex } from "@mavrykdynamics/webmavryk-utils";
+import { Chest } from '@mavrykdynamics/webmavryk-timelock';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;

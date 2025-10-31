@@ -8,19 +8,19 @@ id: operation_flow
 author: Michael Kernaghan
 ---
 
-# Taquito Operation Flow
-Taquito makes injecting operations into the Mavryk blockchain very simple. This can be accomplished by utilizing the Contract API, Wallet API, or the Batch API.
+# Webmavryk Operation Flow
+Webmavryk makes injecting operations into the Mavryk blockchain very simple. This can be accomplished by utilizing the Contract API, Wallet API, or the Batch API.
 
 ## Contract API
 
 ### What is the Contract API?
-Taquito Contract API provides a simple way to interact with the Mavryk blockchain. It provides methods and abstractions to prepare, forge, sign, and send operations to the Mavryk blockchain, as well as interact with smart contracts.
+Webmavryk Contract API provides a simple way to interact with the Mavryk blockchain. It provides methods and abstractions to prepare, forge, sign, and send operations to the Mavryk blockchain, as well as interact with smart contracts.
 
 ### Installing the Contract API
-The Contract API is part of the `@mavrykdynamics/taquito` package. To install it, run the following command:
+The Contract API is part of the `@mavrykdynamics/webmavryk` package. To install it, run the following command:
 
 ```
-npm install @mavrykdynamics/taquito
+npm install @mavrykdynamics/webmavryk
 
 ```
 
@@ -30,7 +30,7 @@ The Contract API is exposed through the `contract` property of the `MavrykToolki
 Below is a quick example of how to use the `transaction` operation via the Contract API.
 
 ```js
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const Mavryk = new MavrykToolkit('RPC address here');
 const op = await Mavryk.contract.transfer({ to: 'mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv', amount: 100 });
@@ -38,17 +38,17 @@ await op.confirmation();
 ```
 
 ## Wallet API
-Aside from the Contract API, Taquito provides the ability for our users to interact with the Mavryk blockchain via the Wallet API. The Wallet API is functionally similar to the Contract API, but it delegates several actions to the wallet (i.e. signing operations).
+Aside from the Contract API, Webmavryk provides the ability for our users to interact with the Mavryk blockchain via the Wallet API. The Wallet API is functionally similar to the Contract API, but it delegates several actions to the wallet (i.e. signing operations).
 
 ### Installing the Wallet API
-The Wallet API is part of the `@mavrykdynamics/taquito` package, so the installation method is the exact same as the Contract API in the section above.
+The Wallet API is part of the `@mavrykdynamics/webmavryk` package, so the installation method is the exact same as the Contract API in the section above.
 
-Once you have installed the `@mavrykdynamics/taquito` package into your project, however, you will need to install additional packages to use the Wallet API.
+Once you have installed the `@mavrykdynamics/webmavryk` package into your project, however, you will need to install additional packages to use the Wallet API.
 
 We work closely with the Beacon team to provide a seamless integration with the Beacon wallet. To install the Beacon wallet, run the following command:
 
 ```
-npm install @mavrykdynamics/taquito-beacon-wallet
+npm install @mavrykdynamics/webmavryk-beacon-wallet
 
 ```
 
@@ -98,7 +98,7 @@ await op2.confirmation();
 Doing something like this will result in an error message. This is because each Mavryk account holds a counter that increments every time an operation is included in a block on the network. This feature prevents users from sending two or multiple transactions in a row.
 
 
-Tracking the confirmation of transactions and the update of the transaction counter can be very frustrating and cumbersome, this is why Taquito provides the Batch API. The Batch API allows you to group all your transactions together and emit them at once under the same transaction counter value and the same transaction hash.
+Tracking the confirmation of transactions and the update of the transaction counter can be very frustrating and cumbersome, this is why Webmavryk provides the Batch API. The Batch API allows you to group all your transactions together and emit them at once under the same transaction counter value and the same transaction hash.
 
 
 ### Using the Batch API
@@ -111,7 +111,7 @@ We provide a level of independence and customizability if you choose to do so, w
 
 ### Preparing a Transaction Operation
 ```typescript
-import { MavrykToolkit } from '@mavrykdynamics/taquito'
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk'
 const Mavryk = new MavrykToolkit(RPC_URL);
 
 // The PrepareProvider returns a 'PreparedOperation' type object
@@ -129,7 +129,7 @@ const forgeable = await Mavryk.prepare.toForge(prepared);
 ### Forging the Transaction Operation
 ```typescript
 // Import the LocalForger
-import { LocalForger } from '@mavrykdynamics/taquito-local-forging';
+import { LocalForger } from '@mavrykdynamics/webmavryk-local-forging';
 
 
 const forger = new LocalForger();

@@ -5,9 +5,9 @@
  */
 
 import { CONFIGS } from "../../../config";
-import { DefaultContractType, MavrykToolkit } from "@mavrykdynamics/taquito";
+import { DefaultContractType, MavrykToolkit } from "@mavrykdynamics/webmavryk";
 import { ticketsSendTz, ticketsBagTz, ticketsBlackholeTz } from "../../../data/code_with_ticket_transfer";
-import { RpcClient, TicketTokenParams } from '@mavrykdynamics/taquito-rpc';
+import { RpcClient, TicketTokenParams } from '@mavrykdynamics/webmavryk-rpc';
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
   const Mavryk1 = lib;

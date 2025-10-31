@@ -11,7 +11,7 @@ assignees: ''
 
 ---
 
-**As Taquito user, I want to <...>, so that <I can see or avoid this outcome>**
+**As Webmavryk user, I want to <...>, so that <I can see or avoid this outcome>**
 
 **Use cases:**
 

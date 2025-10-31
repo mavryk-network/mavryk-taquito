@@ -6,13 +6,13 @@
 
 import { CONFIGS } from "../../config";
 import { tokenCode, tokenInit } from "../../data/tokens";
-import { MichelsonMap, MichelCodecPacker } from "@mavrykdynamics/taquito";
+import { MichelsonMap, MichelCodecPacker } from "@mavrykdynamics/webmavryk";
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract }) => {
   const Mavryk = lib;
   describe(`Test contract origination and accessing big map abstraction by index through contract api using: ${rpc}`, () => {
 
-    // In this scenario the code of the contract doesn't have annotation in its storage, so Taquito references element by indexes.
+    // In this scenario the code of the contract doesn't have annotation in its storage, so Webmavryk references element by indexes.
 
     beforeEach(async () => {
       await setup()

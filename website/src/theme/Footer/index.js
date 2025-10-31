@@ -79,7 +79,7 @@ function Footer() {
       renderer: 'svg',
       loop: false,
       autoplay: false,
-      animationData: require('../../../static/gif/Taquito_Loop_01.json'),
+      animationData: require('../../../static/gif/Webmavryk_Loop_01.json'),
       name: 'footerLogo',
     });
 

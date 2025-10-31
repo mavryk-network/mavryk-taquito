@@ -10,7 +10,7 @@ author: Simon Boissonneault-Robert
 :::caution Warning
 **Storing private keys in memory is suitable for development workflows but risky for
 production use-cases! Use the InMemorySigner appropriately given your risk profile**
-**More information on why can be found [here](https://github.com/mavryk-network/mavryk-taquito/issues/1764)**
+**More information on why can be found [here](https://github.com/mavryk-network/webmavryk/issues/1764)**
 :::
 
 Inmemory signer is a local signer implementation that allows you to directly use a private key in your browser or your nodejs app.
@@ -25,11 +25,11 @@ If you require the server-side signing of operations on the mainnet, we recommen
 
 ### Loading an unencrypted private key
 
-If you configure Taquito this way, you will now be able to use every function that needs signing support.
+If you configure Webmavryk this way, you will now be able to use every function that needs signing support.
 
 ```js
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
 
@@ -43,8 +43,8 @@ The operation will be signed automatically using the signer (no prompt)
 The `fromSecretKey` method takes a secret that is base58 encoded as a parameter. Here are three examples with unencrypted private keys:
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito'
-// import { InMemorySigner } from '@mavrykdynamics/taquito-signer'
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk'
+// import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer'
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 InMemorySigner.fromSecretKey('edsk2rKA8YEExg9Zo2qNPiQnnYheF1DhqjLVmfKdxiFfu5GyGRZRnb')
@@ -60,8 +60,8 @@ InMemorySigner.fromSecretKey('edsk2rKA8YEExg9Zo2qNPiQnnYheF1DhqjLVmfKdxiFfu5GyGR
 ```
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito'
-// import { InMemorySigner } from '@mavrykdynamics/taquito-signer'
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk'
+// import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer'
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 InMemorySigner.fromSecretKey('spsk2Fiz7sGP5fNMJrokp6ynTa4bcFbsRhw58FHXbNf5ProDNFJ5Xq')
@@ -76,12 +76,12 @@ InMemorySigner.fromSecretKey('spsk2Fiz7sGP5fNMJrokp6ynTa4bcFbsRhw58FHXbNf5ProDNF
   .catch((error) => println(`Error: ${error} ${JSON.stringify(error, null, 2)}`));
 ```
 
-When required, Taquito offers the `b58cencode` function allowing to encode the secret in base58. The parameters of the function are the secret, that can be a `hex string` or an `Uint8Array`, and the desired prefix. Here is an example with a `hex string`:
+When required, Webmavryk offers the `b58cencode` function allowing to encode the secret in base58. The parameters of the function are the secret, that can be a `hex string` or an `Uint8Array`, and the desired prefix. Here is an example with a `hex string`:
 
 ```js live noInline
-// import { b58cencode, prefix, Prefix } from '@mavrykdynamics/taquito-utils';
-// import { MavrykToolkit } from '@mavrykdynamics/taquito'
-// import { InMemorySigner } from '@mavrykdynamics/taquito-signer'
+// import { b58cencode, prefix, Prefix } from '@mavrykdynamics/webmavryk-utils';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk'
+// import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer'
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 const b58encodedSecret = b58cencode(
@@ -109,8 +109,8 @@ InMemorySigner.fromSecretKey(b58encodedSecret)
 If your private key is encrypted, you can specify a passphrase to decrypt it. Doing so will automatically decrypt the key and allow you to use the signer to sign transactions.
 
 ```js
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
 Mavryk.setProvider({
@@ -121,8 +121,8 @@ Mavryk.setProvider({
 Here are three examples with encrypted private keys where the passphrase used is `test`:
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito'
-// import { InMemorySigner } from '@mavrykdynamics/taquito-signer'
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk'
+// import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer'
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 InMemorySigner.fromSecretKey(
@@ -141,8 +141,8 @@ InMemorySigner.fromSecretKey(
 ```
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito'
-// import { InMemorySigner } from '@mavrykdynamics/taquito-signer'
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk'
+// import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer'
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 InMemorySigner.fromSecretKey(
@@ -161,8 +161,8 @@ InMemorySigner.fromSecretKey(
 ```
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito'
-// import { InMemorySigner } from '@mavrykdynamics/taquito-signer'
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk'
+// import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer'
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 InMemorySigner.fromSecretKey(
@@ -190,8 +190,8 @@ derivation path MUST start with "44'/1729'/"
 With ed25519 default derivation path (Reminder Must be hardened with either h or ')
 
 ```js live noInline
-  // import { MavrykToolkit } from '@mavrykdynamics/taquito
-  // import { InMemorySigner } from '@mavrykdynamics/taquito-signer'
+  // import { MavrykToolkit } from '@mavrykdynamics/webmavryk
+  // import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer'
   // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
   // ed25519 must have all hardened paths
@@ -214,8 +214,8 @@ With ed25519 default derivation path (Reminder Must be hardened with either h or
 With a non-default derivation path non-hardened with a mv2 address
 
 ```js live noInline
-  // import { MavrykToolkit } from '@mavrykdynamics/taquito
-  // import { InMemorySigner } from '@mavrykdynamics/taquito-signer'
+  // import { MavrykToolkit } from '@mavrykdynamics/webmavryk
+  // import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer'
   // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
   const params = {
@@ -247,8 +247,8 @@ If you require to sign operations with many different keys, then implementing a 
 The `signerFactory` function example creates a new Mavryk instance. Use the Mavryk instance for signing, and discard it when complete.
 
 ```js
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const signerFactory = async (rpcUrl: string, pk: string) => {
   const Mavryk = new MavrykToolkit(rpcUrl);

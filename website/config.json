@@ -1,15 +1,15 @@
 {
-  "index_name": "taquito",
+  "index_name": "webmavryk",
   "start_urls": [
-    "https://taquito.mavryk.org/docs"
+    "https://webmavryk.mavryk.org/docs"
   ],
   "sitemap_urls": [
-    "https://taquito.mavryk.org/sitemap.xml"
+    "https://webmavryk.mavryk.org/sitemap.xml"
   ],
   "sitemap_alternate_links": true,
   "stop_urls": [
-    "https://taquito.mavryk.org/docs/next",
-    "https://taquito.mavryk.org/docs/([0-9][0-9].([0-9]{1}[0-9]?).([0-9]{1}[0-9]?))"
+    "https://webmavryk.mavryk.org/docs/next",
+    "https://webmavryk.mavryk.org/docs/([0-9][0-9].([0-9]{1}[0-9]?).([0-9]{1}[0-9]?))"
   ],
   "selectors": {
     "lvl0": {

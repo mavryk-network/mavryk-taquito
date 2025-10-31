@@ -5,8 +5,8 @@
  */
 
 import { CONFIGS } from "../../../config";
-import { Protocols } from '@mavrykdynamics/taquito';
-import { ProtoGreaterOrEqual } from '@mavrykdynamics/taquito-michel-codec';
+import { Protocols } from '@mavrykdynamics/webmavryk';
+import { ProtoGreaterOrEqual } from '@mavrykdynamics/webmavryk-michel-codec';
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBaker, protocol }) => {
   const Mavryk = lib;

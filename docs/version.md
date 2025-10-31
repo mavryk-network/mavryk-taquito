@@ -33,7 +33,7 @@ await wallet.client.subscribeToEvent(BeaconEvent.ACTIVE_ACCOUNT_SET, (data) => {
 await wallet.requestPermissions();
 ```
 ### Michelson-encoder
-We fixed a bug in `@mavrykdynamics/taquito-Michelson-encoder` when there are nested `pair` and `or` without having `annots` consistently; the indexing key will have unexpected behaviour as below. This is an API behaviour-breaking change; if your dApp depends on the old behaviour or changing is too much effort, you can configure your `MavrykToolkit` with `Mavryk.setFieldNumberingStrategy('Legacy')` to keep the previous behaviour. But please note that this option might be removed in a future release.
+We fixed a bug in `@mavrykdynamics/webmavryk-Michelson-encoder` when there are nested `pair` and `or` without having `annots` consistently; the indexing key will have unexpected behaviour as below. This is an API behaviour-breaking change; if your dApp depends on the old behaviour or changing is too much effort, you can configure your `MavrykToolkit` with `Mavryk.setFieldNumberingStrategy('Legacy')` to keep the previous behaviour. But please note that this option might be removed in a future release.
 
 Previous behaviour - inner object's field numbers depend on the object's location in its parent, and start with '2'
 ```
@@ -59,36 +59,36 @@ New behaviour - inner object's field number will start with '0'
 ```
 
 ### New Features
-- `@mavrykdynamics/taquito` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Contract API. This includes support for `prepareProvider`, `estimationProvider`, and `rpcContractProvider` #2886
-- `@mavrykdynamics/taquito` - Added staking related pseudo operations (stake, unstake, finalize_unstake) to the Wallet API #2921
-- `@mavrykdynamics/taquito-rpc` - Added various RPC endpoints related to Adaptive Issuance (Staking) #2676 #2678
-- `@mavrykdynamics/taquito-rpc` - Updated return types for several RPC endpoints related to the Boreas protocol update #2887
-- `@mavrykdynamics/taquito-rpc` - Removed `getEndorsingRights` RPC endpoint along with its related type definition and tests #2884
-- `@mavrykdynamics/taquito-rpc` - Updated RPC types for `AttestationWithDal` and `EndorsementWithDal` #2880
-- `@mavrykdynamics/taquito-rpc` - Updated RPC response types to support DAL types #2882
-- `@mavrykdynamics/taquito-rpc` - Updated RPC response type for the new manager op `dal_publish_commitment` #2881 
-- `@mavrykdynamics/taquito-rpc` - Added a new RPC endpoint called `getAllDelegates` #2976
-- `@mavrykdynamics/taquito-local-forging` - Added local forging support for `AttestationWithDal` operation #2880
-- `@mavrykdynamics/taquito-local-forging` - Added local forging support for the new manager operation `dal_publish_commitment` #2881 
-- `@mavrykdynamics/taquito-michel-codec` - Updated Michelson type definitions and validators to include the new Boreas protocol ticket literals [PR#2940](https://github.com/ecadlabs/taquito/pull/2940)
+- `@mavrykdynamics/webmavryk` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Contract API. This includes support for `prepareProvider`, `estimationProvider`, and `rpcContractProvider` #2886
+- `@mavrykdynamics/webmavryk` - Added staking related pseudo operations (stake, unstake, finalize_unstake) to the Wallet API #2921
+- `@mavrykdynamics/webmavryk-rpc` - Added various RPC endpoints related to Adaptive Issuance (Staking) #2676 #2678
+- `@mavrykdynamics/webmavryk-rpc` - Updated return types for several RPC endpoints related to the Boreas protocol update #2887
+- `@mavrykdynamics/webmavryk-rpc` - Removed `getEndorsingRights` RPC endpoint along with its related type definition and tests #2884
+- `@mavrykdynamics/webmavryk-rpc` - Updated RPC types for `AttestationWithDal` and `EndorsementWithDal` #2880
+- `@mavrykdynamics/webmavryk-rpc` - Updated RPC response types to support DAL types #2882
+- `@mavrykdynamics/webmavryk-rpc` - Updated RPC response type for the new manager op `dal_publish_commitment` #2881 
+- `@mavrykdynamics/webmavryk-rpc` - Added a new RPC endpoint called `getAllDelegates` #2976
+- `@mavrykdynamics/webmavryk-local-forging` - Added local forging support for `AttestationWithDal` operation #2880
+- `@mavrykdynamics/webmavryk-local-forging` - Added local forging support for the new manager operation `dal_publish_commitment` #2881 
+- `@mavrykdynamics/webmavryk-michel-codec` - Updated Michelson type definitions and validators to include the new Boreas protocol ticket literals [PR#2940](https://github.com/mavryk-network/webmavryk/pull/2940)
 
 ### Internals
 - Updated protocol constants integration test for Boreas protocol #2869
 - Configured keygen and integration test configs for Boreas protocol #2888
 - Added forger integration test for protocol migrations #2850
-- Updated `@mavrykdynamics/taquito-beacon-wallet` to use event subscription instead of `getActiveAccount()` #2958
-- Updated some website dependencies [PR#2961](https://github.com/ecadlabs/taquito/pull/2961)
-- Updated Beacon wallet dependency to the latest version `v4.2.3` (includes Boreas protocol definitions) [PR#2956](https://github.com/ecadlabs/taquito/pull/2956)
+- Updated `@mavrykdynamics/webmavryk-beacon-wallet` to use event subscription instead of `getActiveAccount()` #2958
+- Updated some website dependencies [PR#2961](https://github.com/mavryk-network/webmavryk/pull/2961)
+- Updated Beacon wallet dependency to the latest version `v4.2.3` (includes Boreas protocol definitions) [PR#2956](https://github.com/mavryk-network/webmavryk/pull/2956)
 - Fixed nested `pair` and `or` indexing bug #2927
 - Added a test-dapp case to transfer ghostnet mav to etherlink address #2944
-- Updated the Boreas protocol hash to reflect the latest Octez fix [PR](https://github.com/ecadlabs/taquito/pull/2974)
+- Updated the Boreas protocol hash to reflect the latest Octez fix [PR](https://github.com/mavryk-network/webmavryk/pull/2974)
 
 ### Documentation
-- Updated documentation for new Adaptive Issuance related features [PR#2928](https://github.com/ecadlabs/taquito/pull/2928)
+- Updated documentation for new Adaptive Issuance related features [PR#2928](https://github.com/mavryk-network/webmavryk/pull/2928)
 - Added Mavryk Dynamics public testnet nodes to rpc_nodes on website #2933
 
 
-### `@mavrykdynamics/taquito` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Contract API
+### `@mavrykdynamics/webmavryk` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Contract API
 
 ```javascript
 const op = await Mavryk.contract.stake({
@@ -97,7 +97,7 @@ const op = await Mavryk.contract.stake({
 await op.confirmation();
 ```
 
-### `@mavrykdynamics/taquito` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Wallet API
+### `@mavrykdynamics/webmavryk` - Added staking pseudo operations (stake, unstake, finalize_unstake) to the Wallet API
 
 ```javascript
 const op = await Mavryk.wallet.stake({
@@ -114,26 +114,26 @@ await op.confirmation();
 ## Summary
 
 ### New Features
-- `@mavrykdynamics/taquito-timelock`- A new package for Timelocks have been introduced #2843. Users will now be able to create Chests, unlock Chests, and utilize Chests. For more information, please refer to this [document](https://taquito.io/docs/next/timelock)
-- `@mavrykdynamics/taquito-beacon-wallet` - the `beacon-wallet` package is now bundled in a `.zip` file for [PR#2860](https://github.com/ecadlabs/taquito/pull/2860)
+- `@mavrykdynamics/webmavryk-timelock`- A new package for Timelocks have been introduced #2843. Users will now be able to create Chests, unlock Chests, and utilize Chests. For more information, please refer to this [document](https://taquito.io/docs/next/timelock)
+- `@mavrykdynamics/webmavryk-beacon-wallet` - the `beacon-wallet` package is now bundled in a `.zip` file for [PR#2860](https://github.com/mavryk-network/webmavryk/pull/2860)
 
 ### Documentation
 - UX improvements to search funtionality on the Taquito website #2858
-- Simplify tutorial for building dApps [PR#2852](https://github.com/ecadlabs/taquito/pull/2852)
-- Updated several documentation blobs on the Taquito website [PR#2860](https://github.com/ecadlabs/taquito/pull/2860)
-- Fixed several live code examples in the Taquito website [PR#2877](https://github.com/ecadlabs/taquito/pull/2877)
-- Changed Taquito documentation website domain from `tezostaquito.io` to `taquito.io` [PR#2876](https://github.com/ecadlabs/taquito/pull/2876)
+- Simplify tutorial for building dApps [PR#2852](https://github.com/mavryk-network/webmavryk/pull/2852)
+- Updated several documentation blobs on the Taquito website [PR#2860](https://github.com/mavryk-network/webmavryk/pull/2860)
+- Fixed several live code examples in the Taquito website [PR#2877](https://github.com/mavryk-network/webmavryk/pull/2877)
+- Changed Taquito documentation website domain from `tezostaquito.io` to `taquito.io` [PR#2876](https://github.com/mavryk-network/webmavryk/pull/2876)
 
 ### Internals
 - Re-added Flextesa test scripts run `drain_delegate` and `ballot` operations' integration test against a Nairobi sandbox #2851
-- Updated Airgap's Beacon package to version 4.2.3. For more information on the release, click [here](https://github.com/airgap-it/beacon-sdk/releases/tag/v4.2.1) [PR#2874](https://github.com/ecadlabs/taquito/pull/2874)
-- Changed website build command for CloudFlare [PR#2804](https://github.com/ecadlabs/taquito/pull/2804)
+- Updated Airgap's Beacon package to version 4.2.3. For more information on the release, click [here](https://github.com/airgap-it/beacon-sdk/releases/tag/v4.2.1) [PR#2874](https://github.com/mavryk-network/webmavryk/pull/2874)
+- Changed website build command for CloudFlare [PR#2804](https://github.com/mavryk-network/webmavryk/pull/2804)
 
 # Taquito v19.1.0
 
 **Potential Breaking Changes**: 
-- `@mavrykdynamics/taquito-rpc` - replaced `OperationBalanceUpdatesItem` in favour of `OperationMetadataBalanceUpdates` #2817 #2827
-- `@mavrykdynamics/taquito` - Several optimizations made to fees and estimation in Taquito #2532
+- `@mavrykdynamics/webmavryk-rpc` - replaced `OperationBalanceUpdatesItem` in favour of `OperationMetadataBalanceUpdates` #2817 #2827
+- `@mavrykdynamics/webmavryk` - Several optimizations made to fees and estimation in Taquito #2532
     - removed `DEFAULT_GAS_LIMIT`, `DEFAULT_STORAGE_LIMIT`, `DEFAULT_FEE` in favour of `getRevealFee`, more details 
     - Added a small buffer to `gasLimit` (varying depending on operations)
     - Reduced `suggestedFeeMumav` buffer from 100 to 20 per op
@@ -142,51 +142,51 @@ await op.confirmation();
 ## Summary
 
 ### New Features
-- `@mavrykdynamics/taquito` - Added smart rollup execute outbox message operation #2321 (please note that this feature is not fully tested due to some parts requiring the use of `mavkit-client`)
-`@mavrykdynamics/taquito-beacon-wallet` - added beacon-wallet bundle script to output a `.zip` bundle for browser only environments #2744 
+- `@mavrykdynamics/webmavryk` - Added smart rollup execute outbox message operation #2321 (please note that this feature is not fully tested due to some parts requiring the use of `mavkit-client`)
+`@mavrykdynamics/webmavryk-beacon-wallet` - added beacon-wallet bundle script to output a `.zip` bundle for browser only environments #2744 
 
 ### Improvement
-- `@mavrykdynamics/taquito-michelson-encoder` - replaced references of `[['unit']]` to be `UnitValue` instead [PR#2813](https://github.com/ecadlabs/taquito/pull/2813)
-- `@mavrykdynamics/taquito` - added 20 storageLimit buffer to prevent `storage_exhausted` error #2854 
-- `@mavrykdynamics/taquito` - removed the storageLimit cap mechanism #2855 
+- `@mavrykdynamics/webmavryk-michelson-encoder` - replaced references of `[['unit']]` to be `UnitValue` instead [PR#2813](https://github.com/mavryk-network/webmavryk/pull/2813)
+- `@mavrykdynamics/webmavryk` - added 20 storageLimit buffer to prevent `storage_exhausted` error #2854 
+- `@mavrykdynamics/webmavryk` - removed the storageLimit cap mechanism #2855 
 
 ### Documentation
 - Added michel-codec to Typedoc documentation #2806
-- Updated `docs` and `examples` to use `methodsObject` instead of `methods` wherever needed [PR#2813](https://github.com/ecadlabs/taquito/pull/2813)
-- Removed `giganode` references from Taquito documentation [PR#2813](https://github.com/ecadlabs/taquito/pull/2813)
+- Updated `docs` and `examples` to use `methodsObject` instead of `methods` wherever needed [PR#2813](https://github.com/mavryk-network/webmavryk/pull/2813)
+- Removed `giganode` references from Taquito documentation [PR#2813](https://github.com/mavryk-network/webmavryk/pull/2813)
 
 ### Deprecation
-- `@mavrykdynamics/taquito-utils` - Deprecated several util methods and updated their names into something more representative. Slight improvements to existing util methods #2372 #2274 
-- `@mavrykdynamics/taquito` - Deprecated `methods` in favour of `methodsObject`. `methodsObject`'s syntax is more consistent with storage params, supports all Michelson data types, and will be maintained going forward #2813
+- `@mavrykdynamics/webmavryk-utils` - Deprecated several util methods and updated their names into something more representative. Slight improvements to existing util methods #2372 #2274 
+- `@mavrykdynamics/webmavryk` - Deprecated `methods` in favour of `methodsObject`. `methodsObject`'s syntax is more consistent with storage params, supports all Michelson data types, and will be maintained going forward #2813
 
 ### Internals
-- Updated various dependencies in Taquito website and the Test DApp (Sass, Firebase, Algoliasearch, Dotenv) [PR#2834](https://github.com/ecadlabs/taquito/pull/2834)
+- Updated various dependencies in Taquito website and the Test DApp (Sass, Firebase, Algoliasearch, Dotenv) [PR#2834](https://github.com/mavryk-network/webmavryk/pull/2834)
 - Updated integration tests to use network types instead of hard coding RPC URL #2164
 - Organized integration tests into more meaningful subfolders and renamed some files for brevity #2203
-- Resolved dependabot updates [PR#2849](https://github.com/ecadlabs/taquito/pull/2849)
-- Added confirmation blocks on older integration tests [PR#2847](https://github.com/ecadlabs/taquito/pull/2847)
-- Added small buffer to operation reveal fee fixed value [PR#2848](https://github.com/ecadlabs/taquito/pull/2848)
+- Resolved dependabot updates [PR#2849](https://github.com/mavryk-network/webmavryk/pull/2849)
+- Added confirmation blocks on older integration tests [PR#2847](https://github.com/mavryk-network/webmavryk/pull/2847)
+- Added small buffer to operation reveal fee fixed value [PR#2848](https://github.com/mavryk-network/webmavryk/pull/2848)
 
 # Taquito v19.0.2
 
 ### Bug Fixes
-- `@mavrykdynamics/taquito-local-forging` - Added the correct constants for staking/unstaking in the forger [PR#2824](https://github.com/ecadlabs/taquito/pull/2824)
+- `@mavrykdynamics/webmavryk-local-forging` - Added the correct constants for staking/unstaking in the forger [PR#2824](https://github.com/mavryk-network/webmavryk/pull/2824)
 
 
 # Taquito v19.0.1
 
 ### Dependency updates
-- Updated Beacon version to v4.1.2 [PR#2811](https://github.com/ecadlabs/taquito/pull/2811)
+- Updated Beacon version to v4.1.2 [PR#2811](https://github.com/mavryk-network/webmavryk/pull/2811)
 
 ### Documentation
-- Removed Sapling live code examples from the website due to large bundle sizes, static code examples will still exist [PR#2810](https://github.com/ecadlabs/taquito/pull/2810)
+- Removed Sapling live code examples from the website due to large bundle sizes, static code examples will still exist [PR#2810](https://github.com/mavryk-network/webmavryk/pull/2810)
 
 # Taquito v19.0.0
 
 ## Summary
 
 ### New Features
-- `@mavrykdynamics/taquito-local-forging` - Added new property `whitelist` in smart rollup origination operation #2776
+- `@mavrykdynamics/webmavryk-local-forging` - Added new property `whitelist` in smart rollup origination operation #2776
 
 
 ### Documentation
@@ -204,22 +204,22 @@ We are not expecting any breaking changes, but if there are any issues that you 
 ## Summary
 
 ### New Features
-- `@mavrykdynamics/taquito` - Expose and publicly `smartContractAbstractionSemantic` #2534
+- `@mavrykdynamics/webmavryk` - Expose and publicly `smartContractAbstractionSemantic` #2534
 
 ### Improvement
-- `@mavrykdynamics/taquito-http-utils` - Removed `Axios` as a dependency of Taquito in favour of `fetch`/`node-fetch` #2461
+- `@mavrykdynamics/webmavryk-http-utils` - Removed `Axios` as a dependency of Taquito in favour of `fetch`/`node-fetch` #2461
 ### Documentation
-- Updated RPC nodes on the website [PR#2732](https://github.com/ecadlabs/taquito/pull/2732
+- Updated RPC nodes on the website [PR#2732](https://github.com/mavryk-network/webmavryk/pull/2732
 - Updated Michelson encoder documentation to reference `generateSchema` instead of the outdated `extractSchema` #2630
 - Added a Taquito Chatbot assistant for the Taquito website to help answer user questions #2684 
 
 ### Internals
-- Removed archive node, and references to it in Taquito [PR#2743](https://github.com/ecadlabs/taquito/pull/2743)
-- Updated Sass, Lerna, and Firebase versions [PR#2749](https://github.com/ecadlabs/taquito/pull/2749)
+- Removed archive node, and references to it in Taquito [PR#2743](https://github.com/mavryk-network/webmavryk/pull/2743)
+- Updated Sass, Lerna, and Firebase versions [PR#2749](https://github.com/mavryk-network/webmavryk/pull/2749)
 - Updated integration tests to increase speed and reliability #2741
 
 
-## `@mavrykdynamics/taquito-http-utils` - Removed `Axios` in favour of `fetch`
+## `@mavrykdynamics/webmavryk-http-utils` - Removed `Axios` in favour of `fetch`
 The `taquito/http-utils` is responsible for handling all HTTP incoming and outgoing HTTP requests in Taquito. It utilized `Axios` as a main dependency to handle requests coming in and out of Taquito.
 
 Now that browsers and Node have supported `fetch` natively, it makes more sense for us to move towards it.
@@ -244,8 +244,8 @@ We have updated various dependencies to the latest version in this release. Plea
 - Updated the Taquito test dApp to output events #2707
 
 ### Internals
- - Updated various dependencies [PR#2693](https://github.com/ecadlabs/taquito/pull/2693) [PR#2720](https://github.com/ecadlabs/taquito/pull/2720)
- - Added detectOpenHandles argument when running Flexmasa integration tests as temporary workaround to Jest throwing circular JSON errors [PR#2721](https://github.com/ecadlabs/taquito/pull/2721)
+ - Updated various dependencies [PR#2693](https://github.com/mavryk-network/webmavryk/pull/2693) [PR#2720](https://github.com/mavryk-network/webmavryk/pull/2720)
+ - Added detectOpenHandles argument when running Flexmasa integration tests as temporary workaround to Jest throwing circular JSON errors [PR#2721](https://github.com/mavryk-network/webmavryk/pull/2721)
 
 
 # Taquito v17.3.2
@@ -258,16 +258,16 @@ We have updated various dependencies to the latest version in this release. Plea
 - Added detail for `getBalance()` method documentation that it returns balances in mumav #2495
 
 ## Internals
-- Minor typo fix on variable name in `RpcEstimateProvider` [PR#2669](https://github.com/ecadlabs/taquito/pull/2669)
-- Added `@mavrykdynamics/taquito-core` as an explicit dependency on other packages [PR#2673](https://github.com/ecadlabs/taquito/pull/2673)
+- Minor typo fix on variable name in `RpcEstimateProvider` [PR#2669](https://github.com/mavryk-network/webmavryk/pull/2669)
+- Added `@mavrykdynamics/webmavryk-core` as an explicit dependency on other packages [PR#2673](https://github.com/mavryk-network/webmavryk/pull/2673)
 
 # Taquito v17.3.1
 
 ## Summary
-- This is a patch release to upgrade `@airgap/beacon-sdk` and `@airgap/beacon-dapp` packages to `v4.0.10` [PR#2649](https://github.com/ecadlabs/taquito/pull/2649)
-- Updating license to `Apache-2.0` in `package.json` files  [PR#2636](https://github.com/ecadlabs/taquito/pull/2636)
-- Updated the ledger dependencies [PR#2645](https://github.com/ecadlabs/taquito/pull/2645)
-- Applied dependency upgrades in website suggested by dependabot [PR#2645](https://github.com/ecadlabs/taquito/pull/2645)
+- This is a patch release to upgrade `@airgap/beacon-sdk` and `@airgap/beacon-dapp` packages to `v4.0.10` [PR#2649](https://github.com/mavryk-network/webmavryk/pull/2649)
+- Updating license to `Apache-2.0` in `package.json` files  [PR#2636](https://github.com/mavryk-network/webmavryk/pull/2636)
+- Updated the ledger dependencies [PR#2645](https://github.com/mavryk-network/webmavryk/pull/2645)
+- Applied dependency upgrades in website suggested by dependabot [PR#2645](https://github.com/mavryk-network/webmavryk/pull/2645)
 
 # Taquito v17.3.0
 
@@ -284,12 +284,12 @@ Taquito has moved from `MIT` to `Apache 2.0`.
 
 ### New Features
 
-- `@mavrykdynamics/taquito-michelson-encoder` - The `OrToken`'s `EncodeObject` method now only accepts an object with a single field #2544
+- `@mavrykdynamics/webmavryk-michelson-encoder` - The `OrToken`'s `EncodeObject` method now only accepts an object with a single field #2544
 
 ### Bug Fixes
 
-- `@mavrykdynamics/taquito-michelson-encoder` - A nested `PairToken` with a mix of fields with `annots` and fields without `annots` could generate the wrong javascript object with `Execute` [#2540](https://github.com/ecadlabs/taquito/issues/2540)
-- `@mavrykdynamics/taquito-michelson-encoder` - the `generateSchema` method in a nested `OrToken` now generates a schema that is consistent with `Execute` and `EncodeObject` [#2543](https://github.com/ecadlabs/taquito/issues/2543)
+- `@mavrykdynamics/webmavryk-michelson-encoder` - A nested `PairToken` with a mix of fields with `annots` and fields without `annots` could generate the wrong javascript object with `Execute` [#2540](https://github.com/mavryk-network/webmavryk/issues/2540)
+- `@mavrykdynamics/webmavryk-michelson-encoder` - the `generateSchema` method in a nested `OrToken` now generates a schema that is consistent with `Execute` and `EncodeObject` [#2543](https://github.com/mavryk-network/webmavryk/issues/2543)
 
 ```
 const schema = {
@@ -348,10 +348,10 @@ But now it returns:
 }
 ```
 ### Internals
- * `integration-tests` config improvement [#2163](https://github.com/ecadlabs/taquito/issues/2163)
- * update RPC urls to align with the updated infrastructure [PR#2576](https://github.com/ecadlabs/taquito/pull/2576) [#2633](https://github.com/ecadlabs/taquito/pull/2633)
+ * `integration-tests` config improvement [#2163](https://github.com/mavryk-network/webmavryk/issues/2163)
+ * update RPC urls to align with the updated infrastructure [PR#2576](https://github.com/mavryk-network/webmavryk/pull/2576) [#2633](https://github.com/mavryk-network/webmavryk/pull/2633)
 
-## `@mavrykdynamics/taquito-michelson-encoder` - Validate that an `OrToken`'s `EncodeObject` method only accepts an object with a single field
+## `@mavrykdynamics/webmavryk-michelson-encoder` - Validate that an `OrToken`'s `EncodeObject` method only accepts an object with a single field
 
 Previously, an `OrToken`'s `EncodeObject` method would accept an object with multiple fields. It now only accepts an object with a single field.
 
@@ -365,7 +365,7 @@ Previously, an `OrToken`'s `EncodeObject` method would accept an object with mul
 
 Previously, this would return work and the result was the same as `token.EncodeObject({ '0': 10, '1': '10' }))`. Now, this throws an error.
 
-## `@mavrykdynamics/taquito-michelson-encoder` - For an `OrToken` with nested `OrToken`s, `generateSchema` behaved inconsistently with `Execute` and `EncodeObject`
+## `@mavrykdynamics/webmavryk-michelson-encoder` - For an `OrToken` with nested `OrToken`s, `generateSchema` behaved inconsistently with `Execute` and `EncodeObject`
 
 Previously, `generateSchema` would generate a schema object that was misleading and did not match what `Execute` created or `EncodeObject` accepted. This is now fixed and the behavior is consistent across all methods.
 
@@ -432,9 +432,9 @@ Now it is:
 
 **Potential Breaking Changes** :
 Further improved error classes
- - In `@mavrykdynamics/taquito-sapling` `InvalidMerkleRootError` is renamed to `InvalidMerkleTreeError`
- - In `@mavrykdynamics/taquito-sapling` `InvalidParameter` is renamed to `SaplingTransactionViewerError`
- - In `@mavrykdynamics/taquito-michel-codec` `InvalidContractError` is renamed to `InvalidMichelsonError`
+ - In `@mavrykdynamics/webmavryk-sapling` `InvalidMerkleRootError` is renamed to `InvalidMerkleTreeError`
+ - In `@mavrykdynamics/webmavryk-sapling` `InvalidParameter` is renamed to `SaplingTransactionViewerError`
+ - In `@mavrykdynamics/webmavryk-michel-codec` `InvalidContractError` is renamed to `InvalidMichelsonError`
 
 ## Summary
 
@@ -457,9 +457,9 @@ Further improved error classes
 ### Internals
  - Updated beacon dependency to v4.0.6 #2584
  - Updated estimation process to use `simulateOperation()` instead of `runOperation()` #2548
- - Updated website dependencies [PR#2587](https://github.com/ecadlabs/taquito/pull/2587)
+ - Updated website dependencies [PR#2587](https://github.com/mavryk-network/webmavryk/pull/2587)
 
-## `@mavrykdynamics/taquito` - Add support of failing_noop operation in Contract and Wallet API
+## `@mavrykdynamics/webmavryk` - Add support of failing_noop operation in Contract and Wallet API
 Taquito now supports the `failing_noop` operation
 
 ```
@@ -478,7 +478,7 @@ basedOnBlock: 'genesis',
 });
 ```
 
-## `@mavrykdynamics/taquito-rpc` - Add support of simulateOperation RPC call
+## `@mavrykdynamics/webmavryk-rpc` - Add support of simulateOperation RPC call
 
 ```
 const Mavryk = new MavrykToolkit(rpcUrl)
@@ -516,103 +516,103 @@ This is a patch release to fix a potential issue with `verifySignature()` and `h
 - Please be wary due to the RxJS version upgrade, we've been seeing intermittent timeouts when testing against a Flexmasa sandbox. This behaviour is **not** present when using it against a regular node (Mainnet, Nairobinet, etc). We are still investigating what the cause might be. #2261
 
 Some other subtle changes that might affect some developers:
-- In `@mavrykdynamics/taquito` - `IntegerError` is renamed to `InvalidBalanceError`
-- In `@mavrykdynamics/taquito` - `PrepareProvider` used to throw `RevealEstimateError` now will throw `PublicKeyNotFoundError`
-- In `@mavrykdynamics/taquito-tzip-16` - `MetadataNotFound` is renamed to `ContractMetadataNotFoundError`
-- In `@mavrykdynamics/taquito-tzip-16` - `InvalidMetadata` is renamed to `InvalidContractMetadataError`
-- In `@mavrykdynamics/taquito-tzip-16` - `InvalidMetadataType` is renamed to `InvalidContractMetadataTypeError`
-- In `@mavrykdynamics/taquito-tzip-16` - `BigMapMetadataNotFound` is renamed to `BigMapContractMetadataNotFoundError`
-- In `@mavrykdynamics/taquito-tzip-16` - `UriNotFound` is renamed to `UriNotFoundError`
-- In `@mavrykdynamics/taquito-tzip-16` - `InvalidUri` is renamed to `InvalidUriError`
-- In `@mavrykdynamics/taquito-tzip-16` - `ProtocolNotSupported` is renamed to `ProtocolNotSupportedError`
-- In `@mavrykdynamics/taquito-tzip-16` - `UnconfiguredMetadataProviderError` is renamed to `UnconfiguredContractMetadataProviderError`
-- In `@mavrykdynamics/taquito-tzip-16` - `ForbiddenInstructionInViewCode` is renamed to `ForbiddenInstructionInViewCodeError`
+- In `@mavrykdynamics/webmavryk` - `IntegerError` is renamed to `InvalidBalanceError`
+- In `@mavrykdynamics/webmavryk` - `PrepareProvider` used to throw `RevealEstimateError` now will throw `PublicKeyNotFoundError`
+- In `@mavrykdynamics/webmavryk-tzip-16` - `MetadataNotFound` is renamed to `ContractMetadataNotFoundError`
+- In `@mavrykdynamics/webmavryk-tzip-16` - `InvalidMetadata` is renamed to `InvalidContractMetadataError`
+- In `@mavrykdynamics/webmavryk-tzip-16` - `InvalidMetadataType` is renamed to `InvalidContractMetadataTypeError`
+- In `@mavrykdynamics/webmavryk-tzip-16` - `BigMapMetadataNotFound` is renamed to `BigMapContractMetadataNotFoundError`
+- In `@mavrykdynamics/webmavryk-tzip-16` - `UriNotFound` is renamed to `UriNotFoundError`
+- In `@mavrykdynamics/webmavryk-tzip-16` - `InvalidUri` is renamed to `InvalidUriError`
+- In `@mavrykdynamics/webmavryk-tzip-16` - `ProtocolNotSupported` is renamed to `ProtocolNotSupportedError`
+- In `@mavrykdynamics/webmavryk-tzip-16` - `UnconfiguredMetadataProviderError` is renamed to `UnconfiguredContractMetadataProviderError`
+- In `@mavrykdynamics/webmavryk-tzip-16` - `ForbiddenInstructionInViewCode` is renamed to `ForbiddenInstructionInViewCodeError`
 
 ## Summary
 ### New Features
 - Exposed the injector to be customizable from the MavrykToolkit class #1344
 
 ### Improvement
-- Simplified generated Lambda for `transferToContract` [PR#2404](https://github.com/ecadlabs/taquito/pull/2404)
+- Simplified generated Lambda for `transferToContract` [PR#2404](https://github.com/mavryk-network/webmavryk/pull/2404)
 - Improved error classes for these following packages:
-    - `@mavrykdynamics/taquito` [PR#2559](https://github.com/ecadlabs/taquito/pull/2559)
-    - `@mavrykdynamics/taquito-michelson-encoder` #1995
-    - `@mavrykdynamics/taquito-tzip12` [PR#2559](https://github.com/ecadlabs/taquito/pull/2559)
-    - `@mavrykdynamics/taquito-tzip16` [PR#2559](https://github.com/ecadlabs/taquito/pull/2559)
+    - `@mavrykdynamics/webmavryk` [PR#2559](https://github.com/mavryk-network/webmavryk/pull/2559)
+    - `@mavrykdynamics/webmavryk-michelson-encoder` #1995
+    - `@mavrykdynamics/webmavryk-tzip12` [PR#2559](https://github.com/mavryk-network/webmavryk/pull/2559)
+    - `@mavrykdynamics/webmavryk-tzip16` [PR#2559](https://github.com/mavryk-network/webmavryk/pull/2559)
 
 ### Internals
-- Updated version dependencies for `Sass` and `Dotenv` in `/website` [PR#2560](https://github.com/ecadlabs/taquito/pull/2560)
+- Updated version dependencies for `Sass` and `Dotenv` in `/website` [PR#2560](https://github.com/mavryk-network/webmavryk/pull/2560)
 
 # Taquito v17
 ### Potential Breaking Changes
 Protocol Nairobi comes with a couple potential breaking changes for our users:
-- `@mavrykdynamics/taquito` - Update gas limit changes that pertains to each different curve in Protocol N #2447
-- `@mavrykdynamics/taquito-rpc` - Update operation result of `sc_rollup_cement_result` to have the newly added field #2448
+- `@mavrykdynamics/webmavryk` - Update gas limit changes that pertains to each different curve in Protocol N #2447
+- `@mavrykdynamics/webmavryk-rpc` - Update operation result of `sc_rollup_cement_result` to have the newly added field #2448
 - Changed error class names #2505 :
-  - `@mavrykdynamics/taquito-remote-signer` - `KeyNotFoundError` renamed to `PublicKeyNotFoundError`
-  - `@mavrykdynamics/taquito-remote-signer` - `PublicKeyMismatch` renamed to `PublicKeyVerificationError`
-  - `@mavrykdynamics/taquito-remote-signer` - `SignatureVerificationFailedError` renamed to `SignatureVerificationError`
+  - `@mavrykdynamics/webmavryk-remote-signer` - `KeyNotFoundError` renamed to `PublicKeyNotFoundError`
+  - `@mavrykdynamics/webmavryk-remote-signer` - `PublicKeyMismatch` renamed to `PublicKeyVerificationError`
+  - `@mavrykdynamics/webmavryk-remote-signer` - `SignatureVerificationFailedError` renamed to `SignatureVerificationError`
 
 ## Summary
 ### Nairobi Support
-- `@mavrykdynamics/taquito` - Update gas limit changes that pertains to each different curve in Protocol N #2447
-- `@mavrykdynamics/taquito-rpc` - Update operation result of `sc_rollup_cement_result` to have the newly added field #2448
+- `@mavrykdynamics/webmavryk` - Update gas limit changes that pertains to each different curve in Protocol N #2447
+- `@mavrykdynamics/webmavryk-rpc` - Update operation result of `sc_rollup_cement_result` to have the newly added field #2448
 
 ### New Features
-- `@mavrykdynamics/taquito` & `@mavrykdynamics/taquito-michelson-encoder`- Introduced a new feature called `EventAbstraction` that provides an abstraction to Events, similar to `ContractAbstraction` #2128
+- `@mavrykdynamics/webmavryk` & `@mavrykdynamics/webmavryk-michelson-encoder`- Introduced a new feature called `EventAbstraction` that provides an abstraction to Events, similar to `ContractAbstraction` #2128
 -
 ### Bug Fixes
-- `@mavrykdynamics/taquito` - Fixed contract call estimation to check for unrevealed keys #2500
+- `@mavrykdynamics/webmavryk` - Fixed contract call estimation to check for unrevealed keys #2500
 
 ### Testing
 - Fixed ballot operation testing to have a dynamic wait #2403
 
 ### Improvement
 - Further improved error classes and updated error class hierarchy for the following packages #2509 & #2505:
-    - `@mavrykdynamics/taquito-http-utils`
-    - `@mavrykdynamics/taquito-contracts-library`
-    - `@mavrykdynamics/taquito-beacon-wallet`
-    - `@mavrykdynamics/taquito-ledger-signer`
-    - `@mavrykdynamics/taquito-remote-signer`
+    - `@mavrykdynamics/webmavryk-http-utils`
+    - `@mavrykdynamics/webmavryk-contracts-library`
+    - `@mavrykdynamics/webmavryk-beacon-wallet`
+    - `@mavrykdynamics/webmavryk-ledger-signer`
+    - `@mavrykdynamics/webmavryk-remote-signer`
 - Improved error capturing/validation for RPC calls #1996
 
 ### Documentation
 - Added docs for making contract calls with JSON Michelson as a workaround to limitations that are introduced by complex contract call parameters #2443
 
 ### Internals
-- Upgrade `netlify-cli` package to fix CI issues [PR#2496](https://github.com/ecadlabs/taquito/pull/2496)
+- Upgrade `netlify-cli` package to fix CI issues [PR#2496](https://github.com/mavryk-network/webmavryk/pull/2496)
 # Taquito v16.2.0
 ## **Potential Breaking Changes**:
-- Some error classes may have been moved to the `@mavrykdynamics/taquito-core` package. Note to developers if they are exporting any error classes to capture errors, there might be a need to adjust the export path.
-- We have an ongoing error class refactoring which includes ticket #1992 (create an error class hierarchy), #1993 (consolidate duplicate errors in Taquito) and #1994 (improve error classes in individual packages, namely `@mavrykdynamics/taquito-utils`, `@mavrykdynamics/taquito-local-forging` and `@mavrykdynamics/taquito-signer`). Here are a list of notable changes:
-    1. `@mavrykdynamics/taquito-sapling` Class SaplingToolkit function prepareUnshieldedTransaction used to throw InvalidKeyError now throw a InvalidAddressError instead
-    2. `@mavrykdynamics/taquito-rpc` when validateContractAddress used to throw InvalidAddressError will now throw InvalidContractAddressError.
-    3. `@mavrykdynamics/taquito-sapling` prepareUnshieldedTransaction function when validateDestinationImplicitAddress used to throw InvalidAddressError now throw InvalidKeyHashError
-    4. `@mavrykdynamics/taquito-local-forging` smartRollupAddressDecoder used to throw InvalidAddressError now throw InvalidSmartRollupAddressError
-    5. `@mavrykdynamics/taquito-local-forging` used to have class InvalidSmartRollupContractAddressError now is InvalidSmartRollupCommitmentHashError
-    6. `@mavrykdynamics/taquito-local-forging` function smartRollupContractAddressEncoder rename to smartRollupCommitmentHashEncoder
-    7. `@mavrykdynamics/taquito-signer` PrivateKeyError is replaced by common error InvalidKeyError from `@mavrykdynamics/taquito-core`
+- Some error classes may have been moved to the `@mavrykdynamics/webmavryk-core` package. Note to developers if they are exporting any error classes to capture errors, there might be a need to adjust the export path.
+- We have an ongoing error class refactoring which includes ticket #1992 (create an error class hierarchy), #1993 (consolidate duplicate errors in Taquito) and #1994 (improve error classes in individual packages, namely `@mavrykdynamics/webmavryk-utils`, `@mavrykdynamics/webmavryk-local-forging` and `@mavrykdynamics/webmavryk-signer`). Here are a list of notable changes:
+    1. `@mavrykdynamics/webmavryk-sapling` Class SaplingToolkit function prepareUnshieldedTransaction used to throw InvalidKeyError now throw a InvalidAddressError instead
+    2. `@mavrykdynamics/webmavryk-rpc` when validateContractAddress used to throw InvalidAddressError will now throw InvalidContractAddressError.
+    3. `@mavrykdynamics/webmavryk-sapling` prepareUnshieldedTransaction function when validateDestinationImplicitAddress used to throw InvalidAddressError now throw InvalidKeyHashError
+    4. `@mavrykdynamics/webmavryk-local-forging` smartRollupAddressDecoder used to throw InvalidAddressError now throw InvalidSmartRollupAddressError
+    5. `@mavrykdynamics/webmavryk-local-forging` used to have class InvalidSmartRollupContractAddressError now is InvalidSmartRollupCommitmentHashError
+    6. `@mavrykdynamics/webmavryk-local-forging` function smartRollupContractAddressEncoder rename to smartRollupCommitmentHashEncoder
+    7. `@mavrykdynamics/webmavryk-signer` PrivateKeyError is replaced by common error InvalidKeyError from `@mavrykdynamics/webmavryk-core`
 
-- In `@mavrykdynamics/taquito-michelson-encoder` we introduced a new semantic `{ Some: null}`  to EncodeObject() for nested options type like (option (option nat)). The old semantic still works when making contract calls but will look to deprecated them in the future as table below. And the corresponding `Execute()` will now return new semantic `{ Some: 1 }` as previously return `1` will be deprecated soon. #2344
-![image](https://github.com/ecadlabs/taquito/assets/106410553/455e7f9f-9d6a-4503-bb89-8f337c322063)
+- In `@mavrykdynamics/webmavryk-michelson-encoder` we introduced a new semantic `{ Some: null}`  to EncodeObject() for nested options type like (option (option nat)). The old semantic still works when making contract calls but will look to deprecated them in the future as table below. And the corresponding `Execute()` will now return new semantic `{ Some: 1 }` as previously return `1` will be deprecated soon. #2344
+![image](https://github.com/mavryk-network/webmavryk/assets/106410553/455e7f9f-9d6a-4503-bb89-8f337c322063)
 
-**Note**: There are also significant (backwards compatible) changes to the `@mavrykdynamics/taquito` package, largely regarding the flow of preparing, estimating, forging, and injecting operations into a node. No breaking changes are expected, but users are welcomed to reach out to the team if any issues arise.
+**Note**: There are also significant (backwards compatible) changes to the `@mavrykdynamics/webmavryk` package, largely regarding the flow of preparing, estimating, forging, and injecting operations into a node. No breaking changes are expected, but users are welcomed to reach out to the team if any issues arise.
 
 ## Summary
 ### New Features
-- Introduction of the new `@mavrykdynamics/taquito-core` package, which will contain important types and shared classes #1992
+- Introduction of the new `@mavrykdynamics/webmavryk-core` package, which will contain important types and shared classes #1992
 
 
 ### Bug Fixes
 - Fixed contract calls with nested `option` with `Some None` #2344
-- Fixed a broken `isNode` check that checks whether the runtime environment is a Node environment or not [PR#2498](https://github.com/ecadlabs/taquito/pull/2498)
+- Fixed a broken `isNode` check that checks whether the runtime environment is a Node environment or not [PR#2498](https://github.com/mavryk-network/webmavryk/pull/2498)
 
 ### Improvement
-- `@mavrykdynamics/taquito` - Tweaked the functionality of `PrepareProvider` to not have coupling with Estimation, it will now output `PreparedOperation` with default fees, gas limits and, storage limits #2257
-- `@mavrykdynamics/taquito` - Added a filter for events listener to exclude failed events #2319
-- `@mavrykdynamics/taquito-utils` - Updated address validation to include smart rollup addresses #2444
+- `@mavrykdynamics/webmavryk` - Tweaked the functionality of `PrepareProvider` to not have coupling with Estimation, it will now output `PreparedOperation` with default fees, gas limits and, storage limits #2257
+- `@mavrykdynamics/webmavryk` - Added a filter for events listener to exclude failed events #2319
+- `@mavrykdynamics/webmavryk-utils` - Updated address validation to include smart rollup addresses #2444
 - Removed duplicate error classes and did a small audit to streamline them across all packages #1993
-- Improved error messages and fix relevant error classes in `@mavrykdynamics/taquito-local-forging` and `@mavrykdynamics/taquito-signer` #1994
+- Improved error messages and fix relevant error classes in `@mavrykdynamics/webmavryk-local-forging` and `@mavrykdynamics/webmavryk-signer` #1994
 
 
 ### Documentation
@@ -623,11 +623,11 @@ Protocol Nairobi comes with a couple potential breaking changes for our users:
 
 
 ### Internals
-- `OperationEmitter` class in `@mavrykdynamics/taquito` have been replaced with `PrepareProvider` and the `Provider` abstract class #2257
+- `OperationEmitter` class in `@mavrykdynamics/webmavryk` have been replaced with `PrepareProvider` and the `Provider` abstract class #2257
     - RpcContractProvider, RpcEstimateProvider, RpcBatchProvider, and RpcMvProvider no longer extends `OperationEmitter`, and is replaced with a more lightweight abstract class `Provider` #2428, #2429, #2430, #2431
-- Removed the dependency `axios-fetch-adapter` and adapted the code directly into Taquito [PR#2457](https://github.com/ecadlabs/taquito/pull/2457)
+- Removed the dependency `axios-fetch-adapter` and adapted the code directly into Taquito [PR#2457](https://github.com/mavryk-network/webmavryk/pull/2457)
 
-### `@mavrykdynamics/taquito` - Added a filter for events listener to exclude failed events
+### `@mavrykdynamics/webmavryk` - Added a filter for events listener to exclude failed events
 Introduces a new filter `excludeFailedOperations` to determine whether you'd want to filter out failed events or not
 ```typescript
 const Mavryk = new MavrykToolkit(RPC_URL);
@@ -653,36 +653,36 @@ try {
 }
 ```
 
-### `@mavrykdynamics/taquito` - Tweaked the functionality of `PrepareProvider`
+### `@mavrykdynamics/webmavryk` - Tweaked the functionality of `PrepareProvider`
 The `PrepareProvider` is a somewhat new feature to Taquito that allows users to independently create a `PreparedOperation` object. It's behaviour is slightly changed so that it **does not** estimate directly when preparing. The estimation and the preparation process are now 2 separate process, removing the circular dependency it used to have.
 
 # Taquito v16.1.1
 ## Bug Fixes
-- Fixed an issue where the package forked from `vespaiach/axios-fetch-adapter` was not able to be resolved by some package managers. We have since published the fork on NPM as `@mavrykdynamics/taquito-axios-fetch-adapter` [PR #2427](https://github.com/ecadlabs/taquito/pull/2427)
+- Fixed an issue where the package forked from `vespaiach/axios-fetch-adapter` was not able to be resolved by some package managers. We have since published the fork on NPM as `@mavrykdynamics/webmavryk-axios-fetch-adapter` [PR #2427](https://github.com/mavryk-network/webmavryk/pull/2427)
 
 # Taquito v16.1.0
 ## Summary
-- `@mavrykdynamics/taquito-rpc` - Added RPC endpoint to add pending transactions in mempool #2382
-- `@mavrykdynamics/taquito-rpc` - Added support for types of smart rollup operations in the RPC package #2409
+- `@mavrykdynamics/webmavryk-rpc` - Added RPC endpoint to add pending transactions in mempool #2382
+- `@mavrykdynamics/webmavryk-rpc` - Added support for types of smart rollup operations in the RPC package #2409
     - `smart_rollup_publish`
     - `smart_rollup_cement`
     - `smart_rollup_recover_bond`
     - `smart_rollup_refute`
     - `smart_rollup_timeout`
-- `@mavrykdynamics/taquito` - Added support for `contractCall()` in the estimate provider #2019
-- `@mavrykdynamics/taquito` - Added support for `smart_rollup_originate` operation #2306
-- `@mavrykdynamics/taquito` - Added utility functions in prepare provider to accomodate forging and operation pre-apply (dry runs) #2256
-- `@mavrykdynamics/taquito-local-forging` - Added support for `set_deposits_limit` in the local forger [PR #2237](https://github.com/ecadlabs/taquito/pull/2237)
+- `@mavrykdynamics/webmavryk` - Added support for `contractCall()` in the estimate provider #2019
+- `@mavrykdynamics/webmavryk` - Added support for `smart_rollup_originate` operation #2306
+- `@mavrykdynamics/webmavryk` - Added utility functions in prepare provider to accomodate forging and operation pre-apply (dry runs) #2256
+- `@mavrykdynamics/webmavryk-local-forging` - Added support for `set_deposits_limit` in the local forger [PR #2237](https://github.com/mavryk-network/webmavryk/pull/2237)
 
 ### Bug Fixes
 - Fixed a bug with the Prepare Provider where operation counters get carried over in subsequent method calls #2425
 
 ### Documentation
-- Fixed typo in Taquito README [PR #2275](https://github.com/ecadlabs/taquito/pull/2275)
-- Updated example in signing documentation [PR #2399](https://github.com/ecadlabs/taquito/pull/2399)
-- Added Exaion node as a commercial provider [PR #2401](https://github.com/ecadlabs/taquito/pull/2401)
+- Fixed typo in Taquito README [PR #2275](https://github.com/mavryk-network/webmavryk/pull/2275)
+- Updated example in signing documentation [PR #2399](https://github.com/mavryk-network/webmavryk/pull/2399)
+- Added Exaion node as a commercial provider [PR #2401](https://github.com/mavryk-network/webmavryk/pull/2401)
 
-### `@mavrykdynamics/taquito-rpc` - Added RPC endpoint to add pending transactions in mempool
+### `@mavrykdynamics/webmavryk-rpc` - Added RPC endpoint to add pending transactions in mempool
 
 This RPC endpoint returns the list of prevalidated operations in the mempool. Note that accessibility of the mempool depends on each Node.
 
@@ -690,7 +690,7 @@ This RPC endpoint returns the list of prevalidated operations in the mempool. No
 await rpcClient.getPendingOperations();
 ```
 
-### `@mavrykdynamics/taquito` - Added support for `contractCall()` in the estimate provider
+### `@mavrykdynamics/webmavryk` - Added support for `contractCall()` in the estimate provider
 
 The estimate provider now supports estimates for contract calls directly, and is usable as such:
 ```typescript
@@ -699,7 +699,7 @@ const opEntrypoint = contract.methods.default(5);
 const estimate = await Mavryk.estimate.contractCall(opEntrypoint);
 ```
 
-### `@mavrykdynamics/taquito` - Added `smart_rollup_originate` operation support
+### `@mavrykdynamics/webmavryk` - Added `smart_rollup_originate` operation support
 Added support in the contract provider to inject `smart_rollup_originate` operations
 
 ```typescript
@@ -710,7 +710,7 @@ const op = await Mavryk.contract.smartRollupOriginate({
 });
 ```
 
-### `@mavrykdynamics/taquito` - Added utility functions in prepare provider to accomodate forging and operation pre-apply (dry runs)
+### `@mavrykdynamics/webmavryk` - Added utility functions in prepare provider to accomodate forging and operation pre-apply (dry runs)
 Provided 2 utility functions to convert results from the `PrepareProvider` (`PreparedOperation` type objects) into `ForgeParams` and `PreapplyParams`
 ```typescript!
 // pre-apply
@@ -734,22 +734,22 @@ const forgedBytes = await forger.forge(params);
 ## Summary
 
 ### Mumbai Support
-- `@mavrykdynamics/taquito` Support new operation `smart_rollup_add_messages` #2309
-- `@mavrykdynamics/taquito` Updated `transferTicket` operation in the contract API to support ticket transfers between implicit accounts #2320
-- `@mavrykdynamics/taquito-local-forging` Support new Mumbai operations #2308
+- `@mavrykdynamics/webmavryk` Support new operation `smart_rollup_add_messages` #2309
+- `@mavrykdynamics/webmavryk` Updated `transferTicket` operation in the contract API to support ticket transfers between implicit accounts #2320
+- `@mavrykdynamics/webmavryk-local-forging` Support new Mumbai operations #2308
     - `smart_rollup_originate`,
     - `smart_rollup_add_messages`,
     - `smart_rollup_execute_outbox_message`
-- `@mavrykdynamics/taquito-local-forging` updated validation to allow mv4 addresses #2350
-- `@mavrykdynamics/taquito-rpc` support Mumbai operation types in the RPC package #2307
-- `@mavrykdynamics/taquito-rpc` added Mumbai protocol constants in the RPC package #2375
-- `@mavrykdynamics/taquito-rpc` removed `consumed_gas` property in `update_consensus_key` return type in the RPC package #2273
-- `@mavrykdynamics/taquito-rpc` added new RPC endpoints #2270:
+- `@mavrykdynamics/webmavryk-local-forging` updated validation to allow mv4 addresses #2350
+- `@mavrykdynamics/webmavryk-rpc` support Mumbai operation types in the RPC package #2307
+- `@mavrykdynamics/webmavryk-rpc` added Mumbai protocol constants in the RPC package #2375
+- `@mavrykdynamics/webmavryk-rpc` removed `consumed_gas` property in `update_consensus_key` return type in the RPC package #2273
+- `@mavrykdynamics/webmavryk-rpc` added new RPC endpoints #2270:
     - `getTicketBalance`
     - `getAllTicketBalances`
-- `@mavrykdynamics/taquito-michel-codec` Added support for `bytes` in these following Michelson instructions #2267:
+- `@mavrykdynamics/webmavryk-michel-codec` Added support for `bytes` in these following Michelson instructions #2267:
     - `AND`, `OR`, `XOR`, `NOT`, `LSL`, `LSR`
-- `@mavrykdynamics/taquito-michel-codec` added support for bytes-nat conversion in Michelson #2268
+- `@mavrykdynamics/webmavryk-michel-codec` added support for bytes-nat conversion in Michelson #2268
 
 ### Bug Fixes
 - Fixed broken website live examples #2305
@@ -761,24 +761,24 @@ const forgedBytes = await forger.forge(params);
 - Added documentation on ~100 most popular contract entrypoint parameter examples on Mavryk #2153
 - Fixed broken link on Dapp pre-launch checklist page #2293
 - Fixed broken link on smart contract collection page #2295
-- Fixed broken live code examples on the `taquito.mavryk.org` website #2305
+- Fixed broken live code examples on the `webmavryk.mavryk.org` website #2305
 - Removed invalid links and duplicate entries #2332
 - Added documentation for contract entrypoints parameters in JS/TS #2153
 - Fixed broken link on Smart Contract collection page #2295
 - Fixed broken link on DApp pre-launch checklist page #2293
 - Added documentation on MANAGER_LAMBDA #1718
-- Updated Ledger examples to point to Basenet [PR](https://github.com/ecadlabs/taquito/pull/2365)
-- Updated README to include cases for specific Linux distros [PR](https://github.com/ecadlabs/taquito/pull/2330)
+- Updated Ledger examples to point to Basenet [PR](https://github.com/mavryk-network/webmavryk/pull/2365)
+- Updated README to include cases for specific Linux distros [PR](https://github.com/mavryk-network/webmavryk/pull/2330)
 
 
 ### Internals
 - Removed Kathmandu references from local-forger #2131
-- Bumped Node versions to 16 [PR](https://github.com/ecadlabs/taquito/pull/2359) #1845
-- Delete TezEdge workflows [PR](https://github.com/ecadlabs/taquito/pull/2364)
-- Updated Docusaurus version to it's latest stable release (v2.3.1) [PR](https://github.com/ecadlabs/taquito/pull/2381)
+- Bumped Node versions to 16 [PR](https://github.com/mavryk-network/webmavryk/pull/2359) #1845
+- Delete TezEdge workflows [PR](https://github.com/mavryk-network/webmavryk/pull/2364)
+- Updated Docusaurus version to it's latest stable release (v2.3.1) [PR](https://github.com/mavryk-network/webmavryk/pull/2381)
 - Removed references to older protocols in Taquito and updated integration tests and examples #485
 
-## `@mavrykdynamics/taquito` - Support for new operation `smart_rollup_add_messages`
+## `@mavrykdynamics/webmavryk` - Support for new operation `smart_rollup_add_messages`
 Support for a new manager operation to add messages to a smart rollup inbox have been added, and can be used as follows:
 ```typescript
 const op = await Mavryk.contract.smartRollupAddMessages({
@@ -788,7 +788,7 @@ const op = await Mavryk.contract.smartRollupAddMessages({
 });
 ```
 
-## `@mavrykdynamics/taquito-rpc` - Support for new Mumbai operation types in the RPC package
+## `@mavrykdynamics/webmavryk-rpc` - Support for new Mumbai operation types in the RPC package
 Added a few new types to accommodate for Mumbai protocol changes:
 - `OperationContentsAndResultSmartRollupOriginate`
 - `OperationContentsAndResultSmartRollupAddMessages`
@@ -800,13 +800,13 @@ Added a few new types to accommodate for Mumbai protocol changes:
 - `OperationContentsAndResultMetadataSmartRollupAddMessages`
 - `OperationContentsAndResultMetadataSmartRollupExecuteOutboxMessage`
 
-## `@mavrykdynamics/taquito-michel-codec` - Added support for `bytes`
+## `@mavrykdynamics/webmavryk-michel-codec` - Added support for `bytes`
 The Mumbai protocol update introduces a change where the following Michelson instructions support `bytes`: `AND`, `OR`, `XOR`, `NOT`, `LSL`, `LSR`
 
 These instructions now have bytes support of the opcodes. For more information, refer to [this document](https://gitlab.com/mavryk-network/mavryk-protocol/-/merge_requests/6055)
 
 
-## `@mavrykdynamics/taquito-michel-codec` - Added support for bytes-nat conversion in Michelson
+## `@mavrykdynamics/webmavryk-michel-codec` - Added support for bytes-nat conversion in Michelson
 The Mumbai protocol update now supports conversion between `bytes` and `nat` as well as `bytes` and `int`
 
 For more information, refer to [this page](https://gitlab.com/mavryk-network/mavryk-protocol/-/merge_requests/6681)
@@ -814,8 +814,8 @@ For more information, refer to [this page](https://gitlab.com/mavryk-network/mav
 ## Summary
 
 ### New Features
-- `@mavrykdynamics/taquito` New provider support `PrepareProvider` to facilitate preparation of operations in Taquito. #2020
-- `@mavrykdynamics/taquito` Support new operation `increase_paid_storage` on the wallet API #1768
+- `@mavrykdynamics/webmavryk` New provider support `PrepareProvider` to facilitate preparation of operations in Taquito. #2020
+- `@mavrykdynamics/webmavryk` Support new operation `increase_paid_storage` on the wallet API #1768
 
 ### Bug Fixes
 - Fixed a bug where `axios-fetch-adapter` was not returning the response body from errors, causing the wrong error to be captured by the calling method #2187
@@ -824,10 +824,10 @@ For more information, refer to [this page](https://gitlab.com/mavryk-network/mav
 - Update Taquito website live code examples to use Basenet endpoint. #2224
 
 ### Internals
-- Updated Beacon version to v3.3.1 [PR](https://github.com/ecadlabs/taquito/pull/2266)
-- Updated Taquito Github Workflows to use Node LTS/Gallium (v16) [PR](https://github.com/ecadlabs/taquito/pull/2301)
+- Updated Beacon version to v3.3.1 [PR](https://github.com/mavryk-network/webmavryk/pull/2266)
+- Updated Taquito Github Workflows to use Node LTS/Gallium (v16) [PR](https://github.com/mavryk-network/webmavryk/pull/2301)
 
-## `@mavrykdynamics/taquito` - Added new provider `PrepareProvider` to facilitate operation preparation
+## `@mavrykdynamics/webmavryk` - Added new provider `PrepareProvider` to facilitate operation preparation
 
 `PrepareProvider` now extends more control to the user to give them the ability to 'prepare' Mavryk operations before forging and injection. The preparation step now can be done through the `MavrykToolkit` class as such:
 
@@ -862,7 +862,7 @@ The expected output will look something like this:
       }
 ```
 
-## `@mavrykdynamics/taquito` - Increase paid storage operation support in the wallet API
+## `@mavrykdynamics/webmavryk` - Increase paid storage operation support in the wallet API
 Taquito now supports `increase_paid_storage` operation in the Wallet API (previously only available in the Contract API).
 
 ```typescript
@@ -877,21 +877,21 @@ const op = await Mavryk.wallet.increasePaidStorage({
 - Fixed a bug where the `local-forging` package was using an outdated version of the codec when it's instantiated without passing in a protocol hash. Updated so that the default value uses the current protocol hash. #2242
 
 ## Summary
-- `@mavrykdynamics/taquito` Support new operation `drain_delegate` in the Contract API #2068
-- `@mavrykdynamics/taquito-local-forging` Support new operation `drain_delegate` #2065
+- `@mavrykdynamics/webmavryk` Support new operation `drain_delegate` in the Contract API #2068
+- `@mavrykdynamics/webmavryk-local-forging` Support new operation `drain_delegate` #2065
 
 ## Bug Fixes
-- `@mavrykdynamics/taquito-michelson-encoder` fix MapTypecheck bug triggered by nested maps ending with a big_map #1762
+- `@mavrykdynamics/webmavryk-michelson-encoder` fix MapTypecheck bug triggered by nested maps ending with a big_map #1762
 
 ### Documentation
 - Auto hide sticky navbar for mobile view to increase readability on mobile devices.
-PR: https://github.com/ecadlabs/taquito/pull/2236
+PR: https://github.com/mavryk-network/webmavryk/pull/2236
 
 ### Internals
 - Start running integration tests against testnets for external PRs.
-PR: https://github.com/ecadlabs/taquito/pull/2221
+PR: https://github.com/mavryk-network/webmavryk/pull/2221
 
-## `@mavrykdynamics/taquito` drain_delegate operation support
+## `@mavrykdynamics/webmavryk` drain_delegate operation support
 A new manager operation related to the consensus_key change in Lima has been added:
 ```typescript
 const op = await Mavryk.contract.updateConsensusKey({
@@ -909,13 +909,13 @@ await op.confirmation();
 ## Summary
 
 ### Lima Support
-- `@mavrykdynamics/taquito` Support new operation `update_consensus_key` in the Contract API #2067
-- `@mavrykdynamics/taquito-local-forging` Support new operation `update_consensus_key` #2065
-- `@mavrykdynamics/taquito-local-forging` Support new instruction `LAMBDA_REC` and value `Lambda_rec` and support changes related to the `TICKET` instruction #2074 #2072
-- `@mavrykdynamics/taquito-rpc` Support new types and operations for `update_consensus_key` and `drain_delegate` #2066
-- `@mavrykdynamics/taquito-rpc` Support new properties related to Lima #2172 #2071
-- `@mavrykdynamics/taquito-michelson-encoder` Support new type `TICKET_DEPRECATED` #2073
-- `@mavrykdynamics/taquito-michel-codec` Support new instruction `LAMBDA_REC` and value `Lambda_rec` and support changes related to the `TICKET` instruction #2181 #2075
+- `@mavrykdynamics/webmavryk` Support new operation `update_consensus_key` in the Contract API #2067
+- `@mavrykdynamics/webmavryk-local-forging` Support new operation `update_consensus_key` #2065
+- `@mavrykdynamics/webmavryk-local-forging` Support new instruction `LAMBDA_REC` and value `Lambda_rec` and support changes related to the `TICKET` instruction #2074 #2072
+- `@mavrykdynamics/webmavryk-rpc` Support new types and operations for `update_consensus_key` and `drain_delegate` #2066
+- `@mavrykdynamics/webmavryk-rpc` Support new properties related to Lima #2172 #2071
+- `@mavrykdynamics/webmavryk-michelson-encoder` Support new type `TICKET_DEPRECATED` #2073
+- `@mavrykdynamics/webmavryk-michel-codec` Support new instruction `LAMBDA_REC` and value `Lambda_rec` and support changes related to the `TICKET` instruction #2181 #2075
 
 ### Testing
 - Removed tests that referenced Timelock feature (`CHEST_OPEN` Michelson instruction) #2070
@@ -929,14 +929,14 @@ await op.confirmation();
 - Removed legacy `lerna bootstrap` commands from build workflow #2188
 
 ### Deprecation
-`@mavrykdynamics/taquito-tezbridge-signer` and `@mavrykdynamics/taquito-tezbridge-wallet` has been deprecated, and references to them have been removed from the codebase #2080
+`@mavrykdynamics/webmavryk-tezbridge-signer` and `@mavrykdynamics/webmavryk-tezbridge-wallet` has been deprecated, and references to them have been removed from the codebase #2080
 
 ### Others
 - Removed Jakarta protocol references in on chain view related code #2098
-- Removed temple-wallet/dapp dependency from Taquito website that was producing build errors [PR](https://github.com/ecadlabs/taquito/pull/2202)
+- Removed temple-wallet/dapp dependency from Taquito website that was producing build errors [PR](https://github.com/mavryk-network/webmavryk/pull/2202)
 
 
-## `@mavrykdynamics/taquito` - Added support for `update_consensus_key`
+## `@mavrykdynamics/webmavryk` - Added support for `update_consensus_key`
 A new manager operation to update consensus keys can be used as follows:
 ```typescript
 const op = await Mavryk.contract.updateConsensusKey({
@@ -946,11 +946,11 @@ const op = await Mavryk.contract.updateConsensusKey({
 await op.confirmation();
 ```
 
-## `@mavrykdynamics/taquito-local-forging` - Added support for Lima operations and instructions
+## `@mavrykdynamics/webmavryk-local-forging` - Added support for Lima operations and instructions
 - Updated local-forger to forge and parse `update_consensus_key` and `drain_delegate`
 - Updated local-forger to support the new Michelson instruction `LAMBDA_REC` and the new data constructor named `Lambda_rec` which enables recursive LAMBDA
 
-## `@mavrykdynamics/taquito-rpc` - Updated types to support Lima protocol
+## `@mavrykdynamics/webmavryk-rpc` - Updated types to support Lima protocol
 Added a few new types to accommodate Lima protocol changes:
 - `OperationContentsUpdateConsensusKey`
 - `OperationContentsDrainDelegate`
@@ -962,10 +962,10 @@ Added a few new types to accommodate Lima protocol changes:
 
 Also updates to existing types to accommodate changes regarding consensus keys.
 
-## `@mavrykdynamics/taquito-michelson-encoder` - Support new type `TICKET_DEPRECATED`
+## `@mavrykdynamics/webmavryk-michelson-encoder` - Support new type `TICKET_DEPRECATED`
 - Added support for the new Michelson type `TICKET_DEPRECATED`. More info here: https://protocol.mavryk.org/protocols/015_lima.html#breaking-changes
 
-## `@mavrykdynamics/taquito-michel-codec` - Support new instruction `LAMBDA_REC` and value `Lambda_rec`
+## `@mavrykdynamics/webmavryk-michel-codec` - Support new instruction `LAMBDA_REC` and value `Lambda_rec`
 
 The Lima protocol introduces a new Michelson type named `LAMBDA_REC`, and a new data constructor named `Lambda_rec`, allowing the creation of recursive lambda functions. Support for those primitives has been added in the michel-codec package enabling users to validate or pack/unpack Michelson code containing them.
 
@@ -975,9 +975,9 @@ The `TICKET` instruction now returns an optional ticket instead of a ticket. Thi
 ## Summary
 ### New Features
 
-- `@mavrykdynamics/taquito` - Added support for `Ballot` operation in the Contract API #1630
-- `@mavrykdynamics/taquito` - Added support for `Proposals` operation in the Contract API #2099
-- `@mavrykdynamics/taquito-signer` - Added new method `fromMnemonic` to the `InMemorySigner` #1228
+- `@mavrykdynamics/webmavryk` - Added support for `Ballot` operation in the Contract API #1630
+- `@mavrykdynamics/webmavryk` - Added support for `Proposals` operation in the Contract API #2099
+- `@mavrykdynamics/webmavryk-signer` - Added new method `fromMnemonic` to the `InMemorySigner` #1228
 
 ### Documentation
 - Updated and organized Taquito README to prepare for translations to other languages #2015
@@ -986,7 +986,7 @@ The `TICKET` instruction now returns an optional ticket instead of a ticket. Thi
 - Added integration test for `Ballot` and `Proposals` operation #2087
 - Configured NPM workspaces for Taquito to improve build process #2127
 
-## `@mavrykdynamics/taquito` - Added support for `Ballot` operation
+## `@mavrykdynamics/webmavryk` - Added support for `Ballot` operation
 We added a new Contract API method to support the `Ballot` operation. Bakers can now cast their ballots using this operation from Taquito as follows:
 
 ```typescript
@@ -998,7 +998,7 @@ const op = await Mavryk.contract.ballot({
 await op.confirmation();
 ```
 
-## `@mavrykdynamics/taquito` - Added support for `Proposals` operation
+## `@mavrykdynamics/webmavryk` - Added support for `Proposals` operation
 Alongside the `Ballot` operation support, bakers can now also submit proposals using the `Proposals` operation that can be used as follows:
 
 ```typescript
@@ -1009,7 +1009,7 @@ const op = await Mavryk.contract.proposals({
 await op.confirmation();
 ```
 
-## `@mavrykdynamics/taquito-signer` - Added new method `fromMnemonic`
+## `@mavrykdynamics/webmavryk-signer` - Added new method `fromMnemonic`
 Users can now create an `InMemorySigner` instance using the `fromMnemonic` method for a mv1, mv2, or mv3 address: ed25519, secp256k1, or p256 respectively.
 
 ```typescript
@@ -1022,24 +1022,24 @@ const signer = InMemorySigner.fromMnemonic({ mnemonic, password, derivationPath:
 
 ### New features
 
-- `@mavrykdynamics/taquito` - Provide a subscriber to events #1746
+- `@mavrykdynamics/webmavryk` - Provide a subscriber to events #1746
 - `@taquiro/rpc` - Support `voting_info` endpoint #1749
-- `@mavrykdynamics/taquito-ledger-signer` - Add support for bip25519 curve #1869
+- `@mavrykdynamics/webmavryk-ledger-signer` - Add support for bip25519 curve #1869
 
 ### Bug fixes
-- `@mavrykdynamics/taquito-http-utils` - Issue using Taquito in service worker environment #2025
-- `@mavrykdynamics/taquito` - `confirmationPollingTimeoutSecond` not working #2006
-- `@mavrykdynamics/taquito` - `PollingSubscribeProvider` used in contract confirmations might skip blocks #1783
-- `@mavrykdynamics/taquito-michelson-encoder` - Fixed Michelson encoder for timestamp to handle numbers being passed #1888
+- `@mavrykdynamics/webmavryk-http-utils` - Issue using Taquito in service worker environment #2025
+- `@mavrykdynamics/webmavryk` - `confirmationPollingTimeoutSecond` not working #2006
+- `@mavrykdynamics/webmavryk` - `PollingSubscribeProvider` used in contract confirmations might skip blocks #1783
+- `@mavrykdynamics/webmavryk-michelson-encoder` - Fixed Michelson encoder for timestamp to handle numbers being passed #1888
 
 ### Improvement
-- `@mavrykdynamics/taquito` - Allow users to customize the parser #660
-- `@mavrykdynamics/taquito` - Accept amount, `fee`, `gasLimit`, and `storageLimit` as parameters of the `withContractCall` method #1717
-- `@mavrykdynamics/taquito-tzip16` - Add more high level functions for tzip16 metadata #584
-- `@mavrykdynamics/taquito` - Support `string` or `number` for the `balance` property for contract origination #1795
+- `@mavrykdynamics/webmavryk` - Allow users to customize the parser #660
+- `@mavrykdynamics/webmavryk` - Accept amount, `fee`, `gasLimit`, and `storageLimit` as parameters of the `withContractCall` method #1717
+- `@mavrykdynamics/webmavryk-tzip16` - Add more high level functions for tzip16 metadata #584
+- `@mavrykdynamics/webmavryk` - Support `string` or `number` for the `balance` property for contract origination #1795
 
 ### Documentation
-- Documentation page dedicated to multi-sig: https://taquito.mavryk.org/docs/next/multisig_doc/
+- Documentation page dedicated to multi-sig: https://webmavryk.mavryk.org/docs/next/multisig_doc/
 - Fixed broken link in the Wallet doc #1865
 
 ### Others
@@ -1054,7 +1054,7 @@ const signer = InMemorySigner.fromMnemonic({ mnemonic, password, derivationPath:
 
 
 
-## `@mavrykdynamics/taquito` - Provide a subscriber to events
+## `@mavrykdynamics/webmavryk` - Provide a subscriber to events
 
 Taquito provides a simple way for users to subscribe to certain events on the blockchain via the `PollingSubscribeProvider`.
 
@@ -1074,7 +1074,7 @@ try {
 }
 ```
 
-Please refer to the documentation for more information: https://taquito.mavryk.org/docs/next/subscribe_event
+Please refer to the documentation for more information: https://webmavryk.mavryk.org/docs/next/subscribe_event
 
 ## `@taquiro/rpc` - Support `voting_info` endpoint
 
@@ -1089,7 +1089,7 @@ VotingInfoResponse = {
 };
 ```
 
-## `@mavrykdynamics/taquito-ledger-signer` - Add support for bip25519 curve
+## `@mavrykdynamics/webmavryk-ledger-signer` - Add support for bip25519 curve
 
 We added support for the bip32-ed25519 derivation scheme in the ledger package. It can be used as follows:
 
@@ -1103,27 +1103,27 @@ const signer = new LedgerSigner(
 )
 ```
 
-## `@mavrykdynamics/taquito-http-utils` - Issue using Taquito in a service worker environment
+## `@mavrykdynamics/webmavryk-http-utils` - Issue using Taquito in a service worker environment
 
-In service worker environments (e.g., Cloudflare workers), `XMLHttpRequest` used by `Axios` is deprecated. When using the `@mavrykdynamics/taquito-http-utils` package in such an environment, the following error was occurring: `TypeError: adapter is not a function`. A fix has been made to use `@vespaiach/axios-fetch-adapter` when not in a nodejs environment.
+In service worker environments (e.g., Cloudflare workers), `XMLHttpRequest` used by `Axios` is deprecated. When using the `@mavrykdynamics/webmavryk-http-utils` package in such an environment, the following error was occurring: `TypeError: adapter is not a function`. A fix has been made to use `@vespaiach/axios-fetch-adapter` when not in a nodejs environment.
 
-## `@mavrykdynamics/taquito` - confirmationPollingTimeoutSecond not working
+## `@mavrykdynamics/webmavryk` - confirmationPollingTimeoutSecond not working
 
 There was an issue with the `confirmationPollingTimeoutSecond` on the `MavrykToolkit`. During the operation confirmation (both on the contract and wallet API), the timeout timer restarted on every new block emission. This has been fixed.
 
-## `@mavrykdynamics/taquito` - `PollingSubscribeProvider` used in contract confirmations might skip blocks
+## `@mavrykdynamics/webmavryk` - `PollingSubscribeProvider` used in contract confirmations might skip blocks
 
 When the polling mechanism skipped a block during the operation confirmation for the wallet API, an error `MissedBlockDuringConfirmationError` was thrown. We refactored the implementation to retrieve missed blocks instead of throwing an error. On the contract API side, there was no check whether a block was missed or skipped, and it would just timeout, unable to find the operation after a certain time. The implementation has also been changed to retrieve missed blocks.
 
-## `@mavrykdynamics/taquito-michelson-encoder` - Fixed Michelson encoder for timestamp to handle numbers being passed
+## `@mavrykdynamics/webmavryk-michelson-encoder` - Fixed Michelson encoder for timestamp to handle numbers being passed
 
 A bug has been fixed, allowing support of UNIX timestamp number when deploying a contract having a timestamp in storage or calling a contract entry point taking a timestamp in parameter.
 
-## `@mavrykdynamics/taquito` - Allow users to customize the parser
+## `@mavrykdynamics/webmavryk` - Allow users to customize the parser
 
-Taquito makes internal uses of the `@mavrykdynamics/taquito-michel-codec` package on smart contract origination, allowing to convert Plain Michelson into JSON Michelson, expand Macros and validate Michelson to ensure its correctness. There is no change in this behavior, but we exposed a `parserProvider` at the MavrykToolkit level allowing users to customize if needed. By default, the `parserProvider` is an instance of `MichelCodecParser`.
+Taquito makes internal uses of the `@mavrykdynamics/webmavryk-michel-codec` package on smart contract origination, allowing to convert Plain Michelson into JSON Michelson, expand Macros and validate Michelson to ensure its correctness. There is no change in this behavior, but we exposed a `parserProvider` at the MavrykToolkit level allowing users to customize if needed. By default, the `parserProvider` is an instance of `MichelCodecParser`.
 
-## `@mavrykdynamics/taquito` - Accept amount, `fee`, `gasLimit`, and `storageLimit` as parameters of the `withContractCall` method
+## `@mavrykdynamics/webmavryk` - Accept amount, `fee`, `gasLimit`, and `storageLimit` as parameters of the `withContractCall` method
 
 Before version 14.1.0, it was impossible to specify the amount, the fee, the `gasLimit`, and the `storageLimit` when calling a smart contract entry point using the batch API via the withContractCall method. An optional parameter has been added to the method to support this feature and can be used as follows:
 
@@ -1137,7 +1137,7 @@ const batchOp = await batch.send();
 await batchOp.confirmation();
 ```
 
-## `@mavrykdynamics/taquito` - Support `string` or `number` for the `balance` property for contract origination
+## `@mavrykdynamics/webmavryk` - Support `string` or `number` for the `balance` property for contract origination
 
 The balance property was a string in the parameters to pass to originate a new contract. We changed to accept a number and string, which is more intuitive.
 
@@ -1147,7 +1147,7 @@ We are currently working on compatibility support for the Lima protocol.
 We are also investigating the integration of wallet connect 2 in Taquito.
 
 
-If you have feature or issue requests, please create an issue on http://github.com/ecadlabs/taquito/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
+If you have feature or issue requests, please create an issue on http://github.com/mavryk-network/webmavryk/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
 
 
 
@@ -1161,33 +1161,33 @@ Note for the users of the lower level APIs: injecting more than one manager oper
 
 ## Summary
 ### Kathmandu support
-- `@mavrykdynamics/taquito` - Support new operation `increase_paid_storage` on the Contract API #1767
-- `@mavrykdynamics/taquito-local-forging` - Support the `increase_paid_storage` operation and the `Emit` instruction #1766 #1742
-- `@mavrykdynamics/taquito-michel-codec` - Support EMIT instruction #1743
-- `@mavrykdynamics/taquito` - Replace `consumed_gas` with `consumed_milligas` #1769
-- `@mavrykdynamics/taquito-rpc` - Support new properties/operations for Kathmandu #1862 #1848
-- `@mavrykdynamics/taquito-rpc` - Add support for `run_script_view` endpoint #1750
+- `@mavrykdynamics/webmavryk` - Support new operation `increase_paid_storage` on the Contract API #1767
+- `@mavrykdynamics/webmavryk-local-forging` - Support the `increase_paid_storage` operation and the `Emit` instruction #1766 #1742
+- `@mavrykdynamics/webmavryk-michel-codec` - Support EMIT instruction #1743
+- `@mavrykdynamics/webmavryk` - Replace `consumed_gas` with `consumed_milligas` #1769
+- `@mavrykdynamics/webmavryk-rpc` - Support new properties/operations for Kathmandu #1862 #1848
+- `@mavrykdynamics/webmavryk-rpc` - Add support for `run_script_view` endpoint #1750
 
 ### New features
 - Sapling package
-- `@mavrykdynamics/taquito` - Added support for the `transfer_ticket` operation #1680
+- `@mavrykdynamics/webmavryk` - Added support for the `transfer_ticket` operation #1680
 
 ### Bug fixes
-- `@mavrykdynamics/taquito-michelson-encoder` - Display contract storage properly when it contains a `ticket` inside a `map` #1762
-- `@mavrykdynamics/taquito-michelson-encoder` - `Schema.generateSchema()` fails for `sapling_transaction_deprecated` #1763
-- `@mavrykdynamics/taquito-michel-codec`- Fixed comb pairs unpacking #1471
+- `@mavrykdynamics/webmavryk-michelson-encoder` - Display contract storage properly when it contains a `ticket` inside a `map` #1762
+- `@mavrykdynamics/webmavryk-michelson-encoder` - `Schema.generateSchema()` fails for `sapling_transaction_deprecated` #1763
+- `@mavrykdynamics/webmavryk-michel-codec`- Fixed comb pairs unpacking #1471
 
 ### Improvement
-- `@mavrykdynamics/taquito-http-utils` - Added request info to the `HttpRequestFailed` error #1091
-- `@mavrykdynamics/taquito` - Retrieve contract addresses from batched operation #1661
-- `@mavrykdynamics/taquito-michelson-encoder` - Accept hex prefixed with 0x as well #1624
-- `@mavrykdynamics/taquito` - Use the new `run_script_view` endpoint to execute on chain views #1750
+- `@mavrykdynamics/webmavryk-http-utils` - Added request info to the `HttpRequestFailed` error #1091
+- `@mavrykdynamics/webmavryk` - Retrieve contract addresses from batched operation #1661
+- `@mavrykdynamics/webmavryk-michelson-encoder` - Accept hex prefixed with 0x as well #1624
+- `@mavrykdynamics/webmavryk` - Use the new `run_script_view` endpoint to execute on chain views #1750
 
 ### Documentation
 - Added documentation feedback to Taquito website #1732
 - Fixed live code example - try temple wallet was getting an error about bad parameters #1698
-- Added documentation on TORU deposit/withdrawals: https://taquito.mavryk.org/docs/next/tx_rollups
-- Added links to commercial nodes (submit a PR if some are missing): https://taquito.mavryk.org/docs/next/rpc_nodes/
+- Added documentation on TORU deposit/withdrawals: https://webmavryk.mavryk.org/docs/next/tx_rollups
+- Added links to commercial nodes (submit a PR if some are missing): https://webmavryk.mavryk.org/docs/next/rpc_nodes/
 
 ### Testing
 - Emptying an implicit account does not cost extra gas anymore #1771
@@ -1195,10 +1195,10 @@ Note for the users of the lower level APIs: injecting more than one manager oper
 
 ### Others
 - `@mavrykdynamics-taquito-beacon-wallet` - Updated `@airgap/beacon-dapp` to version 3.1.4
-- `@mavrykdynamics/taquito-local-forging` - Pure JS implementation #441
+- `@mavrykdynamics/webmavryk-local-forging` - Pure JS implementation #441
 
 
-## `@mavrykdynamics/taquito` - Support new operation `increase_paid_storage` on the Contract API
+## `@mavrykdynamics/webmavryk` - Support new operation `increase_paid_storage` on the Contract API
 
 The `increase_paid_storage` operation allows increasing the paid storage of a smart contract by a specified bytes amount. The smart contract owner doesn't have to do it; any user can increase the storage. The operation is of interest for high-traffic dapps as it allows prepaying for storage and prevents transactions from failing because of an unpredictable storage burn.
 
@@ -1214,17 +1214,17 @@ const op = await Mavryk.contract.increasePaidStorage({
 - `destination` is the address of the smart contract we want to increase the paid storage
 ```
 
-## `@mavrykdynamics/taquito-local-forger` - Support the `increase_paid_storage` operation and the `Emit` instruction
+## `@mavrykdynamics/webmavryk-local-forger` - Support the `increase_paid_storage` operation and the `Emit` instruction
 
 We added support to forge and parse the new operation kind `increase_paid_storage`.
 
 We added support for the new Michelson instruction `Emit`, which can emit contract events when part of a contract script.
 
-## `@mavrykdynamics/taquito-michel-codec` - Support EMIT instruction
+## `@mavrykdynamics/webmavryk-michel-codec` - Support EMIT instruction
 
-@mavrykdynamics/taquito-michel-codec is responsible, among others, for validating Michelson code to ensure its correctness. The package now supports the new `EMIT` instruction.
+@mavrykdynamics/webmavryk-michel-codec is responsible, among others, for validating Michelson code to ensure its correctness. The package now supports the new `EMIT` instruction.
 
-## `@mavrykdynamics/taquito` - Replace `consumed_gas` with `consumed_milligas`
+## `@mavrykdynamics/webmavryk` - Replace `consumed_gas` with `consumed_milligas`
 
 In Kathmandu, the property `consumed_gas` that was previously deprecated in favor of `consumed_milligas` has been removed.
 
@@ -1232,7 +1232,7 @@ In Taquito (Contract API), the classes that extend the `Operation` class like `B
 
 On the wallet API side, the `WalletOperation` class has a `receipt` method that returns a `Receipt` object containing a `totalGas` property. It is now calculated based on the consumed milligas, and we added an additional `totalMilliGas` property.
 
-## `@mavrykdynamics/taquito-rpc` - Support new properties/operations for Kathmandu
+## `@mavrykdynamics/webmavryk-rpc` - Support new properties/operations for Kathmandu
 
 Kathmandu brings new operation kinds that can be found in a block response. New interfaces representing the new operations have been added to the `OperationContents` and `OperationContentsAndResult` types of the RPC package. The new operation kinds are: `increase_paid_storage`, `vdf_revelation`.  There is also a new internal operation named `event`.
 
@@ -1240,7 +1240,7 @@ The `DelegatesResponse` interface returned by the `getDelegates` method on the `
 
 The `ConstantsResponse` type returned by the `getConstants` method on the `RpcCLient` has the new properties `max_wrapped_proof_binary_size`, `nonce_revelation_threshold`, `vdf_difficulty`, `testnet_dictator`,`dal_parametric`, `sc_rollup_stake_amount`, `sc_rollup_commitment_period_in_blocks`, `sc_rollup_max_lookahead_in_blocks`, `sc_rollup_max_active_outbox_levels`, `sc_rollup_max_outbox_messages_per_level`.
 
-## `@mavrykdynamics/taquito-rpc` - Add support for `run_script_view` endpoint
+## `@mavrykdynamics/webmavryk-rpc` - Add support for `run_script_view` endpoint
 
 We added a new method named `runScriptView` on the `RpcClient` class to simulate a contract view. The parameter and response types of the method are as follows:
 
@@ -1266,14 +1266,14 @@ RunScriptViewResult = {
 
 ## Sapling package
 
-We implemented a package `@mavrykdynamics/taquito-sapling` providing functionality for Sapling. For documentation, please refer to the following link: https://taquito.mavryk.org/docs/next/sapling
+We implemented a package `@mavrykdynamics/webmavryk-sapling` providing functionality for Sapling. For documentation, please refer to the following link: https://webmavryk.mavryk.org/docs/next/sapling
 
 We added a post-install script that fetches the z cash parameters required to initialize the sapling state. Excluding the files from the package avoids having an unsustainable bundle size.
-The files `saplingOutputParams.js` and `saplingSpendParams.js` will be created in the users `node_modules/@mavrykdynamics/taquito-sapling` folder and avoid them having to download and inject those files.
+The files `saplingOutputParams.js` and `saplingSpendParams.js` will be created in the users `node_modules/@mavrykdynamics/webmavryk-sapling` folder and avoid them having to download and inject those files.
 
 As the next steps for the sapling package, we will provide interfaces for the key providers, making it easier to generate the proof and produced signature from a remote signer or a ledger. We currently offer an `InMemorySpendingKey` that must be used appropriately, given your risk profile. We will be looking for integration with wallets as well.
 
-## `@mavrykdynamics/taquito` - Added support for the `transfer_ticket` operation
+## `@mavrykdynamics/webmavryk` - Added support for the `transfer_ticket` operation
 
 The `transfer_ticket` operation allows transferring tickets from an implicit account to a smart contract.
 
@@ -1295,27 +1295,27 @@ const op = await Mavryk.contract.transferTicket({
 - `ticketContents`, `ticketTy`, and `ticketTicketer` can be retrieved from the tx rollup client
 ```
 
-## `@mavrykdynamics/taquito-michelson-encoder` - Display contract storage properly when it contains a `ticket` inside a `map`
+## `@mavrykdynamics/webmavryk-michelson-encoder` - Display contract storage properly when it contains a `ticket` inside a `map`
 
 We fixed a bug in the michelson-encoder package that prevented displaying the contract storage when it contained tickets inside a map.
 
-## `@mavrykdynamics/taquito-michelson-encoder` - `Schema.generateSchema()` fails for `sapling_transaction_deprecated`
+## `@mavrykdynamics/webmavryk-michelson-encoder` - `Schema.generateSchema()` fails for `sapling_transaction_deprecated`
 
 Support was missing for `sapling_transaction_deprecated` in the michelson-encoder package and has been added.
 
-## `@mavrykdynamics/taquito-http-utils` - Added request info to the `HttpRequestFailed` error
+## `@mavrykdynamics/webmavryk-http-utils` - Added request info to the `HttpRequestFailed` error
 
 We added the Url and method to the `HttpRequestFailed` error message. This change will make it easier to diagnose timeout error, which was only returning `Request timed out after: 30000ms`.
 
-## `@mavrykdynamics/taquito` - Retrieve contract addresses from batched operation
+## `@mavrykdynamics/webmavryk` - Retrieve contract addresses from batched operation
 
 Added a method named `getOriginatedContractAddresses` on the `BatchWalletOperation` and the `BatchOperation`, which returns an array of contract addresses deployed in the batch. If there is no origination operation, the array will be empty.
 
-## `@mavrykdynamics/taquito-michelson-encoder` - Accept hex prefixed with 0x as well
+## `@mavrykdynamics/webmavryk-michelson-encoder` - Accept hex prefixed with 0x as well
 
 Taquito only accepted hex bytes without the 0x prefix. We added support for this format too.
 
-## `@mavrykdynamics/taquito` - Use the new `run_script_view` endpoint to execute on chain views
+## `@mavrykdynamics/webmavryk` - Use the new `run_script_view` endpoint to execute on chain views
 
 The execution of the on-chain views previously relied on the `helpers/scripts/run_code` RPC endpoint. Since there is a new dedicated RPC endpoint, we refactored the implementation to use it. This change makes the code simpler and reduces the number of calls to the RPC by two, as we don't need to retrieve the balance and storage of the contract to execute the view anymore. The refactor is internal and doesn't imply breaking changes to the APIs.
 
@@ -1327,11 +1327,11 @@ We added a feedback component at the bottom of each documentation page. We encou
 
 We are now using the beacon-dapp's `getDAppClientInstance` method instead of the `new DAppClient`. This new method ensures that only one instance is created. The same cached instance is returned if called multiple times.
 
-## `@mavrykdynamics/taquito-local-forging` - Pure JS implementation
+## `@mavrykdynamics/webmavryk-local-forging` - Pure JS implementation
 
 To accommodate users working in native mobile development, we added a separate pure JS bundle that can be imported.
-The bundle wraps functions in the `@mavrykdynamics/taquito-local-forging` package into a single variable called `taquito_local_forging`.
-To use the JS bundle for your project, download the zip file under `Assets` on the [release page](https://github.com/ecadlabs/taquito/releases).
+The bundle wraps functions in the `@mavrykdynamics/webmavryk-local-forging` package into a single variable called `taquito_local_forging`.
+To use the JS bundle for your project, download the zip file under `Assets` on the [release page](https://github.com/mavryk-network/webmavryk/releases).
 
 
 After that, copy the `.js` file and the `.map.js` file into your project.
@@ -1354,31 +1354,31 @@ The `NaiveEstimateProvider` class that was deprecated in v11 has been removed.
 
 ## Summary
 ### Jakarta support
-- `@mavrykdynamics/taquito-rpc` - Allow retrieving the state and inbox of a rollup #1617
-- `@mavrykdynamics/taquito-rpc` - Added appropriate types related to TORU #1614, #1676
-- `@mavrykdynamics/taquito-local-forging` - Added support for the operations `transfer_ticket`, `tx_rollup_origination` and `tx_rollup_submit_batch` #1615
-- `@mavrykdynamics/taquito-michelson-encoder` - Added support for the new type`tx_rollup_l2_address` #1613
-- `@mavrykdynamics/taquito-michel-codec` - Added support for the new type`tx_rollup_l2_address` and the new instruction `MIN_BLOCK_TIME` #1612
-- `@mavrykdynamics/taquito-michel-codec` - Annotating the top-level parameter constructor to designate the root entry point is now forbidden #1611
-- `@mavrykdynamics/taquito` - Added support for the `tx_rollup_origination` and `tx_rollup_submit_batch` operations #1616
+- `@mavrykdynamics/webmavryk-rpc` - Allow retrieving the state and inbox of a rollup #1617
+- `@mavrykdynamics/webmavryk-rpc` - Added appropriate types related to TORU #1614, #1676
+- `@mavrykdynamics/webmavryk-local-forging` - Added support for the operations `transfer_ticket`, `tx_rollup_origination` and `tx_rollup_submit_batch` #1615
+- `@mavrykdynamics/webmavryk-michelson-encoder` - Added support for the new type`tx_rollup_l2_address` #1613
+- `@mavrykdynamics/webmavryk-michel-codec` - Added support for the new type`tx_rollup_l2_address` and the new instruction `MIN_BLOCK_TIME` #1612
+- `@mavrykdynamics/webmavryk-michel-codec` - Annotating the top-level parameter constructor to designate the root entry point is now forbidden #1611
+- `@mavrykdynamics/webmavryk` - Added support for the `tx_rollup_origination` and `tx_rollup_submit_batch` operations #1616
 
 ### Documentation
-- Remove outdated RPC nodes: https://taquito.mavryk.org/docs/next/rpc_nodes/
+- Remove outdated RPC nodes: https://webmavryk.mavryk.org/docs/next/rpc_nodes/
 - Fixed broken links #1629
 
 ### Others
 - Add to The Taquito Integration Tests the Contract Security tests from InferenceAG / TezosSecurityBaselineChecking #1631, #1632, #1654
-- `@mavrykdynamics/taquito-beacon-wallet` - The beacon-dapp is updated to version 3.1.1: https://github.com/airgap-it/beacon-sdk/releases/tag/v3.1.1
+- `@mavrykdynamics/webmavryk-beacon-wallet` - The beacon-dapp is updated to version 3.1.1: https://github.com/airgap-it/beacon-sdk/releases/tag/v3.1.1
 
 
 
-## `@mavrykdynamics/taquito-rpc` - Allow retrieving the state and inbox of a rollup
+## `@mavrykdynamics/webmavryk-rpc` - Allow retrieving the state and inbox of a rollup
 
 A new method named `getTxRollupState`, which allows accessing a rollup's state, has been added to the `RpcClient` class. It takes a `txRollupId` (a `string`) as a parameter.
 
 A new method named `getTxRollupInbox`, which allows accessing the inbox of a transaction rollup, has been added to the RpcClient class. It takes a `txRollupId` as a parameter and a `blockLevel`.
 
-## `@mavrykdynamics/taquito-rpc` - Added appropriate types related to TORU
+## `@mavrykdynamics/webmavryk-rpc` - Added appropriate types related to TORU
 
 TORU brings several new operation kinds that can be found in a block response. New interfaces representing the new operations have been added to the `OperationContents` and `OperationContentsAndResult` types of the RPC package. The new operation kinds are: `Tx_rollup_origination`, `Tx_rollup_submit_batch`, `Tx_rollup_commit`, `Tx_rollup_return_bond`, `Tx_rollup_finalize_commitment`, `Tx_rollup_remove_commitment`, `Tx_rollup_rejection`, `Tx_rollup_dispatch_tickets` and `Transfer_ticket`.
 
@@ -1398,16 +1398,16 @@ The `liquidity_baking_escape_ema` property in `BlockMetadata` is replaced by `li
 
 The `RPCRunOperationParam` parameter has new optional properties: `self`, `unparsing_mode`, `now` and `level`.
 
-## `@mavrykdynamics/taquito-local-forging` -Added support for the operations `transfer_ticket`, `tx_rollup_origination` and `tx_rollup_submit_batch`
+## `@mavrykdynamics/webmavryk-local-forging` -Added support for the operations `transfer_ticket`, `tx_rollup_origination` and `tx_rollup_submit_batch`
 
 Added support to forge and unforge the new operation kinds `transfer_ticket`, `tx_rollup_origination` and `tx_rollup_submit_batch` related to TORU. We plan to add support for the remaining operations in a subsequent release.
 
-## `@mavrykdynamics/taquito-michelson-encoder` - Added support for the the new type`tx_rollup_l2_address`
+## `@mavrykdynamics/webmavryk-michelson-encoder` - Added support for the the new type`tx_rollup_l2_address`
 
 We created a new class `TxRollupL2AddressToken` in the michelson-encoder to support the new Michelson type `tx_rollup_l2_address`. This type is used to identify accounts on transaction rollups' ledgers. Those accounts are prefixed with `mv4`.
 The `TxRollupL2AddressToken` class allows users of Taquito to pass `mv4` addresses in storage or smart contract entry points using the Taquito JS abstraction.
 
-## `@mavrykdynamics/taquito-michel-codec` - Added support for the new type`tx_rollup_l2_address` and the new instruction `MIN_BLOCK_TIME`
+## `@mavrykdynamics/webmavryk-michel-codec` - Added support for the new type`tx_rollup_l2_address` and the new instruction `MIN_BLOCK_TIME`
 
 @taquitp/michel-codec is responsible, among others, for validating Michelson code to ensure its correctness. The package now supports the new `MIN_BLOCK_TIME` instruction and the `tx_rollup_l2_address` type.
 
@@ -1415,7 +1415,7 @@ The `TxRollupL2AddressToken` class allows users of Taquito to pass `mv4` address
 
 *Reference: https://protocol.mavryk.org/protocols/013jakarta.html#michelson*
 
-## `@mavrykdynamics/taquito-michel-codec` - Annotating the top-level parameter constructor to designate the root entry point is now forbidden
+## `@mavrykdynamics/webmavryk-michel-codec` - Annotating the top-level parameter constructor to designate the root entry point is now forbidden
 
 If the top-level parameter constructor is annotated when parsing a contract, a `MichelsonValidationError` exception will be thrown.
 
@@ -1423,7 +1423,7 @@ If the top-level parameter constructor is annotated when parsing a contract, a `
 
 *Reference: https://protocol.mavryk.org/protocols/013jakarta.html#michelson*
 
-## `@mavrykdynamics/taquito` - Added support for the `tx_rollup_origination` and `tx_rollup_submit_batch` operations
+## `@mavrykdynamics/webmavryk` - Added support for the `tx_rollup_origination` and `tx_rollup_submit_batch` operations
 
 We added support on the contract, batch, and estimate API allowing users to deploy a tx rollup using Taquito and send a batch to a tx rollup.
 
@@ -1458,13 +1458,13 @@ The `txRollupSubmitBatch` method also takes optional `storageLimit`, `gasLimit` 
 - Compatibility with the Jakarta protocol
 
 ### Improvements
-- `@mavrykdynamics/taquito` - Avoid doing POST call to fetch contract script with the RPC #1532
+- `@mavrykdynamics/webmavryk` - Avoid doing POST call to fetch contract script with the RPC #1532
 - Review and improve Error classes in Taquito #1472
-- `@mavrykdynamics/taquito-http-utils` - Make HttpBackend.defaultTimeout configurable #751
-- `@mavrykdynamics/taquito-local-forging` - Reject Invalid Inputs When Forging #483
+- `@mavrykdynamics/webmavryk-http-utils` - Make HttpBackend.defaultTimeout configurable #751
+- `@mavrykdynamics/webmavryk-local-forging` - Reject Invalid Inputs When Forging #483
 
 ### Documentation
-- How to capture failwith errors: https://taquito.mavryk.org/docs/next/failwith_errors
+- How to capture failwith errors: https://webmavryk.mavryk.org/docs/next/failwith_errors
 
 
 
@@ -1472,11 +1472,11 @@ The `txRollupSubmitBatch` method also takes optional `storageLimit`, `gasLimit` 
 We addressed the Jakarta protocol's breaking changes, making this version of Taquito compatible with the Jakarta protocol. This early integration has been possible by using the Mondaynet testnet.
 
 The Jakarta protocol addresses the [malleability issue](https://protocol.mavryk.org/alpha/sapling.html#preventing-malleability) discovered in Sapling. It introduces changes around the sapling related types and instructions that are now supported in Taquito:
-- The encoding of `sapling_transaction` has changed; we added support for it in the `@mavrykdynamics/taquito-local-forging` package and support for `sapling_transaction_deprecated`.
+- The encoding of `sapling_transaction` has changed; we added support for it in the `@mavrykdynamics/webmavryk-local-forging` package and support for `sapling_transaction_deprecated`.
 
-- The optional type returned by the `SAPLING_VERIFY_UPDATE` instruction contains an additional property named `bound_data`. We added support for it in the `@mavrykdynamics/taquito-michel-codec` package.
+- The optional type returned by the `SAPLING_VERIFY_UPDATE` instruction contains an additional property named `bound_data`. We added support for it in the `@mavrykdynamics/webmavryk-michel-codec` package.
 
-This release introduces some breaking changes in the `@mavrykdynamics/taquito-rpc` package:
+This release introduces some breaking changes in the `@mavrykdynamics/webmavryk-rpc` package:
 - The type of the proposal response items returned by the `getProposals` methods has changed from `[string, number]` to `[string, BigNumber]`.
 - The type of the properties in the response of the `getBallots` methods have changed from `number` to `BigNumber`.
 - In the response of `getVotesListings`, the field `rolls` is now optional as it has been replaced by `voting_power`, which type is a `BigNumber`.
@@ -1484,7 +1484,7 @@ This release introduces some breaking changes in the `@mavrykdynamics/taquito-rp
 
 Note that support for new features brought by the Jakarta protocol is not part of the current release.
 
-## `@mavrykdynamics/taquito` - Avoid doing POST call to fetch contract script with the RPC
+## `@mavrykdynamics/webmavryk` - Avoid doing POST call to fetch contract script with the RPC
 
 In the latest versions, the RPC `context/contracts/{contractAddress}/script/normalized` endpoint was used to fetch the script when building the contract abstraction. This endpoint which is a POST call has been replaced with `context/contracts/{contractAddress}`, which is a GET call instead. The reason for changing the endpoints is that it is more convenient to avoid POST calls when reading from the chain, as this prevents caching using standard HTTP caches. Also, both endpoints return expanded global constants for all protocols so far.
 
@@ -1494,7 +1494,7 @@ Many error classes in Taquito returned a regular `Error` class. We adjusted them
 
 Note that this improvement results in a potential breaking change for users who were catching the regular Error.
 
-## `@mavrykdynamics/taquito-http-utils` - Make HttpBackend.defaultTimeout configurable
+## `@mavrykdynamics/webmavryk-http-utils` - Make HttpBackend.defaultTimeout configurable
 
 The timeout has been added to the construction of the HttpBackend class with a default value of 30000 milliseconds.
 
@@ -1511,13 +1511,13 @@ new RpcClient('url', 'chain', new HttpBackend(50000));
 - Compatibility with the Jakarta protocol
 
 ### Improvements
-- `@mavrykdynamics/taquito` - Avoid doing POST call to fetch contract script with the RPC #1532
+- `@mavrykdynamics/webmavryk` - Avoid doing POST call to fetch contract script with the RPC #1532
 - Review and improve Error classes in Taquito #1472
-- `@mavrykdynamics/taquito-http-utils` - Make HttpBackend.defaultTimeout configurable #751
-- `@mavrykdynamics/taquito-local-forging` - Reject Invalid Inputs When Forging #483
+- `@mavrykdynamics/webmavryk-http-utils` - Make HttpBackend.defaultTimeout configurable #751
+- `@mavrykdynamics/webmavryk-local-forging` - Reject Invalid Inputs When Forging #483
 
 ### Documentation
-- How to capture failwith errors: https://taquito.mavryk.org/docs/next/failwith_errors
+- How to capture failwith errors: https://webmavryk.mavryk.org/docs/next/failwith_errors
 
 
 
@@ -1525,11 +1525,11 @@ new RpcClient('url', 'chain', new HttpBackend(50000));
 We addressed the Jakarta protocol's breaking changes, making this version of Taquito compatible with the Jakarta protocol. This early integration has been possible by using the Mondaynet testnet.
 
 The Jakarta protocol addresses the [malleability issue](https://protocol.mavryk.org/alpha/sapling.html#preventing-malleability) discovered in Sapling. It introduces changes around the sapling related types and instructions that are now supported in Taquito:
-- The encoding of `sapling_transaction` has changed; we added support for it in the `@mavrykdynamics/taquito-local-forging` package and support for `sapling_transaction_deprecated`.
+- The encoding of `sapling_transaction` has changed; we added support for it in the `@mavrykdynamics/webmavryk-local-forging` package and support for `sapling_transaction_deprecated`.
 
-- The optional type returned by the `SAPLING_VERIFY_UPDATE` instruction contains an additional property named `bound_data`. We added support for it in the `@mavrykdynamics/taquito-michel-codec` package.
+- The optional type returned by the `SAPLING_VERIFY_UPDATE` instruction contains an additional property named `bound_data`. We added support for it in the `@mavrykdynamics/webmavryk-michel-codec` package.
 
-This release introduces some breaking changes in the `@mavrykdynamics/taquito-rpc` package:
+This release introduces some breaking changes in the `@mavrykdynamics/webmavryk-rpc` package:
 - The type of the proposal response items returned by the `getProposals` methods has changed from `[string, number]` to `[string, BigNumber]`.
 - The type of the properties in the response of the `getBallots` methods have changed from `number` to `BigNumber`.
 - In the response of `getVotesListings`, the field `rolls` is now optional as it has been replaced by `voting_power`, which type is a `BigNumber`.
@@ -1537,7 +1537,7 @@ This release introduces some breaking changes in the `@mavrykdynamics/taquito-rp
 
 Note that support for new features brought by the Jakarta protocol is not part of the current release.
 
-## `@mavrykdynamics/taquito` - Avoid doing POST call to fetch contract script with the RPC
+## `@mavrykdynamics/webmavryk` - Avoid doing POST call to fetch contract script with the RPC
 
 In the latest versions, the RPC `context/contracts/{contractAddress}/script/normalized` endpoint was used to fetch the script when building the contract abstraction. This endpoint which is a POST call has been replaced with `context/contracts/{contractAddress}`, which is a GET call instead. The reason for changing the endpoints is that it is more convenient to avoid POST calls when reading from the chain, as this prevents caching using standard HTTP caches. Also, both endpoints return expanded global constants for all protocols so far.
 
@@ -1547,7 +1547,7 @@ Many error classes in Taquito returned a regular `Error` class. We adjusted them
 
 Note that this improvement results in a potential breaking change for users who were catching the regular Error.
 
-## `@mavrykdynamics/taquito-http-utils` - Make HttpBackend.defaultTimeout configurable
+## `@mavrykdynamics/webmavryk-http-utils` - Make HttpBackend.defaultTimeout configurable
 
 The timeout has been added to the construction of the HttpBackend class with a default value of 30000 milliseconds.
 
@@ -1563,34 +1563,34 @@ new RpcClient('url', 'chain', new HttpBackend(50000));
 
 # Taquito v12.0.0-beta
 
-**Please note the presence of two breaking changes in this release. Refer to the following link for a guide to upgrade from version 11 to 12:** https://taquito.mavryk.org/docs/upgrading_guide
+**Please note the presence of two breaking changes in this release. Refer to the following link for a guide to upgrade from version 11 to 12:** https://webmavryk.mavryk.org/docs/upgrading_guide
 
 ## Summary
 ### Ithaca support
-- @mavrykdynamics/taquito-local-forging - Support forging and parsing of endorsement operation #1288
-- @mavrykdynamics/taquito-local-forging - Support for the new `SUB_MUMAV` instruction #1292
-- @mavrykdynamics/taquito-rpc - Updated the `RpcClient` types based on the changes to the balance updates and the new type of operations #1255
-- @mavrykdynamics/taquito-rpc - Updated signature of the `getEndorsingRights` and `getBakingRights` methods #1256
-- @mavrykdynamics/taquito-michel-codec - Support for the `SUB_MUMAV` instruction and the `Map` instruction applied to an optional type #1291
+- @mavrykdynamics/webmavryk-local-forging - Support forging and parsing of endorsement operation #1288
+- @mavrykdynamics/webmavryk-local-forging - Support for the new `SUB_MUMAV` instruction #1292
+- @mavrykdynamics/webmavryk-rpc - Updated the `RpcClient` types based on the changes to the balance updates and the new type of operations #1255
+- @mavrykdynamics/webmavryk-rpc - Updated signature of the `getEndorsingRights` and `getBakingRights` methods #1256
+- @mavrykdynamics/webmavryk-michel-codec - Support for the `SUB_MUMAV` instruction and the `Map` instruction applied to an optional type #1291
 - Updated Taquito website live code examples to use ithacanet #1441
 
 ### New feature
-- @mavrykdynamics/taquito - Introduction of a "Read" interface #1389
+- @mavrykdynamics/webmavryk - Introduction of a "Read" interface #1389
 
 ### Improvements
-- @mavrykdynamics/taquito-signer, @mavrykdynamics/taquito-remote-signer and @mavrykdynamics/taquito-ledger-signer - Replacement of libsodium with stablelib #991
-- @mavrykdynamics/taquito - Use the RPC `run_view` to execute lambda views #1298
-- @mavrykdynamics/taquito - Replacement of some RPC methods for performance purposes #1348
-- @mavrykdynamics/taquito - Use the `LocalForger` by default instead of the `RpcForger` #1401
-- @mavrykdynamics/taquito-http-utils - Replaced the use of `xhr2-cookies` with `axios` #1113
-- Integration tests - Rewrote the contract-permit test (TZIP-17) #1095: https://github.com/ecadlabs/taquito/blob/master/integration-tests/contract-permits.spec.ts
+- @mavrykdynamics/webmavryk-signer, @mavrykdynamics/webmavryk-remote-signer and @mavrykdynamics/webmavryk-ledger-signer - Replacement of libsodium with stablelib #991
+- @mavrykdynamics/webmavryk - Use the RPC `run_view` to execute lambda views #1298
+- @mavrykdynamics/webmavryk - Replacement of some RPC methods for performance purposes #1348
+- @mavrykdynamics/webmavryk - Use the `LocalForger` by default instead of the `RpcForger` #1401
+- @mavrykdynamics/webmavryk-http-utils - Replaced the use of `xhr2-cookies` with `axios` #1113
+- Integration tests - Rewrote the contract-permit test (TZIP-17) #1095: https://github.com/mavryk-network/webmavryk/blob/master/integration-tests/contract-permits.spec.ts
 
 ### Bug Fixes
-- @mavrykdynamics/taquito - Fixed the `ContractAbstraction` instantiated by the `contract` method of the `OriginationWalletOperation` class #1379
-- @mavrykdynamics/taquito - Allow estimating operations using a wallet #1387
+- @mavrykdynamics/webmavryk - Fixed the `ContractAbstraction` instantiated by the `contract` method of the `OriginationWalletOperation` class #1379
+- @mavrykdynamics/webmavryk - Allow estimating operations using a wallet #1387
 
 ### Documentation
-- Examples of using the BeaconWallet instance as a singleton #1045: https://taquito.mavryk.org/docs/beaconwallet-singleton
+- Examples of using the BeaconWallet instance as a singleton #1045: https://webmavryk.mavryk.org/docs/beaconwallet-singleton
 - Fixed link to Mavryk faucet #1383
 - Updated all website examples to show contract and wallet API example variants #493
 - Algolia improvements - Fixed search bar returning dead links and duplicates #1411
@@ -1598,7 +1598,7 @@ new RpcClient('url', 'chain', new HttpBackend(50000));
 
 
 
-## @mavrykdynamics/taquito-local-forging - Support forging and parsing of endorsement operations
+## @mavrykdynamics/webmavryk-local-forging - Support forging and parsing of endorsement operations
 
 The layout of the endorsement operations has changed in the Ithaca protocol. We added support for the new schema in the `LocalForger` class.
 
@@ -1622,7 +1622,7 @@ Example of an endorsement before Ithaca:
 }
 ```
 
-## @mavrykdynamics/taquito-local-forging - Support for the new instruction `SUB_MUMAV`
+## @mavrykdynamics/webmavryk-local-forging - Support for the new instruction `SUB_MUMAV`
 
 We added support to forge and parse operations containing the new `SUB_MUMAV` instruction in the `Localforger` class.
 
@@ -1630,7 +1630,7 @@ We added support to forge and parse operations containing the new `SUB_MUMAV` in
 
 *source: https://protocol.mavryk.org/protocols/012ithaca.html#michelson*
 
-## @mavrykdynamics/taquito-rpc - Updated the `RpcClient` types based on the changes to the balance updates and the new type of operations
+## @mavrykdynamics/webmavryk-rpc - Updated the `RpcClient` types based on the changes to the balance updates and the new type of operations
 
 Support has been added to represent the new operations `Preendorsement`, `Double_preendorsement_evidence`, `Set_deposits_limit`, and the new properties in operations result for `Endorsement` operations.
 
@@ -1645,7 +1645,7 @@ The new origin for balance update is `simulation`.
 
 For more information on the balance update changes, refer to https://protocol.mavryk.org/protocols/tenderbake.html#metadata
 
-## @mavrykdynamics/taquito-rpc - Updated signature of the `getEndorsingRights` and `getBakingRights` methods
+## @mavrykdynamics/webmavryk-rpc - Updated signature of the `getEndorsingRights` and `getBakingRights` methods
 
 **getEndorsingRights**
 
@@ -1713,11 +1713,11 @@ Response example for hangzhounet:
       }...
 ]
 ```
-## @mavrykdynamics/taquito-michel-codec - Support for the `SUB_MUMAV` instruction and the `MAP` instruction applied to an optional type
+## @mavrykdynamics/webmavryk-michel-codec - Support for the `SUB_MUMAV` instruction and the `MAP` instruction applied to an optional type
 
 `@taquitp/michel-codec` is responsible, among others, to validate Michelson code to ensure its correctness. The package now supports the new `SUB_MUMAV` instruction and the `MAP` instruction applied to values of optional type.
 
-## @mavrykdynamics/taquito - Introduction of a "Read" interface
+## @mavrykdynamics/webmavryk - Introduction of a "Read" interface
 
 When using Taquito, all data retrieved from the blockchain are obtained using an RPC by default. For example, all required data for preparing an operation are fetched by doing different queries to a configured RPC node. Those data could be obtained using another medium (i.e., an Indexer), which would reduce the load on the nodes. With this in mind, we defined a new interface in Taquito named `MvReadProvider` and a new provider on the `MavrykToolkit` named `readProvider`. The `readProvider` defaults to the RPC as before. The goal would be to have the different indexers implement the `MvReadProvider` interface allowing users to configure their `MavrykToolkit` to fetch data from indexers instead of from the RPC.
 
@@ -1741,7 +1741,7 @@ Mavryk.setStreamProvider(Mavryk.getFactory(PollingSubscribeProvider)({ pollingIn
 
 These changes consist of preliminary work to better support indexers in Taquito; there will be more to come on this in the near future.
 
-## @mavrykdynamics/taquito-signer, @mavrykdynamics/taquito-remote-signer and @mavrykdynamics/taquito-ledger-signer - Replacement of libsodium with stablelib
+## @mavrykdynamics/webmavryk-signer, @mavrykdynamics/webmavryk-remote-signer and @mavrykdynamics/webmavryk-ledger-signer - Replacement of libsodium with stablelib
 
 [Libsodium](https://github.com/jedisct1/libsodium.js) has been replaced with much smaller minified libraries from [Stablelib](https://github.com/StableLib/stablelib). Thanks to [Geo25rey](https://github.com/Geo25rey), who suggested this alternative library.
 
@@ -1752,10 +1752,10 @@ Reduction of the bundle size:
 | Libsodium | 795kB    | 813.3kB      | 790.6kB        |
 | Stablelib | 254.9kB  | 254.1kB      | 232.2kB        |
 
-## @mavrykdynamics/taquito - Use the RPC `run_view` to execute lambda views
+## @mavrykdynamics/webmavryk - Use the RPC `run_view` to execute lambda views
 
 Before version 12, we used a constantly failing lambda contract to execute the tzip4 (lambda) views. The result of the view was retrieved in the returned error. This implementation was a workaround, and since the Hangzhou protocol, the RPC exposes an endpoint (`helpers/scripts/run_view`) allowing us to execute that kind of view.
-We implemented a method called `runView` in the `@mavrykdynamics/taquito-rpc` package, and we now use this method to execute the tzip4 views.
+We implemented a method called `runView` in the `@mavrykdynamics/webmavryk-rpc` package, and we now use this method to execute the tzip4 views.
 
 Before version 12, the lambda view was only enabled on the "contract" and not the "wallet" API as it relied on getting the result from an error. The feature is now enabled on the "wallet" API too.
 
@@ -1768,31 +1768,31 @@ const contractView = await rpcContractProvider.at(contractAddress);
 const result = await contractView.views.getBalance(arg).read(chainId)
 ```
 
-Follow this link for full documentation on the lambda view feature: https://taquito.mavryk.org/docs/lambda_view
+Follow this link for full documentation on the lambda view feature: https://webmavryk.mavryk.org/docs/lambda_view
 
-## @mavrykdynamics/taquito - Replacement of some RPC methods for performance purposes
+## @mavrykdynamics/webmavryk - Replacement of some RPC methods for performance purposes
 
 The Taquito codebase is doing different calls to the RPC to construct the various operations or prepare the different requests. Thanks to Michael Zaikin's suggestions, we did the following optimizations:
 - Retrieve the `chain_id` using the `getChainId` method of the `RpcClient` instead of `getBlockHeader` as it can be cached.
 - Retrieve the `timestamp` and `level` using `getBlockHeader` instead of `getBlock` to reduce the response payload size.
 - Implemented a new method named `getProtocols` on the `RpcClient` class using the RPC `protocols` endpoint.  In the codebase, we are now retrieving the next protocol value using the `getProtocols` method instead of `getBlockMetadata` as it offers the possibility to be cached at least for a cycle.
 
-## @mavrykdynamics/taquito - Use the LocalForger by default instead of the RpcForger
+## @mavrykdynamics/webmavryk - Use the LocalForger by default instead of the RpcForger
 
 Before version 12, the default forger set on the `MavrykToolkit` was the `RpcForger`. It is important to ensure that the node is trusted when forging with the RPC and users can change the forger implementation by calling the `setForgerProvider` method.
-As the Taquito local forging implementation provided in the `@mavrykdynamics/taquito-local-forger` package has been battle-tested in the past month, we decided to change the default forger configured in the `MavrykToolkit` in favor of the local one.
+As the Taquito local forging implementation provided in the `@mavrykdynamics/webmavryk-local-forger` package has been battle-tested in the past month, we decided to change the default forger configured in the `MavrykToolkit` in favor of the local one.
 
 
 Note that Taquito also provides a composite forger to validate the forged bytes against different implementations. The composite forger gives the most protection against supply chain attacks on Taquito and malicious RPCs.
-Follow this [link](https://taquito.mavryk.org/docs/forger) for an example of how to configure a composite forger.
+Follow this [link](https://webmavryk.mavryk.org/docs/forger) for an example of how to configure a composite forger.
 
-## @mavrykdynamics/taquito-http-utils - Replaced use of `xhr2-cookies` by `axios`
+## @mavrykdynamics/webmavryk-http-utils - Replaced use of `xhr2-cookies` by `axios`
 
-The `@mavrykdynamics/taquito-http-utils` package was using the `xhr2-cookies` library which acts as a XMLHttpRequest polyfill for node. However, the library is not actively maintained and uses the deprecated `new Buffer()`, which fires the following warning in scripts using Taquito: `(node:14846) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.`
+The `@mavrykdynamics/webmavryk-http-utils` package was using the `xhr2-cookies` library which acts as a XMLHttpRequest polyfill for node. However, the library is not actively maintained and uses the deprecated `new Buffer()`, which fires the following warning in scripts using Taquito: `(node:14846) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.`
 
 The usage of `xhr2-cookies` has been replaced with `axios`, which works both on the browser and Node.js.
 
-## @mavrykdynamics/taquito - Fixed the `ContractAbstraction` instantiated by the `contract` method of the `OriginationWalletOperation` class
+## @mavrykdynamics/webmavryk - Fixed the `ContractAbstraction` instantiated by the `contract` method of the `OriginationWalletOperation` class
 
 A bug has been fixed where the `ContractAbstraction` instance created by calling the `contract` method on an `OriginationWalletOperation` instance was unusable. The configured wallet was not cloned correctly in the internal context class and resulted in an `UnconfiguredSignerError` if trying to call an entry point of the contract.
 
@@ -1809,7 +1809,7 @@ const contract = await origination.contract();
 await contact.methods.methodName().send();
 ```
 
-## @mavrykdynamics/taquito - Allow estimating operations using a wallet
+## @mavrykdynamics/webmavryk - Allow estimating operations using a wallet
 
 The estimate API only worked with a configured signer and not a wallet. It has been fixed to allow estimation of operations using a configured wallet.
 Note that the wallet account needs to be revealed to conduct any estimate as Taquito has no access to the wallet's public key required to simulate a reveal operation.
@@ -1819,41 +1819,41 @@ Note that the wallet account needs to be revealed to conduct any estimate as Taq
 ## Summary
 ### New features
 
-- @mavrykdynamics/taquito-utils - Implemented additional hash checksum validation functions in Taquito #95
+- @mavrykdynamics/webmavryk-utils - Implemented additional hash checksum validation functions in Taquito #95
 
 ### Improvements
 
 - Upgrade to ES6 #1020
-- @mavrykdynamics/taquito-signer - Removed dependency on bip39, which has unneeded translation files #1110
-- @mavrykdynamics/taquito-michelson-encoder - Deprecated the `ExtractSchema` method in favor of `generateSchema` #1252, #1303, #1304
+- @mavrykdynamics/webmavryk-signer - Removed dependency on bip39, which has unneeded translation files #1110
+- @mavrykdynamics/webmavryk-michelson-encoder - Deprecated the `ExtractSchema` method in favor of `generateSchema` #1252, #1303, #1304
 - Added validation to different hashes being passed in the Taquito codebase #1311
-- @mavrykdynamics/taquito & @mavrykdynamics/taquito-tzip16 - Better error abstraction on view calls #641 & #1297
+- @mavrykdynamics/webmavryk & @mavrykdynamics/webmavryk-tzip16 - Better error abstraction on view calls #641 & #1297
 
 ### Bug Fixes
 
-- @mavrykdynamics/taquito-tzip12 - `TokenIdNotFound` error was incorrectly thrown on metadata view failure #1210
+- @mavrykdynamics/webmavryk-tzip12 - `TokenIdNotFound` error was incorrectly thrown on metadata view failure #1210
 - `Schema` deserialized `map nat-nat` as `MichelsonMap<string, BigNumber>` instead of `MichelsonMap<BigNumber, BigNumber>` #1140
 - Custom errors extend `Error` instead of implementing it #973
-- @mavrykdynamics/taquito-beacon-wallet - Fixed error `Cannot read property 'DAppClient' of undefined` #787
+- @mavrykdynamics/webmavryk-beacon-wallet - Fixed error `Cannot read property 'DAppClient' of undefined` #787
 - Removed CommonJS module loading that was causing rollup.js to break #1098
 
 ### Documentation
 
 - Added a search bar to the Taquito website
 - Allow website users to view Taquito docs based on specific versions #1208
-- @mavrykdynamics/taquito-ledger-signer - Replacement of the deprecated transport `@ledgerhq/hw-transport-node-hid` by `@ledgerhq/hw-transport-u2f`: https://taquito.mavryk.org/docs/ledger_signer
-- Improved documentation showing the difference between `setDelegate` and `RegisterDelegate` methods: https://taquito.mavryk.org/docs/set_delegate
+- @mavrykdynamics/webmavryk-ledger-signer - Replacement of the deprecated transport `@ledgerhq/hw-transport-node-hid` by `@ledgerhq/hw-transport-u2f`: https://webmavryk.mavryk.org/docs/ledger_signer
+- Improved documentation showing the difference between `setDelegate` and `RegisterDelegate` methods: https://webmavryk.mavryk.org/docs/set_delegate
 - Improvements of the README files
 
 
 
-## @mavrykdynamics/taquito-utils - Implemented additional hash checksum validation functions in Taquito
+## @mavrykdynamics/webmavryk-utils - Implemented additional hash checksum validation functions in Taquito
 
 Added utility functions to validate operation, block, and protocol hash.
 
 Example of use:
 ```typescript=
-import { validateBlock, validateOperation, validateProtocol } from '@mavrykdynamics/taquito-utils';
+import { validateBlock, validateOperation, validateProtocol } from '@mavrykdynamics/webmavryk-utils';
 
 const block ='BLJjnzaPtSsxykZ9pLTFLSfsKuiN3z7SjSPDPWwbE4Q68u5EpBw';
 const validation = validateBlock(block);
@@ -1865,11 +1865,11 @@ const protocol ='PtHangz2aRngywmSRGGvrcTyMbbdpWdpFKuS4uMWxg2RaH9i1qx';
 const validation = validateProtocol(protocol);
 ```
 
-## @mavrykdynamics/taquito-signer - Removed dependency on bip39
+## @mavrykdynamics/webmavryk-signer - Removed dependency on bip39
 
 The dependency on bip39, which has unneeded translation files, has been removed. This change decreases the bundle size from 1 MB to 795kB.
 
-## @mavrykdynamics/taquito-michelson-encoder - Deprecated the `ExtractSchema` method in favor of `generateSchema`
+## @mavrykdynamics/webmavryk-michelson-encoder - Deprecated the `ExtractSchema` method in favor of `generateSchema`
 
 Based on a Michelson type, `ExtractSchema` returns the schema as expected by Taquito for the storage or entry point of a contract.
 Users can use this method to discover how to write the storage property when deploying a contract or the parameter when calling a smart contract entry point using the `methodsObject` property.
@@ -1933,33 +1933,33 @@ The michelson type: `{ prim: 'map', args: [{ prim: 'string' }, { prim: 'int' }],
 
 Instead of leaving them to the node, hash validations have been implemented locally in Taquito. We included checksum validation for parameters of regular operations (i.e.: transfer/delegation/origination addresses).
 
-## @mavrykdynamics/taquito & @mavrykdynamics/taquito-tzip16 - Better error abstraction on view calls
+## @mavrykdynamics/webmavryk & @mavrykdynamics/webmavryk-tzip16 - Better error abstraction on view calls
 
 A `ViewSimulationError` is returned when a view simulation fails, which now contains an optional `failWith` property, making it easier to access the `FAILWITH` messages.
 
-## @mavrykdynamics/taquito-tzip12 - `TokenIdNotFound` was incorrectly trown on metadata view failure
+## @mavrykdynamics/webmavryk-tzip12 - `TokenIdNotFound` was incorrectly trown on metadata view failure
 
-The `getTokenMetadata` method of the `Tzip12ContractAbstraction` class was throwing a `TokenIdNotFound` error when the execution of a token metadata view failed. However, failures can be related to other reasons related to the Mavryk node, which does not mean that the token metadata does not exist. The error handling has been improved at the `@mavrykdynamics/taquito-tzip16` package level; if a view simulation reaches a `FAILWITH` instruction, a `ViewSimulationError` is returned. Otherwise, the original `HttpResponseError` is thrown.
+The `getTokenMetadata` method of the `Tzip12ContractAbstraction` class was throwing a `TokenIdNotFound` error when the execution of a token metadata view failed. However, failures can be related to other reasons related to the Mavryk node, which does not mean that the token metadata does not exist. The error handling has been improved at the `@mavrykdynamics/webmavryk-tzip16` package level; if a view simulation reaches a `FAILWITH` instruction, a `ViewSimulationError` is returned. Otherwise, the original `HttpResponseError` is thrown.
 
 ## Custom errors should extend Error
 
 The custom errors were implementing the Error class instead of extending it. Thus, `errorFromTaquito instanceof Error` was returning `false`. This issue has been fixed.
 
-## @mavrykdynamics/taquito-beacon-wallet - Fixed error `Cannot read property 'DAppClient' of undefined`
+## @mavrykdynamics/webmavryk-beacon-wallet - Fixed error `Cannot read property 'DAppClient' of undefined`
 
-The error `Cannot read property 'DAppClient' of undefined` was thrown when using the `@mavrykdynamics/taquito-beacon-wallet` package without npm. This has been fixed by replacing the global name from `beaconSdk` to `beacon` in the taquito-beacon-wallet.umd.js compiled file.
+The error `Cannot read property 'DAppClient' of undefined` was thrown when using the `@mavrykdynamics/webmavryk-beacon-wallet` package without npm. This has been fixed by replacing the global name from `beaconSdk` to `beacon` in the taquito-beacon-wallet.umd.js compiled file.
 
 # Taquito v11.1.0-beta
 
 ## Summary
 ### New features
-- @mavrykdynamics/taquito - Support for simulating contract views #1117
-- @mavrykdynamics/taquito-michel-codec - Option added to the Parser to expand global constants in script #1219
-- @mavrykdynamics/taquito - Support contract origination using the storage property when there are global constants in the storage part of the contract code #1220
+- @mavrykdynamics/webmavryk - Support for simulating contract views #1117
+- @mavrykdynamics/webmavryk-michel-codec - Option added to the Parser to expand global constants in script #1219
+- @mavrykdynamics/webmavryk - Support contract origination using the storage property when there are global constants in the storage part of the contract code #1220
 ### Bug Fixes
-- @mavrykdynamics/taquito-michelson-encoder - Fixed the Timestamp token to support decoding UNIX string format #1109
+- @mavrykdynamics/webmavryk-michelson-encoder - Fixed the Timestamp token to support decoding UNIX string format #1109
 
-## @mavrykdynamics/taquito - Support for simulating contract views
+## @mavrykdynamics/webmavryk - Support for simulating contract views
 
 Taquito provides an abstraction on the `ContractAbstraction` class, allowing to simulate the execution of the on-chain views.
 
@@ -1986,9 +1986,9 @@ const res = contract.contractViews.myView(param).executeView({
 });
 ```
 
-Here is the link to the documentation page: https://taquito.mavryk.org/docs/on_chain_views
+Here is the link to the documentation page: https://webmavryk.mavryk.org/docs/on_chain_views
 
-## @mavrykdynamics/taquito-michel-codec - Option added to the Parser to expand global constants in a script
+## @mavrykdynamics/webmavryk-michel-codec - Option added to the Parser to expand global constants in a script
 
 An optional `expandGlobalConstant` property has been added to the `ParserOptions` allowing to expand the global constants in a script using the `Parser` class. The hashes and corresponding registered expressions need to be provided as follow:
 
@@ -2003,7 +2003,7 @@ const parserOptions: ParserOptions = {
 const p = new Parser(parserOptions);
 ```
 
-## @mavrykdynamics/taquito - Support contract origination using the storage property when there are global constants in the storage part of the contract code
+## @mavrykdynamics/webmavryk - Support contract origination using the storage property when there are global constants in the storage part of the contract code
 
 In the release note v11.0.0-beta, there was a note about the following limitation:
 > Only the 'init' property can be used if you want to originate a contract having a global constant in the storage section of its code. Do not use the `storage` property, which depends on the `Michelson-Encoder`.
@@ -2025,7 +2025,7 @@ A global constants provider has been added to the `MavrykToolkit` class. Current
 
 Here is a example:
 ```typescript=
-import { MavrykToolkit, DefaultGlobalConstantsProvider } from '@mavrykdynamics/taquito';
+import { MavrykToolkit, DefaultGlobalConstantsProvider } from '@mavrykdynamics/webmavryk';
 
 // create an instance of the `DefaultGlobalConstantsProvider`, load the global constants used in the contract, inject the instance on the MavrykToolkit
 const expression = { "prim": "int" }
@@ -2041,9 +2041,9 @@ Mavryk.setGlobalConstantsProvider(globalConstantProvider);
 
 We plan to support other global constant providers in the future that will depend on indexers or the RPC.
 
-Here is a link to the documentation: https://taquito.mavryk.org/docs/global_constant#how-to-deploy-a-contract-using-the-storage-property-if-i-use-global-constant-in-the-storage-part-of-the-code
+Here is a link to the documentation: https://webmavryk.mavryk.org/docs/global_constant#how-to-deploy-a-contract-using-the-storage-property-if-i-use-global-constant-in-the-storage-part-of-the-code
 
-## @mavrykdynamics/taquito-michelson-encoder - Fixed the Timestamp token to support decoding UNIX string format
+## @mavrykdynamics/webmavryk-michelson-encoder - Fixed the Timestamp token to support decoding UNIX string format
 
 The Michelson-Encoder did not correctly support the UNIX string format. Therefore, Michelson data having the format "string":"1613034908" could not be decoded and generated the following error:
 ```
@@ -2055,13 +2055,13 @@ This format is now supported in the Timestamp token of the Michelson-encoder.
 
 # Taquito v11.0.2-beta
 
-- `@mavrykdynamics/taquito-beacon-wallet` - The beacon-sdk is updated to version 2.3.8
-- `@mavrykdynamics/taquito-utils` - Utility function to get Mavryk Address (PKH) from a public key #643
+- `@mavrykdynamics/webmavryk-beacon-wallet` - The beacon-sdk is updated to version 2.3.8
+- `@mavrykdynamics/webmavryk-utils` - Utility function to get Mavryk Address (PKH) from a public key #643
 
 # Taquito v11.0.1-beta
 
 ## Bug fix
-There was an issue with lodash imports in @mavrykdynamics/taquito-rpc package that was causing the following error: Error: Cannot find module 'lodash/get'
+There was an issue with lodash imports in @mavrykdynamics/webmavryk-rpc package that was causing the following error: Error: Cannot find module 'lodash/get'
 
 
 # Taquito v11.0.0-beta
@@ -2073,29 +2073,29 @@ This release of Taquito supports the upcoming Hangzhou protocol. As usual, this 
 We encourage all developers to update their projects to use version Taquito v11 as soon as is practical and absolutely before the Mavryk mainnet transition from Granada to Hangzhou.
 
 ### New features - Hangzhou protocol
-- `@mavrykdynamics/taquito` - Support for the new operation kind `register_global_constant` on the contract, batch and estimate APIs #1075
-- ``@mavrykdynamics/taquito-local-forging`
+- `@mavrykdynamics/webmavryk` - Support for the new operation kind `register_global_constant` on the contract, batch and estimate APIs #1075
+- ``@mavrykdynamics/webmavryk-local-forging`
     - Support the new types and instructions related to operations-on-timelock #1070
     - Support the new `constant` primitive #1077
     - Support the new operation kind `register_global_constant` #1077
     - Support the new high-level section `view` and the `VIEW` instruction #1074
-- `@mavrykdynamics/taquito-michelson-encoder` - Support new types related to operations-on-timelock #1071
-- `@mavrykdynamics/taquito-michel-codec`
+- `@mavrykdynamics/webmavryk-michelson-encoder` - Support new types related to operations-on-timelock #1071
+- `@mavrykdynamics/webmavryk-michel-codec`
     - Support the new types and instruction related to operations-on-timelock #1072
     - Support the new high-level section `view` and the `VIEW` instruction #1073
 
 ### New features - General
-- `@mavrykdynamics/taquito-utils` - Provide utility to verify signatures #611
-- `@mavrykdynamics/taquito-rpc` - Support for the RPC endpoint`context/contracts/{contract}/script/normalized`. #1114
+- `@mavrykdynamics/webmavryk-utils` - Provide utility to verify signatures #611
+- `@mavrykdynamics/webmavryk-rpc` - Support for the RPC endpoint`context/contracts/{contract}/script/normalized`. #1114
 
 ### Documentation
-- Add documentation on how to sign Michelson data #588: https://taquito.mavryk.org/docs/signing#signing-michelson-data
-- Add a "dApp pre-launch checklist" to website documentation #1135: https://taquito.mavryk.org/docs/dapp_prelaunch
-- Add a documentation page about wallets #1123: https://taquito.mavryk.org/docs/wallets
+- Add documentation on how to sign Michelson data #588: https://webmavryk.mavryk.org/docs/signing#signing-michelson-data
+- Add a "dApp pre-launch checklist" to website documentation #1135: https://webmavryk.mavryk.org/docs/dapp_prelaunch
+- Add a documentation page about wallets #1123: https://webmavryk.mavryk.org/docs/wallets
 
 ### Others
 - Preliminary support for Idiazabalnet protocol
-- `@mavrykdynamics/taquito-beacon-wallet` - The beacon-sdk is updated to version 2.3.7: https://github.com/airgap-it/beacon-sdk/releases/tag/v2.3.7
+- `@mavrykdynamics/webmavryk-beacon-wallet` - The beacon-sdk is updated to version 2.3.7: https://github.com/airgap-it/beacon-sdk/releases/tag/v2.3.7
 - Migrate supported companion DApps to Hangzhou: Beacon Test DApp, Taquito React, and Metadata explorer #1065
 
 
@@ -2115,7 +2115,7 @@ const op = await Mavryk.contract.originate({
 });
 ```
 
-## `@mavrykdynamics/taquito` - Support the new operation kind `register_global_constant` on the contract, batch and estimate APIs
+## `@mavrykdynamics/webmavryk` - Support the new operation kind `register_global_constant` on the contract, batch and estimate APIs
 
 The new manager operation `register_global_constant` has been added to the contract, batch, and estimate APIs.  This new operation allows users to register Micheline expressions in a global table of constants.
 
@@ -2132,21 +2132,21 @@ await op.confirmation();
 const hash = op.globalConstantHash; // expr...
 ```
 
-After registering an expression as a global constant, the occurrences of this expression in a smart contract code can be replaced by its corresponding hash, allowing users to originate larger contracts. More details about the new `global constant` feature and examples using the batch API are available on the following documentation page: https://taquito.mavryk.org/docs/global_constant
+After registering an expression as a global constant, the occurrences of this expression in a smart contract code can be replaced by its corresponding hash, allowing users to originate larger contracts. More details about the new `global constant` feature and examples using the batch API are available on the following documentation page: https://webmavryk.mavryk.org/docs/global_constant
 
-## `@mavrykdynamics/taquito-michelson-encoder` - Support new types related to operations-on-timelock
+## `@mavrykdynamics/webmavryk-michelson-encoder` - Support new types related to operations-on-timelock
 
 New tokens (ChestToken and ChestKeyToken) have been implemented in the Michelson-encoder package to support the new types `chest` and `chest_key` and allow data conversion between Michelson and js.
 
-## `@mavrykdynamics/taquito-utils` - Provide utility to verify signatures
+## `@mavrykdynamics/webmavryk-utils` - Provide utility to verify signatures
 
 Taquito provides a function named `verifySignature` that allows verifying signatures of payloads. The function takes a message, a public key, and a signature as parameters and returns a boolean indicating if the signature matches.
-The crypto library [stablelib](https://www.npmjs.com/package/@stablelib/ed25519) is used instead of [libsodium](https://www.npmjs.com/package/libsodium) in order not to drastically increase the bundle size of the `@mavrykdynamics/taquito-utils` package.
+The crypto library [stablelib](https://www.npmjs.com/package/@stablelib/ed25519) is used instead of [libsodium](https://www.npmjs.com/package/libsodium) in order not to drastically increase the bundle size of the `@mavrykdynamics/webmavryk-utils` package.
 
 Here is an example of use:
 
 ```typescript=
-import { verifySignature } from '@mavrykdynamics/taquito-remote-signer';
+import { verifySignature } from '@mavrykdynamics/webmavryk-remote-signer';
 
 const message = '03d0c10e3ed11d7c6e3357f6ef335bab9e8f2bd54d0ce20c482e241191a6e4b8ce6c01be917311d9ac46959750e405d57e268e2ed9e174a80794fbd504e12a4a000141eb3781afed2f69679ff2bbe1c5375950b0e40d00ff000000005e05050505050507070100000024747a32526773486e74516b72794670707352466261313652546656503539684b72654a4d07070100000024747a315a6672455263414c42776d4171776f6e525859565142445439426a4e6a42484a750001';
 const pk = 'sppk7c7hkPj47yjYFEHX85q46sFJGw6RBrqoVSHwAJAT4e14KJwzoey';
@@ -2155,7 +2155,7 @@ const sig = 'spsig1cdLkp1RLgUHAp13aRFkZ6MQDPp7xCnjAExGL3MBSdMDmT6JgQSX8cufyDgJRM
 await verifySignature(message, pk, sig);
 ```
 
-## `@mavrykdynamics/taquito-rpc` - Support for the RPC endpoint`context/contracts/{contract}/script/normalized`
+## `@mavrykdynamics/webmavryk-rpc` - Support for the RPC endpoint`context/contracts/{contract}/script/normalized`
 
 A new method on the RpcClient named `getNormalizedScript` is available. If global constants are present in the code of a smart contract, `getNormalizedScript` returns the expanded script. In contrast, the global constants are not expanded in the response provided by the `getScript` method.
 
@@ -2166,40 +2166,40 @@ Internally in Taquito, the usage of `getScript` has been replaced by `getNormali
 This release includes preliminary support for the Idiazabal protocol to allow early testing.
 Please note the following:
 - The protocol constant `cost_per_byte` is mistakenly set to `1000` instead of `250`. Meaning that storage costs are higher than on the precedent testnet until this is fixed in the next I network.
-- The `Endorsement` operation has new required properties `slot`, `round` and `block_payload_hash` that are not yet supported in the `@mavrykdynamics/taquito-local-forging` package.
-- The RPC `context/delegates/${address}` has new properties that are not yet supported in the `@mavrykdynamics/taquito-rpc` package.
+- The `Endorsement` operation has new required properties `slot`, `round` and `block_payload_hash` that are not yet supported in the `@mavrykdynamics/webmavryk-local-forging` package.
+- The RPC `context/delegates/${address}` has new properties that are not yet supported in the `@mavrykdynamics/webmavryk-rpc` package.
 
 ## What's coming next for Taquito?
 
 We plan to provide abstractions for some of the new Hangzhou features. For example, an addition to the ContractAbstration will allow running on-chain views and an abstraction that will make using the new timelock feature easier.
 
-If you have feature or issue requests, please create an issue on http://github.com/ecadlabs/taquito/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
+If you have feature or issue requests, please create an issue on http://github.com/mavryk-network/webmavryk/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
 
 # Taquito v10.2.1-beta
 
 - Updated beacon-sdk to version 2.3.5: https://github.com/airgap-it/beacon-sdk/releases/tag/v2.3.5
 - RpcClientCache - Store the Promises instead of the resolved values in the cache:
 When requests were done in parallel to the same RPC endpoint, they were not hitting the cache. This is solved by storing the promise in the cache as soon as the first request is made. If another request tries to reach the same URL, during the configured TTL, the cached promise is returned.
-More details can be found here: https://github.com/ecadlabs/taquito/discussions/916
+More details can be found here: https://github.com/mavryk-network/webmavryk/discussions/916
 # Taquito v10.2.0-beta
 
 ## Summary
 
 ### New features
-- @mavrykdynamics/taquito-contract-library - [Performance] Embed popular contracts into your application using the new ContractAbstraction instantiation #1049
-- @mavrykdynamics/taquito-rpc - [Performance] Enable RPC caching in your application using the RpcClient cache implementation #924
-- @mavrykdynamics/taquito - [DevExp] Taquito Entrypoint methods now accept javascript object format for contract method calls (parametric calls are unchanged!) #915
+- @mavrykdynamics/webmavryk-contract-library - [Performance] Embed popular contracts into your application using the new ContractAbstraction instantiation #1049
+- @mavrykdynamics/webmavryk-rpc - [Performance] Enable RPC caching in your application using the RpcClient cache implementation #924
+- @mavrykdynamics/webmavryk - [DevExp] Taquito Entrypoint methods now accept javascript object format for contract method calls (parametric calls are unchanged!) #915
 
 ### Enhancements
 
 - Compatibility support for Hangzhounet
 - Allow to set HttpBackend on IpfsHttpHandler #1092
 
-## @mavrykdynamics/taquito-contract-library - Ability to bundle smart-contract scripts and entrypoints for ContractAbstration instantiation
+## @mavrykdynamics/webmavryk-contract-library - Ability to bundle smart-contract scripts and entrypoints for ContractAbstration instantiation
 
-A new package named `@mavrykdynamics/taquito-contract-library` has been added to the Taquito library.
+A new package named `@mavrykdynamics/webmavryk-contract-library` has been added to the Taquito library.
 
-To improve (d)App performance, we aim to provide ways to reduce the number of calls made by Taquito to the RPC. The `@mavrykdynamics/taquito-contracts-library` package allows developers to embed the smart-contract scripts into the application, preventing Taquito from loading this data from the RPC for every user.
+To improve (d)App performance, we aim to provide ways to reduce the number of calls made by Taquito to the RPC. The `@mavrykdynamics/webmavryk-contracts-library` package allows developers to embed the smart-contract scripts into the application, preventing Taquito from loading this data from the RPC for every user.
 
 The ContractsLibrary class is populated by at project compile time, using contract addresses and their corresponding script and entry points. The `ContractsLibrary` is then injected into a `MavrykToolkit` as an extension using the toolkits `addExtension` method.
 
@@ -2207,8 +2207,8 @@ When creating a ContractAbstraction instance using the `at` method of the Contra
 
 **Example of use:**
 ```ts
-import { ContractsLibrary } from '@mavrykdynamics/taquito-contracts-library';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { ContractsLibrary } from '@mavrykdynamics/webmavryk-contracts-library';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const contractsLibrary = new ContractsLibrary();
 const Mavryk = new MavrykToolkit('rpc');
@@ -2232,7 +2232,7 @@ const contract = await Mavryk.contract.at('contractAddress1');
 ```
 
 
-## @mavrykdynamics/taquito-RPC - New RpcClient implementation that caches RPC data
+## @mavrykdynamics/webmavryk-RPC - New RpcClient implementation that caches RPC data
 
 Similar to the new `ContractsLibrary` feature, Taquito provides an additional way to increase dApp performance by caching some RPC data. To do so, we offer a new `RpcClient` implementation named `RpcClientCache`
 
@@ -2240,20 +2240,20 @@ The constructor of the `RpcClientCache` class takes an `RpcClient` instance as a
 
 **Example of use:**
 ```ts
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
-import { RpcClient, RpcClientCache } from '@mavrykdynamics/taquito-rpc';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { RpcClient, RpcClientCache } from '@mavrykdynamics/webmavryk-rpc';
 
 const rpcClient = new RpcClient('replace_with_RPC_URL');
 const mavryk = new MavrykToolkit(new RpcClientCache(rpcClient));
 ```
 
-## @mavrykdynamics/taquito - New Taquito Entrypoint methods accept javascript object format for contract method calls
+## @mavrykdynamics/webmavryk - New Taquito Entrypoint methods accept javascript object format for contract method calls
 
 The ContractAbstraction class has a new member called `methodsObject`, which serves the same purpose as the `methods` member. The format expected by the smart contract method differs: `methods` expects flattened arguments while `methodsObject` expects an object.
 
 It is to the user's discretion to use their preferred representation. We wanted to provide Taquito users with a way to pass an object when calling a contract entry point using a format similar to the storage parameter used when deploying a contract.
 
-A comparison between both methods is available here: https://taquito.mavryk.org/docs/smartcontracts#choosing-between-the-methods-or-methodsobject-members-to-interact-with-smart-contracts
+A comparison between both methods is available here: https://webmavryk.mavryk.org/docs/smartcontracts#choosing-between-the-methods-or-methodsobject-members-to-interact-with-smart-contracts
 
 ## Compatibility support for Hangzhounet
 
@@ -2263,11 +2263,11 @@ This version ships with basic compatibility support for the new Hangzhou protoco
 
 We started preliminary work on integrating Hangzhounet, the next Mavryk protocol update proposal. We plan to deliver a final version of Taquito v11 early, giving teams a longer runway to upgrade their projects before protocol transition.
 
-If you have feature or issue requests, please create an issue on http://github.com/ecadlabs/taquito/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
+If you have feature or issue requests, please create an issue on http://github.com/mavryk-network/webmavryk/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
 
 # Taquito v10.1.3-beta
 
-## Bug fix - [Key ordering](https://github.com/ecadlabs/taquito/pull/1044)
+## Bug fix - [Key ordering](https://github.com/mavryk-network/webmavryk/pull/1044)
 Fixed key sorting in literal sets and maps when these collections have mixed key types.
 
 ## Upgrade beacon-sdk to version 2.3.3
@@ -2294,24 +2294,24 @@ In version 9.2.0-beta of Taquito, the ability to send more than one operation in
 
 ### Enhancements
 
-- @mavrykdynamics/taquito - Made PollingSubscribeProvider's polling interval configurable #943
-- @mavrykdynamics/taquito - Possibility to withdraw delegate
+- @mavrykdynamics/webmavryk - Made PollingSubscribeProvider's polling interval configurable #943
+- @mavrykdynamics/webmavryk - Possibility to withdraw delegate
 
 ### Bug Fixes
 
-- @mavrykdynamics/taquito - Added a status method for batched transactions using the wallet API #962
-- @mavrykdynamics/taquito-michelson-encoder - Fixed the Schema.ExecuteOnBigMapValue() for ticket token #970
-- @mavrykdynamics/taquito - Fixed a "Memory leak" in the PollingSubscribeProvider #963
+- @mavrykdynamics/webmavryk - Added a status method for batched transactions using the wallet API #962
+- @mavrykdynamics/webmavryk-michelson-encoder - Fixed the Schema.ExecuteOnBigMapValue() for ticket token #970
+- @mavrykdynamics/webmavryk - Fixed a "Memory leak" in the PollingSubscribeProvider #963
 
 ### Documentation
 
 - Updated Taquito website live examples to use Granadanet #993
-- [Documentation for FA2 functionality](https://taquito.mavryk.org/docs/fa2_parameters) #715
-- [Documentation for confirmation event stream for wallet API](https://taquito.mavryk.org/docs/confirmation_event_stream) #159
+- [Documentation for FA2 functionality](https://webmavryk.mavryk.org/docs/fa2_parameters) #715
+- [Documentation for confirmation event stream for wallet API](https://webmavryk.mavryk.org/docs/confirmation_event_stream) #159
 
 
 
-## @mavrykdynamics/taquito - Made PollingSubscribeProvider's polling interval configurable
+## @mavrykdynamics/webmavryk - Made PollingSubscribeProvider's polling interval configurable
 
 The default streamer set on the `MavrykToolkit` used a hardcoded polling interval of 20 seconds, and there was no easy way to change this. To reduce the probability of missing blocks, it is now possible to configure the interval as follow:
 
@@ -2322,7 +2322,7 @@ mavryk.setProvider({ config: { streamerPollingIntervalMilliseconds: 15000 } });
 const sub = mavryk.stream.subscribeOperation(filter)
 ```
 
-## @mavrykdynamics/taquito - Possibility to withdraw delegate
+## @mavrykdynamics/webmavryk - Possibility to withdraw delegate
 
 It is now possible to `undelegate` by executing a new setDelegate operation and not specifying the delegate property.
 
@@ -2332,16 +2332,16 @@ It is now possible to `undelegate` by executing a new setDelegate operation and 
 await Mavryk.contract.setDelegate({ source: 'mv1_source'});
 ```
 
-## @mavrykdynamics/taquito - Property status doesn't exist on a batched transaction for the wallet API
+## @mavrykdynamics/webmavryk - Property status doesn't exist on a batched transaction for the wallet API
 
 When multiple operations were batched together using the `batch` method of the wallet API, the `send()` method returned a value of type `WalletOperation` where the status was missing. `BatchWalletOperation`, which extends the `WalletOperation` class and contains a `status` method, is now returned.
 
-## @mavrykdynamics/taquito-michelson-encoder - Fixed the Schema.ExecuteOnBigMapValue() for ticket token
+## @mavrykdynamics/webmavryk-michelson-encoder - Fixed the Schema.ExecuteOnBigMapValue() for ticket token
 
 The `Execute` and `ExecuteOnBigMapValue` methods of the `Schema` class could not deserialize Michelson when ticket values were not in the optimized (Edo) notation. Both representations are now supported.
 
 
-## @mavrykdynamics/taquito - Fixed a "Memory leak" in the PollingSubscribeProvider
+## @mavrykdynamics/webmavryk - Fixed a "Memory leak" in the PollingSubscribeProvider
 
 A fix has been made to change the behavior of the `PollingSubscribeProvider`, which was keeping all blocks in memory.
 
@@ -2352,14 +2352,14 @@ A fix has been made to change the behavior of the `PollingSubscribeProvider`, wh
 
 ### Remaining support for Granadanet
 
-- @mavrykdynamics/taquito-rpc - Support `deposits` field in `frozen_balance` #919
-- @mavrykdynamics/taquito-rpc - Support new fields introduced by Granada in block metadata #918
+- @mavrykdynamics/webmavryk-rpc - Support `deposits` field in `frozen_balance` #919
+- @mavrykdynamics/webmavryk-rpc - Support new fields introduced by Granada in block metadata #918
 
 
 ### Bug Fixes
 
-- @mavrykdynamics/taquito - Drain an unrevealed account #975
-- @mavrykdynamics/taquito-rpc - Type `ContractBigMapDiffItem` has BigNumber's but values are string's #946
+- @mavrykdynamics/webmavryk - Drain an unrevealed account #975
+- @mavrykdynamics/webmavryk-rpc - Type `ContractBigMapDiffItem` has BigNumber's but values are string's #946
 
 ### Documentation
 
@@ -2370,34 +2370,34 @@ A fix has been made to change the behavior of the `PollingSubscribeProvider`, wh
 
 ### Enhancements
 
-- **Breaking changes** - @mavrykdynamics/taquito-michelson-encoder - Improvement to the `Schema.ExtractSchema()` method #960 and #933
+- **Breaking changes** - @mavrykdynamics/webmavryk-michelson-encoder - Improvement to the `Schema.ExtractSchema()` method #960 and #933
 
 
 
-## @mavrykdynamics/taquito-rpc - Support deposits field in frozen_balance
+## @mavrykdynamics/webmavryk-rpc - Support deposits field in frozen_balance
 
 In Granada, when fetching delegate information from the RPC, the `deposit` property in `frozen_balance_by_cycle` has been replaced by `deposits`. The RpcClient supports the new and the old notation.
 
-## @mavrykdynamics/taquito-rpc - Support new fields introduced by Granada in block metadata
+## @mavrykdynamics/webmavryk-rpc - Support new fields introduced by Granada in block metadata
 
 The `balance_updates` property in block metadata now includes the new origin `subsidy`, besides the existing ones: `block` and `migration`.
 
 The support for the new `liquidity_baking_escape_ema` and `implicit_operations_results` properties in block metadata has been added in the `RpcClient` class.
 
 
-## @mavrykdynamics/taquito - Drain an unrevealed account
+## @mavrykdynamics/webmavryk - Drain an unrevealed account
 
 Since v9.1.0-beta, the fees associated with a reveal operation are estimated using the RPC instead of using the old 1420 default value. When draining an unrevealed account, the fees associated with the reveal operation needs to be subtracted from the initial balance (as well as the fees related to the actual transaction operation). The reveal fee has changed from 1420 to 374 (based on the simulation using the RPC). However, the constants file was still using the 1420 value, leading to a remaining amount of 1046 in the account when trying to empty it. The default value has been adjusted on the constants file to match this change.
 
-## @mavrykdynamics/taquito-rpc - Type ContractBigMapDiffItem has BigNumber's but values are string's
+## @mavrykdynamics/webmavryk-rpc - Type ContractBigMapDiffItem has BigNumber's but values are string's
 
 The type of the `big_map`, `source_big_map`, and `destination_big_map` properties of `ContractBigMapDiffItem` was set as `BigNumber`, but they were not cast to it. The RPC returns these properties in a string format. The type has been changed from `BigNumber` to `string` for them.
 
 ## Add integration tests for Permit contracts (TZIP-17)
 
-Examples have been added to the integration tests showing how to manipulate permit contracts using the new data packing feature: https://github.com/ecadlabs/taquito/blob/master/integration-tests/contract-permits.spec.ts
+Examples have been added to the integration tests showing how to manipulate permit contracts using the new data packing feature: https://github.com/mavryk-network/webmavryk/blob/master/integration-tests/contract-permits.spec.ts
 
-## @mavrykdynamics/taquito-michelson-encoder - Improvement to the Schema.ExtractSchema() method
+## @mavrykdynamics/webmavryk-michelson-encoder - Improvement to the Schema.ExtractSchema() method
 
 The`ExtractSchema` method of the `Schema` class indicates how to structure contract storage in javascript given its storage type in Michelson JSON representation. This method can be helpful to find out how the storage object needs to be written when deploying a contract.
 
@@ -2516,7 +2516,7 @@ Please help us improve Taquito further by filling out this 2-minute survey by EO
 https://forms.gle/mqYySKeaWUUkF5NXA
 Thank you for your time and support!
 
-If you have feature or issue requests, please create an issue on http://github.com/ecadlabs/taquito/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
+If you have feature or issue requests, please create an issue on http://github.com/mavryk-network/webmavryk/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
 
 # Taquito v9.2.0-beta
 ## Summary
@@ -2524,48 +2524,48 @@ If you have feature or issue requests, please create an issue on http://github.c
 ### New features
 
 - Compatibility support for Granadanet
-- @mavrykdynamics/taquito-michelson-encoder - Accept bytes in Uint8Array #375
-- @mavrykdynamics/taquito-michelson-encoder - Added Bls12-381 tokens #888
-- @mavrykdynamics/taquito-michelson-encoder - Added sapling_state and sapling_transaction tokens #586
-- @mavrykdynamics/taquito-rpc - Added sapling RPC #586
-- @mavrykdynamics/taquito - sapling_state abstraction on storage read #602
-- @mavrykdynamics/taquito - Possibility to send more than one operation in the same block #955
+- @mavrykdynamics/webmavryk-michelson-encoder - Accept bytes in Uint8Array #375
+- @mavrykdynamics/webmavryk-michelson-encoder - Added Bls12-381 tokens #888
+- @mavrykdynamics/webmavryk-michelson-encoder - Added sapling_state and sapling_transaction tokens #586
+- @mavrykdynamics/webmavryk-rpc - Added sapling RPC #586
+- @mavrykdynamics/webmavryk - sapling_state abstraction on storage read #602
+- @mavrykdynamics/webmavryk - Possibility to send more than one operation in the same block #955
 
 ### Documentation
 
-- @mavrykdynamics/taquito-http-utils - Cancel http requests
+- @mavrykdynamics/webmavryk-http-utils - Cancel http requests
 
 ### Enhancements
 
 - Updated various dependencies and switched from tslint to eslint
 
 
-## @mavrykdynamics/taquito-michelson-encoder - Accept bytes in Uint8Array
+## @mavrykdynamics/webmavryk-michelson-encoder - Accept bytes in Uint8Array
 
 The only format accepted in the Michelson-encoder for the type bytes was the hexadecimal string. We added support for the type Uint8Array. It is now possible to call an entry point or originate a contract using a Uint8Array or a hexadecimal string.
 
-## @mavrykdynamics/taquito-http-utils - Make http requests cancelable
+## @mavrykdynamics/webmavryk-http-utils - Make http requests cancelable
 
-We received requests from users to use the abort signal to allow making requests cancelable. This implementation would require changes in the high-level API that we will consider in an incoming issue where we envisage providing a new API. Meanwhile, it is possible to customize the HttpBackend and RpcClient classes to support cancelable requests. Here is an example where a custom HttpBackend class is used to be able to cancel all requests: https://taquito.mavryk.org/docs/cancel_http_requests
+We received requests from users to use the abort signal to allow making requests cancelable. This implementation would require changes in the high-level API that we will consider in an incoming issue where we envisage providing a new API. Meanwhile, it is possible to customize the HttpBackend and RpcClient classes to support cancelable requests. Here is an example where a custom HttpBackend class is used to be able to cancel all requests: https://webmavryk.mavryk.org/docs/cancel_http_requests
 The example, as not specific, might not be ideal for all use cases, so we plan to provide better support for this feature in the future.
 
-## @mavrykdynamics/taquito-michelson-encoder - Added Bls12-381 tokens
+## @mavrykdynamics/webmavryk-michelson-encoder - Added Bls12-381 tokens
 
 The `bls12_381_fr`, `bls12_381_g1`, and `bls12_381_g2` tokens were missing in the Michelson-Encoder since the Edo protocol and have been added. As for the bytes token, their supported format is the hexadecimal string or the Uint8Array.
 
-## @mavrykdynamics/taquito-michelson-encoder - Added sapling_state and sapling_transaction tokens
+## @mavrykdynamics/webmavryk-michelson-encoder - Added sapling_state and sapling_transaction tokens
 
 The `sapling_state` and `sapling_transaction` tokens were missing in the Michelson-Encoder since the Edo protocol and have been added.
 
 Note that no additional abstractions or ability to decrypt Sapling transactions have been implemented so far.
 
-## @mavrykdynamics/taquito-rpc - Added sapling RPC
+## @mavrykdynamics/webmavryk-rpc - Added sapling RPC
 
 The RPC endpoints related to sapling have been added to the RpcClient:
 - the `getSaplingDiffById` method takes a sapling state ID as a parameter and returns its associated values.
 - the `getSaplingDiffByContract` takes the address of a contract as a parameter and returns its sapling state.
 
-## @mavrykdynamics/taquito - sapling_state abstraction on storage read
+## @mavrykdynamics/webmavryk - sapling_state abstraction on storage read
 
 When accessing a `sapling_state` in the storage with the RPC, only the sapling state's ID is returned.
 When fetching the storage of a contract containing a `sapling_state`, Taquito will provide an instance of `SaplingStateAbstraction`. The `SaplingStateAbstraction` class has a `getId` and a `getSaplingDiff` methods.
@@ -2578,7 +2578,7 @@ The `getSaplingDiff` method returns an object of the following type:
 }
 ```
 
-## @mavrykdynamics/taquito - Possibility to send several operations in the same block
+## @mavrykdynamics/webmavryk - Possibility to send several operations in the same block
 
 Unless using the batch API, a specific account was limited to only sending one operation per block. If trying to send a second operation without awaiting confirmation on the first one, a counter exception was thrown by the RPC.
 
@@ -2591,39 +2591,39 @@ We added a counter property (a map of an account and its counter) on the MavrykT
 
 We will work on integrating flexmasa node into our CI pipeline. We are currently relying on testnets for testing purposes. Since many Taquito users use flexmasa for testing, including it in our development process will help provide better support, especially regarding errors encountered during Operation.confirmation() issues.
 
-We plan to improve performance issues by implementing some caching. Please have a look at these open discussions: https://github.com/ecadlabs/taquito/discussions/917 https://github.com/ecadlabs/taquito/discussions/916. Any feedback or suggestions are appreciated.
+We plan to improve performance issues by implementing some caching. Please have a look at these open discussions: https://github.com/mavryk-network/webmavryk/discussions/917 https://github.com/mavryk-network/webmavryk/discussions/916. Any feedback or suggestions are appreciated.
 
-If you have feature or issue requests, please create an issue on http://github.com/ecadlabs/taquito/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
+If you have feature or issue requests, please create an issue on http://github.com/mavryk-network/webmavryk/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
 
 
 # Taquito v9.1.1-beta
 
-@mavrykdynamics/taquito-beacon-wallet - Updated beacon-sdk to version 2.2.9
-@mavrykdynamics/taquito-michelson-encoder - Fix for unexpected MapTypecheckError when loading contract storage - for cases where a map contains a big map as value #925
+@mavrykdynamics/webmavryk-beacon-wallet - Updated beacon-sdk to version 2.2.9
+@mavrykdynamics/webmavryk-michelson-encoder - Fix for unexpected MapTypecheckError when loading contract storage - for cases where a map contains a big map as value #925
 # Taquito v9.1.0-beta
 ## Summary
 
 ### New features
 
-- @mavrykdynamics/taquito - Added reveal operation on the RpcContractProvider and RPCEstimateProvider classes #772
-- @mavrykdynamics/taquito & @mavrykdynamics/taquito-beacon-wallet - Ability to specify the fee, storageLimit and gasLimit parameters using the wallet API #866
+- @mavrykdynamics/webmavryk - Added reveal operation on the RpcContractProvider and RPCEstimateProvider classes #772
+- @mavrykdynamics/webmavryk & @mavrykdynamics/webmavryk-beacon-wallet - Ability to specify the fee, storageLimit and gasLimit parameters using the wallet API #866
 
 ### Enhancements
 
-- @mavrykdynamics/taquito - Include estimate for reveal operation on batch estimate #772
-- @mavrykdynamics/taquito - Export return types of public API methods (BatchOperation, Operation, OperationBatch, TransferParams, ParamsWithKind) #583
-- @mavrykdynamics/taquito-michelson-encoder - Types chain_id, key, option, or, signature, and unit made comparable #603
--  @mavrykdynamics/taquito-rpc - Added big_map_diff, lazy_storage_diff properties and failing_noop operation to RPC types #870
-- @mavrykdynamics/taquito-beacon-wallet - Updated beacon-sdk to version [2.2.8](https://github.com/airgap-it/beacon-sdk/releases/tag/v2.2.8)
+- @mavrykdynamics/webmavryk - Include estimate for reveal operation on batch estimate #772
+- @mavrykdynamics/webmavryk - Export return types of public API methods (BatchOperation, Operation, OperationBatch, TransferParams, ParamsWithKind) #583
+- @mavrykdynamics/webmavryk-michelson-encoder - Types chain_id, key, option, or, signature, and unit made comparable #603
+-  @mavrykdynamics/webmavryk-rpc - Added big_map_diff, lazy_storage_diff properties and failing_noop operation to RPC types #870
+- @mavrykdynamics/webmavryk-beacon-wallet - Updated beacon-sdk to version [2.2.8](https://github.com/airgap-it/beacon-sdk/releases/tag/v2.2.8)
 
 ### Bug fixes
 
-- @mavrykdynamics/taquito-signer - Fixed a public key derivation bug in InMemorySigner class #848
-- @mavrykdynamics/taquito-michelson-encoder - Fixed a bug in the `Execute` method of the `OrToken` class
+- @mavrykdynamics/webmavryk-signer - Fixed a public key derivation bug in InMemorySigner class #848
+- @mavrykdynamics/webmavryk-michelson-encoder - Fixed a bug in the `Execute` method of the `OrToken` class
 
 
 
-## @mavrykdynamics/taquito - Added reveal operation on the `RpcContractProvider` and the `RPCEstimateProvider` classes & Include estimate for reveal operation on batch estimate
+## @mavrykdynamics/webmavryk - Added reveal operation on the `RpcContractProvider` and the `RPCEstimateProvider` classes & Include estimate for reveal operation on batch estimate
 
 When sending an operation using the contract API, Taquito takes care of adding a reveal operation when the account needs to be revealed. This has not changed, but we added a `reveal` method on the `RpcContractProvider` class, allowing to reveal the current account using the contract API without the need to do another operation. The method takes an object as a parameter with optional fee, gasLimit and StorageLimit properties:
 `await Mavryk.contract.reveal({});`
@@ -2632,21 +2632,21 @@ We also added a reveal method on the `RPCEstimateProvider` class, allowing an es
 
 Moreover, when estimating a batch operation where a reveal operation is needed, an `Estimate` object representing the reveal operation will now be returned as the first element of the returned array.
 
-## @mavrykdynamics/taquito-signer - Fixed a public key derivation bug in InMemorySigner class
+## @mavrykdynamics/webmavryk-signer - Fixed a public key derivation bug in InMemorySigner class
 
 There was an issue in the derivation of public keys by the InMemorySigner with the `p256` and `secp256k1` curves having a `y` coordinate shorter than 32 bytes. For these specific cases, the returned public key was erroneous. *Please remember that this signer implementation is for development workflows.*
 
-## @mavrykdynamics/taquito-michelson-encoder - Types `chain_id`, `key`, `option`, `or`, `signature`, and `unit` made comparable
+## @mavrykdynamics/webmavryk-michelson-encoder - Types `chain_id`, `key`, `option`, `or`, `signature`, and `unit` made comparable
 
 Taquito ensures that `map` keys and `set` values of comparable types are sorted in strictly increasing order as requested by the RPC.
 
-## @mavrykdynamics/taquito-michelson-encoder - Fixed a bug in the `Execute` method of the `OrToken` class
+## @mavrykdynamics/webmavryk-michelson-encoder - Fixed a bug in the `Execute` method of the `OrToken` class
 
 The execute method allows converting Michelson data into familiar-looking javascript data. This is used in Taquito to provide a well-formatted JSON object of contract storage. This release includes a bug fix for the OrToken where the right values were not formatted correctly.
 
-## @mavrykdynamics/taquito & @mavrykdynamics/taquito-beacon-wallet - Ability to specify the fee, storageLimit and gasLimit parameters using the wallet API
+## @mavrykdynamics/webmavryk & @mavrykdynamics/webmavryk-beacon-wallet - Ability to specify the fee, storageLimit and gasLimit parameters using the wallet API
 
-We are currently seeing a high number of transactions being backtracked with "storage exhausted" errors in high-traffic dapps in the ecosystem. To mitigate this issue and knowing that dapps are in a better position to assess reasonable values than the wallet, we now provide the ability to specify the storage, gas limit, and fee via the wallet API. As the `beacon-sdk`, which @mavrykdynamics/taquito-beacon-wallet package is built on, accepts those parameters, dapp developers will now have the ability to specify those parameters. One important note is that at the end, it is the wallet that has control over what is actually used when injecting the operation.
+We are currently seeing a high number of transactions being backtracked with "storage exhausted" errors in high-traffic dapps in the ecosystem. To mitigate this issue and knowing that dapps are in a better position to assess reasonable values than the wallet, we now provide the ability to specify the storage, gas limit, and fee via the wallet API. As the `beacon-sdk`, which @mavrykdynamics/webmavryk-beacon-wallet package is built on, accepts those parameters, dapp developers will now have the ability to specify those parameters. One important note is that at the end, it is the wallet that has control over what is actually used when injecting the operation.
 
 
 ## What's coming next for Taquito?
@@ -2655,9 +2655,9 @@ We will work on integrating flexmasa node into our CI pipeline. We are currently
 
 We started some preliminary work on integrating Granadanet, the next Mavryk protocol update proposal. We plan to deliver a final version of Taquito v10 early, giving teams a longer runway to upgrade their projects before protocol transition.
 
-We plan to improve the `michelson-encoder` implementation to open the door for Type generation from contracts and to provide easier discoverability of what parameters endpoints and initial storage take. We opened a discussion on this subject on GitHub where any feedback or suggestions are appreciated: https://github.com/ecadlabs/taquito/discussions/840.
+We plan to improve the `michelson-encoder` implementation to open the door for Type generation from contracts and to provide easier discoverability of what parameters endpoints and initial storage take. We opened a discussion on this subject on GitHub where any feedback or suggestions are appreciated: https://github.com/mavryk-network/webmavryk/discussions/840.
 
-If you have feature or issue requests, please create an issue on http://github.com/ecadlabs/taquito/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
+If you have feature or issue requests, please create an issue on http://github.com/mavryk-network/webmavryk/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
 
 
 # Taquito v9.0.0-beta
@@ -2672,22 +2672,22 @@ If you have feature or issue requests, please create an issue on http://github.c
 - Updated beacon-sdk version to v2.2.5 which includes several performance improvements for p2p pairing.
 
 ### Documentation updates
-- Added documentation about the Michelson encoder package [here](https://taquito.mavryk.org/docs/michelson_encoder).
+- Added documentation about the Michelson encoder package [here](https://webmavryk.mavryk.org/docs/michelson_encoder).
 
 
 ## Forward compatibility for Florence
 
 This version ships with official support for the new Florence protocol which will come into effect on Mainnet in May.
 
-## @mavrykdynamics/taquito - Allows fetching big map with a key of type string, number, or object.
+## @mavrykdynamics/webmavryk - Allows fetching big map with a key of type string, number, or object.
 
 In the precedent versions, fetching a value in a big map required the parameter to be a string, even in such cases when the key of the big map was a number. The `get` and `getMultipleValues` methods of the `BigMapAbstraction` and `getBigMapKeyByID` and `getBigMapKeysByID` methods of the `RpcContractProvider` class now accept a string, a number or an object for the key we want to fetch.
 
 This introduced a breaking change for the method `getMultipleValues` of the `BigMapAbstraction` class and the method `getBigMapKeysByID` of the `RpcContractProvider` class as they now return a `MichelsonMap` instead of an object. This is meant to support keys of type object that are encountered when the Michelson type of the big map key is a pair.
 
-## @mavrykdynamics/taquito - Accept an operator for the retry strategy of the ObservableSubscription class
+## @mavrykdynamics/webmavryk - Accept an operator for the retry strategy of the ObservableSubscription class
 
-To give more flexibility to the user on the retry strategy, we removed the parameters `observableSubscriptionRetryDelay` and `observableSubscriptionRetries` introduced in version 8.1.1-beta and replaced them to accept an `OperatorFunction`. When users configure the ObservableSubscription to retry on error, we use the `retry` operators from `rxjs` by default. An example showing how to set a custom retry strategy is available [here](https://github.com/ecadlabs/taquito/blob/master/example/example-streamer-custom-retry-logic.ts).
+To give more flexibility to the user on the retry strategy, we removed the parameters `observableSubscriptionRetryDelay` and `observableSubscriptionRetries` introduced in version 8.1.1-beta and replaced them to accept an `OperatorFunction`. When users configure the ObservableSubscription to retry on error, we use the `retry` operators from `rxjs` by default. An example showing how to set a custom retry strategy is available [here](https://github.com/mavryk-network/webmavryk/blob/master/example/example-streamer-custom-retry-logic.ts).
 
 # Taquito v8.1.1-beta
 
@@ -2770,8 +2770,8 @@ A note on how to use the Kukai wallet for testing on Edonet has been added to th
 
 ### Documentation updates
 
-- [Tickets](https://taquito.mavryk.org/docs/tickets)
-- [Local pack/unpack, including bigmaps.](https://taquito.mavryk.org/docs/maps_bigmaps#local-packing-for-big-maps)
+- [Tickets](https://webmavryk.mavryk.org/docs/tickets)
+- [Local pack/unpack, including bigmaps.](https://webmavryk.mavryk.org/docs/maps_bigmaps#local-packing-for-big-maps)
 - Rename Thanos to Temple wallet.
 - Build time pre-requisites for Taquito.
 - Documentation website examples now uses the edonet testnet
@@ -2782,7 +2782,7 @@ Before v8.1, Taquito provided an API to pack data using Mavryk RPC. This release
 
 Local pack means that fetching big map values is now 50% faster! Big map keys must be encoded using the PACK method, so Taquito needed to use the `rpc.packData()` method. As of v8.1 Taquito, users can opt to pack big map keys locally, eliminating an RPC round trip.
 
-This feature is _opt-in_, meaning that the Taquito user must enable it to benefit from faster big map fetching. The RPC key backing method is still the default. See [Local packing for big maps](https://taquito.mavryk.org/docs/maps_bigmaps#local-packing-for-big-maps)
+This feature is _opt-in_, meaning that the Taquito user must enable it to benefit from faster big map fetching. The RPC key backing method is still the default. See [Local packing for big maps](https://webmavryk.mavryk.org/docs/maps_bigmaps#local-packing-for-big-maps)
 
 ## npm preview registry - Delivering continuous delivery
 
@@ -2792,7 +2792,7 @@ IMPORTANT NOTE: Preview builds are not official releases. They are helpful for t
 
 ## Fetch multiple bigmaps at once.
 
-Taquito now provides a new API `getMultipleValues` that fetches multiple keys in a single call.  Taquito ensures that all fetched keys are fetched from the same block level. Future enhancements for this feature may include Taquito directly fetching multiple big maps from an RPC call as and when such an RPC is added to the Mavryk nodes. See docs [here](https://taquito.mavryk.org/docs/maps_bigmaps#fetch-multiple-big-map-values-at-once)
+Taquito now provides a new API `getMultipleValues` that fetches multiple keys in a single call.  Taquito ensures that all fetched keys are fetched from the same block level. Future enhancements for this feature may include Taquito directly fetching multiple big maps from an RPC call as and when such an RPC is added to the Mavryk nodes. See docs [here](https://webmavryk.mavryk.org/docs/maps_bigmaps#fetch-multiple-big-map-values-at-once)
 
 ## Expanded property value support for tickets and better `nat` type support.
 
@@ -2842,7 +2842,7 @@ Developer Experience is our high-priority item, and we have improvements in our 
 
 We have a good practice of Continuous Delivery in Taquito, but we plan to take this to the next level. Stay tuned!
 
-If you have feature or issue requests, please create an issue on http://github.com/ecadlabs/taquito/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
+If you have feature or issue requests, please create an issue on http://github.com/mavryk-network/webmavryk/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
 
 # 8.0.6-beta.0 Updated beacon-sdk, bug fixed related to contract callback entry point
 
@@ -2853,7 +2853,7 @@ If you have feature or issue requests, please create an issue on http://github.c
 
 ## 8.0.4-beta.0 Refactor batch API, improve errors for LamdbaView
 
-* MavrykToolkit.batch has been deprecated in favour of a batch() method on the contract and wallet API. See preliminary docs here: https://github.com/ecadlabs/taquito/pull/648/files and many examples of usage in our integration tests.
+* MavrykToolkit.batch has been deprecated in favour of a batch() method on the contract and wallet API. See preliminary docs here: https://github.com/mavryk-network/webmavryk/pull/648/files and many examples of usage in our integration tests.
 * LamdbaView returns a useful error message when a signer is not configured in Taquito
 * More intergration-tests to cover the Wallet API
 * Many small fixes to the Taquito documentation
@@ -2907,7 +2907,7 @@ Taquito v8 ships with full support for reading Contract and Token metadata, as w
 
 Taquito’s support makes it easy for developers to fetch metadata such as name, author, logo, symbol for a Smart Contract based on the address.
 
-Documentation on Taquitos’ new API is available here: https://taquito.mavryk.org/docs/metadata-tzip16/ and here https://taquito.mavryk.org/docs/tzip12/
+Documentation on Taquitos’ new API is available here: https://webmavryk.mavryk.org/docs/metadata-tzip16/ and here https://webmavryk.mavryk.org/docs/tzip12/
 
 michel-codec updates
 The michel-codec package now type checks all Michelson. Passing an incorrect data type with a Michelson operation will be caught by michel-codec.
@@ -2917,7 +2917,7 @@ Michel-codec now takes a protocol parameter so that it produces the correct Mich
 Example of use:
 
 ```
-Import {Protocol, Parser, ParserOptions} from ‘@mavrykdynamics/taquito-michel-codec’
+Import {Protocol, Parser, ParserOptions} from ‘@mavrykdynamics/webmavryk-michel-codec’
 
 const parserOptions: ParserOptions = {
   expandMacros: true,
@@ -2946,7 +2946,7 @@ Developer Experience is our high priority item, and we have improvements in our 
 
 We have a good practice of Continuous Delivery in Taquito, but we plan to take this to the next level. Making new features available for pre-view earlier, and test artefacts more visible. Stay tuned!
 
-If you have feature or issue requests, please create an issue on http://github.com/ecadlabs/taquito/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
+If you have feature or issue requests, please create an issue on http://github.com/mavryk-network/webmavryk/issues or join us on the Taquito community support channel on Telegram https://t.me/tezostaquito
 
 ## Taquito v7.1.0-beta
 
@@ -2956,13 +2956,13 @@ If you have feature or issue requests, please create an issue on http://github.c
 
 Lambda views is a technique that allows a caller to execute a view function on a contract without incurring fees. Taquito provides an abstraction over this technique that makes it easy to use. Application developers can use this feature to call view methods on smart-contracts without incurring fees.
 
-See the [Lambda View documentation](https://taquito.mavryk.org/docs/lambda_view)
+See the [Lambda View documentation](https://webmavryk.mavryk.org/docs/lambda_view)
 
 Special thanks to Philip Diaz and Michael Klien for contributing this feature to Taquito.
 
 #### michel-codec type checking
 
-The `@mavrykdynamics/taquito-michel-codec` package now validates/type checks your Michelson. This validation provides an additional layer of safety and speed as this package validates Michelson at run-time, catching invalid code before it reaches a Mavryk node. We will be integrating `michel-codec` package deeper into Taquito over the next few releases.
+The `@mavrykdynamics/webmavryk-michel-codec` package now validates/type checks your Michelson. This validation provides an additional layer of safety and speed as this package validates Michelson at run-time, catching invalid code before it reaches a Mavryk node. We will be integrating `michel-codec` package deeper into Taquito over the next few releases.
 
 ### Beacon V2
 
@@ -2980,7 +2980,7 @@ This release updates Taquito's Wallet API provider for TZIP-10/beacon-sdk to 1.2
 
 ## Taquito v7.0.0-beta
 
-As per the Taquito [Versioning Strategy](https://github.com/ecadlabs/taquito#versioning-strategy) this v7.0.0 release supports the upcoming Delphinet Mavryk Protocol which we are expecting to reach quorum in the coming days.
+As per the Taquito [Versioning Strategy](https://github.com/mavryk-network/webmavryk#versioning-strategy) this v7.0.0 release supports the upcoming Delphinet Mavryk Protocol which we are expecting to reach quorum in the coming days.
 
 
 ### Delphinet Support
@@ -2997,7 +2997,7 @@ Delphi changelogs: https://blog.nomadic-labs.com/delphi-changelog.html#007-delph
 
 Taquito now ships with a [Ledger](https://www.ledger.com/) Signer implementation. This feature makes it easy to interoperate with Ledger Hardware wallets in a web context or from command-line tools.
 
-Documentation is available here: https://taquito.mavryk.org/docs/ledger_signer
+Documentation is available here: https://webmavryk.mavryk.org/docs/ledger_signer
 
 We have tested using both Ledger Nano S and X devices.
 
@@ -3006,25 +3006,25 @@ Both the [Madfish](https://www.madfish.solutions/) ([Temple Wallet](https://temp
 
 ### More documentation!
 
-- [Web3js → Taquito](https://taquito.mavryk.org/docs/web3js_taquito)
+- [Web3js → Taquito](https://webmavryk.mavryk.org/docs/web3js_taquito)
 - Docs on how to run our integration tests for
-  - [Ledger Devices](https://taquito.mavryk.org/docs/ledger_integration_test)
-  - [RPC Node](https://taquito.mavryk.org/docs/rpc_nodes_integration_test)
-- [Docs for RPC](https://taquito.mavryk.org/docs/rpc_package)
-- [Docs for popular public Mavryk nodes](https://taquito.mavryk.org/docs/rpc_nodes)
+  - [Ledger Devices](https://webmavryk.mavryk.org/docs/ledger_integration_test)
+  - [RPC Node](https://webmavryk.mavryk.org/docs/rpc_nodes_integration_test)
+- [Docs for RPC](https://webmavryk.mavryk.org/docs/rpc_package)
+- [Docs for popular public Mavryk nodes](https://webmavryk.mavryk.org/docs/rpc_nodes)
 
 
 ### Breaking Changes
 
 With a major version release, comes an opportunity for us to make some breaking changes.
 
-We have published an [upgrade guide](https://taquito.mavryk.org/docs/upgrading_guide) to help guide developers and making these changes as easy to adopt as possible.
+We have published an [upgrade guide](https://webmavryk.mavryk.org/docs/upgrading_guide) to help guide developers and making these changes as easy to adopt as possible.
 
 The three most notable changes are:
 
 #### Removal of the default RPC URL
 
-Users of Taquito must specifically set their RPC URL. We have published a list of [public nodes Mavryk RPC nodes](https://taquito.mavryk.org/docs/rpc_nodes/).
+Users of Taquito must specifically set their RPC URL. We have published a list of [public nodes Mavryk RPC nodes](https://webmavryk.mavryk.org/docs/rpc_nodes/).
 
 
 #### Removal of the default Mavryk singleton
@@ -3032,7 +3032,7 @@ Users of Taquito must specifically set their RPC URL. We have published a list o
 Users must now make a new instance of the Taquito `MavrykToolkit`. This change is related to the removal of the default RPC node URL.
 
 #### Remove the deprecated `Mavryk.importKey` method from the main Taquito package
-We deprecated the top-level `importKey` method last march, and now it’s finally time to remove it. The method continues to be available in the `@mavrykdynamics/taquito-signer` package as usual.
+We deprecated the top-level `importKey` method last march, and now it’s finally time to remove it. The method continues to be available in the `@mavrykdynamics/webmavryk-signer` package as usual.
 
 ### Bugs / Improvements
 
@@ -3042,7 +3042,7 @@ We removed the react-components package from Taquito. These may return in the fu
 
 ### Tests
 
-We have added many more tests to our [integration-test](https://github.com/ecadlabs/taquito/tree/master/integration-tests) suit. Including tests for draining of accounts
+We have added many more tests to our [integration-test](https://github.com/mavryk-network/webmavryk/tree/master/integration-tests) suit. Including tests for draining of accounts
 
 ### Infrastructure / backend
 
@@ -3129,9 +3129,9 @@ Integration tests have been sped up significantly by using a special key API tha
 
 ### Changes
 
-Mavryk.importKey() has been marked as deprecated. Please update your application code to use the importKey() method from the @mavrykdynamics/taquito-singer package instead. The deprecated Mavryk.importKey() method will be removed in a future release.
+Mavryk.importKey() has been marked as deprecated. Please update your application code to use the importKey() method from the @mavrykdynamics/webmavryk-singer package instead. The deprecated Mavryk.importKey() method will be removed in a future release.
 
-`import { importKey } from '@mavrykdynamics/taquito-signer';`
+`import { importKey } from '@mavrykdynamics/webmavryk-signer';`
 
 ### Documentation
 All run-able code examples that broadcast operations now all target carthagenet.
@@ -3208,26 +3208,26 @@ map.set({firstName:"Joe", lastName: "Bloe"}, "myValue")
 storage.get({firstName:"Joe", lastName: "Bloe"})
 ```
 
-[https://github.com/ecadlabs/taquito/issues/251](https://github.com/ecadlabs/taquito/issues/251)
+[https://github.com/mavryk-network/webmavryk/issues/251](https://github.com/mavryk-network/webmavryk/issues/251)
 
 ### Documentation
 
-New documentation covering how to interact with Smart Contracts using Taquito [https://taquito.mavryk.org/docs/smartcontracts/](https://taquito.mavryk.org/docs/smartcontracts/)
+New documentation covering how to interact with Smart Contracts using Taquito [https://webmavryk.mavryk.org/docs/smartcontracts/](https://webmavryk.mavryk.org/docs/smartcontracts/)
 
 ### Improvements & Fixes
 
-* Add a `UnitType` symbol to the `MichelsonEncoder` [#221][[https://github.com/ecadlabs/taquito/issues/221](https://github.com/ecadlabs/taquito/issues/221)]
+* Add a `UnitType` symbol to the `MichelsonEncoder` [#221][[https://github.com/mavryk-network/webmavryk/issues/221](https://github.com/mavryk-network/webmavryk/issues/221)]
 * Improved test coverage throughout the project
 * Represent all Operation kinds as an ENUM
-* Fix for handling of Zarith numbers as reported by Doyensec's security audit [https://github.com/ecadlabs/taquito/issues/264](https://github.com/ecadlabs/taquito/issues/264)
-* Validate entrypoint name length as reported by Doyensec's security audit [https://github.com/ecadlabs/taquito/issues/265](https://github.com/ecadlabs/taquito/issues/265)
-* Improve [multi-sig integration test](https://github.com/ecadlabs/taquito/blob/f3a19c4682ba5af2073e72c5d06734860596f455/integration-tests/multisig-contract-scenario.spec.ts) example
+* Fix for handling of Zarith numbers as reported by Doyensec's security audit [https://github.com/mavryk-network/webmavryk/issues/264](https://github.com/mavryk-network/webmavryk/issues/264)
+* Validate entrypoint name length as reported by Doyensec's security audit [https://github.com/mavryk-network/webmavryk/issues/265](https://github.com/mavryk-network/webmavryk/issues/265)
+* Improve [multi-sig integration test](https://github.com/mavryk-network/webmavryk/blob/f3a19c4682ba5af2073e72c5d06734860596f455/integration-tests/multisig-contract-scenario.spec.ts) example
 * Add the mumav option in send method for Smart contract abstraction #255
 
 ### CDN Bundle
 
 ```html
-<script src="https://unpkg.com/@mavrykdynamics/taquito@6.1.0-beta.0/dist/taquito.min.js"
+<script src="https://unpkg.com/@mavrykdynamics/webmavryk@6.1.0-beta.0/dist/taquito.min.js"
 crossorigin="anonymous" integrity="sha384-sk4V+57zLUCfkna8z4p1u6CioucJqmeo+QnaiXoFiuE8vdkm7/ae2TNFLbL+Ys02"></script>
 ```
 
@@ -3243,13 +3243,13 @@ As per our versioning policy, we have now removed support for injecting Athens o
 
 Taquito now supports Local forging of operations. This allows you to forge operations without relying on a Mavryk node RPC. This feature is useful if you do not want to rely (trust) a public node, or if you want to forge & sign operations in an environment that is not accessible to the internet for security purposes.
 
-See the `@mavrykdynamics/taquito-local-forging` package for the implementation.
+See the `@mavrykdynamics/webmavryk-local-forging` package for the implementation.
 
 Our integration tests for local forging work by forging many test cases using the local forger and the RPC forger endpoint. We then assert that the results from both implementations are identical.
 
 #### Composite Forger
 
-A new CompositeForger API is available, that allows you to forge an operation using more than one forging method, such as nodes forge RPC and Local forger. This approach provides additional surety that your operation is correctly composed. The CompositeForger will use more than one forger to produce the operation bytes and check that the bytes from each forger are identical. If the operations differ, the API will throw an error. [#238](https://github.com/ecadlabs/taquito/pull/238)
+A new CompositeForger API is available, that allows you to forge an operation using more than one forging method, such as nodes forge RPC and Local forger. This approach provides additional surety that your operation is correctly composed. The CompositeForger will use more than one forger to produce the operation bytes and check that the bytes from each forger are identical. If the operations differ, the API will throw an error. [#238](https://github.com/mavryk-network/webmavryk/pull/238)
 
 All Taquito integration tests that forge operations make use of the `CompositeForger` that relies on our local forger and the RPC based forger.
 
@@ -3266,7 +3266,7 @@ Developers can now use Taquito using a `<script>` tag instead of using a package
 All new releases of Taquito will be published to the [unpkg.com](http://unpkg.com) CDN. We will publish hash's of the CDN assets for every release, and we encourage users to make use of the [Subresource Integrity](https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity) options to ensure that you are getting the correct version of Taquito.
 
 ```
-    <script src="https://unpkg.com/@mavrykdynamics/taquito@6.0.2-beta.0/dist/taquito.min.js"
+    <script src="https://unpkg.com/@mavrykdynamics/webmavryk@6.0.2-beta.0/dist/taquito.min.js"
     crossorigin="anonymous" integrity="sha384-gIjWpwSahQXCejt3IXr83Lxmcfe13gZX97Yp7bpdCMpX/fD0XV3V4hxRHhCVX9+k"></script>
 ```
 
@@ -3379,7 +3379,7 @@ Documentation:
 - Fix an integration bug between michelson encoder and taquito high level package. The bug was preventing the creation of smart contract abstract using RPCContractProvider.
 - Change balance history order after breaking changes from indexer api
 - Add more types for the script rpc endpoint
-- New boilerplate app see: https://github.com/ecadlabs/taquito-boilerplate
+- New boilerplate app see: https://github.com/mavryk-network/webmavryk-boilerplate
 - New origination example
 - More integration tests
 - Fix pkgsign badge in every readme (Need to url encode keybase profile)
@@ -3387,7 +3387,7 @@ Documentation:
 ## 4.1.0-beta.4: Public release of `taquito`
 
 - Add more types for the script rpc endpoint
-- New boilerplate app see: https://github.com/ecadlabs/taquito-boilerplate
+- New boilerplate app see: https://github.com/mavryk-network/webmavryk-boilerplate
 
 ### Hotfix
 

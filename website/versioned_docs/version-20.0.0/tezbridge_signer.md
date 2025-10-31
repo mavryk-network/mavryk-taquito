@@ -15,8 +15,8 @@ TezBridge Signer is deprecated in v13
 You first need to include https://www.tezbridge.com/plugin.js in your application to use this signer
 
 ```js
-import { TezBridgeSigner } from '@mavrykdynamics/taquito-tezbridge-signer'
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
+import { TezBridgeSigner } from '@mavrykdynamics/webmavryk-tezbridge-signer'
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
 
 const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
 

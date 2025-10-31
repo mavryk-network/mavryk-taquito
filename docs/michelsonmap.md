@@ -10,25 +10,25 @@ author: Claude Barde
 
 One of the most attractive smart contract features is storing a substantial amount of data that the contract code can use. Although Michelson provides different structures to store data, this article's object will be its maps. Maps are hash tables that contain key/value pairs, which means that when you want to find a value in a map, you search for its key. Maps allow you to store complex data that can reference a single word or number or even more complex data like a pair!
 
-Unlike big maps, all the values in a map are deserialized, allowing developers to access all of them at once. While maps become more expensive to use when the number of key/value pairs increases, they are well-suited for smaller databases because of Michelson's extra features (like mapping or folding) and Taquito offer on maps.
+Unlike big maps, all the values in a map are deserialized, allowing developers to access all of them at once. While maps become more expensive to use when the number of key/value pairs increases, they are well-suited for smaller databases because of Michelson's extra features (like mapping or folding) and Webmavryk offer on maps.
 
-Taquito reads maps in the storage of smart contracts and translates them into an [instance of the `MichelsonMap` class](https://taquito.mavryk.org/typedoc/classes/_taquito_taquito.michelsonmap.html). The class and its instances expose different features that give developers much flexibility to use Michelson maps in their dapps. These features fall into four groups:
+Webmavryk reads maps in the storage of smart contracts and translates them into an [instance of the `MichelsonMap` class](https://webmavryk.mavryk.org/typedoc/classes/_webmavryk_webmavryk.michelsonmap.html). The class and its instances expose different features that give developers much flexibility to use Michelson maps in their dapps. These features fall into four groups:
 
-- _The instantiation_: there are three different ways of creating a new `MichelsonMap` in Taquito
+- _The instantiation_: there are three different ways of creating a new `MichelsonMap` in Webmavryk
 - _The general methods_: they give you information about the map, for example, its size or the elements it contains
 - _The key/value methods_: they allow you to manipulate the keys and values in the map
 - _The update methods_: they transform the map itself, for example, by deleting elements or clearing out the map entirely.
 
-This tutorial uses a [simple smart contract deployed on basenet](https://better-call.dev/basenet/KT1M5C76aSjpWXdoBvuzRdi3UJoC3jEzrSUW/operations) with a map that contains addresses as keys and mav as values. We will use all the methods available in Taquito's `MichelsonMap` to check the map, extract values and modify them!
+This tutorial uses a [simple smart contract deployed on basenet](https://better-call.dev/basenet/KT1M5C76aSjpWXdoBvuzRdi3UJoC3jEzrSUW/operations) with a map that contains addresses as keys and mav as values. We will use all the methods available in Webmavryk's `MichelsonMap` to check the map, extract values and modify them!
 
-> Note: Taquito is written in TypeScript; we will also use TypeScript to interact with the contract storage.
+> Note: Webmavryk is written in TypeScript; we will also use TypeScript to interact with the contract storage.
 
 ## Loading the smart contract storage
 
-This paragraph is a little reminder of how to use Taquito to fetch the storage of a smart contract:
+This paragraph is a little reminder of how to use Webmavryk to fetch the storage of a smart contract:
 
 ```ts
-import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/taquito';
+import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/webmavryk';
 import { BigNumber } from 'bignumber.js';
 
 const contractAddress: string = 'KT1M5C76aSjpWXdoBvuzRdi3UJoC3jEzrSUW';
@@ -40,14 +40,14 @@ const storage: MichelsonMap<string, BigNumber> = await contract.storage();
 ```
 
 The setup code is pretty straightforward:  
-1- We import `MavrykToolkit` and `MichelsonMap` from the `@mavrykdynamics/taquito` package. We also import `BigNumber` from `bignumber.js` (Taquito installs the library) as TypeScript will need it for this particular example.  
+1- We import `MavrykToolkit` and `MichelsonMap` from the `@mavrykdynamics/webmavryk` package. We also import `BigNumber` from `bignumber.js` (Webmavryk installs the library) as TypeScript will need it for this particular example.  
 2- We instantiate the `MavrykToolkit` object with the RPC address.  
 3- We fetch the contract using `await Mavryk.contract.at(contractAddress)`.  
-4- We extract the contract from the contract using the `storage` method on the `ContractAbstraction` object created one line above. We also type the `storage` variable with the `MichelsonMap` type, which requires 2 type arguments: the type for the key and the type for the value (the `address` is a string, and the `mav` is converted to a BigNumber by Taquito).
+4- We extract the contract from the contract using the `storage` method on the `ContractAbstraction` object created one line above. We also type the `storage` variable with the `MichelsonMap` type, which requires 2 type arguments: the type for the key and the type for the value (the `address` is a string, and the `mav` is converted to a BigNumber by Webmavryk).
 
 ## Creating a `MichelsonMap` instance
 
-Taquito provides three different ways of creating a new Michelson map: we can use two of them to create an empty map, and the third one is used to create a map with default values.
+Webmavryk provides three different ways of creating a new Michelson map: we can use two of them to create an empty map, and the third one is used to create a map with default values.
 
 The most simple way is to create the instance with no argument:
 
@@ -66,7 +66,7 @@ const newEmptyMapWithArg = new MichelsonMap({
 });
 ```
 
-Finally, you can also pass some values you want to create the instance with and let Taquito figure out the types using the `fromLiteral` static method:
+Finally, you can also pass some values you want to create the instance with and let Webmavryk figure out the types using the `fromLiteral` static method:
 
 ```ts
 const newMapfromLiteral = MichelsonMap.fromLiteral({
@@ -182,7 +182,7 @@ This command will output all the values of the map inside an array:
 
 ## The update methods
 
-Although reading and organizing the keys or the values fetched from a Michelson map is an everyday use case, you may also want to modify a map, for example, before originating a new contract. Taquito also thought about it and provided different methods to add or remove key/value pairs from a map.
+Although reading and organizing the keys or the values fetched from a Michelson map is an everyday use case, you may also want to modify a map, for example, before originating a new contract. Webmavryk also thought about it and provided different methods to add or remove key/value pairs from a map.
 
 First, you can use the `set` method to add a new value to an instance of `MichelsonMap`:
 
@@ -219,6 +219,6 @@ console.log(`clear: new size => ${storage.size} element`); // 0 element
 
 ## To go further
 
-If you want to know more about `MichelsonMap` and some advanced usages (for example, how to use pairs as the map keys), you can learn in the [advanced tutorial](https://taquito.mavryk.org/docs/maps_bigmaps) available in the Taquito documentation.
+If you want to know more about `MichelsonMap` and some advanced usages (for example, how to use pairs as the map keys), you can learn in the [advanced tutorial](https://webmavryk.mavryk.org/docs/maps_bigmaps) available in the Webmavryk documentation.
 
-*April 2021, Taquito version 8.1.0*
+*April 2021, Webmavryk version 8.1.0*

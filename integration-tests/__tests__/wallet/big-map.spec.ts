@@ -6,7 +6,7 @@
 
 import { CONFIGS } from "../../config";
 import { storageContract } from "../../data/storage-contract";
-import { MichelsonMap } from "@mavrykdynamics/taquito";
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;

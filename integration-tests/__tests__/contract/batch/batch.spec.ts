@@ -7,7 +7,7 @@
 import { CONFIGS } from '../../../config';
 import { ligoSample, ligoSampleMichelson } from '../../../data/ligo-simple-contract';
 import { managerCode } from '../../../data/manager_code';
-import { MANAGER_LAMBDA, OpKind } from '@mavrykdynamics/taquito';
+import { MANAGER_LAMBDA, OpKind } from '@mavrykdynamics/webmavryk';
 
 CONFIGS().forEach(({ lib, rpc, setup, knownBaker, knownContract, createAddress }) => {
   const Mavryk = lib;

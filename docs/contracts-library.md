@@ -7,8 +7,8 @@ title: Contracts Library
 author: Roxane Letourneau
 ---
 
-To increase dApp performance, we aim to provide ways to reduce the number of calls made by Taquito to the RPC.
-The `@mavrykdynamics/taquito-contracts-library` package allows developers to supply the static contracts data, preventing Taquito from fetching them from the network.
+To increase dApp performance, we aim to provide ways to reduce the number of calls made by Webmavryk to the RPC.
+The `@mavrykdynamics/webmavryk-contracts-library` package allows developers to supply the static contracts data, preventing Webmavryk from fetching them from the network.
 
 
 The `ContractsLibrary` class can be populated by users with contract addresses and their corresponding script and entry points. Then, the `ContractsLibrary` instance can be injected into a `MavrykToolkit` as an extension using its `addExtension` method. 
@@ -18,8 +18,8 @@ When creating a `ContractAbstraction` instance using the `at` method of the Cont
 ### Example of use:
 
 ```ts
-import { ContractsLibrary } from '@mavrykdynamics/taquito-contracts-library';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { ContractsLibrary } from '@mavrykdynamics/webmavryk-contracts-library';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const contractsLibrary = new ContractsLibrary();
 const Mavryk = new MavrykToolkit('rpc');

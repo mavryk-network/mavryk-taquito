@@ -4,9 +4,9 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { InMemorySpendingKey, SaplingToolkit } from '@mavrykdynamics/taquito-sapling';
+import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { InMemorySpendingKey, SaplingToolkit } from '@mavrykdynamics/webmavryk-sapling';
 import { singleSaplingStateContractJProtocol } from '../integration-tests/data/single_sapling_state_contract_jakarta_michelson';
 const numberOfSaplingTx = 1;
 let totalTime = 0;

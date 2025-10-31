@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { FieldNumberingStrategy } from "@mavrykdynamics/taquito-michelson-encoder";
+import { FieldNumberingStrategy } from "@mavrykdynamics/webmavryk-michelson-encoder";
 import { CONFIGS } from "../../config";
 import { noAnnotCode, noAnnotInit } from "../../data/token_without_annotation";
 

@@ -7,7 +7,7 @@ title: Working with contracts having complex storage/parameters
 author: Roxane Letourneau
 ---
 
-This section shows how Taquito can be used to :
+This section shows how Webmavryk can be used to :
 - Originate a contract with complex storage
 - Call a contract function with a complex object as a parameter
 - Pass null value to some optional arguments
@@ -47,15 +47,15 @@ storage (pair
           (map %validators nat address));
 ```
 
-In this example, we originate the contract with initial values in the storage. We use the `MichelsonMap` class' of Taquito to initialize [the maps and the bigMap](https://taquito.mavryk.org/docs/maps_bigmaps). 
+In this example, we originate the contract with initial values in the storage. We use the `MichelsonMap` class' of Webmavryk to initialize [the maps and the bigMap](https://webmavryk.mavryk.org/docs/maps_bigmaps). 
 
-As described above, the `map %data` uses a value that we chose between different types. When using Taquito, we need to surround the chosen argument with curly braces. In the current example, we initialize the value in the `map %data` to the boolean true: `{ bool: true }`.
+As described above, the `map %data` uses a value that we chose between different types. When using Webmavryk, we need to surround the chosen argument with curly braces. In the current example, we initialize the value in the `map %data` to the boolean true: `{ bool: true }`.
 
 An annotation identifies every argument. Therefore we can ignore optional values if they are not needed. In the first entry of the `bigMap %records` of this example, we do not specify values for the `address %address` or the `nat %ttl` or the `nat %validator` but we define one for the `nat %validator` of the second entry of the bigmap.
 
 ```js live noInline
-// import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/taquito';
-// import { importKey } from '@mavrykdynamics/taquito-signer';
+// import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/webmavryk';
+// import { importKey } from '@mavrykdynamics/webmavryk-signer';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 //%data
@@ -127,14 +127,14 @@ Here is the parameter of the function defined in Michelson :
         (pair (bytes %parent) (option %ttl nat)))
 ```
 
-The way to write the parameter when calling the function of a contract with Taquito differs from the way of writing its storage during the origination step. When calling the contract function, we do not write the annotations of the arguments (nor the indexes). So the order of the arguments is important. Before calling the contract function, it may be useful to use Taquito's `toTransferParams` method to inspect the parameter.
+The way to write the parameter when calling the function of a contract with Webmavryk differs from the way of writing its storage during the origination step. When calling the contract function, we do not write the annotations of the arguments (nor the indexes). So the order of the arguments is important. Before calling the contract function, it may be useful to use Webmavryk's `toTransferParams` method to inspect the parameter.
 
 #### Inspect parameter
 
 ```js live noInline
-// import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network')
-// import { importKey } from '@mavrykdynamics/taquito-signer';
+// import { importKey } from '@mavrykdynamics/webmavryk-signer';
 
 importKey(Mavryk, secretKey)
 .then(signer => {
@@ -156,9 +156,9 @@ importKey(Mavryk, secretKey)
 #### Call the set_child_record function when all the arguments are defined
 
 ```js live noInline
-// import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network')
-// import { importKey } from '@mavrykdynamics/taquito-signer';
+// import { importKey } from '@mavrykdynamics/webmavryk-signer';
 
 importKey(Mavryk, secretKey)
 .then(signer => {
@@ -187,9 +187,9 @@ importKey(Mavryk, secretKey)
 The `address %address` and the `nat %ttl` of the `set_child_record` function are optional. If we want one or both to be null, we must specify the value of the argument as `null` or `undefined`.
 
 ```js live noInline
-// import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network')
-// import { importKey } from '@mavrykdynamics/taquito-signer';
+// import { importKey } from '@mavrykdynamics/webmavryk-signer';
 
 importKey(Mavryk, secretKey)
 .then(signer => {
