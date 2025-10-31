@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-sapling",
-  "version": "20.0.0",
+  "version": "20.0.3",
   "description": "Allows reading and preparing sapling transactions",
   "keywords": [
     "mavryk",
@@ -70,10 +70,10 @@
     "@airgap/sapling-wasm": "0.0.9",
     "@stablelib/nacl": "^1.0.4",
     "@stablelib/random": "^1.0.2",
-    "@mavrykdynamics/webmavryk": "^20.0.0",
-    "@mavrykdynamics/webmavryk-core": "^20.0.0",
-    "@mavrykdynamics/webmavryk-rpc": "^20.0.0",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.0",
+    "@mavrykdynamics/webmavryk": "^20.0.3",
+    "@mavrykdynamics/webmavryk-core": "^20.0.3",
+    "@mavrykdynamics/webmavryk-rpc": "^20.0.3",
+    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
     "bignumber.js": "^9.1.2",
     "bip39": "3.1.0",
     "blakejs": "^1.2.1",

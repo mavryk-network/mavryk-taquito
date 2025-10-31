@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-beacon-wallet",
-  "version": "20.0.0",
+  "version": "20.0.3",
   "description": "Beacon wallet provider",
   "keywords": [
     "mavryk",
@@ -70,8 +70,8 @@
   },
   "dependencies": {
     "@mavrykdynamics/beacon-dapp": "^4.2.3",
-    "@mavrykdynamics/webmavryk-core": "^20.0.0",
-    "@mavrykdynamics/webmavryk": "^20.0.0"
+    "@mavrykdynamics/webmavryk-core": "^20.0.3",
+    "@mavrykdynamics/webmavryk": "^20.0.3"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.40",

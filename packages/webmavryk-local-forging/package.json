@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-local-forging",
-  "version": "20.0.0",
+  "version": "20.0.3",
   "description": "Provide local forging functionality to be with webmavryk",
   "keywords": [
     "mavryk",
@@ -69,12 +69,12 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/webmavryk-core": "^20.0.0",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.0",
+    "@mavrykdynamics/webmavryk-core": "^20.0.3",
+    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
     "bignumber.js": "^9.1.2"
   },
   "devDependencies": {
-    "@mavrykdynamics/webmavryk-rpc": "^20.0.0",
+    "@mavrykdynamics/webmavryk-rpc": "^20.0.3",
     "@types/bluebird": "^3.5.40",
     "@types/estree": "^1.0.2",
     "@types/jest": "^29.5.5",

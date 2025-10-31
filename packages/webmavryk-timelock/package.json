@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-timelock",
-  "version": "20.0.0",
+  "version": "20.0.3",
   "description": "TypeScript implementation of the Timelock feature in Mavryk",
   "main": "./dist/webmavryk-timelock.umd.js",
   "module": "./dist/webmavryk-timelock.es6.js",
@@ -70,9 +70,9 @@
     "big-integer": "^1.6.52"
   },
   "devDependencies": {
-    "@mavrykdynamics/webmavryk-signer": "^20.0.0",
-    "@mavrykdynamics/webmavryk": "^20.0.0",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.0",
+    "@mavrykdynamics/webmavryk-signer": "^20.0.3",
+    "@mavrykdynamics/webmavryk": "^20.0.3",
+    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
     "@types/node": "^20.11.20",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",

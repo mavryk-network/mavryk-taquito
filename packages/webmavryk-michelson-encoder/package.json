@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-michelson-encoder",
-  "version": "20.0.0",
+  "version": "20.0.3",
   "description": "converts michelson data and types into convenient JS/TS objects",
   "keywords": [
     "mavryk",
@@ -69,9 +69,9 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/webmavryk-core": "^20.0.0",
-    "@mavrykdynamics/webmavryk-rpc": "^20.0.0",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.0",
+    "@mavrykdynamics/webmavryk-core": "^20.0.3",
+    "@mavrykdynamics/webmavryk-rpc": "^20.0.3",
+    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
     "bignumber.js": "^9.1.2",
     "fast-json-stable-stringify": "^2.1.0"
   },

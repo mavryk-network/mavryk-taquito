@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-signer",
-  "version": "20.0.0",
+  "version": "20.0.3",
   "description": "Provide signing functionality to be with webmavryk",
   "keywords": [
     "mavryk",
@@ -74,9 +74,9 @@
     "@stablelib/nacl": "^1.0.4",
     "@stablelib/pbkdf2": "^1.0.1",
     "@stablelib/sha512": "^1.0.1",
-    "@mavrykdynamics/webmavryk": "^20.0.0",
-    "@mavrykdynamics/webmavryk-core": "^20.0.0",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.0",
+    "@mavrykdynamics/webmavryk": "^20.0.3",
+    "@mavrykdynamics/webmavryk-core": "^20.0.3",
+    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
     "@types/bn.js": "^5.1.2",
     "bip39": "3.1.0",
     "elliptic": "^6.5.4",

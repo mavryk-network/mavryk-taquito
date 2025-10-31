@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-core",
-  "version": "20.0.0",
+  "version": "20.0.3",
   "description": "Classes, interfaces, and types shared across WebMavryk packages",
   "keywords": [
     "mavryk",
