@@ -148,7 +148,7 @@ describe('Sapling transactions builder', () => {
         {
           to: 'zet12mVvzJ4QJhnNQetGHzdwTMcLgNrdC4SFact6BB5jpeqGAefWip3iGgEjvDA9z7b9Y',
           amount: '8000000',
-          memo: 'WebMavryk',
+          memo: 'WebMavry',
         },
       ],
       new BigNumber(8000000),

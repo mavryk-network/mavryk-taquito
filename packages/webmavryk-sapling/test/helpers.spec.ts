@@ -11,7 +11,7 @@ describe('Sapling helper functions', () => {
     const memoTaco = Buffer.from([116, 97, 99, 111]).toString('hex');
     expect(memoHexToUtf8(memoTaco)).toEqual('taco');
 
-    const memoWebMavryk = Buffer.from([116, 97, 113, 117, 105, 116, 111, 0]).toString('hex');
+    const memoWebMavryk = Buffer.from([119, 101, 98, 109, 97, 118, 114, 121, 107, 0]).toString('hex');
     expect(memoHexToUtf8(memoWebMavryk)).toEqual('webmavryk');
 
     const memoTest = Buffer.from([116, 101, 115, 116, 0, 0, 0, 0]).toString('hex');

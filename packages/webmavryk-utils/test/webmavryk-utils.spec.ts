@@ -136,11 +136,11 @@ describe('sapling keys', () => {
 describe('String/Bytes conversions', () => {
   it('Should convert a string to bytes', () => {
     // I used the result from http://string-functions.com/string-hex.aspx for the test
-    expect(stringToBytes('WebMavryk is awesome!')).toEqual('5461717569746f20697320617765736f6d6521');
+    expect(stringToBytes('WebMavryk is awesome!')).toEqual('5765624d617672796b20697320617765736f6d6521');
   });
 
   it('Should convert bytes to string', () => {
-    expect(bytesToString('5461717569746f20697320617765736f6d6521')).toEqual('WebMavryk is awesome!');
+    expect(bytesToString('5765624d617672796b20697320617765736f6d6521')).toEqual('WebMavryk is awesome!');
   });
 
   it('Test1: Should convert a string of char (utf-8) to a string of bytes, and convert it back to the same string of char', () => {

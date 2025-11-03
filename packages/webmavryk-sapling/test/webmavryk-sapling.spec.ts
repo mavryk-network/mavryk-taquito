@@ -172,7 +172,7 @@ describe('SaplingToolkit', () => {
       {
         to: 'zet12mVvzJ4QJhnNQetGHzdwTMcLgNrdC4SFact6BB5jpeqGAefWip3iGgEjvDA9z7b9Y',
         amount: 8,
-        memo: 'WebMavryk',
+        memo: 'WebMavry',
       },
     ]);
     expect(mockReadProvider.getSaplingDiffById).toHaveBeenCalledWith({ id: '0' }, 'head');
@@ -242,7 +242,7 @@ describe('SaplingToolkit', () => {
       {
         to: 'zet12mVvzJ4QJhnNQetGHzdwTMcLgNrdC4SFact6BB5jpeqGAefWip3iGgEjvDA9z7b9Y',
         amount: 8,
-        memo: 'WebMavryk',
+        memo: 'WebMavry',
       },
     ]);
     expect(mockReadProvider.getSaplingDiffByContract).toHaveBeenCalledWith(
@@ -260,7 +260,7 @@ describe('SaplingToolkit', () => {
         {
           to: 'mv1M2LXcB7tVMhtTKUYwXadmfcgSMihEUVWB',
           amount: 8,
-          memo: 'WebMavryk',
+          memo: 'WebMavry',
         },
       ])
     ).rejects.toThrowError(
@@ -274,11 +274,11 @@ describe('SaplingToolkit', () => {
         {
           to: 'zet12mVvzJ4QJhnNQetGHzdwTMcLgNrdC4SFact6BB5jpeqGAefWip3iGgEjvDA9z7b9Y',
           amount: 8,
-          memo: 'WebMavrykooo',
+          memo: 'WebMavryk',
         },
       ])
     ).rejects.toThrowError(
-      `Invalid memo "WebMavrykooo" with length 10 expecting length to be less than 8`
+      `Invalid memo "WebMavryk" with length 9 expecting length to be less than 8`
     );
   });
 
