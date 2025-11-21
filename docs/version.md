@@ -339,7 +339,7 @@ We have updated various dependencies to the latest version in this release. Plea
 
 ### Internals
  - Updated various dependencies [PR#2693](https://github.com/ecadlabs/taquito/pull/2693) [PR#2720](https://github.com/ecadlabs/taquito/pull/2720)
- - Added detectOpenHandles argument when running Flexmasa integration tests as temporary workaround to Jest throwing circular JSON errors [PR#2721](https://github.com/ecadlabs/taquito/pull/2721)
+ - Added detectOpenHandles argument when running MavBox integration tests as temporary workaround to Jest throwing circular JSON errors [PR#2721](https://github.com/ecadlabs/taquito/pull/2721)
 
 
 # Taquito v17.3.2
@@ -607,7 +607,7 @@ This is a patch release to fix a potential issue with `verifySignature()` and `h
 **Potential Breaking Changes**
 - Updated RxJS version from v6.6.3 to v7.8.1
 - Updated TS version into  v4.2.4
-- Please be wary due to the RxJS version upgrade, we've been seeing intermittent timeouts when testing against a Flexmasa sandbox. This behaviour is **not** present when using it against a regular node (Mainnet, Nairobinet, etc). We are still investigating what the cause might be. #2261
+- Please be wary due to the RxJS version upgrade, we've been seeing intermittent timeouts when testing against a MavBox sandbox. This behaviour is **not** present when using it against a regular node (Mainnet, Nairobinet, etc). We are still investigating what the cause might be. #2261
 
 Some other subtle changes that might affect some developers:
 - In `@mavrykdynamics/webmavryk` - `IntegerError` is renamed to `InvalidBalanceError`
@@ -1142,7 +1142,7 @@ const signer = InMemorySigner.fromMnemonic({ mnemonic, password, derivationPath:
 ### Internals
 - Speed up build with nx #2013
 - Integrate the taquito-test-dapp into the Taquito pipeline #663
-- Add a flexmasa node to our CI pipeline #457
+- Add a mavbox node to our CI pipeline #457
 - Add unit tests for taquito-beacon-wallet #1863
 - Adapt integration tests config so they can be run against a sandbox. #1971
 
@@ -2683,7 +2683,7 @@ We added a counter property (a map of an account and its counter) on the MavrykT
 
 ## What's coming next for Taquito?
 
-We will work on integrating flexmasa node into our CI pipeline. We are currently relying on testnets for testing purposes. Since many Taquito users use flexmasa for testing, including it in our development process will help provide better support, especially regarding errors encountered during Operation.confirmation() issues.
+We will work on integrating mavbox node into our CI pipeline. We are currently relying on testnets for testing purposes. Since many Taquito users use mavbox for testing, including it in our development process will help provide better support, especially regarding errors encountered during Operation.confirmation() issues.
 
 We plan to improve performance issues by implementing some caching. Please have a look at these open discussions: https://github.com/ecadlabs/taquito/discussions/917 https://github.com/ecadlabs/taquito/discussions/916. Any feedback or suggestions are appreciated.
 
@@ -2745,7 +2745,7 @@ We are currently seeing a high number of transactions being backtracked with "st
 
 ## What's coming next for Taquito?
 
-We will work on integrating flexmasa node into our CI pipeline. We are currently relying on testnets for testing purposes. Since many Taquito users use flexmasa for testing, including it in our development process will help provide better support, especially regarding errors encountered during Operation.confirmation() issues.
+We will work on integrating mavbox node into our CI pipeline. We are currently relying on testnets for testing purposes. Since many Taquito users use mavbox for testing, including it in our development process will help provide better support, especially regarding errors encountered during Operation.confirmation() issues.
 
 We started some preliminary work on integrating Granadanet, the next Mavryk protocol update proposal. We plan to deliver a final version of Taquito v10 early, giving teams a longer runway to upgrade their projects before protocol transition.
 
@@ -2802,7 +2802,7 @@ To give more flexibility to the user on the retry strategy, we removed the param
 
 ## Polling interval
 
-After sending an operation with Taquito, we call the confirmation method on the operation. Taquito does polling to the node to fetch new blocks and validate if the operation hash is in the block. Before this change, the polling interval's default value (confirmationPollingIntervalSecond) was set to 10 seconds. In theory, a new block is baked every 30 seconds on the testnets and every 60 seconds on mainnet. However, the time between blocks is shorter on sandboxes. For example, it can be of 5 seconds on Flexmasa. A 10-second polling interval is too high for sandboxes and leads to a very high chance of missing the block containing the operation. To improve sandbox users' experience., we now calculate the polling interval value dynamically based on the RPC constants. To consider variations regarding the time between blocks in practice, we divide the value by 3 to reduce the risk of missing a block.
+After sending an operation with Taquito, we call the confirmation method on the operation. Taquito does polling to the node to fetch new blocks and validate if the operation hash is in the block. Before this change, the polling interval's default value (confirmationPollingIntervalSecond) was set to 10 seconds. In theory, a new block is baked every 30 seconds on the testnets and every 60 seconds on mainnet. However, the time between blocks is shorter on sandboxes. For example, it can be of 5 seconds on MavBox. A 10-second polling interval is too high for sandboxes and leads to a very high chance of missing the block containing the operation. To improve sandbox users' experience., we now calculate the polling interval value dynamically based on the RPC constants. To consider variations regarding the time between blocks in practice, we divide the value by 3 to reduce the risk of missing a block.
 
 Note that this value was configurable before and can still be configured if needed:
 Mavryk.setProvider({config: {confirmationPollingIntervalSecond: 5}})

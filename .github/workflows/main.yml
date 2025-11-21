@@ -63,7 +63,7 @@ jobs:
         # Ternary operator workaround
         MAVRYK_RPC_${{ matrix.testnet_uppercase }}: ${{ github.event.pull_request.head.repo.fork && format('https://{0}.ecadinfra.com', matrix.testnet) || null }}
 
-  integration-tests-flexmasa:
+  integration-tests-mavbox:
     runs-on: ubuntu-latest
     continue-on-error: true
     strategy:
@@ -72,7 +72,7 @@ jobs:
           - protocol: Atlas
             testnet: atlasnet
             testnet_uppercase: ATLASNET
-            flexmasa_docker_image: registry.gitlab.com/mavryk-network/flexmasa:atlas-update-run
+            mavbox_docker_image: registry.gitlab.com/mavryk-network/mavbox:atlas-update-run
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -84,21 +84,21 @@ jobs:
     # # bob,edpkurPsQ8eUApnLUJ9ZPDvu98E8VNj4KtJa1aZr16Cr5ow5VHKnz4,mv1NpEEq8FLgc2Yi4wNpEZ3pvc1kUZrp2JWU,unencrypted:edsk3RFfvaFaxbHx8BMtEW1rKQcPtDML3LXjNqMNLCzC3wLC1bWbAt
     # # charlie,edpkuvMuRuZ6ZbAquJH1XxBFfUmuBFz1zp9ENEqjCVgLp3NcY3Ww9M,mv1Daxuv5cvCaCF3T3RmuszbdWYYA8KMhxEF,unencrypted:edsk3RgWvbKKA1atEUcaGwivge7QtckHkTL9nQJUXQKY5r8WKp4pF4
     # # donald,edpkvXGp1BMZxHkwg3mKnWfJYS6HTJ5JtufD8YXxLtH8UKqLZkZVun,mv1Soz7eVXANQyfbVfwNQaGgBphBLbnYy5RZ,unencrypted:edsk3S8mG2sSBmSRbikAcZVLCz4SrCq4DjmsQRic6MGktqNFijfrS2
-    - name: Generate Flexmasa bootstrap accounts
+    - name: Generate MavBox bootstrap accounts
       run: |-
-        echo "alice=$(docker run --rm ${{ matrix.flexmasa_docker_image }} flexmasa key alice)" >> $GITHUB_ENV
-        echo "bob=$(docker run --rm ${{ matrix.flexmasa_docker_image }} flexmasa key bob)" >> $GITHUB_ENV
-        echo "charlie=$(docker run --rm ${{ matrix.flexmasa_docker_image }} flexmasa key charlie)" >> $GITHUB_ENV
-        echo "donald=$(docker run --rm ${{ matrix.flexmasa_docker_image }} flexmasa key donald)" >> $GITHUB_ENV
-    - name: Provision Flexmasa ${{ matrix.protocol }} container
+        echo "alice=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key alice)" >> $GITHUB_ENV
+        echo "bob=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key bob)" >> $GITHUB_ENV
+        echo "charlie=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key charlie)" >> $GITHUB_ENV
+        echo "donald=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key donald)" >> $GITHUB_ENV
+    - name: Provision MavBox ${{ matrix.protocol }} container
       run: |-
         docker run \
         --rm \
         --name my-sandbox \
         --detach \
         -p 20000:20000 \
-        ${{ matrix.flexmasa_docker_image }} \
-        flexmasa mini-net \
+        ${{ matrix.mavbox_docker_image }} \
+        mavbox mini-net \
           --root /tmp/mini-box --size 1 \
           --set-history-mode N000:archive \
           --number-of-b 1 \

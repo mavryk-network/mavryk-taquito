@@ -39,7 +39,7 @@ const forgers: ForgerType[] = [ForgerType.COMPOSITE];
 // user running integration test can pass environment variable MAVRYK_NETWORK_TYPE=sandbox to specify which network to run against
 export enum NetworkType {
   TESTNET,  // corresponds basenet, boreasnet and weeklynet etc.
-  SANDBOX,  // corresponds to flexmasa local chain
+  SANDBOX,  // corresponds to mavbox local chain
 }
 
 interface Config {

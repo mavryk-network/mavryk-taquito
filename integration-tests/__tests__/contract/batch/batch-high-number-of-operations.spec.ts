@@ -9,7 +9,7 @@ import { b58cencode, Prefix, prefix } from '@mavrykdynamics/webmavryk-utils';
 import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 const crypto = require('crypto');
 
-// This test is skipped on Flexmasa due to the high number of operations taking too long to resolve in the sandbox
+// This test is skipped on MavBox due to the high number of operations taking too long to resolve in the sandbox
 CONFIGS().forEach(({ lib, rpc, setup }) => {
     const Mavryk = lib;
 
