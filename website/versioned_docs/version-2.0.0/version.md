@@ -7,6 +7,100 @@ title: Versions
 author: Jev Bjorsell
 ---
 
+# WebMavryk v2.0.0
+## Summary
+
+WebMavryk v2.0.0 is a fork of Taquito v20.0.0, adapted for the Mavryk blockchain. We have adopted a new versioning scheme that aligns with Mavryk's protocol versions rather than continuing Taquito's version numbers. Version 2.0.0 corresponds to the Boreas protocol, which is the second major protocol update of the Mavryk blockchain.
+
+### WebMavryk-Specific Changes
+
+This release represents a complete adaptation of Taquito for the Mavryk blockchain ecosystem. Below are the key changes introduced in WebMavryk 2.0.0 compared to Taquito 20.0.0:
+
+#### Breaking Changes
+
+**1. Package Namespace Change**
+All packages have been renamed from `@taquito/*` to `@mavrykdynamics/webmavryk-*`:
+- `@taquito/taquito` → `@mavrykdynamics/webmavryk`
+- `@taquito/rpc` → `@mavrykdynamics/webmavryk-rpc`
+- `@taquito/michelson-encoder` → `@mavrykdynamics/webmavryk-michelson-encoder`
+- `@taquito/local-forging` → `@mavrykdynamics/webmavryk-local-forging`
+- `@taquito/beacon-wallet` → `@mavrykdynamics/webmavryk-beacon-wallet`
+- And all other packages follow the same pattern
+
+**Migration Example:**
+```javascript
+// Before (Taquito)
+import { TezosToolkit } from '@taquito/taquito';
+const Tezos = new TezosToolkit('https://rpc.tezos.example');
+
+// After (WebMavryk)
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+const Mavryk = new MavrykToolkit('https://rpc.mavryk.example');
+```
+
+**2. API Class and Variable Naming**
+Core classes and APIs have been renamed to reflect the Mavryk blockchain:
+- `TezosToolkit` → `MavrykToolkit`
+- `Tezos` → `Mavryk` (typical instance variable name)
+- Currency references: `mutez` → `mumav` (micro-Mavryk)
+
+**3. Versioning Strategy**
+WebMavryk adopts a new versioning scheme that aligns with Mavryk protocol versions:
+- Version 2.0.0 corresponds to the Boreas protocol (2nd major Mavryk protocol)
+- Future versions will track Mavryk protocol updates rather than maintain continuity with Taquito version numbers
+- This approach provides clearer alignment between library versions and supported blockchain protocols
+
+#### Documentation and Branding
+
+**4. Complete Rebranding**
+- All documentation references updated from Tezos to Mavryk
+- Code examples and API documentation reflect Mavryk terminology
+- Links and references updated to Mavryk ecosystem resources
+- Copyright headers updated to reflect Mavryk Dynamics with proper attribution to original Taquito project by ECAD Labs
+
+**5. Infrastructure References**
+- Default RPC nodes and examples point to Mavryk network infrastructure
+- Added Mavryk Dynamics public testnet nodes to documentation
+- Network references updated (e.g., ghostnet configurations for Mavryk)
+
+#### Technical Changes
+
+**6. Blockchain-Specific Adaptations**
+While the core functionality remains consistent with Taquito 20.0.0, WebMavryk includes:
+- Adapted protocol constants for Mavryk blockchain
+- Updated integration tests to work with Mavryk nodes
+- Modified package configurations for Mavryk ecosystem compatibility
+
+**7. License and Attribution**
+- Maintains Apache 2.0 license from original Taquito project
+- All files include proper attribution to both Mavryk Dynamics (2025) and original Taquito project by ECAD Labs Inc.
+
+### Migration Guide for Taquito Users
+
+If you're migrating from Taquito to WebMavryk, follow these steps:
+
+1. **Update package dependencies** in your `package.json`:
+   ```json
+   {
+     "dependencies": {
+       "@mavrykdynamics/webmavryk": "^2.0.0",
+       "@mavrykdynamics/webmavryk-rpc": "^2.0.0"
+     }
+   }
+   ```
+
+2. **Update import statements** throughout your codebase
+3. **Rename class instances** from `TezosToolkit` to `MavrykToolkit`
+4. **Update RPC endpoints** to point to Mavryk nodes
+5. **Replace currency references** from `mutez` to `mumav` where applicable
+6. **Test thoroughly** as you would with any major dependency change
+
+### Compatibility Note
+
+WebMavryk 2.0.0 maintains API compatibility with Taquito 20.0.0's structure and methods. The primary differences are naming conventions and blockchain-specific configurations. All features, bug fixes, and improvements from Taquito 20.0.0 (including Boreas protocol support) are included in WebMavryk 2.0.0.
+
+---
+
 # Taquito v20.0.0
 ## Summary
 

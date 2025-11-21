@@ -11,7 +11,7 @@ The `@mavrykdynamics/webmavryk` package contains higher-level functionality that
 ## CDN Bundle
 
 ```html
-<script src="https://unpkg.com/@mavrykdynamics/webmavryk@20.0.0/dist/webmavryk.min.js"
+<script src="https://unpkg.com/@mavrykdynamics/webmavryk@2.0.0/dist/webmavryk.min.js"
 crossorigin="anonymous" integrity="sha384-IxvP0ECHi5oqLyz94wF85pU9+ktcsL1HHtA42MITxZsGbsUMEu/g+0Vkjj5vqiMR"></script>
 ```
 

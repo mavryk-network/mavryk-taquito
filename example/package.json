@@ -1,7 +1,7 @@
 {
   "name": "@mavrykdynamics/webmavryk-example",
   "private": true,
-  "version": "20.1.0",
+  "version": "2.0.0",
   "scripts": {
     "example": "node -r ts-node/register --preserve-symlinks example-node.ts",
     "example:activation": "node -r ts-node/register --preserve-symlinks example-activate.ts",
@@ -42,16 +42,16 @@
   },
   "dependencies": {
     "@ledgerhq/hw-transport-node-hid": "^6.28.5",
-    "@mavrykdynamics/webmavryk": "^20.0.3",
-    "@mavrykdynamics/webmavryk-ledger-signer": "^20.0.3",
-    "@mavrykdynamics/webmavryk-local-forging": "^20.0.3",
-    "@mavrykdynamics/webmavryk-michel-codec": "^20.0.3",
-    "@mavrykdynamics/webmavryk-michelson-encoder": "^20.0.3",
-    "@mavrykdynamics/webmavryk-rpc": "^20.0.3",
-    "@mavrykdynamics/webmavryk-sapling": "^20.0.3",
-    "@mavrykdynamics/webmavryk-signer": "^20.0.3",
-    "@mavrykdynamics/webmavryk-tzip16": "^20.0.3",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
+    "@mavrykdynamics/webmavryk": "^2.0.0",
+    "@mavrykdynamics/webmavryk-ledger-signer": "^2.0.0",
+    "@mavrykdynamics/webmavryk-local-forging": "^2.0.0",
+    "@mavrykdynamics/webmavryk-michel-codec": "^2.0.0",
+    "@mavrykdynamics/webmavryk-michelson-encoder": "^2.0.0",
+    "@mavrykdynamics/webmavryk-rpc": "^2.0.0",
+    "@mavrykdynamics/webmavryk-sapling": "^2.0.0",
+    "@mavrykdynamics/webmavryk-signer": "^2.0.0",
+    "@mavrykdynamics/webmavryk-tzip16": "^2.0.0",
+    "@mavrykdynamics/webmavryk-utils": "^2.0.0",
     "bignumber.js": "^9.1.2"
   },
   "devDependencies": {

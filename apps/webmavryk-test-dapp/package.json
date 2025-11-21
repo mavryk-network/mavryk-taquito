@@ -1,7 +1,7 @@
 {
   "name": "webmavryk-test-dapp-vite",
   "private": true,
-  "version": "20.1.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -26,10 +26,10 @@
   "dependencies": {
     "@mavrykdynamics/beacon-sdk": "^4.2.3",
     "@mavrykdynamics/beacon-types": "^4.2.3",
-    "@mavrykdynamics/webmavryk": "^20.0.3",
-    "@mavrykdynamics/webmavryk-beacon-wallet": "^20.0.3",
-    "@mavrykdynamics/webmavryk-core": "^20.0.3",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
+    "@mavrykdynamics/webmavryk": "^2.0.0",
+    "@mavrykdynamics/webmavryk-beacon-wallet": "^2.0.0",
+    "@mavrykdynamics/webmavryk-core": "^2.0.0",
+    "@mavrykdynamics/webmavryk-utils": "^2.0.0",
     "buffer": "^6.0.3",
     "svelte-select": "^5.7.0",
     "vite-compatible-readable-stream": "^3.6.1"
