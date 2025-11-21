@@ -66,7 +66,7 @@ Then, you can start initializing the wallet:
 ```js
 const options = {
   name: 'MyAwesomeDapp',
-  iconUrl: 'https://webmavryk.mavryk.org/img/favicon.svg',
+  iconUrl: 'https://webmavryk.mavryk.org/img/favicon.ico',
   network: { type: 'basenet' },
   enableMetrics: true,
 };

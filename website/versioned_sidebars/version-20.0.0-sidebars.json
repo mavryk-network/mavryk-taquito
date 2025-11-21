@@ -11,8 +11,7 @@
         "tutorial",
         "operation_flow",
         "rpc_nodes",
-        "web3js_webmavryk",
-        "chatbot"
+        "web3js_webmavryk"
       ]
     },
     {
@@ -153,7 +152,7 @@
         "drain_account",
         "complex_parameters",
         "confirmation_event_stream",
-        "subscribe_event",
+        "events",
         "liquidity_baking",
         "storage_annotations",
         "tezos_domains"
@@ -202,7 +201,7 @@
       "collapsible": false,
       "items": [
         "wallet_API",
-        "batch_API"
+        "batch-api"
       ]
     },
     {
@@ -213,7 +212,7 @@
       "collapsible": false,
       "items": [
         "tutorial_links",
-        "contracts_collection"
+        "contract-test-collection"
       ]
     },
     {

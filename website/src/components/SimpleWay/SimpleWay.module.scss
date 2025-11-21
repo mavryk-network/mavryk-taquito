@@ -92,7 +92,7 @@
     content: ' ';
     width: 35px;
     height: 35px;
-    background: var(--yellow-second);
+    background: var(--blue-primary);
     border-radius: 50%;
     position: absolute;
     left: 0;
@@ -111,6 +111,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: var(--brown);
+  background: var(--blue-primary);
   border-radius: 50%;
+  svg {
+    path {
+      fill: #ffffff;
+    }
+  }
 }

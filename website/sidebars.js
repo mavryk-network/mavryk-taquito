@@ -34,7 +34,6 @@ const sidebars = {
         'operation_flow',
         'rpc_nodes',
         'web3js_webmavryk',
-        'chatbot',
       ],
     },
     {
@@ -171,7 +170,7 @@ const sidebars = {
         'drain_account',
         'complex_parameters',
         'confirmation_event_stream',
-        'subscribe_event',
+        'events',
         'liquidity_baking',
         'storage_annotations',
         'tezos_domains',
@@ -214,7 +213,7 @@ const sidebars = {
       collapsible: false,
       items: [
         'wallet_API',
-        'batch_API',
+        'batch-api',
       ]
     },
     {
@@ -225,7 +224,7 @@ const sidebars = {
       collapsible: false,
       items: [
         'tutorial_links',
-        'contracts_collection',
+        'contract-test-collection',
       ],
     },
 

@@ -29,7 +29,7 @@ import { BeaconWallet } from '@mavrykdynamics/webmavryk-beacon-wallet';
 
 const options = {
   name: 'MyAwesomeDapp',
-  iconUrl: 'https://webmavryk.mavryk.org/img/favicon.svg',
+  iconUrl: 'https://webmavryk.mavryk.org/img/favicon.ico',
   network: { type: 'basenet' },
   enableMetrics: true,
 };

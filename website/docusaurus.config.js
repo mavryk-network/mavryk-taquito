@@ -10,7 +10,7 @@ require('dotenv').config();
 module.exports = {
   title: 'Webmavryk',
   tagline: 'A TypeScript library suite for development on the Mavryk blockchain.',
-  favicon: 'img/favicon.svg',
+  favicon: 'img/favicon.ico',
   url: 'https://webmavryk.mavryk.org',
   baseUrl: '/',
   projectName: 'webmavryk',

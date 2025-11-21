@@ -6,7 +6,6 @@
 
 import React from 'react';
 import styles from './SimpleWay.module.scss';
-import SimpleWaySvg from '../../../static/img/logo-webmavryk-color.svg';
 import StartNowButton from '../StartNowButton/StartNowButton';
 
 const FeatureList = [
@@ -57,7 +56,6 @@ export default function SimpleWay() {
       <div className={styles.container}>
         <Feature {...FeatureList[0]} />
         <div className={styles.simpleWaySvg}>
-          <SimpleWaySvg />
         </div>
       </div>
     </section>

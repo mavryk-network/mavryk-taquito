@@ -68,7 +68,7 @@
     font-size: 20px;
     text-transform: capitalize;
     width: fit-content;
-    background: var(--brown);
+    background: var(--blue-primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,9 +76,10 @@
     text-align: center;
     min-width: 135px !important;
     padding: 3px 15px 6px 15px;
-    color: var(--ifm-color-text-secondary) !important;
+    color: #ffffff !important;
     &:hover {
-      color: var(--ifm-color-text-primary) !important;
+      background-color: #5B8DEF;
+      color: #ffffff !important;
       text-decoration: none;
     }
   }
@@ -118,7 +119,7 @@
 
 .cardBox {
   max-width: 315px;
-  border: 1px solid #d3832b;
+  border: 1px solid #262626;
   box-sizing: border-box;
   border-radius: 12px;
   padding: 30px;
@@ -148,14 +149,14 @@
 
 [data-theme='dark'] {
   .cardTitle {
-    color: var(--yellow-second);
+    color: var(--blue-primary);
   }
 }
 
 [data-theme='light'] .cardSvg [stroke] {
-  stroke: var(--yellow-second);
+  stroke: var(--blue-primary);
 }
 
 [data-theme='dark'] .cardSvg [stroke] {
-  stroke: var(--yellow-second);
+  stroke: var(--blue-primary);
 }
