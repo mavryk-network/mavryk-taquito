@@ -339,7 +339,7 @@ We have updated various dependencies to the latest version in this release. Plea
 
 ### Internals
  - Updated various dependencies [PR#2693](https://github.com/ecadlabs/taquito/pull/2693) [PR#2720](https://github.com/ecadlabs/taquito/pull/2720)
- - Added detectOpenHandles argument when running MavBox integration tests as temporary workaround to Jest throwing circular JSON errors [PR#2721](https://github.com/ecadlabs/taquito/pull/2721)
+ - Added detectOpenHandles argument when running Mavbox integration tests as temporary workaround to Jest throwing circular JSON errors [PR#2721](https://github.com/ecadlabs/taquito/pull/2721)
 
 
 # Taquito v17.3.2
@@ -607,7 +607,7 @@ This is a patch release to fix a potential issue with `verifySignature()` and `h
 **Potential Breaking Changes**
 - Updated RxJS version from v6.6.3 to v7.8.1
 - Updated TS version into  v4.2.4
-- Please be wary due to the RxJS version upgrade, we've been seeing intermittent timeouts when testing against a MavBox sandbox. This behaviour is **not** present when using it against a regular node (Mainnet, Nairobinet, etc). We are still investigating what the cause might be. #2261
+- Please be wary due to the RxJS version upgrade, we've been seeing intermittent timeouts when testing against a Mavbox sandbox. This behaviour is **not** present when using it against a regular node (Mainnet, Nairobinet, etc). We are still investigating what the cause might be. #2261
 
 Some other subtle changes that might affect some developers:
 - In `@mavrykdynamics/webmavryk` - `IntegerError` is renamed to `InvalidBalanceError`
@@ -2802,7 +2802,7 @@ To give more flexibility to the user on the retry strategy, we removed the param
 
 ## Polling interval
 
-After sending an operation with Taquito, we call the confirmation method on the operation. Taquito does polling to the node to fetch new blocks and validate if the operation hash is in the block. Before this change, the polling interval's default value (confirmationPollingIntervalSecond) was set to 10 seconds. In theory, a new block is baked every 30 seconds on the testnets and every 60 seconds on mainnet. However, the time between blocks is shorter on sandboxes. For example, it can be of 5 seconds on MavBox. A 10-second polling interval is too high for sandboxes and leads to a very high chance of missing the block containing the operation. To improve sandbox users' experience., we now calculate the polling interval value dynamically based on the RPC constants. To consider variations regarding the time between blocks in practice, we divide the value by 3 to reduce the risk of missing a block.
+After sending an operation with Taquito, we call the confirmation method on the operation. Taquito does polling to the node to fetch new blocks and validate if the operation hash is in the block. Before this change, the polling interval's default value (confirmationPollingIntervalSecond) was set to 10 seconds. In theory, a new block is baked every 30 seconds on the testnets and every 60 seconds on mainnet. However, the time between blocks is shorter on sandboxes. For example, it can be of 5 seconds on Mavbox. A 10-second polling interval is too high for sandboxes and leads to a very high chance of missing the block containing the operation. To improve sandbox users' experience., we now calculate the polling interval value dynamically based on the RPC constants. To consider variations regarding the time between blocks in practice, we divide the value by 3 to reduce the risk of missing a block.
 
 Note that this value was configurable before and can still be configured if needed:
 Mavryk.setProvider({config: {confirmationPollingIntervalSecond: 5}})

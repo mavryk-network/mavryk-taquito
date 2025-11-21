@@ -4,7 +4,7 @@
 # Original project: Taquito by ECAD Labs Inc.
 
 
-# Generate MavBox bootstrap accounts
+# Generate Mavbox bootstrap accounts
 mavbox_docker_image="${1}"
 
 # Set environment variables
@@ -25,7 +25,7 @@ export "bob=${bob}"
 export "charlie=${charlie}"
 export "dave=${dave}"
 
-# Provision MavBox container
+# Provision Mavbox container
 protocol="${2}"
 testnet="${3}"
 testnet_uppercase="${4}"

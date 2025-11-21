@@ -72,7 +72,7 @@ jobs:
           - protocol: Atlas
             testnet: atlasnet
             testnet_uppercase: ATLASNET
-            mavbox_docker_image: registry.gitlab.com/mavryk-network/mavbox:atlas-update-run
+            mavbox_docker_image: registry.gitlab.com/mavryk-network/mavbox:master-run
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -84,13 +84,13 @@ jobs:
     # # bob,edpkurPsQ8eUApnLUJ9ZPDvu98E8VNj4KtJa1aZr16Cr5ow5VHKnz4,mv1NpEEq8FLgc2Yi4wNpEZ3pvc1kUZrp2JWU,unencrypted:edsk3RFfvaFaxbHx8BMtEW1rKQcPtDML3LXjNqMNLCzC3wLC1bWbAt
     # # charlie,edpkuvMuRuZ6ZbAquJH1XxBFfUmuBFz1zp9ENEqjCVgLp3NcY3Ww9M,mv1Daxuv5cvCaCF3T3RmuszbdWYYA8KMhxEF,unencrypted:edsk3RgWvbKKA1atEUcaGwivge7QtckHkTL9nQJUXQKY5r8WKp4pF4
     # # donald,edpkvXGp1BMZxHkwg3mKnWfJYS6HTJ5JtufD8YXxLtH8UKqLZkZVun,mv1Soz7eVXANQyfbVfwNQaGgBphBLbnYy5RZ,unencrypted:edsk3S8mG2sSBmSRbikAcZVLCz4SrCq4DjmsQRic6MGktqNFijfrS2
-    - name: Generate MavBox bootstrap accounts
+    - name: Generate Mavbox bootstrap accounts
       run: |-
         echo "alice=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key alice)" >> $GITHUB_ENV
         echo "bob=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key bob)" >> $GITHUB_ENV
         echo "charlie=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key charlie)" >> $GITHUB_ENV
         echo "donald=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key donald)" >> $GITHUB_ENV
-    - name: Provision MavBox ${{ matrix.protocol }} container
+    - name: Provision Mavbox ${{ matrix.protocol }} container
       run: |-
         docker run \
         --rm \

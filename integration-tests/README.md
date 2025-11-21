@@ -7,7 +7,7 @@
 
 The `webmavryk/integration-tests` directory contains the integration test suite for Webmavryk. These tests are executed against live Mavryk testnets, ensuring a comprehensive evaluation of various Webmavryk use cases.
 
-The tests may also be run using MavBox. This is useful for testing new features not in current test nets and for testing features around governance that benefit from shortened block processing times. As well MavBox tests offer a secondary confirmation of the test net results.
+The tests may also be run using Mavbox. This is useful for testing new features not in current test nets and for testing features around governance that benefit from shortened block processing times. As well Mavbox tests offer a secondary confirmation of the test net results.
 
 Internally Webmavryk is tested with tests running in parallel. This is achieved using an application that generates new keys and funds them as needed per test.
 The application is not publicly available. External users, therefore, must run the Webmavryk Integration Tests in sequence, one test at a time.
@@ -104,7 +104,7 @@ If running the test with a configured secret key, ensure that the account balanc
 To review the graphical report of the test run, open the index.html file in ~/webmavryk/integration-tests/jest-stare after each test run.
 
 
-## Webmavryk Integration Tests with MavBox
+## Webmavryk Integration Tests with Mavbox
 
 :::warning
 Due to the discontinuation of Flextesa support from Protocol Oxford onwards, we unfortunately will not be testing against sandboxes anymore.
