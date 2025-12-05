@@ -123,8 +123,5 @@
       "@commitlint/config-conventional"
     ]
   },
-  "license": "Apache-2.0",
-  "dependencies": {
-    "code-point-at": "^1.1.0"
-  }
+  "license": "Apache-2.0"
 }
