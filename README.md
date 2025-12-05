@@ -84,7 +84,7 @@ Webmavryk is organized as a [monorepo](https://en.wikipedia.org/wiki/Monorepo), 
 | [@mavrykdynamics/webmavryk-utils](packages/webmavryk-utils)                         | Provides different encoding and decoding utilities                                                   |
 | [@mavrykdynamics/webmavryk-tzip12](packages/webmavryk-tzip12)                       | TZIP-12 allows retrieving NFT/token metadata                                                         |
 | [@mavrykdynamics/webmavryk-tzip16](packages/webmavryk-tzip16)                       | TZIP-16 allows retrieving contract metadata and executing off-chain views                            |
-| [@mavrykdynamics/webmavryk-beacon-wallet](packages/webmavryk-beacon-wallet)         | TZIP-10 implementation of a Wallet API                                                               |
+| [@mavrykdynamics/webmavryk-mavlet-wallet](packages/webmavryk-mavlet-wallet)         | TZIP-10 implementation of a Wallet API                                                               |
 | [@mavrykdynamics/webmavryk-http-utils](packages/webmavryk-http-utils)               | Provides functionality to configure and customize http requests                                      |
 | [@mavrykdynamics/webmavryk-core](packages/webmavryk-core)                           | Provides parent and core types, classes, and interfaces for other Webmavryk packages or external uses  |
 | [@mavrykdynamics/webmavryk-sapling](packages/webmavryk-sapling)                     | Provides functionality to prepare and read sapling transactions                                      |

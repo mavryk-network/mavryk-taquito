@@ -6,8 +6,8 @@
   import { onMount, afterUpdate } from "svelte";
   import { fly } from "svelte/transition";
   import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
-  import { BeaconWallet } from "@mavrykdynamics/webmavryk-beacon-wallet";
-  import { BeaconEvent, type DAppClientOptions } from "@mavrykdynamics/beacon-sdk";
+  import { MavletWallet } from "@mavrykdynamics/webmavryk-mavlet-wallet";
+  import { MavletEvent, type DAppClientOptions } from "@mavrykdynamics/mavlet-sdk";
   import store from "../store";
   import { formatTokenAmount, shortenHash } from "../utils";
   import {
@@ -38,15 +38,15 @@
     //   options.disableDefaultEvents = true;
     //   options.eventHandlers = {
     //     // To keep the pairing alert, we have to add the following default event handlers back
-    //     [BeaconEvent.PAIR_INIT]: {
+    //     [MavletEvent.PAIR_INIT]: {
     //       handler: defaultEventCallbacks.PAIR_INIT
     //     },
-    //     [BeaconEvent.PAIR_SUCCESS]: {
+    //     [MavletEvent.PAIR_SUCCESS]: {
     //       handler: defaultEventCallbacks.PAIR_SUCCESS
     //     }
     //   }
     // }
-    return new BeaconWallet(options);
+    return new MavletWallet(options);
   };
 
   const connectWallet = async () => {
@@ -127,87 +127,87 @@
     }
   });
 
-  const saveLog = (data: unknown, eventType: BeaconEvent) => {
+  const saveLog = (data: unknown, eventType: MavletEvent) => {
     const log = JSON.stringify({ eventType, data });
     store.addEvent(log);
   };
 
-  async function subscribeToAllEvents(wallet: BeaconWallet) {
-    await wallet.client.subscribeToEvent(BeaconEvent.PERMISSION_REQUEST_SENT, (data) =>
-      saveLog(data, BeaconEvent.PERMISSION_REQUEST_SENT),
+  async function subscribeToAllEvents(wallet: MavletWallet) {
+    await wallet.client.subscribeToEvent(MavletEvent.PERMISSION_REQUEST_SENT, (data) =>
+      saveLog(data, MavletEvent.PERMISSION_REQUEST_SENT),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.PERMISSION_REQUEST_SUCCESS, (data) =>
-      saveLog(data, BeaconEvent.PERMISSION_REQUEST_SUCCESS),
+    await wallet.client.subscribeToEvent(MavletEvent.PERMISSION_REQUEST_SUCCESS, (data) =>
+      saveLog(data, MavletEvent.PERMISSION_REQUEST_SUCCESS),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.PERMISSION_REQUEST_ERROR, (data) =>
-      saveLog(data, BeaconEvent.PERMISSION_REQUEST_ERROR),
+    await wallet.client.subscribeToEvent(MavletEvent.PERMISSION_REQUEST_ERROR, (data) =>
+      saveLog(data, MavletEvent.PERMISSION_REQUEST_ERROR),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.OPERATION_REQUEST_SENT, (data) =>
-      saveLog(data, BeaconEvent.OPERATION_REQUEST_SENT),
+    await wallet.client.subscribeToEvent(MavletEvent.OPERATION_REQUEST_SENT, (data) =>
+      saveLog(data, MavletEvent.OPERATION_REQUEST_SENT),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.OPERATION_REQUEST_SUCCESS, (data) =>
-      saveLog(data, BeaconEvent.OPERATION_REQUEST_SUCCESS),
+    await wallet.client.subscribeToEvent(MavletEvent.OPERATION_REQUEST_SUCCESS, (data) =>
+      saveLog(data, MavletEvent.OPERATION_REQUEST_SUCCESS),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.OPERATION_REQUEST_ERROR, (data) =>
-      saveLog(data, BeaconEvent.OPERATION_REQUEST_ERROR),
+    await wallet.client.subscribeToEvent(MavletEvent.OPERATION_REQUEST_ERROR, (data) =>
+      saveLog(data, MavletEvent.OPERATION_REQUEST_ERROR),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.SIGN_REQUEST_SENT, (data) =>
-      saveLog(data, BeaconEvent.SIGN_REQUEST_SENT),
+    await wallet.client.subscribeToEvent(MavletEvent.SIGN_REQUEST_SENT, (data) =>
+      saveLog(data, MavletEvent.SIGN_REQUEST_SENT),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.SIGN_REQUEST_SUCCESS, (data) =>
-      saveLog(data, BeaconEvent.SIGN_REQUEST_SUCCESS),
+    await wallet.client.subscribeToEvent(MavletEvent.SIGN_REQUEST_SUCCESS, (data) =>
+      saveLog(data, MavletEvent.SIGN_REQUEST_SUCCESS),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.SIGN_REQUEST_ERROR, (data) =>
-      saveLog(data, BeaconEvent.SIGN_REQUEST_ERROR),
+    await wallet.client.subscribeToEvent(MavletEvent.SIGN_REQUEST_ERROR, (data) =>
+      saveLog(data, MavletEvent.SIGN_REQUEST_ERROR),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.BROADCAST_REQUEST_SENT, (data) =>
-      saveLog(data, BeaconEvent.BROADCAST_REQUEST_SENT),
+    await wallet.client.subscribeToEvent(MavletEvent.BROADCAST_REQUEST_SENT, (data) =>
+      saveLog(data, MavletEvent.BROADCAST_REQUEST_SENT),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.BROADCAST_REQUEST_SUCCESS, (data) =>
-      saveLog(data, BeaconEvent.BROADCAST_REQUEST_SUCCESS),
+    await wallet.client.subscribeToEvent(MavletEvent.BROADCAST_REQUEST_SUCCESS, (data) =>
+      saveLog(data, MavletEvent.BROADCAST_REQUEST_SUCCESS),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.BROADCAST_REQUEST_ERROR, (data) =>
-      saveLog(data, BeaconEvent.BROADCAST_REQUEST_ERROR),
+    await wallet.client.subscribeToEvent(MavletEvent.BROADCAST_REQUEST_ERROR, (data) =>
+      saveLog(data, MavletEvent.BROADCAST_REQUEST_ERROR),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.ACKNOWLEDGE_RECEIVED, (data) =>
-      saveLog(data, BeaconEvent.ACKNOWLEDGE_RECEIVED),
+    await wallet.client.subscribeToEvent(MavletEvent.ACKNOWLEDGE_RECEIVED, (data) =>
+      saveLog(data, MavletEvent.ACKNOWLEDGE_RECEIVED),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.LOCAL_RATE_LIMIT_REACHED, (data) =>
-      saveLog(data, BeaconEvent.LOCAL_RATE_LIMIT_REACHED),
+    await wallet.client.subscribeToEvent(MavletEvent.LOCAL_RATE_LIMIT_REACHED, (data) =>
+      saveLog(data, MavletEvent.LOCAL_RATE_LIMIT_REACHED),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.NO_PERMISSIONS, (data) =>
-      saveLog(data, BeaconEvent.NO_PERMISSIONS),
+    await wallet.client.subscribeToEvent(MavletEvent.NO_PERMISSIONS, (data) =>
+      saveLog(data, MavletEvent.NO_PERMISSIONS),
     );
 
-    await wallet.client.subscribeToEvent(BeaconEvent.ACTIVE_ACCOUNT_SET, (data) => {
-      saveLog(data, BeaconEvent.ACTIVE_ACCOUNT_SET);
+    await wallet.client.subscribeToEvent(MavletEvent.ACTIVE_ACCOUNT_SET, (data) => {
+      saveLog(data, MavletEvent.ACTIVE_ACCOUNT_SET);
       store.updateUserAddress(data.address);
       store.updateNetworkType(data.network.type as SupportedNetworks);
     });
 
-    await wallet.client.subscribeToEvent(BeaconEvent.ACTIVE_TRANSPORT_SET, (data) =>
-      saveLog(data, BeaconEvent.ACTIVE_TRANSPORT_SET),
+    await wallet.client.subscribeToEvent(MavletEvent.ACTIVE_TRANSPORT_SET, (data) =>
+      saveLog(data, MavletEvent.ACTIVE_TRANSPORT_SET),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.SHOW_PREPARE, (data) =>
-      saveLog(data, BeaconEvent.SHOW_PREPARE),
+    await wallet.client.subscribeToEvent(MavletEvent.SHOW_PREPARE, (data) =>
+      saveLog(data, MavletEvent.SHOW_PREPARE),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.HIDE_UI, (data) =>
-      saveLog(data, BeaconEvent.HIDE_UI),
+    await wallet.client.subscribeToEvent(MavletEvent.HIDE_UI, (data) =>
+      saveLog(data, MavletEvent.HIDE_UI),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.PAIR_INIT, (data) =>
-      saveLog(data, BeaconEvent.PAIR_INIT),
+    await wallet.client.subscribeToEvent(MavletEvent.PAIR_INIT, (data) =>
+      saveLog(data, MavletEvent.PAIR_INIT),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.PAIR_SUCCESS, (data) =>
-      saveLog(data, BeaconEvent.PAIR_SUCCESS),
+    await wallet.client.subscribeToEvent(MavletEvent.PAIR_SUCCESS, (data) =>
+      saveLog(data, MavletEvent.PAIR_SUCCESS),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.CHANNEL_CLOSED, (data) =>
-      saveLog(data, BeaconEvent.CHANNEL_CLOSED),
+    await wallet.client.subscribeToEvent(MavletEvent.CHANNEL_CLOSED, (data) =>
+      saveLog(data, MavletEvent.CHANNEL_CLOSED),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.INTERNAL_ERROR, (data) =>
-      saveLog(data, BeaconEvent.INTERNAL_ERROR),
+    await wallet.client.subscribeToEvent(MavletEvent.INTERNAL_ERROR, (data) =>
+      saveLog(data, MavletEvent.INTERNAL_ERROR),
     );
-    await wallet.client.subscribeToEvent(BeaconEvent.UNKNOWN, (data) =>
-      saveLog(data, BeaconEvent.UNKNOWN),
+    await wallet.client.subscribeToEvent(MavletEvent.UNKNOWN, (data) =>
+      saveLog(data, MavletEvent.UNKNOWN),
     );
   }
 </script>

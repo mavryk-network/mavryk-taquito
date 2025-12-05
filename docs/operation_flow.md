@@ -45,10 +45,10 @@ The Wallet API is part of the `@mavrykdynamics/webmavryk` package, so the instal
 
 Once you have installed the `@mavrykdynamics/webmavryk` package into your project, however, you will need to install additional packages to use the Wallet API.
 
-We work closely with the Beacon team to provide a seamless integration with the Beacon wallet. To install the Beacon wallet, run the following command:
+We work closely with the Mavlet team to provide a seamless integration with the Mavlet wallet. To install the Mavlet wallet, run the following command:
 
 ```
-npm install @mavrykdynamics/webmavryk-beacon-wallet
+npm install @mavrykdynamics/webmavryk-mavlet-wallet
 
 ```
 

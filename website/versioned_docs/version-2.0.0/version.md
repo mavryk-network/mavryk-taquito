@@ -24,7 +24,7 @@ All packages have been renamed from `@taquito/*` to `@mavrykdynamics/webmavryk-*
 - `@taquito/rpc` → `@mavrykdynamics/webmavryk-rpc`
 - `@taquito/michelson-encoder` → `@mavrykdynamics/webmavryk-michelson-encoder`
 - `@taquito/local-forging` → `@mavrykdynamics/webmavryk-local-forging`
-- `@taquito/beacon-wallet` → `@mavrykdynamics/webmavryk-beacon-wallet`
+- `@taquito/beacon-wallet` → `@mavrykdynamics/webmavryk-mavlet-wallet`
 - And all other packages follow the same pattern
 
 **Migration Example:**
@@ -170,7 +170,7 @@ New behaviour - inner object's field number will start with '0'
 - Updated protocol constants integration test for Boreas protocol #2869
 - Configured keygen and integration test configs for Boreas protocol #2888
 - Added forger integration test for protocol migrations #2850
-- Updated `@mavrykdynamics/webmavryk-beacon-wallet` to use event subscription instead of `getActiveAccount()` #2958
+- Updated `@mavrykdynamics/webmavryk-mavlet-wallet` to use event subscription instead of `getActiveAccount()` #2958
 - Updated some website dependencies [PR#2961](https://github.com/ecadlabs/taquito/pull/2961)
 - Updated Beacon wallet dependency to the latest version `v4.2.3` (includes Boreas protocol definitions) [PR#2956](https://github.com/ecadlabs/taquito/pull/2956)
 - Fixed nested `pair` and `or` indexing bug #2927
@@ -209,7 +209,7 @@ await op.confirmation();
 
 ### New Features
 - `@mavrykdynamics/webmavryk-timelock`- A new package for Timelocks have been introduced #2843. Users will now be able to create Chests, unlock Chests, and utilize Chests. For more information, please refer to this [document](https://taquito.io/docs/next/timelock)
-- `@mavrykdynamics/webmavryk-beacon-wallet` - the `beacon-wallet` package is now bundled in a `.zip` file for [PR#2860](https://github.com/ecadlabs/taquito/pull/2860)
+- `@mavrykdynamics/webmavryk-mavlet-wallet` - the `beacon-wallet` package is now bundled in a `.zip` file for [PR#2860](https://github.com/ecadlabs/taquito/pull/2860)
 
 ### Documentation
 - UX improvements to search funtionality on the Taquito website #2858
@@ -237,7 +237,7 @@ await op.confirmation();
 
 ### New Features
 - `@mavrykdynamics/webmavryk` - Added smart rollup execute outbox message operation #2321 (please note that this feature is not fully tested due to some parts requiring the use of `mavkit-client`)
-`@mavrykdynamics/webmavryk-beacon-wallet` - added beacon-wallet bundle script to output a `.zip` bundle for browser only environments #2744 
+`@mavrykdynamics/webmavryk-mavlet-wallet` - added beacon-wallet bundle script to output a `.zip` bundle for browser only environments #2744 
 
 ### Improvement
 - `@mavrykdynamics/webmavryk-michelson-encoder` - replaced references of `[['unit']]` to be `UnitValue` instead [PR#2813](https://github.com/ecadlabs/taquito/pull/2813)
@@ -358,7 +358,7 @@ We have updated various dependencies to the latest version in this release. Plea
 # Taquito v17.3.1
 
 ## Summary
-- This is a patch release to upgrade `@airgap/beacon-sdk` and `@airgap/beacon-dapp` packages to `v4.0.10` [PR#2649](https://github.com/ecadlabs/taquito/pull/2649)
+- This is a patch release to upgrade `@mavrykdynamics/mavlet-sdk` and `@mavrykdynamics/mavlet-dapp` packages to `v4.0.10` [PR#2649](https://github.com/ecadlabs/taquito/pull/2649)
 - Updating license to `Apache-2.0` in `package.json` files  [PR#2636](https://github.com/ecadlabs/taquito/pull/2636)
 - Updated the ledger dependencies [PR#2645](https://github.com/ecadlabs/taquito/pull/2645)
 - Applied dependency upgrades in website suggested by dependabot [PR#2645](https://github.com/ecadlabs/taquito/pull/2645)
@@ -665,7 +665,7 @@ Protocol Nairobi comes with a couple potential breaking changes for our users:
 - Further improved error classes and updated error class hierarchy for the following packages #2509 & #2505:
     - `@mavrykdynamics/webmavryk-http-utils`
     - `@mavrykdynamics/webmavryk-contracts-library`
-    - `@mavrykdynamics/webmavryk-beacon-wallet`
+    - `@mavrykdynamics/webmavryk-mavlet-wallet`
     - `@mavrykdynamics/webmavryk-ledger-signer`
     - `@mavrykdynamics/webmavryk-remote-signer`
 - Improved error capturing/validation for RPC calls #1996
@@ -1137,7 +1137,7 @@ const signer = InMemorySigner.fromMnemonic({ mnemonic, password, derivationPath:
 - Fixed broken link in the Wallet doc #1865
 
 ### Others
-- `@mavrykdynamics-taquito-beacon-wallet` - Updated `@airgap/beacon-dapp` to version 3.3.0: https://github.com/airgap-it/beacon-sdk/releases/tag/v3.3.0
+- `@mavrykdynamics-taquito-beacon-wallet` - Updated `@mavrykdynamics/mavlet-dapp` to version 3.3.0: https://github.com/airgap-it/beacon-sdk/releases/tag/v3.3.0
 
 ### Internals
 - Speed up build with nx #2013
@@ -1288,7 +1288,7 @@ Note for the users of the lower level APIs: injecting more than one manager oper
 - Added more Manager_lambda scenarios to contract multisig integration tests #1724
 
 ### Others
-- `@mavrykdynamics-taquito-beacon-wallet` - Updated `@airgap/beacon-dapp` to version 3.1.4
+- `@mavrykdynamics-taquito-beacon-wallet` - Updated `@mavrykdynamics/mavlet-dapp` to version 3.1.4
 - `@mavrykdynamics/webmavryk-local-forging` - Pure JS implementation #441
 
 
@@ -1417,7 +1417,7 @@ The execution of the on-chain views previously relied on the `helpers/scripts/ru
 
 We added a feedback component at the bottom of each documentation page. We encourage you to provide feedback. It will help us evaluate which pages are the most helpful and which could benefit from improvement.
 
-## `@mavrykdynamics-taquito-beacon-wallet` - Updated `@airgap/beacon-dapp` to version 3.1.4
+## `@mavrykdynamics-taquito-beacon-wallet` - Updated `@mavrykdynamics/mavlet-dapp` to version 3.1.4
 
 We are now using the beacon-dapp's `getDAppClientInstance` method instead of the `new DAppClient`. This new method ensures that only one instance is created. The same cached instance is returned if called multiple times.
 
@@ -1462,7 +1462,7 @@ The `NaiveEstimateProvider` class that was deprecated in v11 has been removed.
 
 ### Others
 - Add to The Taquito Integration Tests the Contract Security tests from InferenceAG / MavrykSecurityBaselineChecking #1631, #1632, #1654
-- `@mavrykdynamics/webmavryk-beacon-wallet` - The beacon-dapp is updated to version 3.1.1: https://github.com/airgap-it/beacon-sdk/releases/tag/v3.1.1
+- `@mavrykdynamics/webmavryk-mavlet-wallet` - The beacon-dapp is updated to version 3.1.1: https://github.com/airgap-it/beacon-sdk/releases/tag/v3.1.1
 
 
 
@@ -1928,7 +1928,7 @@ Note that the wallet account needs to be revealed to conduct any estimate as Taq
 - @mavrykdynamics/webmavryk-tzip12 - `TokenIdNotFound` error was incorrectly thrown on metadata view failure #1210
 - `Schema` deserialized `map nat-nat` as `MichelsonMap<string, BigNumber>` instead of `MichelsonMap<BigNumber, BigNumber>` #1140
 - Custom errors extend `Error` instead of implementing it #973
-- @mavrykdynamics/webmavryk-beacon-wallet - Fixed error `Cannot read property 'DAppClient' of undefined` #787
+- @mavrykdynamics/webmavryk-mavlet-wallet - Fixed error `Cannot read property 'DAppClient' of undefined` #787
 - Removed CommonJS module loading that was causing rollup.js to break #1098
 
 ### Documentation
@@ -2039,9 +2039,9 @@ The `getTokenMetadata` method of the `Tzip12ContractAbstraction` class was throw
 
 The custom errors were implementing the Error class instead of extending it. Thus, `errorFromTaquito instanceof Error` was returning `false`. This issue has been fixed.
 
-## @mavrykdynamics/webmavryk-beacon-wallet - Fixed error `Cannot read property 'DAppClient' of undefined`
+## @mavrykdynamics/webmavryk-mavlet-wallet - Fixed error `Cannot read property 'DAppClient' of undefined`
 
-The error `Cannot read property 'DAppClient' of undefined` was thrown when using the `@mavrykdynamics/webmavryk-beacon-wallet` package without npm. This has been fixed by replacing the global name from `beaconSdk` to `beacon` in the taquito-beacon-wallet.umd.js compiled file.
+The error `Cannot read property 'DAppClient' of undefined` was thrown when using the `@mavrykdynamics/webmavryk-mavlet-wallet` package without npm. This has been fixed by replacing the global name from `beaconSdk` to `beacon` in the taquito-beacon-wallet.umd.js compiled file.
 
 # Taquito v11.1.0-beta
 
@@ -2149,7 +2149,7 @@ This format is now supported in the Timestamp token of the Michelson-encoder.
 
 # Taquito v11.0.2-beta
 
-- `@mavrykdynamics/webmavryk-beacon-wallet` - The beacon-sdk is updated to version 2.3.8
+- `@mavrykdynamics/webmavryk-mavlet-wallet` - The beacon-sdk is updated to version 2.3.8
 - `@mavrykdynamics/webmavryk-utils` - Utility function to get Mavryk Address (PKH) from a public key #643
 
 # Taquito v11.0.1-beta
@@ -2189,7 +2189,7 @@ We encourage all developers to update their projects to use version Taquito v11 
 
 ### Others
 - Preliminary support for Idiazabalnet protocol
-- `@mavrykdynamics/webmavryk-beacon-wallet` - The beacon-sdk is updated to version 2.3.7: https://github.com/airgap-it/beacon-sdk/releases/tag/v2.3.7
+- `@mavrykdynamics/webmavryk-mavlet-wallet` - The beacon-sdk is updated to version 2.3.7: https://github.com/airgap-it/beacon-sdk/releases/tag/v2.3.7
 - Migrate supported companion DApps to Hangzhou: Beacon Test DApp, Taquito React, and Metadata explorer #1065
 
 
@@ -2692,7 +2692,7 @@ If you have feature or issue requests, please create an issue on http://github.c
 
 # Taquito v9.1.1-beta
 
-@mavrykdynamics/webmavryk-beacon-wallet - Updated beacon-sdk to version 2.2.9
+@mavrykdynamics/webmavryk-mavlet-wallet - Updated beacon-sdk to version 2.2.9
 @mavrykdynamics/webmavryk-michelson-encoder - Fix for unexpected MapTypecheckError when loading contract storage - for cases where a map contains a big map as value #925
 # Taquito v9.1.0-beta
 ## Summary
@@ -2700,7 +2700,7 @@ If you have feature or issue requests, please create an issue on http://github.c
 ### New features
 
 - @mavrykdynamics/webmavryk - Added reveal operation on the RpcContractProvider and RPCEstimateProvider classes #772
-- @mavrykdynamics/webmavryk & @mavrykdynamics/webmavryk-beacon-wallet - Ability to specify the fee, storageLimit and gasLimit parameters using the wallet API #866
+- @mavrykdynamics/webmavryk & @mavrykdynamics/webmavryk-mavlet-wallet - Ability to specify the fee, storageLimit and gasLimit parameters using the wallet API #866
 
 ### Enhancements
 
@@ -2708,7 +2708,7 @@ If you have feature or issue requests, please create an issue on http://github.c
 - @mavrykdynamics/webmavryk - Export return types of public API methods (BatchOperation, Operation, OperationBatch, TransferParams, ParamsWithKind) #583
 - @mavrykdynamics/webmavryk-michelson-encoder - Types chain_id, key, option, or, signature, and unit made comparable #603
 -  @mavrykdynamics/webmavryk-rpc - Added big_map_diff, lazy_storage_diff properties and failing_noop operation to RPC types #870
-- @mavrykdynamics/webmavryk-beacon-wallet - Updated beacon-sdk to version [2.2.8](https://github.com/airgap-it/beacon-sdk/releases/tag/v2.2.8)
+- @mavrykdynamics/webmavryk-mavlet-wallet - Updated beacon-sdk to version [2.2.8](https://github.com/airgap-it/beacon-sdk/releases/tag/v2.2.8)
 
 ### Bug fixes
 
@@ -2738,9 +2738,9 @@ Taquito ensures that `map` keys and `set` values of comparable types are sorted 
 
 The execute method allows converting Michelson data into familiar-looking javascript data. This is used in Taquito to provide a well-formatted JSON object of contract storage. This release includes a bug fix for the OrToken where the right values were not formatted correctly.
 
-## @mavrykdynamics/webmavryk & @mavrykdynamics/webmavryk-beacon-wallet - Ability to specify the fee, storageLimit and gasLimit parameters using the wallet API
+## @mavrykdynamics/webmavryk & @mavrykdynamics/webmavryk-mavlet-wallet - Ability to specify the fee, storageLimit and gasLimit parameters using the wallet API
 
-We are currently seeing a high number of transactions being backtracked with "storage exhausted" errors in high-traffic dapps in the ecosystem. To mitigate this issue and knowing that dapps are in a better position to assess reasonable values than the wallet, we now provide the ability to specify the storage, gas limit, and fee via the wallet API. As the `beacon-sdk`, which @mavrykdynamics/webmavryk-beacon-wallet package is built on, accepts those parameters, dapp developers will now have the ability to specify those parameters. One important note is that at the end, it is the wallet that has control over what is actually used when injecting the operation.
+We are currently seeing a high number of transactions being backtracked with "storage exhausted" errors in high-traffic dapps in the ecosystem. To mitigate this issue and knowing that dapps are in a better position to assess reasonable values than the wallet, we now provide the ability to specify the storage, gas limit, and fee via the wallet API. As the `beacon-sdk`, which @mavrykdynamics/webmavryk-mavlet-wallet package is built on, accepts those parameters, dapp developers will now have the ability to specify those parameters. One important note is that at the end, it is the wallet that has control over what is actually used when injecting the operation.
 
 
 ## What's coming next for Taquito?
@@ -2981,7 +2981,7 @@ If you are using a public testnet for your development or testing, please verify
 * Contract and Token Metadata features
 * Support for off-chain Michelson views
 * Michel-codec type checks all your Michelson
-* Ships with @airgap/beacon-sdk v2.2.1 for the Taquito Beacon wallet provider.
+* Ships with @mavrykdynamics/mavlet-sdk v2.2.1 for the Taquito Beacon wallet provider.
 * As per the Taquito Versioning Strategy this v8.0.0 release supports the upcoming edonet Mavryk Protocol which will activate on the Mavryk mainnet on February 13th 2021.
 
 ## edonet Support

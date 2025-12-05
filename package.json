@@ -42,7 +42,7 @@
     "moduleNameMapper": {
       "^@mavrykdynamics/webmavryk-core$": "<rootDir>/packages/webmavryk-core/src/webmavryk-core.ts",
       "^pack-test-tool$": "<rootDir>/packages/webmavryk-michel-codec/pack-test-tool/src/pack-test-tool.js",
-      "^@mavrykdynamics-webmavryk-beacon-wallet$": "<rootDir>/packages/webmavryk-beacon-wallet/src/webmavryk-beacon-wallet.ts",
+      "^@mavrykdynamics-webmavryk-mavlet-wallet$": "<rootDir>/packages/webmavryk-mavlet-wallet/src/webmavryk-mavlet-wallet.ts",
       "^@mavrykdynamics/webmavryk-contracts-library$": "<rootDir>/packages/webmavryk-contracts-library/src/contracts-library.ts",
       "^@mavrykdynamics/webmavryk-http-utils$": "<rootDir>/packages/webmavryk-http-utils/src/webmavryk-http-utils.ts",
       "^@mavrykdynamics-webmavryk-ledger-signer$": "<rootDir>/packages/webmavryk-ledger-signer/src/webmavryk-ledger-signer.ts",
@@ -123,5 +123,8 @@
       "@commitlint/config-conventional"
     ]
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "code-point-at": "^1.1.0"
+  }
 }

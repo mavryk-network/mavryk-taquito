@@ -10,7 +10,7 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    "webmavryk_beacon_wallet": ['./src/webmavryk-beacon-wallet.ts']
+    "webmavryk_mavlet_wallet": ['./src/webmavryk-mavlet-wallet.ts']
   },
   mode: 'production',
   module: {

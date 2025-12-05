@@ -5,7 +5,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
-  import { NetworkType } from "@mavrykdynamics/beacon-types";
+  import { NetworkType } from "@mavrykdynamics/mavlet-types";
   import Select from "svelte-select";
   import { getRpcUrl } from "./config";
   import store from "./store";
@@ -239,7 +239,7 @@
             />
           </label>
           <label>
-            <span class="select-title">Enable Metrics In Beacon:</span>
+            <span class="select-title">Enable Metrics In Mavlet:</span>
             <input
               type="checkbox"
               checked={$store.enableMetrics}

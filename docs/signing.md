@@ -39,7 +39,7 @@ The `signer` method returns the following object:
 }
 ```
 
-## Generating a signature with Beacon SDK
+## Generating a signature with Mavlet SDK
 
 You can also sign a string of bytes with a wallet. Unlike the `InMemorySigner`, the wallets require a certain format for the bytes that need to be signed. Here is how the string must be formatted:
 
@@ -74,7 +74,7 @@ The hexadecimal/Micheline representation of the string must contain 4 pieces of 
 Once you have your bytes, you can send them to the wallet to have them signed:
 
 ```typescript
-import { RequestSignPayloadInput, SigningType } from '@airgap/beacon-sdk';
+import { RequestSignPayloadInput, SigningType } from '@mavrykdynamics/mavlet-sdk';
 
 const payload: RequestSignPayloadInput = {
   signingType: SigningType.MICHELINE,
@@ -85,7 +85,7 @@ const signedPayload = await wallet.client.requestSignPayload(payload);
 const { signature } = signedPayload;
 ```
 
-The Beacon SDK exposes the `RequestSignPayloadInput` type and the `SigningType` enum that we can use to make sure our data is typed properly. The payload to sign must be an object and only requires the `payload` property to be set, the `signingType` and `sourceAddress` properties are optional but it is better to use them, above all the `signingType` one to verify we are passing a Micheline expression.
+The Mavlet SDK exposes the `RequestSignPayloadInput` type and the `SigningType` enum that we can use to make sure our data is typed properly. The payload to sign must be an object and only requires the `payload` property to be set, the `signingType` and `sourceAddress` properties are optional but it is better to use them, above all the `signingType` one to verify we are passing a Micheline expression.
 
 You can then use the `requestSignPayload` method of the `client` available on the `wallet` instance to sign the data.
 
@@ -95,7 +95,7 @@ Here is the full code to sign data with a wallet:
 
 ```ts
 import { stringToBytes } from '@mavrykdynamics/webmavryk-utils';
-import { RequestSignPayloadInput, SigningType } from '@airgap/beacon-sdk';
+import { RequestSignPayloadInput, SigningType } from '@mavrykdynamics/mavlet-sdk';
 
 // The data to format
 const dappUrl = 'mavryk-test-d.app';
@@ -178,7 +178,7 @@ Mavryk.signer
 First, you provide the Michelson code to be signed as a string along with its type.  
 Then, you create a new instance of the `michel-codec` parser and call the `parseMichelineExpression` on it to get the JSON representation of the Michelson code and type.  
 Once done, you can pack the data using the `packDataBytes` function available in the `@mavrykdynamics/webmavryk-michel-codec` package.  
-To finish, use one of the methods presented above to sign the packed data (with the `InMemorySigner` like in this example or with the Beacon SDK).
+To finish, use one of the methods presented above to sign the packed data (with the `InMemorySigner` like in this example or with the Mavlet SDK).
 
 :::caution
 In the previous example, the data is packed locally in Webmavryk using the `packDataBytes` function of the `@mavrykdynamics/webmavryk-michel-codec` package instead of the RPC. You should always verify the packed bytes before signing or requesting that they be signed when using the RPC to pack. This precaution helps protect you and your applications users from RPC nodes that have been compromised. A node that is operated by a bad actor, or compromised by a bad actor could return a fully formed operation that does not correspond to the input provided to the RPC endpoint.

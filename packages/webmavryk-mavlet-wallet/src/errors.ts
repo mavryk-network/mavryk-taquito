@@ -4,19 +4,19 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { PermissionScope } from '@mavrykdynamics/beacon-dapp';
+import { PermissionScope } from '@mavrykdynamics/mavlet-dapp';
 import { PermissionDeniedError } from '@mavrykdynamics/webmavryk-core';
 
 /**
  *  @category Error
- *  @description Error that indicates the Beacon wallet not being initialized
+ *  @description Error that indicates the Mavlet wallet not being initialized
  */
-export class BeaconWalletNotInitialized extends PermissionDeniedError {
+export class MavletWalletNotInitialized extends PermissionDeniedError {
   constructor() {
     super();
-    this.name = 'BeaconWalletNotInitialized';
+    this.name = 'MavletWalletNotInitialized';
     this.message =
-      'BeaconWallet needs to be initialized by calling `await BeaconWallet.requestPermissions({network: {type: "chosen_network"}})` first.';
+      'MavletWallet needs to be initialized by calling `await MavletWallet.requestPermissions({network: {type: "chosen_network"}})` first.';
   }
 }
 

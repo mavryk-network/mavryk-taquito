@@ -9,7 +9,7 @@ module.exports = {
   readme: 'packages/webmavryk/README.md',
   entryPoints: [
     './packages/webmavryk/src/webmavryk.ts',
-    './packages/webmavryk-beacon-wallet/src/webmavryk-beacon-wallet.ts',
+    './packages/webmavryk-mavlet-wallet/src/webmavryk-mavlet-wallet.ts',
     './packages/webmavryk-core/src/webmavryk-core.ts',
     './packages/webmavryk-http-utils/src/webmavryk-http-utils.ts',
     './packages/webmavryk-ledger-signer/src/webmavryk-ledger-signer.ts',

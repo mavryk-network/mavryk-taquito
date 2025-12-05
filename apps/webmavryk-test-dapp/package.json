@@ -24,10 +24,10 @@
     "vite": "^4.4.11"
   },
   "dependencies": {
-    "@mavrykdynamics/beacon-sdk": "^4.2.3",
-    "@mavrykdynamics/beacon-types": "^4.2.3",
+    "@mavrykdynamics/mavlet-sdk": "^1.0.0",
+    "@mavrykdynamics/mavlet-types": "^1.0.0",
     "@mavrykdynamics/webmavryk": "^2.0.0",
-    "@mavrykdynamics/webmavryk-beacon-wallet": "^2.0.0",
+    "@mavrykdynamics/webmavryk-mavlet-wallet": "^2.0.0",
     "@mavrykdynamics/webmavryk-core": "^2.0.0",
     "@mavrykdynamics/webmavryk-utils": "^2.0.0",
     "buffer": "^6.0.3",
@@ -35,7 +35,7 @@
     "vite-compatible-readable-stream": "^3.6.1"
   },
   "alias": {
-    "@mavrykdynamics/beacon-sdk": "../../node_modules/@mavrykdynamics/beacon-sdk/dist/esm/index.js"
+    "@mavrykdynamics/mavlet-sdk": "../../node_modules/@mavrykdynamics/mavlet-sdk/dist/esm/index.js"
   },
   "prettier": {
     "svelteSortOrder": "options-scripts-styles-markup"

@@ -31,7 +31,7 @@ The main benefit of this workflow is that the user does not have to trust a dApp
 The first thing to do is to use the wallet API is to install it. You just need to install the Webmavryk package to use the wallet API:
 
 ```
-npm install @mavrykdynamics/webmavryk @mavrykdynamics/webmavryk-beacon-wallet @temple-wallet/dapp
+npm install @mavrykdynamics/webmavryk @mavrykdynamics/webmavryk-mavlet-wallet @temple-wallet/dapp
 ```
 
 A separate step from setting up the wallet in the dApp code as a developer is to set up the wallet as the user. This step is different for each wallet (e.g., Temple needs the user to install a browser extension). Some wallets are browser extensions, while others are mobile apps or web wallets.
@@ -49,16 +49,16 @@ import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 const Mavryk = new MavrykToolkit('https://ghostnet.ecadinfra.com/');
 ```
 
-This object exposes different methods we are going to use to set up our wallet. TZIP-10 has become the official standard of communication and interaction between wallets and dapps, so let's start with the `@mavrykdynamics/webmavryk-beacon-wallet` package that implements this standard!
+This object exposes different methods we are going to use to set up our wallet. TZIP-10 has become the official standard of communication and interaction between wallets and dapps, so let's start with the `@mavrykdynamics/webmavryk-mavlet-wallet` package that implements this standard!
 
 ### - TZIP-10 wallet
 
-The `BeaconWallet` is a package implementing the TZIP-10 standard that describes the communication between a dapp (decentralized application on Mavryk) and a wallet (e.g., a browser extension). The Beacon wallet works with any wallet that supports the TZIP-10 standard (for example, the Beacon extension, Temple, or Kukai). This package is the recommended way of connecting your dapp to a wallet. In addition to being future-proof, it gives your users the freedom to choose the wallet they want.
+The `MavletWallet` is a package implementing the TZIP-10 standard that describes the communication between a dapp (decentralized application on Mavryk) and a wallet (e.g., a browser extension). The Mavlet wallet works with any wallet that supports the TZIP-10 standard (for example, the Mavlet extension, Temple, or Kukai). This package is the recommended way of connecting your dapp to a wallet. In addition to being future-proof, it gives your users the freedom to choose the wallet they want.
 
-First, the `BeaconWallet` class must be imported:
+First, the `MavletWallet` class must be imported:
 
 ```js
-import { BeaconWallet } from '@mavrykdynamics/webmavryk-beacon-wallet';
+import { MavletWallet } from '@mavrykdynamics/webmavryk-mavlet-wallet';
 ```
 
 Then, you can start initializing the wallet:
@@ -70,16 +70,16 @@ const options = {
   network: { type: 'basenet' },
   enableMetrics: true,
 };
-const wallet = new BeaconWallet(options);
+const wallet = new MavletWallet(options);
 ```
 
-The necessary bare minimum to instantiate the wallet is an object with a `name` property that contains the name of your dapp and the network you want it to point to. In this case, we choose to point it to `basenet`. However, the Beacon wallet allows you to customize your dapp responses to different events. In the example above, instead of getting the default Beacon pop-up after the user connects the wallet, it will display the available data in the console. You can use whatever solution you prefer for feedback. You can find a list of all the default handlers [in the beacon-sdk Github repo](https://github.com/airgap-it/beacon-sdk/blob/master/packages/beacon-dapp/src/events.ts).
+The necessary bare minimum to instantiate the wallet is an object with a `name` property that contains the name of your dapp and the network you want it to point to. In this case, we choose to point it to `basenet`. However, the Mavlet wallet allows you to customize your dapp responses to different events. In the example above, instead of getting the default Mavlet pop-up after the user connects the wallet, it will display the available data in the console. You can use whatever solution you prefer for feedback. You can find a list of all the default handlers [in the mavlet-sdk Github repo](https://github.com/mavryk-network/mavlet-sdk/blob/master/packages/mavlet-dapp/src/events.ts).
 
 The `enableMetrics` property is an optional parameter that allows you to enable or disable the collection of metrics. It also allows the user to report bugs via a link in the wallet pop-up.
 
-> Note: Previous versions of Beacon used to have a `preferredNetwork` property instead of `network`. This property has been removed in the latest version of Beacon, and you must now use the `network` property.
+> Note: Previous versions of Mavlet used to have a `preferredNetwork` property instead of `network`. This property has been removed in the latest version of Mavlet, and you must now use the `network` property.
 
-The Beacon wallet requires an extra step to set up the network to connect to and the permissions:
+The Mavlet wallet requires an extra step to set up the network to connect to and the permissions:
 
 ```js
 // TODO: subscribe to events, more information below
@@ -90,7 +90,7 @@ await wallet.requestPermissions();
 Please check out the section [Subscribing to events](#subscribing-to-events) to learn how to subscribe to events and be notified of changes in the wallet.
 :::
 
-In previous versions of Beacon, you were able to set the `network` property when doing `requestPermissions()`. This behavior was removed from Beacon, and you must now set the network when instantiating the wallet.
+In previous versions of Mavlet, you were able to set the `network` property when doing `requestPermissions()`. This behavior was removed from Mavlet, and you must now set the network when instantiating the wallet.
 
 You can choose among `mainnet`, `boreasnet`, `basenet` and `custom` to set up the network. Once the permissions have been configured, you can get the user's address by calling the `getPKH` method on the wallet:
 
@@ -110,14 +110,14 @@ or
 Mavryk.setProvider({ wallet });
 ```
 
-#### Try the Beacon wallet!
+#### Try the Mavlet wallet!
 
-Make sure you have the Beacon browser extension installed (the extension offers minimal features, the BeaconWallet works with any wallet implementing the TZIP-10 standard), the AirGap wallet on your phone, or any TZIP-10 ready wallet like Temple or Kukai.
+Make sure you have the Mavlet browser extension installed (the extension offers minimal features, the MavletWallet works with any wallet implementing the TZIP-10 standard), the AirGap wallet on your phone, or any TZIP-10 ready wallet like Temple or Kukai.
 
 ```js live noInline wallet
-// import { BeaconWallet } from '@mavrykdynamics/webmavryk-beacon-wallet';
+// import { MavletWallet } from '@mavrykdynamics/webmavryk-mavlet-wallet';
 // const options = { name: 'exampleWallet', enableMetrics: true };
-// const wallet = new BeaconWallet(options);
+// const wallet = new MavletWallet(options);
 
 wallet
   .requestPermissions()
@@ -130,13 +130,13 @@ Mavryk.setWalletProvider(wallet);
 ### Subscribing to events
 
 While your dApp is connected to the wallet, different events can happen on the wallet side. A reactive dApp can subscribe to these events and update the UI to create a good user experience.
-The different types of events are defined in the type `BeaconEvent` that can be imported from `"@airgap/beacon-sdk"`. Some of the events are: `ACTIVE_ACCOUNT_SET`, `PAIR_SUCCESS`, `SIGN_REQUEST_SUCCESS`.
-To see all possible events, please check out the [BeaconEvent in Beacon SDK documentation](https://typedocs.walletbeacon.io/enums/beaconevent.html).
+The different types of events are defined in the type `MavletEvent` that can be imported from `"@mavrykdynamics/mavlet-sdk"`. Some of the events are: `ACTIVE_ACCOUNT_SET`, `PAIR_SUCCESS`, `SIGN_REQUEST_SUCCESS`.
+To see all possible events, please check out the [MavletEvent in Mavlet SDK documentation](https://typedocs.mavlet.mavryk.org/enums/mavletevent.html).
 
 You can subscribe to any of these events as follows:
 
 ```ts
-await wallet.client.subscribeToEvent(BeaconEvent.ACTIVE_ACCOUNT_SET, (data) => {
+await wallet.client.subscribeToEvent(MavletEvent.ACTIVE_ACCOUNT_SET, (data) => {
   // logic to update the active account in your dApp's UI
   console.log(data.address);
 });
@@ -145,7 +145,7 @@ await wallet.requestPermissions();
 
 ### - Development wallets
 
-During the development of your dapp, you may prefer a less "user-friendly" option that gives you more information and details than a more user-friendly wallet. You may also want to install and set up a wallet quickly that requires less boilerplate than the Beacon SDK. In these cases, use the Temple Wallet (for a quick setup using the Temple wallet extension).
+During the development of your dapp, you may prefer a less "user-friendly" option that gives you more information and details than a more user-friendly wallet. You may also want to install and set up a wallet quickly that requires less boilerplate than the Mavlet SDK. In these cases, use the Temple Wallet (for a quick setup using the Temple wallet extension).
 
 - Temple wallet
 

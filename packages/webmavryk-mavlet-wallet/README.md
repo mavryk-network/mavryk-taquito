@@ -2,21 +2,21 @@
      This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
      Original project: Taquito by ECAD Labs Inc. -->
 
-# WebMavryk Beacon Wallet package
+# WebMavryk Mavlet Wallet package
 
 _Documentation can be found [here](https://webmavryk.mavryk.org/docs/wallet_API)_  
-_TypeDoc style documentation is available [here](https://webmavryk.mavryk.org/typedoc/modules/_webmavryk_beacon_wallet.html)_
+_TypeDoc style documentation is available [here](https://webmavryk.mavryk.org/typedoc/modules/_webmavryk_mavlet_wallet.html)_
 
 ## General Information
 
-`@mavrykdynamics/webmavryk-beacon-wallet` is an npm package implementing the TZIP-10 standard that describes the communication between decentralized applications and wallets. The package provides developers a way to connect a dapp built with WebMavryk to a wallet giving the freedom to the users of the dapp to choose the wallet they want.
+`@mavrykdynamics/webmavryk-mavlet-wallet` is an npm package implementing the TZIP-10 standard that describes the communication between decentralized applications and wallets. The package provides developers a way to connect a dapp built with WebMavryk to a wallet giving the freedom to the users of the dapp to choose the wallet they want.
 
 ## Install
 
 Install the package as follows
 
 ```
-npm install @mavrykdynamics/webmavryk-beacon-wallet
+npm install @mavrykdynamics/webmavryk-mavlet-wallet
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ Create a wallet instance with defined option parameters and set the wallet provi
 
 ```ts
 import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
-import { BeaconWallet } from '@mavrykdynamics/webmavryk-beacon-wallet';
+import { MavletWallet } from '@mavrykdynamics/webmavryk-mavlet-wallet';
 
 const options = {
   name: 'MyAwesomeDapp',
@@ -33,13 +33,13 @@ const options = {
   network: { type: 'basenet' },
   enableMetrics: true,
 };
-const wallet = new BeaconWallet(options);
+const wallet = new MavletWallet(options);
 
 await wallet.client.subscribeToEvent(
-  BeaconEvent.ACTIVE_ACCOUNT_SET,
+  MavletEvent.ACTIVE_ACCOUNT_SET,
   async (account) => {
     // An active account has been set, update the dApp UI
-    console.log(`${BeaconEvent.ACTIVE_ACCOUNT_SET} triggered: `, account);
+    console.log(`${MavletEvent.ACTIVE_ACCOUNT_SET} triggered: `, account);
   },
 );
 await wallet.requestPermissions();

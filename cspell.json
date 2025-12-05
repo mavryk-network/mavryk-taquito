@@ -7,7 +7,7 @@
     "annots",
     "b58cdecode",
     "b58cencode",
-    "beaconwallet",
+    "mavletwallet",
     "bigmap",
     "BIGMAPCONTRACT",
     "bigmaps",
@@ -125,7 +125,7 @@
     "unstake",
     "Unstaked",
     "vals",
-    "walletbeacon",
+    "walletmavlet",
     "weeklynet",
     "ZARITH"
   ],

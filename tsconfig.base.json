@@ -24,8 +24,8 @@
       "@mavrykdynamics/webmavryk-core": [
         "webmavryk-core/src/webmavryk-core.ts"
       ],
-      "@mavrykdynamics/webmavryk-beacon-wallet": [
-        "webmavryk-beacon-wallet/src/webmavryk-beacon-wallet.ts"
+      "@mavrykdynamics/webmavryk-mavlet-wallet": [
+        "webmavryk-mavlet-wallet/src/webmavryk-mavlet-wallet.ts"
       ],
       "@mavrykdynamics/webmavryk-contracts-library": [
         "webmavryk-contracts-library/src/webmavryk-contracts-library.ts"

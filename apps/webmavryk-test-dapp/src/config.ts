@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { NetworkType } from "@mavrykdynamics/beacon-types";
+import { NetworkType } from "@mavrykdynamics/mavlet-types";
 
 export type SupportedNetworks = NetworkType.BOREASNET | NetworkType.ATLASNET | NetworkType.BASENET | NetworkType.MAINNET | NetworkType.CUSTOM;
 

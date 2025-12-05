@@ -6,7 +6,7 @@
 
 ![Built with Webmavryk][logo]
 
-A minimal end-to-end testing setup for developing Mavryk DApps with Webmavryk and Beacon to manage signing and wallet operations.
+A minimal end-to-end testing setup for developing Mavryk DApps with Webmavryk and Mavlet to manage signing and wallet operations.
 ## Getting Started
 #### Initial setup
 1. Clone the Webmavryk repository: `git clone git@github.com:mavryk-network/webmavryk.git`

@@ -13,9 +13,9 @@ import {
   UnitValue
 } from "@mavrykdynamics/webmavryk";
 import type { ContractProvider } from "@mavrykdynamics/webmavryk";
-import type { BeaconWallet } from "@mavrykdynamics/webmavryk-beacon-wallet";
+import type { MavletWallet } from "@mavrykdynamics/webmavryk-mavlet-wallet";
 import { stringToBytes, verifySignature } from "@mavrykdynamics/webmavryk-utils";
-import { SigningType, type RequestSignPayloadInput } from "@mavrykdynamics/beacon-types";
+import { SigningType, type RequestSignPayloadInput } from "@mavrykdynamics/mavlet-types";
 import { get } from "svelte/store";
 import type { TestSettings, TestResult } from "./types";
 import store from "./store";
@@ -353,7 +353,7 @@ const batchApiContractCallsTest = async (
 
 const signPayload = async (
   input: string,
-  wallet: BeaconWallet
+  wallet: MavletWallet
 ): Promise<TestResult> => {
   const userAddress = await wallet.getPKH();
   const { payload, formattedInput } = preparePayloadToSign(input, userAddress);
@@ -373,7 +373,7 @@ const signPayload = async (
 
 const signPayloadAndSend = async (
   input: string,
-  wallet: BeaconWallet,
+  wallet: MavletWallet,
   contract: ContractAbstraction<Wallet> | ContractAbstraction<ContractProvider>
 ): Promise<TestResult> => {
   if (!input) throw "No input provided";
@@ -426,7 +426,7 @@ const signFailingNoop = async (
 
 const verifySignatureWithWebmavryk = async (
   input: string,
-  wallet: BeaconWallet,
+  wallet: MavletWallet,
   contract: ContractAbstraction<Wallet> | ContractAbstraction<ContractProvider>
 ): Promise<TestResult> => {
   if (!input) throw "No input provided";
@@ -529,7 +529,7 @@ const tryConfirmationObservable = async (
   }
 };
 
-const permit = async (Mavryk: MavrykToolkit, wallet: BeaconWallet) => {
+const permit = async (Mavryk: MavrykToolkit, wallet: MavletWallet) => {
   const store = get(localStore);
 
   const expectedBytes =
@@ -659,7 +659,7 @@ export const list = [
 export const init = (
   Mavryk: MavrykToolkit,
   contract: ContractAbstraction<Wallet> | ContractAbstraction<ContractProvider>,
-  wallet: BeaconWallet | undefined
+  wallet: MavletWallet | undefined
 ): TestSettings[] => [
     {
       id: "send-mav",
@@ -836,7 +836,7 @@ export const init = (
       id: "sign-payload",
       name: "Sign the provided payload",
       description: "This test signs the payload provided by the user",
-      documentation: 'https://webmavryk.mavryk.org/docs/signing/#generating-a-signature-with-beacon-sdk',
+      documentation: 'https://webmavryk.mavryk.org/docs/signing/#generating-a-signature-with-mavlet-sdk',
       keyword: 'requestSignPayload',
       run: input => signPayload(input.text, wallet),
       showExecutionTime: false,

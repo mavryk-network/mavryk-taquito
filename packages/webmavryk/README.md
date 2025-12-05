@@ -61,14 +61,14 @@ await Mavryk.contract.transfer({ to: publicKeyHash, amount: 2 });
 
 **Configure a wallet to use the Wallet API**
 
-Sending operations using the Wallet API requires a wallet to be configured. The wallet API supports different kinds of wallets. For example, the `BeaconWallet` from the `@mavrykdynamics/webmavryk-beacon-wallet` can be used. Use the `setWalletProvider` method of the `MavrykToolkit` to set the wallet and refer to the `@mavrykdynamics/webmavryk-beacon-wallet` for specific configuration:
+Sending operations using the Wallet API requires a wallet to be configured. The wallet API supports different kinds of wallets. For example, the `MavletWallet` from the `@mavrykdynamics/webmavryk-mavlet-wallet` can be used. Use the `setWalletProvider` method of the `MavrykToolkit` to set the wallet and refer to the `@mavrykdynamics/webmavryk-mavlet-wallet` for specific configuration:
 
 ```ts
 import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
-import { BeaconWallet } from '@mavrykdynamics/webmavryk-beacon-wallet';
+import { MavletWallet } from '@mavrykdynamics/webmavryk-mavlet-wallet';
 
 const Mavryk = new MavrykToolkit('https://YOUR_PREFERRED_RPC_URL');
-const wallet = new BeaconWallet(options);
+const wallet = new MavletWallet(options);
 
 await wallet.requestPermissions(network);
 

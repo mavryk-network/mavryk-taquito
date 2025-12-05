@@ -22,9 +22,9 @@ In this example, we will originate the popular multi-sig contract available [her
 
 Here are three examples of originating a contract using Webmavryk. The first example initializes the storage of the contract using a familiar-looking javascript object. The second and third demonstrates the use of plain Michelson and JSON Michelson. The first method is preferred, but if you have a reason to circumvent the convenient storage API, you can do so.
 
-We will show these three examples using the `Contract API` and the `Wallet API.` The new Webmavryk Wallet API interacts with wallets, supporting Beacon, the TZIP-10 standard.
+We will show these three examples using the `Contract API` and the `Wallet API.` The new Webmavryk Wallet API interacts with wallets, supporting Mavlet, the TZIP-10 standard.
 
-> Note: To run the `Wallet API` examples, you can install a wallet extension to your browser. For example, the Beacon Extension can be download [here](https://www.walletbeacon.io/).
+> Note: To run the `Wallet API` examples, you can install a wallet extension to your browser. For example, the Mavlet Extension can be download [here](https://www.mavlet.mavryk.org/).
 
 <Tabs
 defaultValue="contractAPI"
@@ -47,17 +47,17 @@ importKey(Mavryk, "p2sk2obfVMEuPUnadAConLWk7Tf4Dt3n4svSgJwrgpamRqJXvaYcg1")
   <TabItem value="walletAPI">
 
 ```
-import {  BeaconWallet } from '@mavrykdynamics/webmavryk-beacon-wallet';
+import {  MavletWallet } from '@mavrykdynamics/webmavryk-mavlet-wallet';
 import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 const Mavryk = new MavrykToolkit('https://ghostnet.ecadinfra.com');
 const option = { name: "nameOfWallet", network: { type: 'ghostnet' }, enableMetrics: true};
-const wallet = new BeaconWallet(option);
+const wallet = new MavletWallet(option);
 
 await wallet.client.subscribeToEvent(
-  BeaconEvent.ACTIVE_ACCOUNT_SET,
+  MavletEvent.ACTIVE_ACCOUNT_SET,
   async (account) => {
     // An active account has been set, update the dApp UI
-    console.log(`${BeaconEvent.ACTIVE_ACCOUNT_SET} triggered: `, account);
+    console.log(`${MavletEvent.ACTIVE_ACCOUNT_SET} triggered: `, account);
   },
 
 await wallet.requestPermissions();

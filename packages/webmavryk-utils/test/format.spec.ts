@@ -31,7 +31,7 @@ describe('Format', () => {
 });
 
 describe('webmavryk.mavryk.org example signing formatting', () => {
-  it('Should be valid bytes WebMavryk example https://webmavryk.mavryk.org/docs/next/signing#generating-a-signature-with-beacon-sdk with proper padding for bytes length', () => {
+  it('Should be valid bytes WebMavryk example https://webmavryk.mavryk.org/docs/next/signing#generating-a-signature-with-mavlet-sdk with proper padding for bytes length', () => {
     const formattedInput: string = [
       'Mavryk Signed Message:',
       'some url',

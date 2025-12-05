@@ -316,7 +316,7 @@ As it turns out, there is an elegant solution to this problem.
 
 The wallet is a program that stores the user's secrets (like the private key) and signs operations on behalf of the user. The wallet is not part of the dApp. It is a separate program. The wallet is usually a browser extension, a website, a mobile app, or a hardware wallet. The wallet is also responsible for showing the operations to the user and asking them to approve the operation. The user only needs to fully trust the wallet. The dApp cannot make any write operations to the blockchain unless it is signed by the wallet.
 
-The beacon SDK is a library that provides a standard way for dApps to connect to wallets. The beacon SDK supports several wallets, including Thanos, Temple, and Kukai. You don't need to use the beacon SDK directly. Webmavryk uses the beacon SDK internally.
+The mavlet SDK is a library that provides a standard way for dApps to connect to wallets. The mavlet SDK supports several wallets, including Thanos, Temple, and Kukai. You don't need to use the mavlet SDK directly. Webmavryk uses the mavlet SDK internally.
 
 Another interesting component is the indexer/explorer. The way data is stored on the blockchain is optimized for storage, and to facilitate data retrieval that's essential for new operations (like checking the balance of an account). But some other operations might be slow. A blockchain indexer reads all the data from the blockchain and stores it in an optimized way for fast retrieval. Users can interact with that data through the explorer, which is a web application that shows the data in a user-friendly way. Also, dApps can read the data from the indexer to reduce the load on the blockchain and/or to have a faster response time.
 
@@ -381,7 +381,7 @@ Alternatively, in a slightly different flow, the wallet sends the signed operati
 
 ## Creating a simple dApp that transfers ṁ from the user's wallet to another address
 
-We will start by creating a simple dApp that transfers ṁ from the user's wallet to another address. This will help us understand the flow of events in a dApp and the role of Webmavryk and Beacon SDK in the process.
+We will start by creating a simple dApp that transfers ṁ from the user's wallet to another address. This will help us understand the flow of events in a dApp and the role of Webmavryk and Mavlet SDK in the process.
 
 ### creating the React app
 
@@ -408,12 +408,12 @@ git commit -m "initial commit"
 
 </details>
 
-### adding Webmavryk and Beacon SDK to the React app
+### adding Webmavryk and Mavlet SDK to the React app
 
-In the next step, we add Webmavryk and Beacon SDK to the React app, and create a minimal UI to connect to the wallet and transfer ṁ.
+In the next step, we add Webmavryk and Mavlet SDK to the React app, and create a minimal UI to connect to the wallet and transfer ṁ.
 
 ```bash
-npm i @mavrykdynamics/webmavryk @mavrykdynamics/webmavryk-beacon-wallet @mavrykdynamics/beacon-dapp
+npm i @mavrykdynamics/webmavryk @mavrykdynamics/webmavryk-mavlet-wallet @mavrykdynamics/mavlet-dapp
 ```
 
 Open the file `index.html` and make the following changes:
@@ -431,13 +431,13 @@ import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
 import "./App.css";
 import ConnectButton from "./components/ConnectWallet";
 import Transfer from "./components/Transfer";
-import { BeaconWallet } from "@mavrykdynamics/webmavryk-beacon-wallet";
+import { MavletWallet } from "@mavrykdynamics/webmavryk-mavlet-wallet";
 
 const App = () => {
   const [Mavryk] = useState<MavrykToolkit>(
     new MavrykToolkit("https://basenet.rpc.mavryk.network")
   );
-  const [wallet, setWallet] = useState<BeaconWallet | undefined>(undefined);
+  const [wallet, setWallet] = useState<MavletWallet | undefined>(undefined);
   const [userAddress, setUserAddress] = useState<string | undefined>(undefined);
 
   switch (userAddress) {
@@ -459,23 +459,23 @@ export default App;
 
 ### Connecting to the wallet
 
-The first step in interacting with the blockchain is connecting to the user's wallet. Webmavryk provides a BeaconWallet class that abstracts away the complexity of connecting to the wallet. The BeaconWallet class is a wrapper around the Beacon SDK.
+The first step in interacting with the blockchain is connecting to the user's wallet. Webmavryk provides a MavletWallet class that abstracts away the complexity of connecting to the wallet. The MavletWallet class is a wrapper around the Mavlet SDK.
 
 Create a new file `src/components/ConnectWallet.tsx` and add the following code:
 
 ```tsx
 import { Dispatch, SetStateAction, useEffect } from "react";
 import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
-import { BeaconWallet } from "@mavrykdynamics/webmavryk-beacon-wallet";
+import { MavletWallet } from "@mavrykdynamics/webmavryk-mavlet-wallet";
 import {
   NetworkType,
-} from "@airgap/beacon-dapp";
+} from "@mavrykdynamics/mavlet-dapp";
 
 type ButtonProps = {
   Mavryk: MavrykToolkit;
   setUserAddress: Dispatch<SetStateAction<string | undefined>>;
-  setWallet: Dispatch<SetStateAction<BeaconWallet | undefined>>;
-  wallet: BeaconWallet | undefined;
+  setWallet: Dispatch<SetStateAction<MavletWallet | undefined>>;
+  wallet: MavletWallet | undefined;
 };
 
 const ConnectButton = ({
@@ -501,7 +501,7 @@ const ConnectButton = ({
 
   useEffect(() => {
     (async () => {
-      const wallet = new BeaconWallet({
+      const wallet = new MavletWallet({
         name: "My dApp",
         preferredNetwork: NetworkType.BASENET,
         disableDefaultEvents: false,
@@ -603,7 +603,7 @@ export default Transfer;
 
 ### Fixing node-specific dependencies in the browser
 
-The libraries Webmavryk and Beacon SDK are designed to run in a Node.js environment. However, we are running them in a browser. This causes some issues. For example, the Beacon SDK uses the Node.js `buffer`, `stream`, and `util` modules. These modules are not available in the browser. Fortunately, there are browser-compatible versions of these modules. We can use these versions instead of the Node.js versions. To do this, we need to install the following packages:
+The libraries Webmavryk and Mavlet SDK are designed to run in a Node.js environment. However, we are running them in a browser. This causes some issues. For example, the Mavlet SDK uses the Node.js `buffer`, `stream`, and `util` modules. These modules are not available in the browser. Fortunately, there are browser-compatible versions of these modules. We can use these versions instead of the Node.js versions. To do this, we need to install the following packages:
 
 ```bash
 npm i -D vite-plugin-node-polyfills

@@ -26,18 +26,18 @@ export default ({ command, mode }) => {
     },
     resolve: {
       alias: {
-        // dedupe @mavrykdynamics/beacon-sdk
+        // dedupe @mavrykdynamics/mavlet-sdk
         // I almost have no idea why it needs `cjs` on dev and `esm` on build, but this is how it works 🤷‍♂️
-        "@mavrykdynamics/beacon-dapp": path.resolve(
+        "@mavrykdynamics/mavlet-dapp": path.resolve(
           path.resolve(),
-          // "./src/walletbeacon.dapp.min.js"
-          `../../node_modules/@mavrykdynamics/beacon-dapp/dist/${isBuild ? "esm" : "cjs"
+          // "./src/walletmavlet.dapp.min.js"
+          `../../node_modules/@mavrykdynamics/mavlet-dapp/dist/${isBuild ? "esm" : "cjs"
           }/index.js`
-          // `../../node_modules/@mavrykdynamics/beacon-dapp/dist/walletbeacon.dapp.min.js`
+          // `../../node_modules/@mavrykdynamics/mavlet-dapp/dist/walletmavlet.dapp.min.js`
         ),
-        "@airgap/beacon-sdk": path.resolve(
+        "@mavrykdynamics/mavlet-sdk": path.resolve(
           path.resolve(),
-          `../../node_modules/@airgap/beacon-sdk/dist/${isBuild ? "esm" : "cjs"
+          `../../node_modules/@mavrykdynamics/mavlet-sdk/dist/${isBuild ? "esm" : "cjs"
           }/index.js`
         ),
         // polyfills

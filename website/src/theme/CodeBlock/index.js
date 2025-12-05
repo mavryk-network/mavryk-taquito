@@ -84,7 +84,7 @@ export default ({
         prefix,
         Prefix
       } = await import('@mavrykdynamics/webmavryk-utils');
-      const { BeaconWallet } = await import('@mavrykdynamics/webmavryk-beacon-wallet');
+      const { MavletWallet } = await import('@mavrykdynamics/webmavryk-mavlet-wallet');
       const { InMemorySigner, importKey, Path, ECDSA, Ed25519, generateSecretKey } = await import('@mavrykdynamics/webmavryk-signer');
       const { LedgerSigner, DerivationType } = await import('@mavrykdynamics/webmavryk-ledger-signer');
       const { Tzip16Module, tzip16, MichelsonStorageView } = await import('@mavrykdynamics/webmavryk-tzip16')
@@ -98,7 +98,7 @@ export default ({
       if (typeof window !== 'undefined') {
         // solve localStorage is not defined Error when building server
         // can use localStorage on the browser, not on the server
-        wallet = new BeaconWallet({ name:"exampleWallet", network: { type: 'basenet'}, enableMetrics: true, });
+        wallet = new MavletWallet({ name:"exampleWallet", network: { type: 'basenet'}, enableMetrics: true, });
       }      
       const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network/');
       setDependencies({

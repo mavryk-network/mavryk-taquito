@@ -30,7 +30,7 @@
     "@mdx-js/react": "^1.6.22",
     "@svgr/webpack": "^8.1.0",
     "@mavrykdynamics/webmavryk-core": "file:../packages/webmavryk-core",
-    "@mavrykdynamics/webmavryk-beacon-wallet": "file:../packages/webmavryk-beacon-wallet",
+    "@mavrykdynamics/webmavryk-mavlet-wallet": "file:../packages/webmavryk-mavlet-wallet",
     "@mavrykdynamics/webmavryk-http-utils": "file:../packages/webmavryk-http-utils",
     "@mavrykdynamics/webmavryk-ledger-signer": "file:../packages/webmavryk-ledger-signer",
     "@mavrykdynamics/webmavryk-michel-codec": "file:../packages/webmavryk-michel-codec",

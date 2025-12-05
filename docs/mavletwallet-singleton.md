@@ -3,19 +3,19 @@
      Original project: Taquito by ECAD Labs Inc. -->
 
 ---
-title: BeaconWallet singleton
+title: MavletWallet singleton
 author: Claude Barde
 ---
 
 :::caution Outdated documentation
-Since version 14, Webmavryk uses the beacon-dapp's `getDAppClientInstance` method instead of the `new DAppClient`. This new method ensures that only one instance is created. The same cached instance is returned if called multiple times.
+Since version 14, Webmavryk uses the mavlet-dapp's `getDAppClientInstance` method instead of the `new DAppClient`. This new method ensures that only one instance is created. The same cached instance is returned if called multiple times.
 :::
 
-# How to use a single instance of the BeaconWallet?
+# How to use a single instance of the MavletWallet?
 
-> TL;DR: in order to avoid unexpected problems with the Beacon wallet instance, there should be only one __new BeaconWallet(options)__ in your whole app.
+> TL;DR: in order to avoid unexpected problems with the Mavlet wallet instance, there should be only one __new MavletWallet(options)__ in your whole app.
 
-The `@mavrykdynamics/webmavryk-beacon-wallet` package is a wrapper for the `Beacon SDK`. The Beacon SDK creates a peer-to-peer connection that must stay unique. If you try to create multiple instances of the Beacon wallet, you may encounter the following error: `[BEACON] It looks like you created multiple Beacon SDK Client instances. This can lead to problems. Only create one instance and re-use it everywhere`, encouraging you to keep a single instance of the Beacon wallet.  
+The `@mavrykdynamics/webmavryk-mavlet-wallet` package is a wrapper for the `Mavlet SDK`. The Mavlet SDK creates a peer-to-peer connection that must stay unique. If you try to create multiple instances of the Mavlet wallet, you may encounter the following error: `[MAVLET] It looks like you created multiple Mavlet SDK Client instances. This can lead to problems. Only create one instance and re-use it everywhere`, encouraging you to keep a single instance of the Mavlet wallet.  
 
 In modern JavaScript frameworks, this can be achieved by passing the instance to the components through their props or by keeping the instance in the context (or state) of the dapp so that every component has access to the same instance.  
 
@@ -23,12 +23,12 @@ This is how this can be accomplished with 3 of the main JavaScript frameworks, [
 
 ## With React
 ### - Using "prop drilling"
-It is possible to create a single instance of the `BeaconWallet` in one of the parent components and pass it down to its child components. This method can be preferred when there aren't many components down the tree. It becomes difficult to track when the instance is passed to many components and their props become redundant.  
+It is possible to create a single instance of the `MavletWallet` in one of the parent components and pass it down to its child components. This method can be preferred when there aren't many components down the tree. It becomes difficult to track when the instance is passed to many components and their props become redundant.  
    
 Example:
 ```ts
 const ParentComponent = () => {
-    const [wallet, setWallet] = useState(new BeaconWallet(options));
+    const [wallet, setWallet] = useState(new MavletWallet(options));
     
     return <>
             <ChildComponent wallet={wallet} />
@@ -56,14 +56,14 @@ const OtherComponent = ({wallet}) => {
 ```
 
 ### - Using the Context API and useContext
-The Context API is the recommended way to set up the instance of the `BeaconWallet` as it ensures that a single instance is created and used by the different components of the application.  
+The Context API is the recommended way to set up the instance of the `MavletWallet` as it ensures that a single instance is created and used by the different components of the application.  
 
 Example:
 ```ts
 const Context = React.createContext(undefined);
 
 const ParentComponent = () => {
-    const [wallet, setWallet] = useState(new BeaconWallet(options));   
+    const [wallet, setWallet] = useState(new MavletWallet(options));   
     
     return (
         <Context.Provider value={wallet}>
@@ -96,7 +96,7 @@ const OtherComponent = () => {
 
 ## With Vue
 ### - Passing the instance through props
-It is possible to do "prop drilling" in Vue and pass an instance of the `BeaconWallet` down to the children of a component. This method requires updating the value returned by the `data` method and catching the prop in the `props` array of the child component:
+It is possible to do "prop drilling" in Vue and pass an instance of the `MavletWallet` down to the children of a component. This method requires updating the value returned by the `data` method and catching the prop in the `props` array of the child component:
 ```ts
 // In ParentComponent.vue
 <script>
@@ -104,7 +104,7 @@ import ChildComponent from "./ChildComponent.vue";
 
 export default {
     data() {
-        const wallet = new BeaconWallet(options);
+        const wallet = new MavletWallet(options);
         
         return {
           wallet
@@ -162,7 +162,7 @@ export default {
 ```
 
 ### - Using Vuex
-If you want to be sure that all your components access a single instance of the `BeaconWallet`, the best solution is to use a store provided by `Vuex`. After creating the store, all your components can connect to the new store and access the instance of the `BeaconWallet`:
+If you want to be sure that all your components access a single instance of the `MavletWallet`, the best solution is to use a store provided by `Vuex`. After creating the store, all your components can connect to the new store and access the instance of the `MavletWallet`:
 ```ts
 // In store.vue
 import { createApp } from 'vue'
@@ -172,7 +172,7 @@ import { createStore } from 'vuex'
 const store = createStore({
   state () {
     return {
-      wallet: new BeaconWallet(options)
+      wallet: new MavletWallet(options)
     }
   },
   mutations: {
@@ -217,7 +217,7 @@ Example:
     let wallet;
 
     onMount(() => {
-        wallet = new BeaconWallet(options);
+        wallet = new MavletWallet(options);
     })
 </script>
 
@@ -253,20 +253,20 @@ Example:
 ```
 
 ### - Using a store
-A Svelte store is the recommended way to store and use an instance of the `BeaconWallet`. You just need to import the store in the components that need access to the instance and you can be sure you have a single instance:  
+A Svelte store is the recommended way to store and use an instance of the `MavletWallet`. You just need to import the store in the components that need access to the instance and you can be sure you have a single instance:  
 
 Example:
 ```ts
 // In store.ts
 import { writable } from "svelte/store";
 
-const wallet = new BeaconWallet(options);
+const wallet = new MavletWallet(options);
 
 const store = writable(wallet);
 
 const state = {
   subscribe: store.subscribe,
-  updateWallet: (wallet: BeaconWallet) =>
+  updateWallet: (wallet: MavletWallet) =>
     store.update(store => wallet)
 }
 

@@ -6,7 +6,7 @@
 
 import { writable } from "svelte/store";
 import type { MavrykToolkit } from "@mavrykdynamics/webmavryk";
-import type { BeaconWallet } from "@mavrykdynamics/webmavryk-beacon-wallet";
+import type { MavletWallet } from "@mavrykdynamics/webmavryk-mavlet-wallet";
 import { defaultMatrixNode, defaultNetworkType, type SupportedNetworks } from "./config";
 import type { TestSettings } from "./types";
 
@@ -14,7 +14,7 @@ interface State {
   Mavryk: MavrykToolkit | undefined;
   userAddress: string | undefined;
   userBalance: number | undefined;
-  wallet: BeaconWallet | undefined;
+  wallet: MavletWallet | undefined;
   disableDefaultEvents: boolean;
   enableMetrics: boolean;
   networkType: SupportedNetworks;
@@ -61,7 +61,7 @@ const state = {
       ...store,
       Mavryk
     })),
-  updateWallet: (wallet: BeaconWallet | undefined) =>
+  updateWallet: (wallet: MavletWallet | undefined) =>
     store.update(store => ({
       ...store,
       wallet

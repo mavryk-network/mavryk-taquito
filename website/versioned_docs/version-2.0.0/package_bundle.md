@@ -10,9 +10,9 @@ author: Davis Sawali
 # Using Webmavryk in Client-Side Environments
 While Webmavryk works best in Node runtime applications, some of our users working in client-side development might not have access to such features. To accommodate for that, we have decided to provide separate pure JavaScript bundles that you can import into your client-side environment.
 
-Currently, the available bundles are `@mavrykdynamics/webmavryk-local-forging` and `@mavrykdynamics/webmavryk-beacon-wallet` packages.
+Currently, the available bundles are `@mavrykdynamics/webmavryk-local-forging` and `@mavrykdynamics/webmavryk-mavlet-wallet` packages.
 
-The bundle wraps functions from the `@mavrykdynamics/webmavryk-local-forging` package into a single variable called `webmavryk_local_forging`, and from the `@mavrykdynamics/webmavryk-beacon-wallet` package into a single variable called `webmavryk_beacon_wallet`.
+The bundle wraps functions from the `@mavrykdynamics/webmavryk-local-forging` package into a single variable called `webmavryk_local_forging`, and from the `@mavrykdynamics/webmavryk-mavlet-wallet` package into a single variable called `webmavryk_mavlet_wallet`.
 
 ## Instructions for Using the Bundle
 
@@ -29,12 +29,12 @@ Example of how to use the `LocalForger` class in a simple HTML script tag:
     let res = forger.forge(op);
 </script>
 ```
-Example of how to use the `BeaconWallet` class in a simple HTML script tag:
+Example of how to use the `MavletWallet` class in a simple HTML script tag:
 
 ```
-<script type="text/javascript" src="/path/to/webmavryk_beacon_wallet.js"></script>
+<script type="text/javascript" src="/path/to/webmavryk_mavlet_wallet.js"></script>
 <script type="text/javascript">
     let op = {...}
-    let wallet = new webmavryk_beacon_wallet.BeaconWallet();
+    let wallet = new webmavryk_mavlet_wallet.MavletWallet();
 </script>
 ```

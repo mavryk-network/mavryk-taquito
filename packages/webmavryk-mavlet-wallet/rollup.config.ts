@@ -10,12 +10,12 @@ import json from 'rollup-plugin-json';
 
 const pkg = require('./package.json');
 
-const libraryName = 'webmavryk-beacon-wallet';
+const libraryName = 'webmavryk-mavlet-wallet';
 
 export default {
   input: `src/${libraryName}.ts`,
   output: [
-    { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true, globals: { '@mavrykdynamics/beacon-sdk': 'beacon'} },
+    { file: pkg.main, name: camelCase(libraryName), format: 'umd', sourcemap: true, globals: { '@mavrykdynamics/mavlet-sdk': 'mavlet'} },
     { file: pkg.module, format: 'es', sourcemap: true },
   ],
   external: [],

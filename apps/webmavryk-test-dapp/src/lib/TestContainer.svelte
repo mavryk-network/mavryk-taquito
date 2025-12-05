@@ -7,7 +7,7 @@
   import store from "../store";
   import type { TestSettings, TestResult } from "../types";
   import { shortenHash } from "../utils";
-  import { NetworkType } from "@mavrykdynamics/beacon-types";
+  import { NetworkType } from "@mavrykdynamics/mavlet-types";
   import { getMvKtUrl } from "../config";
 
   let test: TestSettings | undefined;

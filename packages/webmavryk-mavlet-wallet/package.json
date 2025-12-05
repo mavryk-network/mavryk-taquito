@@ -1,15 +1,15 @@
 {
-  "name": "@mavrykdynamics/webmavryk-beacon-wallet",
+  "name": "@mavrykdynamics/webmavryk-mavlet-wallet",
   "version": "20.0.3",
-  "description": "Beacon wallet provider",
+  "description": "Mavlet wallet provider",
   "keywords": [
     "mavryk",
     "blockchain",
     "websocket"
   ],
-  "main": "dist/webmavryk-beacon-wallet.umd.js",
-  "module": "dist/webmavryk-beacon-wallet.es6.js",
-  "typings": "dist/types/webmavryk-beacon-wallet.d.ts",
+  "main": "dist/webmavryk-mavlet-wallet.umd.js",
+  "module": "dist/webmavryk-mavlet-wallet.es6.js",
+  "typings": "dist/types/webmavryk-mavlet-wallet.d.ts",
   "files": [
     "signature.json",
     "dist",
@@ -69,7 +69,7 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/beacon-dapp": "^4.2.3",
+    "@mavrykdynamics/mavlet-dapp": "^1.0.0",
     "@mavrykdynamics/webmavryk-core": "^20.0.3",
     "@mavrykdynamics/webmavryk": "^20.0.3"
   },

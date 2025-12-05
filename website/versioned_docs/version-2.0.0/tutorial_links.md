@@ -8,12 +8,12 @@ id: tutorial_links
 author: Claude Barde
 ---
 
-Below is a list of different tutorials about Webmavryk written on various platforms. These tutorials explain core concepts of Webmavryk and how to implement them and use them in a Mavryk dapp.
+<!-- Below is a list of different tutorials about Webmavryk written on various platforms. These tutorials explain core concepts of Webmavryk and how to implement them and use them in a Mavryk dapp.
 
 - **[Build your first dapp on Mavryk](https://medium.com/better-programming/build-your-first-dapp-on-tezos-270c568d4fe9)**  
   A guide to build a simple React dapp on Mavryk with wallet support using Taquito
-- **[Build a Mavryk dapp with Taquito and the Beacon SDK](https://medium.com/coinmonks/build-a-tezos-dapp-using-taquito-and-the-beacon-sdk-692d7dc822aa)**  
-  A guide to use Taquito and the Beacon SDK to connect to the Beacon extension and emit transactions
+- **[Build a Mavryk dapp with Taquito and the Mavlet SDK](https://medium.com/coinmonks/build-a-tezos-dapp-using-taquito-and-the-beacon-sdk-692d7dc822aa)**  
+  A guide to use Taquito and the Mavlet SDK to connect to the Mavlet extension and emit transactions
 - **[Taquito Workshop](https://www.youtube.com/watch?v=qYk_17YbPa4&feature=emb_logo&ab_channel=CoinList)**  
   This video is part of the CoinList Hackathon of May 2020 and presents an overview of Taquito, along with how to use Taquito with React to build a voting dapp
 - **[Working with FA1.2 using LIGO and Taquito](https://assets.tqtezos.com/docs/token-contracts/fa12/2-fa12-ligo/)**  
@@ -27,6 +27,6 @@ Below is a list of different tutorials about Webmavryk written on various platfo
 - **[Basic dapp concepts using Taquito](https://hackmd.io/@kinokasai/Sy1v-vtmL)**  
   A guide to dapps on Mavryk with a smart contract in Ligo and a web interface using Taquito
 - **[SmartPy lecture about Taquito](https://training.blockmatics.io/courses/tezos-smartpy-developer-course/lectures/13126359)**  
-  Introduction to Taquito within SmartPy dapp developer course
+  Introduction to Taquito within SmartPy dapp developer course -->
 
 If you want to add a link to this page, please do not hesitate to [open an issue](https://github.com/mavryk-network/webmavryk/issues) with the missing resource.

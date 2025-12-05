@@ -6,7 +6,7 @@
 
 /**
  * @packageDocumentation
- * @module @mavrykdynamics/webmavryk-beacon-wallet
+ * @module @mavrykdynamics/webmavryk-mavlet-wallet
  */
 
 import {
@@ -17,9 +17,9 @@ import {
   getDAppClientInstance,
   SigningType,
   AccountInfo,
-  BeaconEvent,
-} from '@mavrykdynamics/beacon-dapp';
-import { BeaconWalletNotInitialized, MissingRequiredScopes } from './errors';
+  MavletEvent,
+} from '@mavrykdynamics/mavlet-dapp';
+import { MavletWalletNotInitialized, MissingRequiredScopes } from './errors';
 import toBuffer from 'typedarray-to-buffer';
 import {
   createIncreasePaidStorageOperation,
@@ -39,16 +39,16 @@ import { buf2hex, hex2buf, mergebuf } from '@mavrykdynamics/webmavryk-utils';
 import { UnsupportedActionError } from '@mavrykdynamics/webmavryk-core';
 
 export { VERSION } from './version';
-export { BeaconWalletNotInitialized, MissingRequiredScopes } from './errors';
+export { MavletWalletNotInitialized, MissingRequiredScopes } from './errors';
 
-export class BeaconWallet implements WalletProvider {
+export class MavletWallet implements WalletProvider {
   public client: DAppClient;
   public account: AccountInfo | undefined;
 
   constructor(options: DAppClientOptions) {
     this.client = getDAppClientInstance(options);
     // Subscribe to the active account set event, this will update when there are account changes happening in the dApp
-    this.client.subscribeToEvent(BeaconEvent.ACTIVE_ACCOUNT_SET, async (data) => {
+    this.client.subscribeToEvent(MavletEvent.ACTIVE_ACCOUNT_SET, async (data) => {
       this.account = data;
     });
   }
@@ -76,14 +76,14 @@ export class BeaconWallet implements WalletProvider {
 
   async getPKH() {
     if (!this.account) {
-      throw new BeaconWalletNotInitialized();
+      throw new MavletWalletNotInitialized();
     }
     return this.account.address;
   }
 
   async getPK() {
     if (!this.account) {
-      throw new BeaconWalletNotInitialized();
+      throw new MavletWalletNotInitialized();
     }
     return this.account.publicKey ?? '';
   }
@@ -217,7 +217,7 @@ export class BeaconWallet implements WalletProvider {
     operatedParams: any
   ) {
     // If fee, storageLimit or gasLimit is undefined by user
-    // in case of beacon wallet, dont override it by
+    // in case of mavlet wallet, dont override it by
     // defaults.
     if (!params.fee) {
       delete operatedParams.fee;
@@ -233,7 +233,7 @@ export class BeaconWallet implements WalletProvider {
 
   async sendOperations(params: any[]) {
     if (!this.account) {
-      throw new BeaconWalletNotInitialized();
+      throw new MavletWalletNotInitialized();
     }
     const permissions = this.account.scopes;
     this.validateRequiredScopesOrFail(permissions, [PermissionScope.OPERATION_REQUEST]);
@@ -244,8 +244,8 @@ export class BeaconWallet implements WalletProvider {
 
   /**
    *
-   * @description Removes all beacon values from the storage. After using this method, this instance is no longer usable.
-   * You will have to instantiate a new BeaconWallet.
+   * @description Removes all mavlet values from the storage. After using this method, this instance is no longer usable.
+   * You will have to instantiate a new MavletWallet.
    */
   async disconnect() {
     await this.client.destroy();
@@ -268,7 +268,7 @@ export class BeaconWallet implements WalletProvider {
     const signingType = this.getSigningType(watermark);
     if (signingType !== SigningType.OPERATION) {
       throw new UnsupportedActionError(
-        `WebMavryk Beacon Wallet currently only supports signing operations, not ${signingType}`
+        `WebMavryk Mavlet Wallet currently only supports signing operations, not ${signingType}`
       );
     }
     const { signature } = await this.client.requestSignPayload({

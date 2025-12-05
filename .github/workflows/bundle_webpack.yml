@@ -31,11 +31,11 @@ jobs:
           packages/webmavryk-local-forging/dist/webmavryk_local_forging.js
           packages/webmavryk-local-forging/dist/webmavryk_local_forging.js.map
 
-    - run: npm -w packages/webmavryk-beacon-wallet run build-webpack
+    - run: npm -w packages/webmavryk-mavlet-wallet run build-webpack
     -
       uses: actions/upload-artifact@v3
       with:
-        name: webmavryk-beacon-wallet-vanilla
+        name: webmavryk-mavlet-wallet-vanilla
         path: |
-          packages/webmavryk-beacon-wallet/dist/webmavryk_beacon_wallet.js
-          packages/webmavryk-beacon-wallet/dist/webmavryk_beacon_wallet.js.map
+          packages/webmavryk-mavlet-wallet/dist/webmavryk_mavlet_wallet.js
+          packages/webmavryk-mavlet-wallet/dist/webmavryk_mavlet_wallet.js.map

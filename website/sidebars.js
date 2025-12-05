@@ -87,7 +87,7 @@ const sidebars = {
       collapsed: false,
       collapsible: false,
       items: [
-        'beaconwallet-singleton',
+        'mavletwallet-singleton',
         'wallets',
         'transaction_limits',
       ],

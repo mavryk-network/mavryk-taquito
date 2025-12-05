@@ -40,7 +40,7 @@ const FeatureList = [
         icon: require('../../../static/img/credit_card.svg').default,
         title: 'Well Supported',
         description:
-          'Webmavryk has a well-documented API, runs continuous integration tests against the Mavryk Node and a set of Beacon wallets.',
+          'Webmavryk has a well-documented API, runs continuous integration tests against the Mavryk Node and a set of Mavlet wallets.',
       },
     ],
   },
