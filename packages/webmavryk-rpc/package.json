@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-rpc",
-  "version": "20.0.3",
+  "version": "2.0.0",
   "description": "Provides low level methods, and types to invoke RPC calls from a Nomadic Mavryk RPC node",
   "keywords": [
     "mavryk",
@@ -68,9 +68,9 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/webmavryk-core": "^20.0.3",
-    "@mavrykdynamics/webmavryk-http-utils": "^20.0.3",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
+    "@mavrykdynamics/webmavryk-core": "^2.0.0",
+    "@mavrykdynamics/webmavryk-http-utils": "^2.0.0",
+    "@mavrykdynamics/webmavryk-utils": "^2.0.0",
     "bignumber.js": "^9.1.2"
   },
   "devDependencies": {

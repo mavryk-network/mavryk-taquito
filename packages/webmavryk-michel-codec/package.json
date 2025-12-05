@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-michel-codec",
-  "version": "20.0.3",
+  "version": "2.0.0",
   "description": "Michelson parser/validator/formatter",
   "keywords": [
     "mavryk",
@@ -68,7 +68,7 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/webmavryk-core": "^20.0.3"
+    "@mavrykdynamics/webmavryk-core": "^2.0.0"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.40",

@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-tzip12",
-  "version": "20.0.3",
+  "version": "2.0.0",
   "description": "Tzip12",
   "keywords": [
     "mavryk",
@@ -64,10 +64,10 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/webmavryk": "^20.0.3",
-    "@mavrykdynamics/webmavryk-core": "^20.0.3",
-    "@mavrykdynamics/webmavryk-michelson-encoder": "^20.0.3",
-    "@mavrykdynamics/webmavryk-tzip16": "^20.0.3"
+    "@mavrykdynamics/webmavryk": "^2.0.0",
+    "@mavrykdynamics/webmavryk-core": "^2.0.0",
+    "@mavrykdynamics/webmavryk-michelson-encoder": "^2.0.0",
+    "@mavrykdynamics/webmavryk-tzip16": "^2.0.0"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.40",

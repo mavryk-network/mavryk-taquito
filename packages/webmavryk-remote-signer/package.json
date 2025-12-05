@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-remote-signer",
-  "version": "20.0.3",
+  "version": "2.0.0",
   "description": "Remote signer provider",
   "keywords": [
     "mavryk",
@@ -64,10 +64,10 @@
   "dependencies": {
     "@stablelib/blake2b": "^1.0.1",
     "@stablelib/ed25519": "^1.0.3",
-    "@mavrykdynamics/webmavryk": "^20.0.3",
-    "@mavrykdynamics/webmavryk-core": "^20.0.3",
-    "@mavrykdynamics/webmavryk-http-utils": "^20.0.3",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
+    "@mavrykdynamics/webmavryk": "^2.0.0",
+    "@mavrykdynamics/webmavryk-core": "^2.0.0",
+    "@mavrykdynamics/webmavryk-http-utils": "^2.0.0",
+    "@mavrykdynamics/webmavryk-utils": "^2.0.0",
     "typedarray-to-buffer": "^4.0.0"
   },
   "devDependencies": {

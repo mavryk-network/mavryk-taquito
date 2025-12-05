@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-mavlet-wallet",
-  "version": "20.0.3",
+  "version": "2.0.0",
   "description": "Mavlet wallet provider",
   "keywords": [
     "mavryk",
@@ -70,8 +70,8 @@
   },
   "dependencies": {
     "@mavrykdynamics/mavlet-dapp": "^1.0.0",
-    "@mavrykdynamics/webmavryk-core": "^20.0.3",
-    "@mavrykdynamics/webmavryk": "^20.0.3"
+    "@mavrykdynamics/webmavryk-core": "^2.0.0",
+    "@mavrykdynamics/webmavryk": "^2.0.0"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.40",

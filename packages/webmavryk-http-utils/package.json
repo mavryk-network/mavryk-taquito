@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-http-utils",
-  "version": "20.0.3",
+  "version": "2.0.0",
   "description": "",
   "keywords": [
     "mavryk"
@@ -60,7 +60,7 @@
     ]
   },
   "dependencies": {
-    "@mavrykdynamics/webmavryk-core": "^20.0.3",
+    "@mavrykdynamics/webmavryk-core": "^2.0.0",
     "node-fetch": "^2.7.0"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@mavrykdynamics/webmavryk-ledger-signer",
-  "version": "20.0.3",
+  "version": "2.0.0",
   "description": "Ledger signer provider",
   "keywords": [
     "mavryk",
@@ -59,9 +59,9 @@
   "dependencies": {
     "@ledgerhq/hw-transport": "^6.30.5",
     "@stablelib/blake2b": "^1.0.1",
-    "@mavrykdynamics/webmavryk-core": "^20.0.3",
-    "@mavrykdynamics/webmavryk": "^20.0.3",
-    "@mavrykdynamics/webmavryk-utils": "^20.0.3",
+    "@mavrykdynamics/webmavryk-core": "^2.0.0",
+    "@mavrykdynamics/webmavryk": "^2.0.0",
+    "@mavrykdynamics/webmavryk-utils": "^2.0.0",
     "buffer": "^6.0.3"
   },
   "devDependencies": {
