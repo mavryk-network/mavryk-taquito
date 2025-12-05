@@ -16,7 +16,7 @@ export default ({ command, mode }) => {
     define: {
     },
     build: {
-      target: "es6",
+      target: "es2020",
       commonjsOptions: {
         transformMixedEsModules: true
       }
