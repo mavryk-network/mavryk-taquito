@@ -134,9 +134,9 @@
             ]
           },
           "dependencies": {
-            "@mavrykdynamics/mavlet-sdk": "4.0.12",
-            "@mavrykdynamics/webmavryk": "^8.0.4-beta.0",
-            "@mavrykdynamics/webmavryk-utils": "^8.0.4-beta.0"
+            "@mavrykdynamics/mavlet-sdk": "1.0.1",
+            "@mavrykdynamics/webmavryk": "2.0.0",
+            "@mavrykdynamics/webmavryk-utils": "2.0.0"
           },
           "devDependencies": {
             "@types/chrome": "0.0.126",

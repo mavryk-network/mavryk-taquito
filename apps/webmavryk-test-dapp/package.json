@@ -24,8 +24,8 @@
     "vite": "^4.4.11"
   },
   "dependencies": {
-    "@mavrykdynamics/mavlet-sdk": "^1.0.0",
-    "@mavrykdynamics/mavlet-types": "^1.0.0",
+    "@mavrykdynamics/mavlet-sdk": "^1.0.2",
+    "@mavrykdynamics/mavlet-types": "^1.0.2",
     "@mavrykdynamics/webmavryk": "^2.0.0",
     "@mavrykdynamics/webmavryk-mavlet-wallet": "^2.0.0",
     "@mavrykdynamics/webmavryk-core": "^2.0.0",
