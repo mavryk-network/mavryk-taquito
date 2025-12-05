@@ -4,7 +4,7 @@
  * Original project: Taquito by ECAD Labs Inc.
  */
 
-import { CompositeForger, RpcForger, MavrykToolkit, Protocols, WebmavrykLocalForger, PollingSubscribeProvider } from '@mavrykdynamics/webmavryk';
+import { CompositeForger, RpcForger, MavrykToolkit, Protocols, WebMavrykLocalForger, PollingSubscribeProvider } from '@mavrykdynamics/webmavryk';
 import { RemoteSigner } from '@mavrykdynamics/webmavryk-remote-signer';
 import { HttpBackend } from '@mavrykdynamics/webmavryk-http-utils';
 import { b58cencode, Prefix, prefix } from '@mavrykdynamics/webmavryk-utils';
@@ -204,10 +204,10 @@ if (process.env['RUN_WITH_SECRET_KEY']) {
 
 const setupForger = (Mavryk: MavrykToolkit, forger: ForgerType): void => {
   if (forger === ForgerType.LOCAL) {
-    Mavryk.setProvider({ forger: Mavryk.getFactory(WebmavrykLocalForger)() });
+    Mavryk.setProvider({ forger: Mavryk.getFactory(WebMavrykLocalForger)() });
   } else if (forger === ForgerType.COMPOSITE) {
     const rpcForger = Mavryk.getFactory(RpcForger)();
-    const localForger = Mavryk.getFactory(WebmavrykLocalForger)()
+    const localForger = Mavryk.getFactory(WebMavrykLocalForger)()
     const composite = new CompositeForger([rpcForger, localForger]);
     Mavryk.setProvider({ forger: composite });
   } else if (forger === ForgerType.RPC) {
