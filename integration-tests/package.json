@@ -3,9 +3,6 @@
   "scripts": {
     "test": "jest",
     "test:secret-key": "RUN_WITH_SECRET_KEY=true jest --runInBand",
-    "test:boreasnet": "BOREASNET=true jest",
-    "test:boreasnet-secret-key": "RUN_BOREASNET_WITH_SECRET_KEY=true jest --runInBand",
-    "test:atlasnet-secret-key": "RUN_ATLASNET_WITH_SECRET_KEY=true jest --runInBand",
     "test:weeklynet": "WEEKLYNET=true jest",
     "test:weeklynet-secret-key": "RUN_WEEKLYNET_WITH_SECRET_KEY=true jest --runInBand",
     "test:basenet": "BASENET=true jest",

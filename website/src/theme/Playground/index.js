@@ -55,7 +55,7 @@ class SemiLiveProvider extends LiveProvider {
       } else if (this.props.noConfig) {
         return this.code
       } else {
-        return `fetch('https://keygen.ecadinfra.com/basenet', {
+        return `fetch('https://keygen.mavryk.network/basenet', {
           method: 'POST',
           headers: { Authorization: 'Bearer webmavryk-example' },
         })

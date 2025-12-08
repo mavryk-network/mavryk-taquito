@@ -1566,7 +1566,7 @@ export const fa2ContractTzip16 = `{
             CAR;
             DIG 13;
             CDR;
-            PUSH string "MVRK_RECEIVED";
+            PUSH string "XTZ_RECEIVED";
             PUSH mumav 0;
             AMOUNT;
             COMPARE;

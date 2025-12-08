@@ -263,8 +263,8 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 			expect(tokenMetadata0).toEqual({
 				token_id: 0,
 				decimals: 3,
-				name: 'Webmavryk test URI',
-				symbol: 'MVRK2'
+				name: 'Taquito test URI',
+				symbol: 'XTZ2'
 			});
 
 			const tokenMetadata1 = await contract.tzip12().getTokenMetadata(1);

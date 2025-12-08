@@ -1503,7 +1503,7 @@ describe('RpcClient test', () => {
     it('should query the right url and property for operation', async () => {
       httpBackend.createRequest.mockReturnValue(
         Promise.resolve({
-          protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
+          protocol: 'PtBoreasK2KPuKbeYtXeEdudEHS7YcMFHE9amwheUc4kejTxgRi',
           chain_id: 'NetXSgo1ZT2DRUG',
           hash: 'BKjqpGqKggVrYbkBmBUYjLx8QdCUxBLaVGr1GWKho4ziBo1KQFX',
           header: {
@@ -1521,8 +1521,8 @@ describe('RpcClient test', () => {
               'sigkj5nVVW6Zq7F9dEstPs5o2s1vTnUfwhsWi3UnmwrjYVwN9gfmXUBArzSLeXEUNQBM4KUYSg385i1ajR9TugSkM2swFzQp',
           },
           metadata: {
-            protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
-            next_protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
+            protocol: 'PtBoreasK2KPuKbeYtXeEdudEHS7YcMFHE9amwheUc4kejTxgRi',
+            next_protocol: 'PtBoreasK2KPuKbeYtXeEdudEHS7YcMFHE9amwheUc4kejTxgRi',
             test_chain_status: {
               status: 'not_running',
             },
@@ -1600,7 +1600,7 @@ describe('RpcClient test', () => {
           operations: [
             [
               {
-                protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
+                protocol: 'PtBoreasK2KPuKbeYtXeEdudEHS7YcMFHE9amwheUc4kejTxgRi',
                 chain_id: 'NetXSgo1ZT2DRUG',
                 hash: 'onefqcSYA5FNfNW68ghLqQajxnM9cZ3vvdNaTDR1Mhv34LBAhaG',
                 branch: 'BMF7j462upRKLRWEdmFYTCMK3kuEfbQdR2Apo7noc1ZwzPZi2ji',
@@ -2346,7 +2346,7 @@ describe('RpcClient test', () => {
     it('should query the right url and properties (lazy_storage_diff of kind sapling_state) in transaction operation result, proto 8', async () => {
       httpBackend.createRequest.mockReturnValue(
         Promise.resolve({
-          protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
+          protocol: 'PtBoreasK2KPuKbeYtXeEdudEHS7YcMFHE9amwheUc4kejTxgRi',
           chain_id: 'NetXSgo1ZT2DRUG',
           hash: 'BL463rWSReHJRLkwUPdGSS6fDqvJwAVPeaZGTBhEkFbYecAR9Ks',
           header: {},
@@ -2357,7 +2357,7 @@ describe('RpcClient test', () => {
             [],
             [
               {
-                protocol: 'PtAtLasdzXg4XxeVNtWheo13nG4wHXP22qYMqFcT3fyBpWkFero',
+                protocol: 'PtBoreasK2KPuKbeYtXeEdudEHS7YcMFHE9amwheUc4kejTxgRi',
                 chain_id: 'NetXSgo1ZT2DRUG',
                 hash: 'onhF4PVPmPDJjrRfiFf1Tg1wBM4SjQuk5h2Ucx84f42CfAeQtVe',
                 branch: 'BKkgRGNt4kw7EDZvWXQjYVzCQvMsZYkpUSweepc9HZumQ3qSdnv',

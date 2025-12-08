@@ -30,7 +30,7 @@ In the following example, we transfer 0.5ṁ from a `mv1PYMQXgRiJBMsrEaM9Yre4Jyv
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 render(`Fetching a private key...`);
-fetch('https://keygen.ecadinfra.com/basenet/', {
+fetch('https://keygen.mavryk.network/basenet/', {
   method: 'POST',
   headers: { Authorization: 'Bearer webmavryk-example' },
 })

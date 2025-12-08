@@ -9,7 +9,7 @@ import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer'
 import { code, storage } from './data/test-dapp-contract';
 
 // update the targeted rpc url before running
-const rpcUrl = 'http://boreasnet.i.ecadinfra.com:8732'
+const rpcUrl = 'https://basenet.rpc.mavryk.network'
 
 originate(rpcUrl)
 

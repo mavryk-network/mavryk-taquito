@@ -135,26 +135,26 @@ const defaultConfig = ({
   }
 }
 
-const boreasnetEphemeral: Config =
-  defaultConfig({
-    networkName: 'BOREASNET',
-    protocol: Protocols.PtBoreas,
-    defaultRpc: 'http://boreasnet.i.ecadinfra.com:8732/',
-    knownContracts: knownContractsPtBoreas,
-    signerConfig: defaultEphemeralConfig('https://keygen.ecadinfra.com/boreasnet')
-  });
+// const boreasnetEphemeral: Config =
+//   defaultConfig({
+//     networkName: 'BOREASNET',
+//     protocol: Protocols.PtBoreas,
+//     defaultRpc: 'https://basenet.rpc.mavryk.network/',
+//     knownContracts: knownContractsPtBoreas,
+//     signerConfig: defaultEphemeralConfig('https://keygen.mavryk.network/basenet')
+//   });
 
-const boreasnetSecretKey: Config =
-  { ...boreasnetEphemeral, ...{ signerConfig: defaultSecretKey }, ...{ defaultRpc: 'http://boreasnet.i.ecadinfra.com:8732/' } };
+// const boreasnetSecretKey: Config =
+//   { ...boreasnetEphemeral, ...{ signerConfig: defaultSecretKey }, ...{ defaultRpc: 'https://basenet.rpc.mavryk.network/' } };
 
-const atlasnetSecretKey: Config =
-  defaultConfig({
-    networkName: 'ATLASNET',
-    protocol: Protocols.PtAtLas,
-    defaultRpc: 'https://atlasnet.rpc.mavryk.network',
-    knownContracts: knownContractsPtAtLas,
-    signerConfig: defaultSecretKey
-  });
+// const atlasnetSecretKey: Config =
+//   defaultConfig({
+//     networkName: 'ATLASNET',
+//     protocol: Protocols.PtAtLas,
+//     defaultRpc: 'https://atlasnet.rpc.mavryk.network',
+//     knownContracts: knownContractsPtAtLas,
+//     signerConfig: defaultSecretKey
+//   });
 
 const basenetEphemeral: Config =
   defaultConfig({
@@ -162,7 +162,7 @@ const basenetEphemeral: Config =
     protocol: Protocols.PtAtLas,
     defaultRpc: 'https://basenet.rpc.mavryk.network',
     knownContracts: knownContractsPtBasenet,
-    signerConfig: defaultEphemeralConfig('https://keygen.ecadinfra.com/ghostnet')
+    signerConfig: defaultEphemeralConfig('https://keygen.mavryk.network/basenet')
   });
 
 const basenetSecretKey: Config =
@@ -183,23 +183,23 @@ const weeklynetSecretKey: Config =
 const providers: Config[] = [];
 
 if (process.env['RUN_WITH_SECRET_KEY']) {
-  providers.push(boreasnetSecretKey);
-} else if (process.env['RUN_BOREASNET_WITH_SECRET_KEY']) {
-  providers.push(boreasnetSecretKey);
+  providers.push(basenetSecretKey);
+// } else if (process.env['RUN_BOREASNET_WITH_SECRET_KEY']) {
+//   providers.push(boreasnetSecretKey);
 } else if (process.env['RUN_BASENET_WITH_SECRET_KEY']) {
   providers.push(basenetSecretKey);
-} else if (process.env['RUN_ATLASNET_WITH_SECRET_KEY']) {
-  providers.push(atlasnetSecretKey);
-} else if (process.env['RUN_WEEKLYNET_WITH_SECRET_KEY']) {
-  providers.push(weeklynetSecretKey);
-} else if (process.env['BOREASNET']) {
-  providers.push(boreasnetEphemeral);
+// } else if (process.env['RUN_ATLASNET_WITH_SECRET_KEY']) {
+//   providers.push(atlasnetSecretKey);
+// } else if (process.env['RUN_WEEKLYNET_WITH_SECRET_KEY']) {
+//   providers.push(weeklynetSecretKey);
+// } else if (process.env['BOREASNET']) {
+//   providers.push(boreasnetEphemeral);
 } else if (process.env['BASENET']) {
   providers.push(basenetEphemeral);
-} else if (process.env['WEEKLYNET']) {
-  providers.push(weeklynetEphemeral);
+// } else if (process.env['WEEKLYNET']) {
+//   providers.push(weeklynetEphemeral);
 } else {
-  providers.push(boreasnetEphemeral);
+  providers.push(basenetEphemeral);
 }
 
 const setupForger = (Mavryk: MavrykToolkit, forger: ForgerType): void => {
@@ -226,7 +226,7 @@ const setupSignerWithFreshKey = async (
       url: keyUrl,
       method: 'POST',
       headers: requestHeaders,
-      json: false,
+      json: true,
     });
 
     const signer = new InMemorySigner(key!);
