@@ -6,9 +6,9 @@
 
 import { KnownContracts } from './known-contracts';
 export const knownContractsPtBasenet: KnownContracts = {
-  contract: "KT1BsqmT6DBccRXNk2DVjhHcEkdPgWfugJAY",
-  bigMapContract: "KT1VWyGgTWPSmSnMFMYT5zeByX2tyqnLMWLy",
-  tzip12BigMapOffChainContract: "KT1JQQipASBXEvdWxRjUPjmTY6z4o8UWmZtA",
-  saplingContract: "KT1F8BoKHeFTPDsTwSQmThwjSBjAjYgGgAGy",
-  onChainViewContractAddress: "KT1LdBJDGN9svUfootxSGksoC7d78gNuzVXV",
+  contract: "KT1DhEy76Uxfoojd2KTFW35ZJztri1Q7cpqR",
+  bigMapContract: "KT1L6H2xr4vMfvMggECaWwdeCjQPZHZ5m4fe",
+  tzip12BigMapOffChainContract: "KT1FuLEYuAagpvEXxy6UnM5znATupvZbSEEH",
+  saplingContract: "KT1M84MJhFcoqn3invXjQcYQ6jawsXsZBULe",
+  onChainViewContractAddress: "KT1TuGYfmr4Z4H6mQtZrYjYBADzt9e1qVQbp",
 }

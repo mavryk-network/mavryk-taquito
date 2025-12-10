@@ -63,7 +63,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             expect(metadata.sha256Hash).toEqual('18b983a4cc78d7c15d53f7642461176c1366fbdb83960ea432188130db1f8c9d');
             expect(metadata.metadata).toEqual({
                 "name": "Taquito test with valid metadata",
-                "description": "his is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage",
+                "description": "This is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage",
                 "version": "7.1.0-beta.0",
                 "license": {
                     "name": "MIT",
@@ -80,7 +80,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             });
 
             expect(await (await contract.tzip16()).metadataName()).toEqual('Taquito test with valid metadata')
-            expect(await (await contract.tzip16()).metadataDescription()).toEqual('his is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage')
+            expect(await (await contract.tzip16()).metadataDescription()).toEqual('This is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage')
             expect(await (await contract.tzip16()).metadataVersion()).toEqual('7.1.0-beta.0')
             expect(await (await contract.tzip16()).metadataLicense()).toEqual({
                 "name": "MIT",
@@ -141,7 +141,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             expect(metadata.sha256Hash).toEqual('18b983a4cc78d7c15d53f7642461176c1366fbdb83960ea432188130db1f8c9d');
             expect(metadata.metadata).toEqual({
                 "name": "Taquito test with valid metadata",
-                "description": "his is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage",
+                "description": "This is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage",
                 "version": "7.1.0-beta.0",
                 "license": {
                     "name": "MIT",
@@ -158,7 +158,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             });
 
             expect(await (await contract.tzip16()).metadataName()).toEqual('Taquito test with valid metadata')
-            expect(await (await contract.tzip16()).metadataDescription()).toEqual('his is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage')
+            expect(await (await contract.tzip16()).metadataDescription()).toEqual('This is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage')
             expect(await (await contract.tzip16()).metadataVersion()).toEqual('7.1.0-beta.0')
             expect(await (await contract.tzip16()).metadataLicense()).toEqual({
                 "name": "MIT",

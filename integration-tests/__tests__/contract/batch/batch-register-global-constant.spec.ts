@@ -6,6 +6,7 @@
 
 import { CONFIGS } from '../../../config';
 import { OpKind } from '@mavrykdynamics/webmavryk';
+import crypto from "crypto";
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;

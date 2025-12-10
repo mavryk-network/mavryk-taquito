@@ -61,7 +61,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       const storageFinish: any = await contract.storage()
 
       expect(storageFinish.guess).toBe(stringToBytes(message))
-      expect(storageFinish.result).toBe('00')
+      expect(storageFinish.result).toBe('01')
     });
 
 

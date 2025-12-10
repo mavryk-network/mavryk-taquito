@@ -13,7 +13,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
     const Mavryk = lib;
 
     const customHandler = new Map<string, Handler>([
-        ['ipfs', new IpfsHttpHandler('cloudflare-ipfs.com')]
+        ['ipfs', new IpfsHttpHandler('ipfs.io')]
     ]);
 
     const customMetadataProvider = new MetadataProvider(customHandler);
@@ -64,7 +64,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             expect(metadata.metadata).toEqual({
                 name: 'Taquito test with valid metadata',
                 description:
-                    'his is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage',
+                    'This is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage',
                 version: '7.1.0-beta.0',
                 license: {
                     name: 'MIT',
@@ -78,7 +78,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
             });
 
             expect(await (await contract.tzip16()).metadataName()).toEqual('Taquito test with valid metadata');
-            expect(await (await contract.tzip16()).metadataDescription()).toEqual('his is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage');
+            expect(await (await contract.tzip16()).metadataDescription()).toEqual('This is metadata test for Taquito integration tests with the Ligo Taco shop contract modified to include metadata in storage');
             expect(await (await contract.tzip16()).metadataVersion()).toEqual('7.1.0-beta.0');
             expect(await (await contract.tzip16()).metadataLicense()).toEqual({
                 name: 'MIT',

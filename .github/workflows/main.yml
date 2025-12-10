@@ -43,8 +43,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - testnet: boreasnet
-            testnet_uppercase: BOREASNET
+          - testnet: basenet
+            testnet_uppercase: BASENET
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -114,12 +114,12 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: source ./integration-tests/sandbox-env.sh
-    - run: npm -w integration-tests run test:boreasnet-secret-key sandbox-ballot-operation.spec.ts
-    - run: npm -w integration-tests run test:boreasnet-secret-key sandbox-drain-delegate-operation.spec.ts
+    - run: npm -w integration-tests run test:basenet-secret-key sandbox-ballot-operation.spec.ts
+    - run: npm -w integration-tests run test:basenet-secret-key sandbox-drain-delegate-operation.spec.ts
       env:
         RUN_${{ matrix.testnet_uppercase }}_WITH_SECRET_KEY: true
         SECRET_KEY: edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq
         MAVRYK_RPC_${{ matrix.testnet_uppercase }}: http://localhost:20000
         POLLING_INTERVAL_MILLISECONDS: 100
         RPC_CACHE_MILLISECONDS: 0
-        MAVRYK_BAKER: mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv
+        MAVRYK_BAKER: mv1V4h45W3p4e1sjSBvRkK2uYbvkTnSuHg8g

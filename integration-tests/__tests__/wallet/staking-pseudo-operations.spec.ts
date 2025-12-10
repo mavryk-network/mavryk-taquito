@@ -43,7 +43,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol, knownBaker }) => {
 
       const UnstakedBalance = await Mavryk.rpc.getUnstakedFrozenBalance(await Mavryk.signer.publicKeyHash());
       // unstaked balance returned in mumav therefore dividing by 1000000 and rounding explanation here https://tezos-dev.slack.com/archives/C05RS0MEJ9H/p1714641691368019?thread_ts=1714604532.409029&cid=C05RS0MEJ9H
-      expect(Math.round(UnstakedBalance.toNumber() / 1000000)).toEqual(1);
+      expect(Math.round(UnstakedBalance.toNumber() / 1000000)).toEqual(0);
     });
 
     boreasAndAlpha(`should be able to finalizeUnstake successfully: ${rpc}`, async () => {

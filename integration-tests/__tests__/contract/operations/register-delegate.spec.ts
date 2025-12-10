@@ -25,12 +25,8 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
         const account = await Mavryk.rpc.getDelegate(pkh)
         expect(account).toEqual(pkh)
       } catch (ex: any) {
-        if (protocol === Protocols.PsFLorena) {
-          expect(ex.message).toMatch('delegate.unchanged')
-        } else {
-          // When running tests more than one time with the same key, the account is already delegated to the given delegate
-          expect(ex.message).toMatch('delegate.already_active')
-        }
+        // When running tests more than one time with the same key, the account is already delegated to the given delegate
+        expect(ex.message).toMatch('delegate.already_active')
       }
     });
   });

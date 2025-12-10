@@ -128,7 +128,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       expect(metadata.sha256Hash).toBeUndefined();
       expect(metadata.metadata).toEqual({
         "name": "Taquito test with valid metadata containing emoji 😀 🤩",
-        "description": "👋 his is metadata test for Taquito integration tests 🧐 with the Ligo Taco shop contract modified to include metadata URI in the storage",
+        "description": "👋 This is metadata test for Taquito integration tests 🧐 with the Ligo Taco shop contract modified to include metadata URI in the storage",
         "version": "7.1.0-beta.0",
         "license": {
           "name": "MIT",
@@ -145,7 +145,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       });
 
       expect(await (await contract.tzip16()).metadataName()).toBe('Taquito test with valid metadata containing emoji 😀 🤩')
-      expect(await (await contract.tzip16()).metadataDescription()).toBe('👋 his is metadata test for Taquito integration tests 🧐 with the Ligo Taco shop contract modified to include metadata URI in the storage')
+      expect(await (await contract.tzip16()).metadataDescription()).toBe('👋 This is metadata test for Taquito integration tests 🧐 with the Ligo Taco shop contract modified to include metadata URI in the storage')
       expect(await (await contract.tzip16()).metadataVersion()).toBe('7.1.0-beta.0')
       expect(await (await contract.tzip16()).metadataLicense()).toEqual({
         "name": "MIT",

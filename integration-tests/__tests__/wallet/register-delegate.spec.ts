@@ -6,7 +6,7 @@
 
 import { CONFIGS } from '../../config';
 
-CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
+CONFIGS().forEach(({ lib, rpc, setup }) => {
     const Mavryk = lib;
     describe(`Test delegate registration through wallet api: ${rpc}`, () => {
         beforeEach(async () => {
