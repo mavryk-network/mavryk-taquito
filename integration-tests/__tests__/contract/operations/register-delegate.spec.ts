@@ -7,7 +7,7 @@
 import { Protocols } from "@mavrykdynamics/webmavryk";
 import { CONFIGS } from "../../../config";
 
-CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
+CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;
   describe(`Test register delegate through contract api: ${rpc}`, () => {
 

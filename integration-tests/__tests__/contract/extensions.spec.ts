@@ -62,7 +62,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBigMapContract, knownTzip1216Contract
             // We can access the functionalities of the Tzip12 and Tzip16 modules
             const contract = await Mavryk.contract.at(knownTzip1216Contract, compose(tzip16, tzip12));
             const metadata = await contract.tzip16().getMetadata();
-            expect(metadata.metadata.name).toEqual('Test Webmavryk FA2 token_metadata view');
+            expect(metadata.metadata.name).toEqual('Test Taquito FA2 token_metadata view');
             const tokenMetadata1 = await contract.tzip12().getTokenMetadata(1);
             expect(tokenMetadata1.name).toEqual('AliceToken');
 

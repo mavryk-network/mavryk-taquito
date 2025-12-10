@@ -22,7 +22,7 @@ CONFIGS().forEach(({ lib, rpc, setup, knownBaker, signerConfig }) => {
                         { kind: OpKind.TRANSACTION, to: 'mv1N3KY1vXdYX2x568MGmNBRLEK7k7uc2zEM', amount: 0.02 },
                     ])
 
-                expect(batchOpEstimate.length).toEqual(2);
+                expect(batchOpEstimate.length).toEqual(3);
             } catch (ex: any) {
                 // When running tests more than one time with the same key, the account is already delegated to the given delegate
                 if (signerConfig.type === SignerType.SECRET_KEY) {
