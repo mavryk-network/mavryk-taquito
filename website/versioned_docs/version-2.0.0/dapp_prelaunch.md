@@ -1,11 +1,11 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Dapp pre-launch checklist
 author: Claude Barde
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 #### You will find below a few considerations that you may take into account when building your Mavryk dapp or before publishing it. These pointers help you prevent eventual bugs and improve your users' experience.
 

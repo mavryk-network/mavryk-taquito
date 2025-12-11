@@ -1,11 +1,11 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Ledger tests
 author: Roxane Letourneau
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 The Ledger Signer's integration tests are disabled by default because they require having a Ledger Device connected to your computer.
 

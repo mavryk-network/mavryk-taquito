@@ -1,12 +1,12 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Operation Flow
 id: operation_flow
 author: Michael Kernaghan
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 # Webmavryk Operation Flow
 Webmavryk makes injecting operations into the Mavryk blockchain very simple. This can be accomplished by utilizing the Contract API, Wallet API, or the Batch API.

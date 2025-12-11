@@ -1,12 +1,12 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Ballot Operation
 id: ballot
 author: Davis Sawali
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 The `Ballot` operation allows delegates to cast one `Yay`, `Nay`, or `Pass` ballot on a selected proposal. Delegates are only able to cast their votes during the **Exploration period** and the **Promotion period**
 

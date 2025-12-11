@@ -1,11 +1,11 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 id: lambda_view
 title: Lambda View
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 :::caution note
 Lambda View implementation have recently changed due to a recent protocol update. Lambda Views now utilize the `run_view` endpoint. For more information refer to [this document](https://protocol.mavryk.org/CHANGES.html?highlight=run_view#id16)

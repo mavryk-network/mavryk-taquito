@@ -1,11 +1,11 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Timelock (BETA)
 author: Davis Sawali & Hui-An Yang
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 :::warning
 This feature is a work in progress and might go through refinements in the near future. We encourage Webmavryk users to try this feature and reach out to us if you have any issues or concerns.

@@ -1,11 +1,11 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Contract call parameters
 author: Claude Barde & Hui-An Yang
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 The smart contracts on the Mavryk blockchain only work with Michelson, so it can be sometimes complicated to write the correct JavaScript values that Webmavryk will translate to Michelson values for contract calls.
 

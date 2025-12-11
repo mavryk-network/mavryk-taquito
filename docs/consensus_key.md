@@ -1,11 +1,11 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Consensus Keys
 author: Davis Sawali & Hui-An Yang
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 The "consensus key" feature allows bakers to use a different key, called the consensus key. It will allow for baking and signing consensus operations (i.e. preattestation/preendorsements and attestation/endorsements). For more detailed information on consensus keys, refer to [this documentation](https://protocol.mavryk.org/protocols/015_lima.html?highlight=update%20consensus%20key#consensus-key)
 

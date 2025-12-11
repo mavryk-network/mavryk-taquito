@@ -1,12 +1,12 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: MichelsonMap class
 id: michelsonmap
 author: Claude Barde
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 One of the most attractive smart contract features is storing a substantial amount of data that the contract code can use. Although Michelson provides different structures to store data, this article's object will be its maps. Maps are hash tables that contain key/value pairs, which means that when you want to find a value in a map, you search for its key. Maps allow you to store complex data that can reference a single word or number or even more complex data like a pair!
 

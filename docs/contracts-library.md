@@ -1,11 +1,11 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Contracts Library
 author: Roxane Letourneau
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 To increase dApp performance, we aim to provide ways to reduce the number of calls made by Webmavryk to the RPC.
 The `@mavrykdynamics/webmavryk-contracts-library` package allows developers to supply the static contracts data, preventing Webmavryk from fetching them from the network.

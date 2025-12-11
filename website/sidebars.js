@@ -170,7 +170,6 @@ const sidebars = {
         'drain_account',
         'complex_parameters',
         'confirmation_event_stream',
-        'events',
         'liquidity_baking',
         'storage_annotations',
         'tezos_domains',
@@ -213,7 +212,7 @@ const sidebars = {
       collapsible: false,
       items: [
         'wallet_API',
-        'batch-api',
+        'batch_API',
       ]
     },
     {
@@ -224,7 +223,6 @@ const sidebars = {
       collapsible: false,
       items: [
         'tutorial_links',
-        'contract-test-collection',
       ],
     },
 

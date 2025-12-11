@@ -58,7 +58,7 @@ module.exports = {
       hideOnScroll: true,
       logo: {
         alt: 'Webmavryk Logo',
-        src: 'img/webmavryk_header.svg',
+        src: 'img/WebMavryk.png',
       },
       items: [
         {

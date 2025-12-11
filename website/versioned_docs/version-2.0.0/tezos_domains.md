@@ -1,12 +1,12 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Mavryk Domains
 id: tezos_domains
 author: Claude Barde
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 A Mavryk domain is a feature that allows users of the Mavryk blockchain to use a human-readable and easy to remember address (for example, `alice.mav`) instead of a long string of letters and numbers (for example, `mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv`). The data about which address owns which domain is stored as a token inside a smart contract, so it's possible to find this piece of information when inspecting the storage of the contract.
 

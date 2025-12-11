@@ -640,6 +640,14 @@ aside {
   background-color: var(--ifm-color-primary);
   color: var(--ifm-color-text-primary);
 
+  // Hide logo in doc sidebar
+  .navbar__logo,
+  .navbar__brand,
+  img[alt*="logo" i],
+  img[alt*="Logo" i] {
+    display: none !important;
+  }
+
   .menu__link--active {
     color: var(--ifm-color-hover-link);
     border-radius: 24px;
@@ -670,12 +678,12 @@ aside {
   }
 
   .menu {
-    padding: 3rem 2.5rem 5rem 5rem !important;
+    padding: 8rem 2.5rem 5rem 5rem !important;
     height: 100% !important;
 
     // overflow-x: none !important;
     @media (max-width: 1200px) {
-      padding: 3rem 1.5rem 3rem 1.5rem !important;
+      padding: 8rem 1.5rem 3rem 1.5rem !important;
     }
   }
 

@@ -1,11 +1,11 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: MANAGER_LAMBDA
 author: Claude Barde
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 The `MANAGER_LAMBDA` is an object exported from the `@mavrykdynamics/webmavryk` package that provides a convenient way to create lambda functions in Michelson to interact with the [manager contract](https://gitlab.com/nomadic-labs/mi-cho-coq/blob/master/src/contracts/manager.mv), a multisig contract.
 

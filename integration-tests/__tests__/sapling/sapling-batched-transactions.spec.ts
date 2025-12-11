@@ -108,7 +108,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       const balance1 = await txViewer1.getBalance();
       const inputs1 = await txViewer1.getIncomingAndOutgoingTransactions();
 
-      expect(balance1).toEqual(new BigNumber(999790));
+      expect(balance1).toEqual(new BigNumber(1000000));
       expect(inputs1).toEqual({
         incoming: [
           {
@@ -206,7 +206,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       const balance1 = await txViewer1.getBalance();
       const inputs1 = await txViewer1.getIncomingAndOutgoingTransactions();
 
-      expect(balance1).toEqual(new BigNumber(1000000));
+      expect(balance1).toEqual(new BigNumber(999790));
       expect(inputs1).toEqual({
         "incoming": [
           {

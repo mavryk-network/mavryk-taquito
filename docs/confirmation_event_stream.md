@@ -1,12 +1,12 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Confirmation Event Stream
 id: confirmation_event_stream
 author: Claude Barde
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 Every operation forged with the [Wallet API](https://webmavryk.mavryk.org/docs/wallet_API) has a `confirmationObservable` method that can be used to set a certain number of confirmations to wait for and to get an update every time a new confirmation is received. 
 

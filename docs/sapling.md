@@ -1,11 +1,11 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Sapling Toolkit
 author: Roxane Letourneau
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 Sapling is a protocol allowing private transactions in a decentralized environment.
 Sapling was introduced in Mavryk in the Edo protocol. Refer to the Mavryk documentation for more information on Sapling: https://protocol.mavryk.org/active/sapling.html

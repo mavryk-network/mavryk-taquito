@@ -1,12 +1,12 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: web3js vs Webmavryk
 id: web3js_webmavryk
 author: Claude Barde
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
 
 Web3js and Webmavryk have a common goal: connecting dapps to the Ethereum and Mavryk blockchain (respectively) and thus implement similar approaches. However, these approaches are also different due to the nature of Ethereum and the Mavryk blockchains.
 

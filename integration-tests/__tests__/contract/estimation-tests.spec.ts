@@ -63,7 +63,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.burnFeeMumav).toEqual(69250);
       expect(estimate.minimalFeeMumav).toEqual(166);
       expect(estimate.totalCost).toEqual(69416);
-      expect(estimate.usingBaseFeeMumav).toEqual(168);
+      expect(estimate.usingBaseFeeMumav).toEqual(166);
       expect(estimate.consumedMilligas).toEqual(100040);
     });
 
@@ -79,7 +79,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.burnFeeMumav).toEqual(147750);
       expect(estimate.minimalFeeMumav).toEqual(515);
       expect(estimate.totalCost).toEqual(148265);
-      expect(estimate.usingBaseFeeMumav).toEqual(517);
+      expect(estimate.usingBaseFeeMumav).toEqual(515);
       expect(estimate.consumedMilligas).toEqual(676402);
     });
 
@@ -108,7 +108,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.minimalFeeMumav).toEqual(374);
       expect(estimate.totalCost).toEqual(374);
       expect(estimate.usingBaseFeeMumav).toEqual(374);
-      expect(estimate.consumedMilligas).toEqual(1456228);
+      expect(estimate.consumedMilligas).toEqual(1455970);
     });
 
     it('Verify .estimate.transfer for multiple internal transfers to unallocated account', async () => {
@@ -124,7 +124,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.burnFeeMumav).toEqual(133500);
       expect(estimate.minimalFeeMumav).toEqual(445);
       expect(estimate.totalCost).toEqual(133945);
-      expect(estimate.usingBaseFeeMumav).toEqual(447);
+      expect(estimate.usingBaseFeeMumav).toEqual(445);
       expect(estimate.consumedMilligas).toEqual(1570757);
     });
 
@@ -137,7 +137,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.burnFeeMumav).toEqual(84250);
       expect(estimate.minimalFeeMumav).toEqual(421);
       expect(estimate.totalCost).toEqual(84671);
-      expect(estimate.usingBaseFeeMumav).toEqual(423);
+      expect(estimate.usingBaseFeeMumav).toEqual(421);
       expect(estimate.consumedMilligas).toEqual(1866852);
     });
 
@@ -149,7 +149,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.suggestedFeeMumav).toEqual(559);
       expect(estimate.burnFeeMumav).toEqual(163500);
       expect(estimate.minimalFeeMumav).toEqual(539);
-      expect(estimate.totalCost).toEqual(164041);
+      expect(estimate.totalCost).toEqual(164039);
       expect(estimate.usingBaseFeeMumav).toEqual(539);
       expect(estimate.consumedMilligas).toEqual(2392005);
       // Do the actual operation

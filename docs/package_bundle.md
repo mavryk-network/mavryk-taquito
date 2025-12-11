@@ -1,12 +1,13 @@
-<!-- SPDX-License-Identifier: Apache-2.0
-     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
-     Original project: Taquito by ECAD Labs Inc. -->
-
 ---
 title: Client-Side Environments
 id: package_bundle
 author: Davis Sawali
 ---
+
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 # Using Webmavryk in Client-Side Environments
 While Webmavryk works best in Node runtime applications, some of our users working in client-side development might not have access to such features. To accommodate for that, we have decided to provide separate pure JavaScript bundles that you can import into your client-side environment.
 
