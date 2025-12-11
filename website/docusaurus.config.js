@@ -160,7 +160,7 @@ module.exports = {
             {
               html: `
 									<p class='footerDescription'>
-									Developing On Mavryk Can Be Delicious!
+									Developing On Mavryk Has Never Been Easier!
 									</p>
 								  `,
             },

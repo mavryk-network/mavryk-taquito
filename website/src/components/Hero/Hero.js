@@ -13,7 +13,7 @@ import '../../../static/slick/slick-theme.css';
 
 const FeatureList = [
   {
-    title: 'Developing on Mavryk can be delicious!',
+    title: 'Developing on Mavryk has never been easier!',
     description: (
       <>
         Use our popular Webmavryk TypeScript library to develop your Mavryk blockchain apps faster and

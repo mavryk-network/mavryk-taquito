@@ -125,7 +125,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.minimalFeeMumav).toEqual(445);
       expect(estimate.totalCost).toEqual(133945);
       expect(estimate.usingBaseFeeMumav).toEqual(445);
-      expect(estimate.consumedMilligas).toEqual(1570757);
+      expect(estimate.consumedMilligas).toEqual(1570499);
     });
 
     it('Verify .estimate.transfer for internal origination', async () => {
@@ -138,7 +138,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.minimalFeeMumav).toEqual(421);
       expect(estimate.totalCost).toEqual(84671);
       expect(estimate.usingBaseFeeMumav).toEqual(421);
-      expect(estimate.consumedMilligas).toEqual(1866852);
+      expect(estimate.consumedMilligas).toEqual(1866594);
     });
 
     it('Verify .estimate.transfer for multiple internal originations', async () => {
@@ -151,7 +151,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.minimalFeeMumav).toEqual(539);
       expect(estimate.totalCost).toEqual(164039);
       expect(estimate.usingBaseFeeMumav).toEqual(539);
-      expect(estimate.consumedMilligas).toEqual(2392005);
+      expect(estimate.consumedMilligas).toEqual(2391747);
       // Do the actual operation
       const op2 = await contract.methods.do(originate2()).send();
       await op2.confirmation();
