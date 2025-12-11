@@ -17,23 +17,30 @@ CONFIGS().forEach(({ lib, rpc, setup, signerConfig }) => {
         })
 
         testWithKeyGen('verify that contract.reveal reveals the current account', async () => {
-
             const pkh = await Mavryk.signer.publicKeyHash()
             const pk = await Mavryk.signer.publicKey()
-            const op = await Mavryk.contract.reveal({})
-            await op.confirmation();
 
-            expect(op.hash).toBeDefined();
-            expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
-            expect(Number(op.consumedGas)).toBeGreaterThan(0);
-            expect(op.publicKey).toEqual(pk);
-            expect(op.source).toEqual(pkh);
-            expect(op.status).toEqual('applied');
-            expect(op.storageDiff).toEqual('0');
+            try {
+                const op = await Mavryk.contract.reveal({})
+                await op.confirmation();
 
-            // if the account is revealed, it has a manager
-            expect(await Mavryk.rpc.getManagerKey(pkh)).toEqual(pk)
+                expect(op.hash).toBeDefined();
+                expect(op.includedInBlock).toBeLessThan(Number.POSITIVE_INFINITY);
+                expect(Number(op.consumedGas)).toBeGreaterThan(0);
+                expect(op.publicKey).toEqual(pk);
+                expect(op.source).toEqual(pkh);
+                expect(op.status).toEqual('applied');
+                expect(op.storageDiff).toEqual('0');
 
+                // if the account is revealed, it has a manager
+                expect(await Mavryk.rpc.getManagerKey(pkh)).toEqual(pk)
+            } catch (ex: any) {
+                // When running tests with the same key multiple times, account may already be revealed
+                expect(ex.message).toMatch(`The publicKeyHash '${pkh}' has already been revealed.`)
+
+                // Verify the account is indeed revealed
+                expect(await Mavryk.rpc.getManagerKey(pkh)).toEqual(pk)
+            }
         });
     });
 })

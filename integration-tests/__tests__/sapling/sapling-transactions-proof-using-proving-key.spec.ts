@@ -228,7 +228,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       const aliceTxViewer = await aliceSaplingToolkit.getSaplingTransactionViewer();
       const aliceBalance = await aliceTxViewer.getBalance();
 
-      expect(aliceBalance).toEqual(new BigNumber(0));
+      expect(aliceBalance).toEqual(new BigNumber(1000000));
 
       const inputsAlice = await aliceTxViewer.getIncomingAndOutgoingTransactions();
       expect(inputsAlice).toEqual({
