@@ -26,7 +26,7 @@ CONFIGS().forEach(
     knownViewContract,
   }) => {
     const Mavryk = lib;
-    const unrestrictedRPCNode = rpc.endsWith("ecadinfra.com") ? test.skip : test;
+    const unrestrictedRPCNode = rpc.endsWith("rpc.mavryk.network") ? test.skip : test;
     const boreasAndAlpha = ProtoGreaterOrEqual(protocol, Protocols.PtBoreas) ? test : test.skip;
 
     let ticketContract: DefaultContractType;

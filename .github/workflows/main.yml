@@ -61,7 +61,7 @@ jobs:
     - run: npm -w integration-tests run test:${{ matrix.testnet }} -- --maxWorkers=4
       env:
         # Ternary operator workaround
-        MAVRYK_RPC_${{ matrix.testnet_uppercase }}: ${{ github.event.pull_request.head.repo.fork && format('https://{0}.ecadinfra.com', matrix.testnet) || null }}
+        MAVRYK_RPC_${{ matrix.testnet_uppercase }}: ${{ github.event.pull_request.head.repo.fork && format('https://{0}.rpc.mavryk.network', matrix.testnet) || null }}
 
   integration-tests-mavbox:
     runs-on: ubuntu-latest

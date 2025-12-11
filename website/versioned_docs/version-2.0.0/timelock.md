@@ -152,7 +152,7 @@ Let's originate the contract with initial storage values `level` of 0, a stub ch
 // import { stringToBytes } from '@mavrykdynamics/webmavryk-utils';
 // import { timelockCode, timelockStorage } from './timelock-flip-contract';
 
-// const Mavryk = new MavrykToolkit('https://ghostnet.ecadinfra.com');
+// const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 const originate = await Mavryk.contract.originate({ code: timelockCode, init: timelockStorage });
 await originate.confirmation()

@@ -286,7 +286,7 @@ importKey(Mavryk, secretKey)
 In the following example, a contract's `set_child_record` method will be called by passing the arguments using the flattened representation. The `methods` member of the `ContractAbstraction` class allows doing so. First, it is possible to obtain details about the signature of the `set_child_record` entry point by using the `getSignature` method as follow:
 
 ```js live noInline
-// const Mavryk = new MavrykToolkit('https://ghostnet.ecadinfra.com');
+// const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 Mavryk.contract
   .at('KT1B2exfRrGMjfZqWK1bDemr3nBFhHsUWQuN')
@@ -307,7 +307,7 @@ The preceding example returns an array which contains the different possible sig
 
 ```js live noInline
 // import { MavrykToolkit, MichelsonMap } from '@mavrykdynamics/webmavryk';
-// const Mavryk = new MavrykToolkit('https://ghostnet.ecadinfra.com')
+// const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network')
 // import { importKey } from '@mavrykdynamics/webmavryk-signer';
 
 importKey(Mavryk, secretKey)

@@ -49,7 +49,7 @@ importKey(Mavryk, "p2sk2obfVMEuPUnadAConLWk7Tf4Dt3n4svSgJwrgpamRqJXvaYcg1")
 ```
 import {  MavletWallet } from '@mavrykdynamics/webmavryk-mavlet-wallet';
 import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
-const Mavryk = new MavrykToolkit('https://ghostnet.ecadinfra.com');
+const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 const option = { name: "nameOfWallet", network: { type: 'ghostnet' }, enableMetrics: true};
 const wallet = new MavletWallet(option);
 

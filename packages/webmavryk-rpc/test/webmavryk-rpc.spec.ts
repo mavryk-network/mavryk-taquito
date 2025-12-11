@@ -3410,9 +3410,9 @@ describe('RpcClient test', () => {
 
   describe('getRpcUrl', () => {
     it('should return the RPC Url', () => {
-      const url = 'https://mainnet.ecadinfra.com/';
+      const url = 'https://rpc.mavryk.network/';
       const rpcUrlMainnet = new RpcClient(url).getRpcUrl();
-      expect(rpcUrlMainnet).toEqual('https://mainnet.ecadinfra.com/');
+      expect(rpcUrlMainnet).toEqual('https://rpc.mavryk.network/');
       const rpcUrlCarthagenet = new RpcClient('https://basenet.rpc.mavryk.network').getRpcUrl();
       expect(rpcUrlCarthagenet).toEqual('https://basenet.rpc.mavryk.network');
     });
