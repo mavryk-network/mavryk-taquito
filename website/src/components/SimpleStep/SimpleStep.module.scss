@@ -21,13 +21,13 @@
   background-repeat: no-repeat;
   background-position: center 0px;
 
-  @media (max-width: 640px) {
-    background: none;
-    clip-path: none;
-    padding: 50px 10px;
-    background-color: #6F9CF3;
-    clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-  }
+  // @media (max-width: 640px) {
+  //   background: none;
+  //   clip-path: none;
+  //   padding: 50px 10px;
+  //   // background-color: #6F9CF3;
+  //   clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+  // }
 
   @media (max-width: 380px) {
     clip-path: polygon(0 0, 100% 0, 100% 97%, 0 100%);
@@ -40,10 +40,10 @@
   background-repeat: no-repeat;
   background-position: center 0px;
 
-  @media (max-width: 640px) {
-    background: none;
-    background-color: #2D497E;
-  }
+  // @media (max-width: 640px) {
+  //   background: none;
+  //   background-color: #2D497E;
+  // }
 }
 
 .content {

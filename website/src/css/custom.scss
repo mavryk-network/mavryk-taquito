@@ -12,6 +12,7 @@
   --blue-primary: #4169E1;
   --blue-secondary: #5B8DEF;
   --blue-accent: #3B82F6;
+  --blue-card-border: #5878B4;
   --red: #ac0000;
   --brown: #d3832b;
   --green: #71a417;
@@ -25,9 +26,9 @@
   --black: #1E293B;
   --white: #ffffff;
   --twitter-svg: url('../../static/img/XSVG-white.svg') no-repeat;
-  --github-svg: url('../../static/img/githubSVG-white.svg') no-repeat;
-  --github-svg-reverse: url('../../static/img/github-svg-white.svg') no-repeat;
-  --telegram-svg: url('../../static/img/telegramSVG.svg') no-repeat;
+  --github-svg: url('../../static/img/github-svg-white.svg') no-repeat;
+  --github-svg-reverse: url('../../static/img/githubSVG-white.svg') no-repeat;
+  --telegram-svg: url('../../static/img/telegram-svg-white.svg') no-repeat;
   --discord-svg: url('../../static/img/discord-mark-white.svg') no-repeat;
   --brown-secondary: #975b19;
   --background-dark: #1E293B;
@@ -83,11 +84,12 @@
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #1E293B;
+  --ifm-color-primary: #14284C;
   --ifm-color-secondary: var(--blue-primary);
   --ifm-color-text-primary: var(--white);
   --ifm-color-text-secondary: var(--black);
   --ifm-color-hover-link: var(--blue-primary);
+  --blue-card-border: #5878B4;
   --twitter-svg: url('../../static/img/XSVG-white.svg') no-repeat;
   --github-svg: url('../../static/img/github-svg-white.svg') no-repeat;
   --github-svg-reverse: url('../../static/img/githubSVG.svg') no-repeat;
@@ -98,9 +100,9 @@
   --sidebar-text-color: #CBD5E1;
   --sidebar-link-bg: rgba(59, 130, 246, 0.2);
   --black-third: var(--white);
-  --docsearch-text-color: var(--white);
-  --docsearch-searchbox-background: #334155 !important;
-  --docsearch-searchbox-focus-background: #334155 !important;
+  --docsearch-text-color: var(--black);
+  --docsearch-searchbox-background: var(--white) !important;
+  --docsearch-searchbox-focus-background: var(--white) !important;
   --ifm-background-color: #0F172A;
   --ifm-navbar-background-color: #1b1b1d;
   --ifm-footer-background-color: #1b1b1d;
@@ -198,7 +200,7 @@ h2 {
   align-items: center;
 
   img {
-    height: 100%;
+    height: 175%;
     width: auto;
   }
 }
