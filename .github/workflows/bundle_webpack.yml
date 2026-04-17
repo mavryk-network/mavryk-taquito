@@ -15,16 +15,16 @@ jobs:
     steps:
     -
       name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     -
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: lts/hydrogen
     - run: npm ci
     - run: npm run build
     - run: npm -w packages/webmavryk-local-forging run build-webpack
     -
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: webmavryk-local-forging-vanilla
         path: |
@@ -33,7 +33,7 @@ jobs:
 
     - run: npm -w packages/webmavryk-mavlet-wallet run build-webpack
     -
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: webmavryk-mavlet-wallet-vanilla
         path: |
