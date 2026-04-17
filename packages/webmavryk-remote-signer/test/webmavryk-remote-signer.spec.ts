@@ -86,7 +86,7 @@ describe('RemoteSigner test', () => {
     // TODO: Find a way to fix this test
     // it('Should sign messages with 5 digit edsig prefix', async () => {
     //   const signer = new RemoteSigner(
-    //     'mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq',
+    //     'mv1LapnmjYfyts8DShXLZNXRqCMccF2FwgH8',
     //     'http://127.0.0.1:6732',
     //     {},
     //     httpBackend as any
@@ -107,7 +107,7 @@ describe('RemoteSigner test', () => {
 
     //   expect(httpBackend.createRequest.mock.calls[0][0]).toEqual({
     //     method: 'POST',
-    //     url: 'http://127.0.0.1:6732/keys/mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq',
+    //     url: 'http://127.0.0.1:6732/keys/mv1LapnmjYfyts8DShXLZNXRqCMccF2FwgH8',
     //     headers: undefined,
     //   });
 
@@ -117,7 +117,7 @@ describe('RemoteSigner test', () => {
 
     //   expect(httpBackend.createRequest.mock.calls[1][0]).toEqual({
     //     method: 'GET',
-    //     url: 'http://127.0.0.1:6732/keys/mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq',
+    //     url: 'http://127.0.0.1:6732/keys/mv1LapnmjYfyts8DShXLZNXRqCMccF2FwgH8',
     //     headers: undefined,
     //   });
 

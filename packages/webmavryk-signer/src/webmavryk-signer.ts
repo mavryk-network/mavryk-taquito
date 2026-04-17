@@ -68,7 +68,7 @@ export class InMemorySigner {
    * @description Instantiation of an InMemorySigner instance from a mnemonic
    * @param mnemonic 12-24 word mnemonic
    * @param password password used to encrypt the mnemonic to seed value
-   * @param derivationPath default 44'/1729'/0'/0' (44'/1729' mandatory)
+   * @param derivationPath default 44'/1969'/0'/0' (44'/1969' mandatory)
    * @param curve currently only supported for mv1, mv2, mv3 addresses. soon bip25519
    * @returns InMemorySigner
    * @throws {@link InvalidMnemonicError}
@@ -76,7 +76,7 @@ export class InMemorySigner {
   static fromMnemonic({
     mnemonic,
     password = '',
-    derivationPath = "44'/1729'/0'/0'",
+    derivationPath = "44'/1969'/0'/0'",
     curve = 'ed25519',
   }: FromMnemonicParams) {
     // check if curve is defined if not default mv1

@@ -1108,7 +1108,7 @@ Users can now create an `InMemorySigner` instance using the `fromMnemonic` metho
 
 ```typescript
 const mnemonic = 'author crumble medal dose ribbon permit ankle sport final hood shadow vessel horn hawk enter zebra prefer devote captain during fly found despair business'
-const signer = InMemorySigner.fromMnemonic({ mnemonic, password, derivationPath: "44h/1729h/1/0", curve: 'secp256k1' });
+const signer = InMemorySigner.fromMnemonic({ mnemonic, password, derivationPath: "44h/1969h/1/0", curve: 'secp256k1' });
 ```
 # Taquito v14.1.0-beta
 
@@ -1191,7 +1191,7 @@ We added support for the bip32-ed25519 derivation scheme in the ledger package. 
 const transport = await TransportNodeHid.create();
 const signer = new LedgerSigner(
     transport,
-    "44'/1729'/0'/0'",
+    "44'/1969'/0'/0'",
     false,
     DerivationType.BIP32_ED25519
 )

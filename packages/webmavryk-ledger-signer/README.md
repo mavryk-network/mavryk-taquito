@@ -32,8 +32,8 @@ const ledgerSigner = new LedgerSigner(transport);
 
 The constructor of the `LedgerSigner` class takes three other optional parameters. If none are specified, the following default values are used:
 
-- `path`: **default value is "44'/1729'/0'/0'"**  
-  You can use as a parameter the `HDPathTemplate` which refers to `44'/1729'/${account}'/0'`. You have to specify the index of the account you want to use. Or you can also use a complete path as a parameter. More details about paths [here](https://webmavryk.mavryk.org/docs/ledger_signer#derivation-paths-hd-wallet--bip-standards)
+- `path`: **default value is "44'/1969'/0'/0'"**  
+  You can use as a parameter the `HDPathTemplate` which refers to `44'/1969'/${account}'/0'`. You have to specify the index of the account you want to use. Or you can also use a complete path as a parameter. More details about paths [here](https://webmavryk.mavryk.org/docs/ledger_signer#derivation-paths-hd-wallet--bip-standards)
 - `prompt`: **default is true**  
   If true, you will be asked on your Ledger device to send your public key for validation. **_Note that confirmation is required when using `@ledgerhq/hw-transport-webhid`, so you should not set this parameter to false if you are using this transport._**
 - `derivationType`: **default is DerivationType.ED25519**  
@@ -44,7 +44,7 @@ import { LedgerSigner, DerivationType, HDPathTemplate } from '@mavrykdynamics/we
 
 const ledgerSigner = new LedgerSigner(
   transport, //required
-  HDPathTemplate(1), // path optional (equivalent to "44'/1729'/1'/0'")
+  HDPathTemplate(1), // path optional (equivalent to "44'/1969'/1'/0'")
   true, // prompt optional
   DerivationType.ED25519 // derivationType optional
 );

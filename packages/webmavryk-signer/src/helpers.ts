@@ -16,7 +16,7 @@ export type Curves = 'ed25519' | 'secp256k1' | 'p256' | 'bip25519';
 /**
  *
  * @param seed bip39.mnemonicToSeed
- * @param derivationPath Mavryk Requirement 44'/1729' for HD key address default 44'/1729'/0'/0'
+ * @param derivationPath Mavryk Requirement 44'/1969' for HD key address default 44'/1969'/0'/0'
  * @param curve 'ed25519' | 'secp256k1' | 'p256''
  * @returns final Derivation of HD keys mavryk Secret key
  * @throws {@link InvalidCurveError} | {@link ToBeImplemented}

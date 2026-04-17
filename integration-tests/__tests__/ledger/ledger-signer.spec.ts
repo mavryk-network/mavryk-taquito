@@ -58,7 +58,7 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
       expect(
         new LedgerSigner(
           transport,
-          "44'/1729'/0'/0'",
+          "44'/1969'/0'/0'",
           true,
           DerivationType.SECP256K1
         )
@@ -69,7 +69,7 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
       it('Verify that Ledger will provide correct public key and public key hash for mv1 curve and default path', async () => {
         const signer = new LedgerSigner(
           transport,
-          "44'/1729'/0'/0'",
+          "44'/1969'/0'/0'",
           false,
           DerivationType.ED25519
         );
@@ -79,14 +79,14 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
           'edpkuRkcStobJ569XFxmE6edyRQQzMmtf4ZnmPkTPfSQnt6P3Nym2V'
         );
         expect(pkh).toEqual(
-          'mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq'
+          'mv1LapnmjYfyts8DShXLZNXRqCMccF2FwgH8'
         );
       });
 
       it('Verify that Ledger will provide correct public key and public key hash for mv2 curve and default path', async () => {
         const signer = new LedgerSigner(
           transport,
-          "44'/1729'/0'/0'",
+          "44'/1969'/0'/0'",
           false,
           DerivationType.SECP256K1
         );
@@ -96,14 +96,14 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
           'sppk7ZMM9NZLPPueTKcoJobdUG7MjLtaGsdrZqddcn9U6C9Yt99m8sU'
         );
         expect(pkh).toEqual(
-          'mv2efHjyQ74JL9AwwWNDYEh3MpKxLLsjYRPz'
+          'mv2LGYNEgrQWFcjktG6u7oLpnC26YzgE4N6c'
         );
       });
 
       it('Verify that that Ledger will provide correct public key and public key hash for mv3 curve and path having 1 as account value', async () => {
         const signer = new LedgerSigner(
           transport,
-          "44'/1729'/1'/0'",
+          "44'/1969'/1'/0'",
           false,
           DerivationType.P256
         );
@@ -124,7 +124,7 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
       it('Verify that Ledger returns the correct signature', async () => {
         const signer = new LedgerSigner(
           transport,
-          "44'/1729'/0'/0'",
+          "44'/1969'/0'/0'",
           false,
           DerivationType.ED25519
         );
@@ -148,12 +148,12 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
       jest.setTimeout(240000)
       it('Verify that a contract can be originated with Ledger', async () => {
 
-        const fundAccountFirst = await mavryk.contract.transfer({ to: 'mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq', amount: 9 });
+        const fundAccountFirst = await mavryk.contract.transfer({ to: 'mv1LapnmjYfyts8DShXLZNXRqCMccF2FwgH8', amount: 9 });
         await fundAccountFirst.confirmation();
 
         const signer = new LedgerSigner(
           transport,
-          "44'/1729'/0'/0'",
+          "44'/1969'/0'/0'",
           false,
           DerivationType.ED25519
         );
@@ -176,7 +176,7 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
       it('Verify signing and injecting a transaction with Ledger', async () => {
         const signer = new LedgerSigner(
           transport,
-          "44'/1729'/0'/0'",
+          "44'/1969'/0'/0'",
           false,
           DerivationType.ED25519
         );
@@ -193,7 +193,7 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
       it('Verify that the pk and pkh is correct', async () => {
         const signer = new LedgerSigner(
           transport,
-          "44'/1729'/1'/0'",
+          "44'/1969'/1'/0'",
           false,
           DerivationType.BIP32_ED25519
         )
@@ -214,7 +214,7 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
       it('Verify that the signature is correctly prefixed with originated contract', async () => {
         const signer = new LedgerSigner(
           transport,
-          "44'/1729'/1'/0'",
+          "44'/1969'/1'/0'",
           false,
           DerivationType.BIP32_ED25519
         )
@@ -234,7 +234,7 @@ CONFIGS().forEach(({ lib, setup, rpc }) => {
       it('Verify that the signature is correct with set forged payload', async () => {
         const signer = new LedgerSigner(
           transport,
-          "44'/1729'/1'/0'",
+          "44'/1969'/1'/0'",
           false,
           DerivationType.BIP32_ED25519
         )

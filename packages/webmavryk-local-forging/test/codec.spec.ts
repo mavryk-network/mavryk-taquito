@@ -72,8 +72,8 @@ describe('Tests for Entrypoint functions and for encode and decoder error messag
   });
 
   test(`Verify publicKeyHashEncoder`, async () => {
-    const mv1 = publicKeyHashEncoder('mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq');
-    expect(mv1).toEqual('00c9fc72e8491bd2973e196f04ec6918ad5bcee22d');
+    const mv1 = publicKeyHashEncoder('mv1LapnmjYfyts8DShXLZNXRqCMccF2FwgH8');
+    expect(mv1).toEqual('0089eeecba566129abc62e8c29db41f59d085fed10');
     const mv2 = publicKeyHashEncoder('mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ');
     expect(mv2).toEqual('012ffebbf1560632ca767bc960ccdb84669d284c2c');
     const mv3 = publicKeyHashEncoder('mv3Ju2CZXqfgiHctrWsjjJD8D7GnwJXMkdvV');
@@ -96,13 +96,13 @@ describe('Tests for Entrypoint functions and for encode and decoder error messag
     const empty = publicKeyHashesEncoder([]);
     expect(empty).toEqual('ff00000000');
     const mv = publicKeyHashesEncoder([
-      'mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq',
+      'mv1LapnmjYfyts8DShXLZNXRqCMccF2FwgH8',
       'mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ',
       'mv3Ju2CZXqfgiHctrWsjjJD8D7GnwJXMkdvV',
       'mv4V7CnM8pzPbWHtiRRbvSLkaheyM4pEnMSC',
     ]);
     expect(mv).toEqual(
-      'ff0000005400c9fc72e8491bd2973e196f04ec6918ad5bcee22d012ffebbf1560632ca767bc960ccdb84669d284c2c026fde46af0356a0476dae4e4600172dc9309b3aa4035c14a7a05c10fc8b402fbcdd48dc8136236bf3c1'
+      'ff0000005400' + '89eeecba566129abc62e8c29db41f59d085fed10012ffebbf1560632ca767bc960ccdb84669d284c2c026fde46af0356a0476dae4e4600172dc9309b3aa4035c14a7a05c10fc8b402fbcdd48dc8136236bf3c1'
     );
 
     expect(() => publicKeyHashesEncoder(['tz5WXYtyDUNL91qfiCJtVUX746QpNv5i5ve5'])).toThrow(
@@ -122,11 +122,11 @@ describe('Tests for Entrypoint functions and for encode and decoder error messag
     expect(empty).toEqual([]);
     const mv = publicKeyHashesDecoder(
       Uint8ArrayConsumer.fromHexString(
-        'ff0000005400c9fc72e8491bd2973e196f04ec6918ad5bcee22d012ffebbf1560632ca767bc960ccdb84669d284c2c026fde46af0356a0476dae4e4600172dc9309b3aa4'
+        'ff0000005400' + '89eeecba566129abc62e8c29db41f59d085fed10012ffebbf1560632ca767bc960ccdb84669d284c2c026fde46af0356a0476dae4e4600172dc9309b3aa4'
       )
     );
     expect(mv).toEqual([
-      'mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq',
+      'mv1LapnmjYfyts8DShXLZNXRqCMccF2FwgH8',
       'mv2QQ5sHsmFuksCRmRgkZpp2DUHBxrZkQzcZ',
       'mv3Ju2CZXqfgiHctrWsjjJD8D7GnwJXMkdvV',
     ]);

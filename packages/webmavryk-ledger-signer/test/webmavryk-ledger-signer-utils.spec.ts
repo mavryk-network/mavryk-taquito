@@ -64,20 +64,20 @@ describe('Utils functions', () => {
   });
 
   it('Should convert default path to buffer', () => {
-    const path = "44'/1729'/0'/0'/0'";
+    const path = "44'/1969'/0'/0'/0'";
     const buff = transformPathToBuffer(path);
     const buff2hex = Buffer.from(buff).toString('hex');
     expect(buff2hex).toEqual(
-      '058000002c800006c1800000008000000080000000'
+      '058000002c800007b1800000008000000080000000'
     );
   });
 
   it('Should convert path to buffer', () => {
-    const path = "44'/1729'/0'/1'";
+    const path = "44'/1969'/0'/1'";
     const buff = transformPathToBuffer(path);
     const buff2hex = Buffer.from(buff).toString('hex');
     expect(buff2hex).toEqual(
-      '048000002c800006c18000000080000001'
+      '048000002c800007b18000000080000001'
     );
   });
 

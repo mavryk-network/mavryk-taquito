@@ -120,7 +120,7 @@ export class PrivateKey implements ExtendedPrivateKey {
   }
   /**
    *
-   * @param path pre-hardened (if applicable) derivation path items ie 44'/1729'/0/0 -> 2^31 + 44/2^31 + 1729/0/0
+   * @param path pre-hardened (if applicable) derivation path items ie 44'/1969'/0/0 -> 2^31 + 44/2^31 + 1969/0/0
    * @returns final child of the full HD keys derivation
    */
   derivePath(path: Iterable<number>): PrivateKey {

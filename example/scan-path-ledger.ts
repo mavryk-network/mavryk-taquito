@@ -19,7 +19,7 @@ async function example() {
     let index = 0;
     const mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network')
     while (index < 8) {
-        const ledgerSigner = new LedgerSigner(transport, `44'/1729'/${index}'/0'`, false, DerivationType.ED25519);
+        const ledgerSigner = new LedgerSigner(transport, `44'/1969'/${index}'/0'`, false, DerivationType.ED25519);
         mavryk.setProvider({ signer: ledgerSigner });
         const pkh = await mavryk.signer.publicKeyHash();
         const balance = await mavryk.mv.getBalance(pkh)

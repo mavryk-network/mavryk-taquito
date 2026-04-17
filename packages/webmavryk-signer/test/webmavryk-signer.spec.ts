@@ -209,12 +209,12 @@ describe('inmemory-signer', () => {
     const signer = InMemorySigner.fromMnemonic({ mnemonic });
     const pkh = await signer.publicKeyHash();
 
-    expect(pkh).toEqual('mv1SRWEiswZXAcpv3wA3CxQT8qVaMDuwZNEq');
+    expect(pkh).toEqual('mv1LapnmjYfyts8DShXLZNXRqCMccF2FwgH8');
   });
 
   it('Should instantiate mv1 from mnemonic will throw an error with non-hardened derivation paths', () => {
-    // good path: 44'/1729'/0'/0' || 44h/1729h/0h/0h
-    const badPath = '44/1729/0/0';
+    // good path: 44'/1969'/0'/0' || 44h/1969h/0h/0h
+    const badPath = '44/1969/0/0';
 
     expect(() => InMemorySigner.fromMnemonic({ mnemonic, derivationPath: badPath })).toThrowError(
       InvalidDerivationPathError
@@ -222,8 +222,8 @@ describe('inmemory-signer', () => {
   });
 
   it('Should instantiate mv1 from mnemonic will throw an error if path option is greater than 2^31', () => {
-    // good path: 44'/1729'/0'/0' || 44h/1729h/0h/0h
-    const badPath = `44/1729/${Number('0x80000000') + 10}'/0'`;
+    // good path: 44'/1969'/0'/0' || 44h/1969h/0h/0h
+    const badPath = `44/1969/${Number('0x80000000') + 10}'/0'`;
 
     expect(() => InMemorySigner.fromMnemonic({ mnemonic, derivationPath: badPath })).toThrowError(
       InvalidDerivationPathError
@@ -231,8 +231,8 @@ describe('inmemory-signer', () => {
   });
 
   it('Should instantiate mv1 from mnemonic will throw an error if path option NaN', () => {
-    // good path: 44'/1729'/0'/0' || 44h/1729h/0h/0h
-    const badPath = `44/1729/suspicious'/0'`;
+    // good path: 44'/1969'/0'/0' || 44h/1969h/0h/0h
+    const badPath = `44/1969/suspicious'/0'`;
 
     expect(() => InMemorySigner.fromMnemonic({ mnemonic, derivationPath: badPath })).toThrowError(
       InvalidDerivationPathError
@@ -243,7 +243,7 @@ describe('inmemory-signer', () => {
     const mnemonic = 'prefer wait something wrong';
 
     expect(() =>
-      InMemorySigner.fromMnemonic({ mnemonic, derivationPath: "44'/1729'/0'/0'" })
+      InMemorySigner.fromMnemonic({ mnemonic, derivationPath: "44'/1969'/0'/0'" })
     ).toThrowError(InvalidMnemonicError);
   });
 
@@ -252,52 +252,52 @@ describe('inmemory-signer', () => {
       'prefer wait flock brown volume recycle scrubbyiswrong elder rate pair twenty giant';
 
     expect(() =>
-      InMemorySigner.fromMnemonic({ mnemonic, derivationPath: "44'/1729'/0'/0'" })
+      InMemorySigner.fromMnemonic({ mnemonic, derivationPath: "44'/1969'/0'/0'" })
     ).toThrowError(InvalidMnemonicError);
   });
 
   it('Should instantiate mv2 hardened from mnemonic from in memory signer', async () => {
     const signer = InMemorySigner.fromMnemonic({
       mnemonic,
-      derivationPath: "44'/1729'/0'/0'",
+      derivationPath: "44'/1969'/0'/0'",
       curve: 'secp256k1',
     });
     const pkh = await signer.publicKeyHash();
 
-    expect(pkh).toEqual('mv2efHjyQ74JL9AwwWNDYEh3MpKxLLsjYRPz');
+    expect(pkh).toEqual('mv2LGYNEgrQWFcjktG6u7oLpnC26YzgE4N6c');
   });
 
   it('Should instantiate mv2 non-hardened from mnemonic from in memory signer', async () => {
     const signer = InMemorySigner.fromMnemonic({
       mnemonic,
-      derivationPath: "44'/1729'/0/0",
+      derivationPath: "44'/1969'/0/0",
       curve: 'secp256k1',
     });
     const pkh = await signer.publicKeyHash();
 
-    expect(pkh).toEqual('mv2iptuhiG5LrByJKBf2FMhs8sKmHu73TwCc');
+    expect(pkh).toEqual('mv2RtTyt4yqxkAUEeyjiSC7MAzPeJTVmdgoK');
   });
 
   it('Should instantiate mv3 hardened path from mnemonic from in memory signer', async () => {
     const signer = InMemorySigner.fromMnemonic({
       mnemonic,
-      derivationPath: "44'/1729'/0'/0'",
+      derivationPath: "44'/1969'/0'/0'",
       curve: 'p256',
     });
     const pkh = await signer.publicKeyHash();
 
-    expect(pkh).toEqual('mv3RwnDXHpJfca8SgDgQ3KnG8W5aYGJFe7wt');
+    expect(pkh).toEqual('mv3FLXBkPSoL8Z658YcAtr6UrZ5CsZCF4t65');
   });
 
   it('Should instantiate mv3 non-hardened path from mnemonic from in memory signer', async () => {
     const signer = InMemorySigner.fromMnemonic({
       mnemonic,
-      derivationPath: "44'/1729'/0/0",
+      derivationPath: "44'/1969'/0/0",
       curve: 'p256',
     });
     const pkh = await signer.publicKeyHash();
 
-    expect(pkh).toEqual('mv3ThcycEJEdAge6DMJq8p4aB82ktqxz2RXm');
+    expect(pkh).toEqual('mv3GSVdx3h4mj6sJC2BC3At85HTNPpUF6G7x');
   });
 
   // REMOVE WHEN BIP32 IMPLEMENTED
@@ -305,7 +305,7 @@ describe('inmemory-signer', () => {
     expect(() =>
       InMemorySigner.fromMnemonic({
         mnemonic,
-        derivationPath: "44'/1729'/0'/0'",
+        derivationPath: "44'/1969'/0'/0'",
         curve: 'bip25519',
       })
     ).toThrowError(ToBeImplemented);
@@ -317,7 +317,7 @@ describe('inmemory-signer', () => {
     expect(() =>
       InMemorySigner.fromMnemonic({
         mnemonic,
-        derivationPath: "44'/1729'/0'/0'",
+        derivationPath: "44'/1969'/0'/0'",
         curve: 'wrong' as any,
       })
     ).toThrowError(InvalidCurveError);

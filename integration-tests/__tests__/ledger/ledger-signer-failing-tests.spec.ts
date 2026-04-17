@@ -30,7 +30,7 @@ CONFIGS().forEach(({ lib, setup }) => {
             it('Verify that Ledger will throw an error when public key is declined', async () => {
                 const signer = new LedgerSigner(
                     transport,
-                    "44'/1729'/0'/0'",
+                    "44'/1969'/0'/0'",
                     true,
                     DerivationType.ED25519
                 );
@@ -45,7 +45,7 @@ CONFIGS().forEach(({ lib, setup }) => {
             it('Verify that Ledger will throw an error when signing is declined', async () => {
                 const signer = new LedgerSigner(
                     transport,
-                    "44'/1729'/0'/0'",
+                    "44'/1969'/0'/0'",
                     false,
                     DerivationType.ED25519
                 );
@@ -66,7 +66,7 @@ CONFIGS().forEach(({ lib, setup }) => {
                 it('Verify that Ledger will throw an error when a transaction is declined', async () => {
                     const signer = new LedgerSigner(
                         transport,
-                        "44'/1729'/0'/0'",
+                        "44'/1969'/0'/0'",
                         false,
                         DerivationType.ED25519
                     );
@@ -86,7 +86,7 @@ CONFIGS().forEach(({ lib, setup }) => {
                 it('Should throw error when user declines to originate contract with Ledger', async () => {
                     const signer = new LedgerSigner(
                         transport,
-                        "44'/1729'/0'/0'",
+                        "44'/1969'/0'/0'",
                         false,
                         DerivationType.ED25519
                     );

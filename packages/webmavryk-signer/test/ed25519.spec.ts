@@ -97,7 +97,7 @@ const testData: TestChain[] = [
       'miracle blush border auto country easily icon below finish fruit base shift lift old farm wild room symbol ocean attitude ill tank soon know',
     keys: [
       {
-        path: [44 | Hard, 1729 | Hard],
+        path: [44 | Hard, 1969 | Hard],
       },
     ],
   },

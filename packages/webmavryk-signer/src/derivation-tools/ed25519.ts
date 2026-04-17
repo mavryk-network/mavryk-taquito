@@ -51,7 +51,7 @@ export class PrivateKey implements ExtendedPrivateKey {
     return this.priv.subarray(0, 32);
   }
   /**
-   * @index current derivation path item ie: 1729'
+   * @index current derivation path item ie: 1969'
    * @returns derivation path child of original private key pair
    */
   derive(index: number): PrivateKey {

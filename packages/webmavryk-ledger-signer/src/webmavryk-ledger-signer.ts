@@ -43,7 +43,7 @@ export enum DerivationType {
 export { InvalidDerivationTypeError } from './errors';
 
 export const HDPathTemplate = (account: number) => {
-  return `44'/1729'/${account}'/0'`;
+  return `44'/1969'/${account}'/0'`;
 };
 
 export { VERSION } from './version';
@@ -53,7 +53,7 @@ export { VERSION } from './version';
  * @description Implementation of the Signer interface that will allow signing operation from a Ledger Nano device
  *
  * @param transport A transport instance from LedgerJS libraries depending on the platform used (e.g. Web, Node)
- * @param path The ledger derivation path (default is "44'/1729'/0'/0'")
+ * @param path The ledger derivation path (default is "44'/1969'/0'/0'")
  * @param prompt Whether to prompt the ledger for public key (default is true)
  * @param derivationType The value which defines the curve to use (DerivationType.ED25519(default), DerivationType.SECP256K1, DerivationType.P256, DerivationType.BIP32_ED25519)
  *
@@ -61,21 +61,21 @@ export { VERSION } from './version';
  * ```
  * import TransportNodeHid from "@ledgerhq/hw-transport-node-hid";
  * const transport = await TransportNodeHid.create();
- * const ledgerSigner = new LedgerSigner(transport, "44'/1729'/0'/0'", false, DerivationType.ED25519);
+ * const ledgerSigner = new LedgerSigner(transport, "44'/1969'/0'/0'", false, DerivationType.ED25519);
  * ```
  *
  * @example
  * ```
  * import TransportU2F from "@ledgerhq/hw-transport-u2f";
  * const transport = await TransportU2F.create();
- * const ledgerSigner = new LedgerSigner(transport, "44'/1729'/0'/0'", true, DerivationType.SECP256K1);
+ * const ledgerSigner = new LedgerSigner(transport, "44'/1969'/0'/0'", true, DerivationType.SECP256K1);
  * ```
  *
  * @example
  * ```
  * import TransportU2F from "@ledgerhq/hw-transport-u2f";
  * const transport = await TransportU2F.create();
- * const ledgerSigner = new LedgerSigner(transport, "44'/1729'/6'/0'", true, DerivationType.BIP32_ED25519);
+ * const ledgerSigner = new LedgerSigner(transport, "44'/1969'/6'/0'", true, DerivationType.BIP32_ED25519);
  * ```
  */
 export class LedgerSigner implements Signer {
@@ -92,15 +92,15 @@ export class LedgerSigner implements Signer {
   private _publicKeyHash?: string;
   constructor(
     private transport: LedgerTransport,
-    private path: string = "44'/1729'/0'/0'",
+    private path: string = "44'/1969'/0'/0'",
     private prompt: boolean = true,
     private derivationType: DerivationType = DerivationType.ED25519
   ) {
     this.transport.setScrambleKey('MVRK');
-    if (!path.startsWith(`44'/1729'`)) {
+    if (!path.startsWith(`44'/1969'`)) {
       throw new InvalidDerivationPathError(
         path,
-        `${invalidDetail(ValidationResult.NO_PREFIX_MATCHED)} expecting prefix "44'/1729'".`
+        `${invalidDetail(ValidationResult.NO_PREFIX_MATCHED)} expecting prefix "44'/1969'".`
       );
     }
     if (!Object.values(DerivationType).includes(derivationType)) {

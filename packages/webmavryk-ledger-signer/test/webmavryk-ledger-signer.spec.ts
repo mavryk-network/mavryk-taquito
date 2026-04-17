@@ -27,15 +27,15 @@ describe('LedgerSigner test', () => {
 
   it('LedgerSigner is instantiable with parameters', () => {
     expect(
-      new LedgerSigner(mockTransport, "44'/1729'/0'/0'", true, DerivationType.SECP256K1)
+      new LedgerSigner(mockTransport, "44'/1969'/0'/0'", true, DerivationType.SECP256K1)
     ).toBeInstanceOf(LedgerSigner);
   });
 
   it('Should throw exception if path is incorrect', () => {
     expect(() => {
-      new LedgerSigner(mockTransport, "4'/1729'/0'/0'", true, DerivationType.SECP256K1);
+      new LedgerSigner(mockTransport, "4'/1969'/0'/0'", true, DerivationType.SECP256K1);
     }).toThrow(
-      `Invalid derivation path "4'/1729'/0'/0'" with unsupported prefix expecting prefix "44'/1729'".`
+      `Invalid derivation path "4'/1969'/0'/0'" with unsupported prefix expecting prefix "44'/1969'".`
     );
   });
 
@@ -48,7 +48,7 @@ describe('LedgerSigner test', () => {
     mockTransport.send.mockResolvedValue(mockpk);
     const pk = await signer.publicKey();
     const pkh = await signer.publicKeyHash();
-    const path = "44'/1729'/0'/0'";
+    const path = "44'/1969'/0'/0'";
     const buff = transformPathToBuffer(path);
     expect(mockTransport.send).toHaveBeenCalledWith(0x80, 0x03, 0x00, 0x00, buff);
     expect(mockTransport.send).toHaveBeenCalledTimes(1);
@@ -59,7 +59,7 @@ describe('LedgerSigner test', () => {
   it('Should get public key and public key hash for default path and mv2 curve', async () => {
     const signer = new LedgerSigner(
       mockTransport,
-      "44'/1729'/0'/0'",
+      "44'/1969'/0'/0'",
       false,
       DerivationType.SECP256K1
     );
@@ -70,7 +70,7 @@ describe('LedgerSigner test', () => {
     mockTransport.send.mockResolvedValue(mockpk);
     const pk = await signer.publicKey();
     const pkh = await signer.publicKeyHash();
-    const path = "44'/1729'/0'/0'";
+    const path = "44'/1969'/0'/0'";
     const buff = transformPathToBuffer(path);
     expect(mockTransport.send).toHaveBeenCalledWith(0x80, 0x02, 0x00, 0x01, buff);
     expect(mockTransport.send).toHaveBeenCalledTimes(1);
@@ -79,7 +79,7 @@ describe('LedgerSigner test', () => {
   });
 
   it('Should get public key and public key hash for path which accounnt is 1 and mv3 curve', async () => {
-    const signer = new LedgerSigner(mockTransport, "44'/1729'/1'/0'", false, DerivationType.P256);
+    const signer = new LedgerSigner(mockTransport, "44'/1969'/1'/0'", false, DerivationType.P256);
     const mockpk = Buffer.from(
       '4104eac3db090c124a2d57623d8e743f4a2beef9e6f96e80b49a4755c525c6c80ee391d9d93595479ae1d0099ecc8f4d56ca0542516407ff9f386c48678de965b8809000',
       'hex'
@@ -87,7 +87,7 @@ describe('LedgerSigner test', () => {
     mockTransport.send.mockResolvedValue(mockpk);
     const pk = await signer.publicKey();
     const pkh = await signer.publicKeyHash();
-    const path = "44'/1729'/1'/0'";
+    const path = "44'/1969'/1'/0'";
     const buff = transformPathToBuffer(path);
     expect(mockTransport.send).toHaveBeenCalledWith(0x80, 0x02, 0x00, 0x02, buff);
     expect(mockTransport.send).toHaveBeenCalledTimes(1);
@@ -96,7 +96,7 @@ describe('LedgerSigner test', () => {
   });
 
   it('Should get the right public key and public key hash using HDPathTemplate with index 1', async () => {
-    const path = HDPathTemplate(1); //"44'/1729'/1'/0'"
+    const path = HDPathTemplate(1); //"44'/1969'/1'/0'"
     const signer = new LedgerSigner(mockTransport, path, false, DerivationType.ED25519);
     const mockpk = Buffer.from(
       '2102ba40b58f38f54512f79e0d6c416e501759d08a05948989d84204a81d841e76749000',
@@ -122,7 +122,7 @@ describe('LedgerSigner test', () => {
     const signature = await signer.sign(
       '367325bbba406bc3f8c1bf12b27b6e8081064722d3342e34142c172b322ba0426b00c9fc72e8491bd2973e196f04ec6918ad5bcee22d8c0bbcb98d01e85200006760ff228c2c16cbca18bb782a106e51c43a131776f5dfad30ecb5d5e43eccbd6c00c9fc72e8491bd2973e196f04ec6918ad5bcee22dea0abdb98d01c35000a0c21e01eadc0855adb415fa69a76fc10397dc2fb37039a00000'
     );
-    const path = "44'/1729'/0'/0'";
+    const path = "44'/1969'/0'/0'";
     const buff = transformPathToBuffer(path);
     expect(mockTransport.send).toHaveBeenCalledTimes(2);
     expect(mockTransport.send).toHaveBeenCalledWith(0x80, 0x04, 0x00, 0x00, buff);
@@ -140,7 +140,7 @@ describe('LedgerSigner test', () => {
   it('Should sign operation for mv2', async () => {
     const signer = new LedgerSigner(
       mockTransport,
-      "44'/1729'/0'/0'",
+      "44'/1969'/0'/0'",
       false,
       DerivationType.SECP256K1
     );
@@ -152,7 +152,7 @@ describe('LedgerSigner test', () => {
     const signature = await signer.sign(
       '0372a589146bff99c31469fde4a7ac539e0ea5d926cbea4b72f2ae048fefacdaa16c01cc70a574e52e16028ce0fead32e8b2d8cc1440aca40e9bba8d01ed760000016ca589ff04efc7f657ded2a796631183b3d3709a00ffff09696e6372656d656e74000000020007'
     );
-    const path = "44'/1729'/0'/0'";
+    const path = "44'/1969'/0'/0'";
     const buff = transformPathToBuffer(path);
     expect(mockTransport.send).toHaveBeenCalledTimes(2);
     expect(mockTransport.send).toHaveBeenCalledWith(0x80, 0x04, 0x00, 0x01, buff);
@@ -168,7 +168,7 @@ describe('LedgerSigner test', () => {
   });
 
   it('Should sign operation for mv3', async () => {
-    const signer = new LedgerSigner(mockTransport, "44'/1729'/0'/0'", false, DerivationType.P256);
+    const signer = new LedgerSigner(mockTransport, "44'/1969'/0'/0'", false, DerivationType.P256);
     const mocksig = Buffer.from(
       '3144022005ccc37c4c434b39054a68d15f9f4d4d279699dd3a406cb235e0b3bf62a6ec1702204f72794ad3f06dd3ebb21b36b63eb44b98f5607e8751513741d73660b7952c399000',
       'hex'
@@ -177,7 +177,7 @@ describe('LedgerSigner test', () => {
     const signature = await signer.sign(
       '038e1824a75961255a36e47d354733d6923c5849579d6abb4bd8c2a929ab5d393a6b02bd2cbb50fb2bfd7237b474a25b1b4ae447c577208c0babbc8d01e8520002022937a7444d7a00cb29f353058444d26d19382f0079e34b5aaf0eda4cec6665f16d02bd2cbb50fb2bfd7237b474a25b1b4ae447c577209310acbc8d01bb78c2030000000000b702000000b205000764045b0000000a2564656372656d656e74045b0000000a25696e6372656d656e740501035b0502020000008303210317057000010321057100020316072e020000002b032105700002032105710003034203210317057000010321057100020316034b051f020000000405200002020000002b0321057000020321057100030342032103170570000103210571000203160312051f020000000405200002053d036d0342051f020000000405200002000000020000'
     );
-    const path = "44'/1729'/0'/0'";
+    const path = "44'/1969'/0'/0'";
     const buff = transformPathToBuffer(path);
     expect(mockTransport.send).toHaveBeenCalledTimes(3);
     expect(mockTransport.send).toHaveBeenCalledWith(0x80, 0x04, 0x00, 0x02, buff);
@@ -195,7 +195,7 @@ describe('LedgerSigner test', () => {
   it('Should sign Operation for mv1 bip32', async () => {
     const signer = new LedgerSigner(
       mockTransport,
-      "44'/1729'/1'/0'",
+      "44'/1969'/1'/0'",
       true,
       DerivationType.BIP32_ED25519
     );
@@ -207,7 +207,7 @@ describe('LedgerSigner test', () => {
     const signature = await signer.sign(
       '367325bbba406bc3f8c1bf12b27b6e8081064722d3342e34142c172b322ba0426b00c9fc72e8491bd2973e196f04ec6918ad5bcee22d8c0bbcb98d01e85200006760ff228c2c16cbca18bb782a106e51c43a131776f5dfad30ecb5d5e43eccbd6c00c9fc72e8491bd2973e196f04ec6918ad5bcee22dea0abdb98d01c35000a0c21e01eadc0855adb415fa69a76fc10397dc2fb37039a00000'
     );
-    const path = "44'/1729'/1'/0'";
+    const path = "44'/1969'/1'/0'";
     const buff = transformPathToBuffer(path);
     expect(mockTransport.send).toHaveBeenCalledTimes(2);
     expect(mockTransport.send).toHaveBeenCalledWith(0x80, 0x04, 0x00, 0x03, buff);

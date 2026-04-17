@@ -185,7 +185,7 @@ InMemorySigner.fromSecretKey(
 
 The `fromMnemonic` method takes the mnemonic, password, derivationPath, and curve as parameters. Here is an example of an instantiation of an `InMemorySigner.fromMnemonic`
 
-derivation path MUST start with "44'/1729'/"
+derivation path MUST start with "44'/1969'/"
 
 With ed25519 default derivation path (Reminder Must be hardened with either h or ')
 
@@ -196,7 +196,7 @@ With ed25519 default derivation path (Reminder Must be hardened with either h or
 
   // ed25519 must have all hardened paths
 
-  // using all default values password = '' curve = 'ed25519' and derivationPath "44'/1729'/0'/0'"
+  // using all default values password = '' curve = 'ed25519' and derivationPath "44'/1969'/0'/0'"
   const params = {
     mnemonic: 'author crumble medal dose ribbon permit ankle sport final hood shadow vessel horn hawk enter zebra prefer devote captain during fly found despair business'
   }
@@ -221,7 +221,7 @@ With a non-default derivation path non-hardened with a mv2 address
   const params = {
     mnemonic: 'author crumble medal dose ribbon permit ankle sport final hood shadow vessel horn hawk enter zebra prefer devote captain during fly found despair business',
     password: '',
-    derivationPath: '44h/1729h/1/0', // h  or ' specify hardened derivation path)
+    derivationPath: '44h/1969h/1/0', // h  or ' specify hardened derivation path)
     curve: 'secp256k1'
   }
 

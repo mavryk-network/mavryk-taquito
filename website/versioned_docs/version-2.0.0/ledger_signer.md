@@ -61,8 +61,8 @@ const ledgerSigner = new LedgerSigner(transport);
 
 The constructor of the `LedgerSigner` class can take three other parameters. If none are specified, the default values are used.
 
-- path: **default value is "44'/1729'/0'/0'"**
-  You can use as a parameter the `HDPathTemplate` which refers to `44'/1729'/${account}'/0'`. You have to specify what is the index of the account you want to use. Or you can also use a complete path as a parameter.
+- path: **default value is "44'/1969'/0'/0'"**
+  You can use as a parameter the `HDPathTemplate` which refers to `44'/1969'/${account}'/0'`. You have to specify what is the index of the account you want to use. Or you can also use a complete path as a parameter.
   _More details about paths below_
 - prompt: **default is true**
   If true, you will be asked on your Ledger device to send your public key for validation.
@@ -74,7 +74,7 @@ import { LedgerSigner, DerivationType, HDPathTemplate } from '@mavrykdynamics/we
 
 const ledgerSigner = new LedgerSigner(
   transport, //required
-  HDPathTemplate(1), // path optional (equivalent to "44'/1729'/1'/0'")
+  HDPathTemplate(1), // path optional (equivalent to "44'/1969'/1'/0'")
   true, // prompt optional
   DerivationType.ED25519 // derivationType optional
 );
@@ -159,24 +159,24 @@ Here is the technical specification for the most commonly used HD wallets :
 
 According to BIP44, path is described as follow:
 `purpose' / coin_type' / account' / change / address_index`.
-Where `purpose` is a constant set to `44'` and `coin_type` is set to `1729'` for Mavryk.
+Where `purpose` is a constant set to `44'` and `coin_type` is set to `1969'` for Mavryk.
 
 #### Different Mavryk HD Paths
 
-The path always begins with `44'/1729'` and we see some difference for the three other indexes across the Mavryk ecosystem. We can notice that changing any number for the three last indexes of the path (`account' / change / address_index`) will lead to different accounts. **But, to ensure consistency, it is important trying to follow the same convention regarding the structure of the path and which index to increase to access the next address.**
+The path always begins with `44'/1969'` and we see some difference for the three other indexes across the Mavryk ecosystem. We can notice that changing any number for the three last indexes of the path (`account' / change / address_index`) will lead to different accounts. **But, to ensure consistency, it is important trying to follow the same convention regarding the structure of the path and which index to increase to access the next address.**
 
-In Mavryk, we generally see a slight difference in the path compared to the BIP44 specification. It is common to see path made of 4 indexes instead of 5 (default path being `44'/1729'/0'/0'` instead of `44'/1729'/0'/0'/0'`). For example, the default path used by mavkit-client is `44'/1729'/0'/0'`.
-Based on what is done by the Mavryk-client, the default path used by Webmavryk in the `LedgerSigner` is also `44'/1729'/0'/0'`. Webmavryk offers a template for the path called `HDPathTemplate`. This template uses four indexes and suggests doing the iteration on the `account` index.
-For example, you can use HDPathTemplate(0) (equivalent to `44'/1729'/0'/0'`) to access the first address, HDPathTemplate(1) equivalent to `44'/1729'/1'/0'`) to access the second address, HDPathTemplate(2) (equivalent to `44'/1729'/2'/0'`) to access the third address... _In order to meet the needs of each user, this template is not imposed by Webmavryk_.
+In Mavryk, we generally see a slight difference in the path compared to the BIP44 specification. It is common to see path made of 4 indexes instead of 5 (default path being `44'/1969'/0'/0'` instead of `44'/1969'/0'/0'/0'`). For example, the default path used by mavkit-client is `44'/1969'/0'/0'`.
+Based on what is done by the Mavryk-client, the default path used by Webmavryk in the `LedgerSigner` is also `44'/1969'/0'/0'`. Webmavryk offers a template for the path called `HDPathTemplate`. This template uses four indexes and suggests doing the iteration on the `account` index.
+For example, you can use HDPathTemplate(0) (equivalent to `44'/1969'/0'/0'`) to access the first address, HDPathTemplate(1) equivalent to `44'/1969'/1'/0'`) to access the second address, HDPathTemplate(2) (equivalent to `44'/1969'/2'/0'`) to access the third address... _In order to meet the needs of each user, this template is not imposed by Webmavryk_.
 
-We can see other implementations that use `44'/1729'/0'/0'/0'`, where the next address is accessed by incrementing `account` or `address_index`.
+We can see other implementations that use `44'/1969'/0'/0'/0'`, where the next address is accessed by incrementing `account` or `address_index`.
 
 **Quick summary of [different default paths used](https://github.com/LedgerHQ/ledger-live-common/blob/master/src/derivation.js):**
 
 | Wallet  | Path                                                         |
 | ------- | ------------------------------------------------------------ |
-| Tezbox  | "44'/1729'/{account}'/0'" or "44'/1729'/0'/{account}'"       |
-| Galleon | "44'/1729'/{account}'/0'/0'" or "44'/1729'/0'/0'/{account}'" |
+| Tezbox  | "44'/1969'/{account}'/0'" or "44'/1969'/0'/{account}'"       |
+| Galleon | "44'/1969'/{account}'/0'/0'" or "44'/1969'/0'/0'/{account}'" |
 
 #### Some considerations about paths
 
@@ -194,9 +194,9 @@ https://github.com/MyCryptoHQ/MyCrypto/issues/2070
 
 https://medium.com/mycrypto/wtf-is-a-derivation-path-c3493ca2eb52
 
-## Live example that iterates from the path `44'/1729'/0'/0'` to `44'/1729'/9'/0'`
+## Live example that iterates from the path `44'/1969'/0'/0'` to `44'/1969'/9'/0'`
 
-Having your Ledger device connected to your computer and the `Mavryk Wallet App` opened, you can run the following code example. It will scan your Ledger from path `44'/1729'/0'/0'` to `44'/1729'/9'/0'` to get public key hashes and the balance for revealed accounts. Confirmations will be asked on your Ledger to send the public keys.
+Having your Ledger device connected to your computer and the `Mavryk Wallet App` opened, you can run the following code example. It will scan your Ledger from path `44'/1969'/0'/0'` to `44'/1969'/9'/0'` to get public key hashes and the balance for revealed accounts. Confirmations will be asked on your Ledger to send the public keys.
 _Note that this example is not intended to be a complete example of paths scanning but only a rough outline of what it is possible to do._
 
 ```js live noInline
@@ -222,7 +222,7 @@ TransportWebHID.create().then((transport) => {
 function getAddressInfo(transport, index) {
   const ledgerSigner = new LedgerSigner(
     transport,
-    `44'/1729'/${index}'/0'`,
+    `44'/1969'/${index}'/0'`,
     true,
     DerivationType.ED25519
   );

@@ -28,7 +28,7 @@ export class Path extends Array<number> {
   }
   /**
    *
-   * @param s derivation path eg: 44'/1729'/0'/0'
+   * @param s derivation path eg: 44'/1969'/0'/0'
    * @returns applied hardened values
    */
   static fromString(s: string): Path {
