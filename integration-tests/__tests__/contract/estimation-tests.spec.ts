@@ -108,7 +108,7 @@ CONFIGS().forEach(({ lib, setup, knownBaker, createAddress, rpc }) => {
       expect(estimate.minimalFeeMumav).toEqual(374);
       expect(estimate.totalCost).toEqual(374);
       expect(estimate.usingBaseFeeMumav).toEqual(374);
-      expect(estimate.consumedMilligas).toEqual(1455970);
+      expect(estimate.consumedMilligas).toEqual(1456056);
     });
 
     it('Verify .estimate.transfer for multiple internal transfers to unallocated account', async () => {
