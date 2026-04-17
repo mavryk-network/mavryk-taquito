@@ -5,6 +5,6 @@
   },
   "main.js": {
     "src": "dist/webmavryk.min.js",
-    "integrity": "sha256-HbLfbrIf0epXsYQ4ZwchLdqoIsx3BVMtyt5i2eg9uno= sha384-KHMviAW/BJwwVODKQKukhbsXBVB21PYOtauM6DCBVJFi9kMwkM1czAYWmyk6jbVY sha512-zW/rNKV53zhtlhvpEvGI8Zq27hz0YVm3X6RrsjBPAhqR/PbL1wVwx4MBeZ4VlDyksmJ5M0sa0wE36RA71UAR0A=="
+    "integrity": "sha256-XUHdfyK7BxudXPsqP/6tH9qeoksmIONj5P36l6xNwvE= sha384-rOrbRtulTiCy6cWLofHztefVhgTF9wRplM2x6dG4Rif1ttDCrBuU+sRagGbrufwI sha512-UJ5gPJlEa33ZoePW+EbobPVP4X6flu4E7jZsnDxe66ZriUjqfTm0EJXcvXtANaVl62qTAERGTMGEe4p+3mO3Jg=="
   }
 }

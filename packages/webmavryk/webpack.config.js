@@ -35,6 +35,6 @@ module.exports = {
       hashFuncNames: ['sha384'],
       enabled: true
     }),
-    new WebpackAssetsManifest({ integrity: true })
+    new WebpackAssetsManifest({ integrity: true, output: 'manifest.json' })
   ]
 }
