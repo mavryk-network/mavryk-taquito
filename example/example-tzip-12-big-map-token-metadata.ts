@@ -1,6 +1,12 @@
-import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
-import { importKey, InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { b58cencode, stringToBytes, Prefix, prefix } from '@mavrykdynamics/taquito-utils';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { importKey, InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { b58cencode, stringToBytes, Prefix, prefix } from '@mavrykdynamics/webmavryk-utils';
 import { fa2TokenFactory } from '../integration-tests/data/fa2-token-factory';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires

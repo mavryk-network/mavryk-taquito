@@ -1,3 +1,7 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 This website was created with [Docusaurus](https://docusaurus.io/).
 
 # What's In This Document

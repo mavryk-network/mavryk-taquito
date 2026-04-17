@@ -1,0 +1,71 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { Wallet } from '../../wallet';
+import { ContractProvider } from '..';
+import { ContractMethodObject } from './contract-method-object-param';
+import { ContractMethod } from './contract-method-flat-param';
+import { ParameterSchema, ViewSchema } from '@mavrykdynamics/webmavryk-michelson-encoder';
+import { RpcClientInterface, MichelsonV1Expression } from '@mavrykdynamics/webmavryk-rpc';
+import { OnChainView } from './contract-on-chain-view';
+import { MvReadProvider } from '../../read-provider/interface';
+
+export class ContractMethodFactory<T extends ContractProvider | Wallet> {
+  constructor(private provider: T, private contractAddress: string) {}
+
+  createContractMethodFlatParams(
+    smartContractMethodSchema: ParameterSchema,
+    smartContractMethodName: string,
+    args: any[],
+    isMultipleEntrypoint = true,
+    isAnonymous = false
+  ) {
+    return new ContractMethod<T>(
+      this.provider,
+      this.contractAddress,
+      smartContractMethodSchema,
+      smartContractMethodName,
+      args,
+      isMultipleEntrypoint,
+      isAnonymous
+    );
+  }
+
+  createContractMethodObjectParam(
+    smartContractMethodSchema: ParameterSchema,
+    smartContractMethodName: string,
+    args: any[],
+    isMultipleEntrypoint = true,
+    isAnonymous = false
+  ) {
+    return new ContractMethodObject<T>(
+      this.provider,
+      this.contractAddress,
+      smartContractMethodSchema,
+      smartContractMethodName,
+      args,
+      isMultipleEntrypoint,
+      isAnonymous
+    );
+  }
+
+  createContractViewObjectParam(
+    rpc: RpcClientInterface,
+    readProvider: MvReadProvider,
+    smartContractViewSchema: ViewSchema,
+    contractStorageType: MichelsonV1Expression,
+    viewArgs: any
+  ) {
+    return new OnChainView(
+      rpc,
+      readProvider,
+      this.contractAddress,
+      smartContractViewSchema,
+      contractStorageType,
+      viewArgs
+    );
+  }
+}

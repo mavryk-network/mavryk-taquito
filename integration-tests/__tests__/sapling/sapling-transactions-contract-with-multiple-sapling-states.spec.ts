@@ -1,9 +1,15 @@
-import { ContractAbstraction, ContractProvider, RpcReadAdapter, SaplingStateAbstraction } from '@mavrykdynamics/taquito';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { ContractAbstraction, ContractProvider, RpcReadAdapter, SaplingStateAbstraction } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
-import { InMemorySpendingKey, SaplingToolkit } from '@mavrykdynamics/taquito-sapling';
+import { InMemorySpendingKey, SaplingToolkit } from '@mavrykdynamics/webmavryk-sapling';
 import BigNumber from 'bignumber.js';
 import { saplingContractDoubleJProto } from '../../data/sapling_test_contracts';
-import { SaplingStateValue } from '@mavrykdynamics/taquito-michelson-encoder';
+import { SaplingStateValue } from '@mavrykdynamics/webmavryk-michelson-encoder';
 
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {

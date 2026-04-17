@@ -1,6 +1,12 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from "../config";
-import { DefaultContractType, UnitValue } from "@mavrykdynamics/taquito";
-import { LocalForger, ProtocolsHash } from '@mavrykdynamics/taquito-local-forging'
+import { DefaultContractType, UnitValue } from "@mavrykdynamics/webmavryk";
+import { LocalForger, ProtocolsHash } from '@mavrykdynamics/webmavryk-local-forging'
 
 CONFIGS().forEach(({ rpc, protocol, setup, lib }) => {
   const Mavryk = lib;

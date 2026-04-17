@@ -1,4 +1,10 @@
 /**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+/**
  * Creating a sidebar enables you to:
  - create an ordered group of docs
  - render a sidebar for each doc of that group
@@ -27,13 +33,12 @@ const sidebars = {
         'tutorial',
         'operation_flow',
         'rpc_nodes',
-        'web3js_taquito',
-        'chatbot',
+        'web3js_webmavryk',
       ],
     },
     {
       type: 'category',
-      label: 'Taquito Providers',
+      label: 'Webmavryk Providers',
       className: 'sidebarHeader',
       collapsed: false,
       collapsible: false,
@@ -82,7 +87,7 @@ const sidebars = {
       collapsed: false,
       collapsible: false,
       items: [
-        'beaconwallet-singleton',
+        'mavletwallet-singleton',
         'wallets',
         'transaction_limits',
       ],
@@ -144,7 +149,7 @@ const sidebars = {
         'michelson_encoder',
         'contracts-library',
         'timelock',
-        'taquito_utils',
+        'webmavryk_utils',
         {
           type: 'category',
           label: 'Sapling',
@@ -165,7 +170,6 @@ const sidebars = {
         'drain_account',
         'complex_parameters',
         'confirmation_event_stream',
-        'subscribe_event',
         'liquidity_baking',
         'storage_annotations',
         'tezos_domains',
@@ -202,7 +206,7 @@ const sidebars = {
     },
     {
       type: 'category',
-      label: 'Taquito Public API',
+      label: 'Webmavryk Public API',
       className: 'sidebarHeader',
       collapsed: false,
       collapsible: false,
@@ -219,7 +223,6 @@ const sidebars = {
       collapsible: false,
       items: [
         'tutorial_links',
-        'contracts_collection',
       ],
     },
 
@@ -227,7 +230,7 @@ const sidebars = {
     {
       type: 'link',
       label: 'TypeDoc Reference',
-      href: 'https://taquito.mavryk.org/typedoc',
+      href: 'https://webmavryk.mavryk.org/typedoc',
     },
   ],
 };

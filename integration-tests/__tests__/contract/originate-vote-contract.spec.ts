@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 //This contract is used in integration tests where origination of contracts using voting is tested.
 
 import { CONFIGS } from "../../config";

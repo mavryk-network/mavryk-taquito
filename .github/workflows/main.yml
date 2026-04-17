@@ -43,8 +43,8 @@ jobs:
     strategy:
       matrix:
         include:
-          - testnet: boreasnet
-            testnet_uppercase: BOREASNET
+          - testnet: basenet
+            testnet_uppercase: BASENET
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -61,9 +61,9 @@ jobs:
     - run: npm -w integration-tests run test:${{ matrix.testnet }} -- --maxWorkers=4
       env:
         # Ternary operator workaround
-        MAVRYK_RPC_${{ matrix.testnet_uppercase }}: ${{ github.event.pull_request.head.repo.fork && format('https://{0}.ecadinfra.com', matrix.testnet) || null }}
+        MAVRYK_RPC_${{ matrix.testnet_uppercase }}: ${{ github.event.pull_request.head.repo.fork && format('https://{0}.rpc.mavryk.network', matrix.testnet) || null }}
 
-  integration-tests-flexmasa:
+  integration-tests-mavbox:
     runs-on: ubuntu-latest
     continue-on-error: true
     strategy:
@@ -72,7 +72,7 @@ jobs:
           - protocol: Atlas
             testnet: atlasnet
             testnet_uppercase: ATLASNET
-            flexmasa_docker_image: registry.gitlab.com/mavryk-network/flexmasa:atlas-update-run
+            mavbox_docker_image: registry.gitlab.com/mavryk-network/mavbox:master-run
     steps:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
@@ -84,21 +84,21 @@ jobs:
     # # bob,edpkurPsQ8eUApnLUJ9ZPDvu98E8VNj4KtJa1aZr16Cr5ow5VHKnz4,mv1NpEEq8FLgc2Yi4wNpEZ3pvc1kUZrp2JWU,unencrypted:edsk3RFfvaFaxbHx8BMtEW1rKQcPtDML3LXjNqMNLCzC3wLC1bWbAt
     # # charlie,edpkuvMuRuZ6ZbAquJH1XxBFfUmuBFz1zp9ENEqjCVgLp3NcY3Ww9M,mv1Daxuv5cvCaCF3T3RmuszbdWYYA8KMhxEF,unencrypted:edsk3RgWvbKKA1atEUcaGwivge7QtckHkTL9nQJUXQKY5r8WKp4pF4
     # # donald,edpkvXGp1BMZxHkwg3mKnWfJYS6HTJ5JtufD8YXxLtH8UKqLZkZVun,mv1Soz7eVXANQyfbVfwNQaGgBphBLbnYy5RZ,unencrypted:edsk3S8mG2sSBmSRbikAcZVLCz4SrCq4DjmsQRic6MGktqNFijfrS2
-    - name: Generate Flexmasa bootstrap accounts
+    - name: Generate Mavbox bootstrap accounts
       run: |-
-        echo "alice=$(docker run --rm ${{ matrix.flexmasa_docker_image }} flexmasa key alice)" >> $GITHUB_ENV
-        echo "bob=$(docker run --rm ${{ matrix.flexmasa_docker_image }} flexmasa key bob)" >> $GITHUB_ENV
-        echo "charlie=$(docker run --rm ${{ matrix.flexmasa_docker_image }} flexmasa key charlie)" >> $GITHUB_ENV
-        echo "donald=$(docker run --rm ${{ matrix.flexmasa_docker_image }} flexmasa key donald)" >> $GITHUB_ENV
-    - name: Provision Flexmasa ${{ matrix.protocol }} container
+        echo "alice=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key alice)" >> $GITHUB_ENV
+        echo "bob=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key bob)" >> $GITHUB_ENV
+        echo "charlie=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key charlie)" >> $GITHUB_ENV
+        echo "donald=$(docker run --rm ${{ matrix.mavbox_docker_image }} mavbox key donald)" >> $GITHUB_ENV
+    - name: Provision Mavbox ${{ matrix.protocol }} container
       run: |-
         docker run \
         --rm \
         --name my-sandbox \
         --detach \
         -p 20000:20000 \
-        ${{ matrix.flexmasa_docker_image }} \
-        flexmasa mini-net \
+        ${{ matrix.mavbox_docker_image }} \
+        mavbox mini-net \
           --root /tmp/mini-box --size 1 \
           --set-history-mode N000:archive \
           --number-of-b 1 \
@@ -114,12 +114,12 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: source ./integration-tests/sandbox-env.sh
-    - run: npm -w integration-tests run test:boreasnet-secret-key sandbox-ballot-operation.spec.ts
-    - run: npm -w integration-tests run test:boreasnet-secret-key sandbox-drain-delegate-operation.spec.ts
+    - run: npm -w integration-tests run test:basenet-secret-key sandbox-ballot-operation.spec.ts
+    - run: npm -w integration-tests run test:basenet-secret-key sandbox-drain-delegate-operation.spec.ts
       env:
         RUN_${{ matrix.testnet_uppercase }}_WITH_SECRET_KEY: true
         SECRET_KEY: edsk3QoqBuvdamxouPhin7swCvkQNgq4jP5KZPbwWNnwdZpSpJiEbq
         MAVRYK_RPC_${{ matrix.testnet_uppercase }}: http://localhost:20000
         POLLING_INTERVAL_MILLISECONDS: 100
         RPC_CACHE_MILLISECONDS: 0
-        MAVRYK_BAKER: mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv
+        MAVRYK_BAKER: mv1V4h45W3p4e1sjSBvRkK2uYbvkTnSuHg8g

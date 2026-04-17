@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useRef } from 'react';
 import styles from './TeamsCarousel.module.scss';
@@ -9,7 +15,7 @@ import ArrowLeft from '../../../static/img/carousel-arrow-left.svg';
 
 const FeatureList = [
   {
-    title: 'Teams Building With Taquito',
+    title: 'Teams Building With Webmavryk',
     // Svg: require("../../../static/img/taq_orange.svg").default,
     images: [
       {

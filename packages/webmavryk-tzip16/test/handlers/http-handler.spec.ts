@@ -1,0 +1,37 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { HttpHandler } from '../../src/handlers/http-handler';
+
+describe('Tzip16 http handler test', () => {
+  let mockHttpBackend: {
+    createRequest: jest.Mock<any, any>;
+  };
+  const mockContractAbstraction: any = {};
+  const mockContext: any = {};
+
+  const httpHandler = new HttpHandler();
+
+  beforeEach(() => {
+    mockHttpBackend = {
+      createRequest: jest.fn(),
+    };
+
+    httpHandler['httpBackend'] = mockHttpBackend as any;
+  });
+
+  it('Should return a string representing the metadata fetched by the httpBackend', async () => {
+    mockHttpBackend.createRequest.mockResolvedValue(`{ "name": "WebMavryk test" }`);
+    const tzip16Uri = {
+      sha256hash: undefined,
+      protocol: 'https',
+      location: '//storage.googleapis.com/tzip-16/emoji-in-metadata.json',
+    };
+    const metadata = await httpHandler.getMetadata(mockContractAbstraction, tzip16Uri, mockContext);
+
+    expect(metadata).toEqual(`{ "name": "WebMavryk test" }`);
+  });
+});

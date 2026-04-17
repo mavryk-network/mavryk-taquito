@@ -1,7 +1,13 @@
-import { Protocols } from "@mavrykdynamics/taquito";
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { Protocols } from "@mavrykdynamics/webmavryk";
 import { CONFIGS } from "../../../config";
 
-CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
+CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;
   describe(`Test register delegate through contract api: ${rpc}`, () => {
 
@@ -19,12 +25,8 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
         const account = await Mavryk.rpc.getDelegate(pkh)
         expect(account).toEqual(pkh)
       } catch (ex: any) {
-        if (protocol === Protocols.PsFLorena) {
-          expect(ex.message).toMatch('delegate.unchanged')
-        } else {
-          // When running tests more than one time with the same key, the account is already delegated to the given delegate
-          expect(ex.message).toMatch('delegate.already_active')
-        }
+        // When running tests more than one time with the same key, the account is already delegated to the given delegate
+        expect(ex.message).toMatch('delegate.already_active')
       }
     });
   });

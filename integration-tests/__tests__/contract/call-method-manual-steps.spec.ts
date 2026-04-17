@@ -1,5 +1,11 @@
-import { createTransferOperation } from '@mavrykdynamics/taquito';
-import { encodeOpHash } from '@mavrykdynamics/taquito-utils';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { createTransferOperation } from '@mavrykdynamics/webmavryk';
+import { encodeOpHash } from '@mavrykdynamics/webmavryk-utils';
 import { CONFIGS } from '../../config';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
@@ -25,7 +31,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       // This plan to be addressed in issue #432
 
       // The purpose of this test is to calculate the operation hash before sending the operation to the node.
-      // Using Taquito to call a contract entry point abstracts many underlying calls
+      // Using Webmavryk to call a contract entry point abstracts many underlying calls
       // Here are steps to manually reproduce the following operation: contract.methods.default(5).send();
 
       // Calling an entry point is a type of transaction operation

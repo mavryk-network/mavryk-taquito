@@ -1,23 +1,29 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 module.exports = {
   out: 'website/build/typedoc',
-  readme: 'packages/taquito/README.md',
+  readme: 'packages/webmavryk/README.md',
   entryPoints: [
-    './packages/taquito/src/taquito.ts',
-    './packages/taquito-beacon-wallet/src/taquito-beacon-wallet.ts',
-    './packages/taquito-core/src/taquito-core.ts',
-    './packages/taquito-http-utils/src/taquito-http-utils.ts',
-    './packages/taquito-ledger-signer/src/taquito-ledger-signer.ts',
-    './packages/taquito-local-forging/src/taquito-local-forging.ts',
-    './packages/taquito-michelson-encoder/src/taquito-michelson-encoder.ts',
-    './packages/taquito-remote-signer/src/taquito-remote-signer.ts',
-    './packages/taquito-rpc/src/taquito-rpc.ts',
-    './packages/taquito-signer/src/taquito-signer.ts',
-    './packages/taquito-tzip12/src/taquito-tzip12.ts',
-    './packages/taquito-tzip16/src/taquito-tzip16.ts',
-    './packages/taquito-utils/src/taquito-utils.ts',
-    './packages/taquito-contracts-library/src/taquito-contracts-library.ts',
-    './packages/taquito-sapling/src/taquito-sapling.ts',
-    './packages/taquito-michel-codec/src/taquito-michel-codec.ts',
+    './packages/webmavryk/src/webmavryk.ts',
+    './packages/webmavryk-mavlet-wallet/src/webmavryk-mavlet-wallet.ts',
+    './packages/webmavryk-core/src/webmavryk-core.ts',
+    './packages/webmavryk-http-utils/src/webmavryk-http-utils.ts',
+    './packages/webmavryk-ledger-signer/src/webmavryk-ledger-signer.ts',
+    './packages/webmavryk-local-forging/src/webmavryk-local-forging.ts',
+    './packages/webmavryk-michelson-encoder/src/webmavryk-michelson-encoder.ts',
+    './packages/webmavryk-remote-signer/src/webmavryk-remote-signer.ts',
+    './packages/webmavryk-rpc/src/webmavryk-rpc.ts',
+    './packages/webmavryk-signer/src/webmavryk-signer.ts',
+    './packages/webmavryk-tzip12/src/webmavryk-tzip12.ts',
+    './packages/webmavryk-tzip16/src/webmavryk-tzip16.ts',
+    './packages/webmavryk-utils/src/webmavryk-utils.ts',
+    './packages/webmavryk-contracts-library/src/webmavryk-contracts-library.ts',
+    './packages/webmavryk-sapling/src/webmavryk-sapling.ts',
+    './packages/webmavryk-michel-codec/src/webmavryk-michel-codec.ts',
   ],
   exclude: [
     '**/*.spec.ts',
@@ -28,6 +34,6 @@ module.exports = {
     '**/test/**',
     '/coverage/**',
   ],
-  name: 'Taquito',
+  name: 'Webmavryk',
   excludePrivate: true,
 };

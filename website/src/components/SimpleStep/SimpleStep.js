@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 import styles from './SimpleStep.module.scss';
@@ -5,7 +11,7 @@ import StartNowButton from '../StartNowButton/StartNowButton';
 
 const FeatureList = [
   {
-    title: 'Start Simple With Mavryk-Taquito',
+    title: 'Start Simple With Webmavryk',
     description: 'Just a few simple steps and you are set to start building your own app.',
     link: {
       title: 'Start Now',
@@ -15,18 +21,18 @@ const FeatureList = [
     steps: [
       {
         icon: require('../../../static/img/download_icon.svg').default,
-        title: 'Install Taquito',
-        description: 'Follow our QuickStart guide to start using Taquito and check code examples.',
+        title: 'Install Webmavryk',
+        description: 'Follow our QuickStart guide to start using Webmavryk and check code examples.',
       },
       {
         icon: require('../../../static/img/systems.svg').default,
         title: 'Create and run your first app locally',
-        description: 'Use our Taquito React Boilerplate app template.',
+        description: 'Use our Webmavryk React Boilerplate app template.',
       },
       {
         icon: require('../../../static/img/app.svg').default,
         title: 'Build your App',
-        description: 'Use Taquito to connect your app to the Mavryk blockchain.',
+        description: 'Use Webmavryk to connect your app to the Mavryk blockchain.',
       },
     ],
   },

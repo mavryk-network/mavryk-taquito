@@ -1,9 +1,15 @@
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
 import { CONFIGS, sleep, isSandbox } from "../../config";
 
 CONFIGS().forEach(({ lib, rpc, protocol, setup, createAddress }) => {
   const Mavryk = lib;
-  const flexmasanet = isSandbox({ rpc }) ? test : test.skip;
+  const mavboxnet = isSandbox({ rpc }) ? test : test.skip;
 
   describe(`Test Drain Delegate in ${protocol}`, () => {
     let Delegate: MavrykToolkit;
@@ -39,7 +45,7 @@ CONFIGS().forEach(({ lib, rpc, protocol, setup, createAddress }) => {
         console.log(JSON.stringify(e));
       }
     })
-    flexmasanet('Should be able to inject drain_delegate operation', async () => {
+    mavboxnet('Should be able to inject drain_delegate operation', async () => {
       expect((await Delegate.rpc.getBalance(delegatePkh)).toNumber()).toBeGreaterThan(0);
       let destinationBalanceBefore = (await Destination.rpc.getBalance(destinationPkh)).toNumber();
 

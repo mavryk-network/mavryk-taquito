@@ -4,9 +4,13 @@ id: wallet_API
 author: Claude Barde
 ---
 
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 ## What is the Wallet API?
 
-You have learned how to use Taquito to interact with the Mavryk blockchain. Up to this document, we used a signer to sign operations. Interactive dApps (short for "decentralized Apps") commonly use a wallet to sign operations. The Wallet API provides a new yet familiar way to interact with the blockchain and smart contracts by delegating several actions that Taquito previously handled to the wallets. This delegation offers more flexibility for both developers and users and gives the ecosystem more space to evolve. From a user's perspective, the workflow is as follows:
+You have learned how to use Webmavryk to interact with the Mavryk blockchain. Up to this document, we used a signer to sign operations. Interactive dApps (short for "decentralized Apps") commonly use a wallet to sign operations. The Wallet API provides a new yet familiar way to interact with the blockchain and smart contracts by delegating several actions that Webmavryk previously handled to the wallets. This delegation offers more flexibility for both developers and users and gives the ecosystem more space to evolve. From a user's perspective, the workflow is as follows:
 
 1. The user has a wallet installed and configured on their device. (Or they might be using a web-based wallet)
 2. The user visits a dApp.
@@ -24,10 +28,10 @@ The main benefit of this workflow is that the user does not have to trust a dApp
 
 ## Installing the Wallet API
 
-The first thing to do is to use the wallet API is to install it. You just need to install the Taquito package to use the wallet API:
+The first thing to do is to use the wallet API is to install it. You just need to install the Webmavryk package to use the wallet API:
 
 ```
-npm install @mavrykdynamics/taquito @mavrykdynamics/taquito-beacon-wallet @temple-wallet/dapp
+npm install @mavrykdynamics/webmavryk @mavrykdynamics/webmavryk-mavlet-wallet @temple-wallet/dapp
 ```
 
 A separate step from setting up the wallet in the dApp code as a developer is to set up the wallet as the user. This step is different for each wallet (e.g., Temple needs the user to install a browser extension). Some wallets are browser extensions, while others are mobile apps or web wallets.
@@ -35,26 +39,26 @@ We will explain the requirements for the different wallets in detail in the sect
 
 ## Connecting the wallet
 
-After installing the Taquito package in your dapp project and the package containing the Wallet API for the wallet of your choice, it's time to import the Wallet API into your project! Although the steps are very similar for each wallet, they all have their specificities that we will check in the paragraphs below.
+After installing the Webmavryk package in your dapp project and the package containing the Wallet API for the wallet of your choice, it's time to import the Wallet API into your project! Although the steps are very similar for each wallet, they all have their specificities that we will check in the paragraphs below.
 
-To start, let's import the Mavryk Toolkit from Taquito and create a new instance of the Mavryk singleton:
+To start, let's import the Mavryk Toolkit from Webmavryk and create a new instance of the Mavryk singleton:
 
 ```js
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const Mavryk = new MavrykToolkit('https://ghostnet.ecadinfra.com/');
 ```
 
-This object exposes different methods we are going to use to set up our wallet. TZIP-10 has become the official standard of communication and interaction between wallets and dapps, so let's start with the `@mavrykdynamics/taquito-beacon-wallet` package that implements this standard!
+This object exposes different methods we are going to use to set up our wallet. TZIP-10 has become the official standard of communication and interaction between wallets and dapps, so let's start with the `@mavrykdynamics/webmavryk-mavlet-wallet` package that implements this standard!
 
 ### - TZIP-10 wallet
 
-The `BeaconWallet` is a package implementing the TZIP-10 standard that describes the communication between a dapp (decentralized application on Mavryk) and a wallet (e.g., a browser extension). The Beacon wallet works with any wallet that supports the TZIP-10 standard (for example, the Beacon extension, Temple, or Kukai). This package is the recommended way of connecting your dapp to a wallet. In addition to being future-proof, it gives your users the freedom to choose the wallet they want.
+The `MavletWallet` is a package implementing the TZIP-10 standard that describes the communication between a dapp (decentralized application on Mavryk) and a wallet (e.g., a browser extension). The Mavlet wallet works with any wallet that supports the TZIP-10 standard (for example, the Mavlet extension, Temple, or Kukai). This package is the recommended way of connecting your dapp to a wallet. In addition to being future-proof, it gives your users the freedom to choose the wallet they want.
 
-First, the `BeaconWallet` class must be imported:
+First, the `MavletWallet` class must be imported:
 
 ```js
-import { BeaconWallet } from '@mavrykdynamics/taquito-beacon-wallet';
+import { MavletWallet } from '@mavrykdynamics/webmavryk-mavlet-wallet';
 ```
 
 Then, you can start initializing the wallet:
@@ -62,20 +66,20 @@ Then, you can start initializing the wallet:
 ```js
 const options = {
   name: 'MyAwesomeDapp',
-  iconUrl: 'https://taquito.mavryk.org/img/favicon.svg',
+  iconUrl: 'https://webmavryk.mavryk.org/img/favicon.ico',
   network: { type: 'basenet' },
   enableMetrics: true,
 };
-const wallet = new BeaconWallet(options);
+const wallet = new MavletWallet(options);
 ```
 
-The necessary bare minimum to instantiate the wallet is an object with a `name` property that contains the name of your dapp and the network you want it to point to. In this case, we choose to point it to `basenet`. However, the Beacon wallet allows you to customize your dapp responses to different events. In the example above, instead of getting the default Beacon pop-up after the user connects the wallet, it will display the available data in the console. You can use whatever solution you prefer for feedback. You can find a list of all the default handlers [in the beacon-sdk Github repo](https://github.com/airgap-it/beacon-sdk/blob/master/packages/beacon-dapp/src/events.ts).
+The necessary bare minimum to instantiate the wallet is an object with a `name` property that contains the name of your dapp and the network you want it to point to. In this case, we choose to point it to `basenet`. However, the Mavlet wallet allows you to customize your dapp responses to different events. In the example above, instead of getting the default Mavlet pop-up after the user connects the wallet, it will display the available data in the console. You can use whatever solution you prefer for feedback. You can find a list of all the default handlers [in the mavlet-sdk Github repo](https://github.com/mavryk-network/mavlet-sdk/blob/master/packages/mavlet-dapp/src/events.ts).
 
 The `enableMetrics` property is an optional parameter that allows you to enable or disable the collection of metrics. It also allows the user to report bugs via a link in the wallet pop-up.
 
-> Note: Previous versions of Beacon used to have a `preferredNetwork` property instead of `network`. This property has been removed in the latest version of Beacon, and you must now use the `network` property.
+> Note: Previous versions of Mavlet used to have a `preferredNetwork` property instead of `network`. This property has been removed in the latest version of Mavlet, and you must now use the `network` property.
 
-The Beacon wallet requires an extra step to set up the network to connect to and the permissions:
+The Mavlet wallet requires an extra step to set up the network to connect to and the permissions:
 
 ```js
 // TODO: subscribe to events, more information below
@@ -86,7 +90,7 @@ await wallet.requestPermissions();
 Please check out the section [Subscribing to events](#subscribing-to-events) to learn how to subscribe to events and be notified of changes in the wallet.
 :::
 
-In previous versions of Beacon, you were able to set the `network` property when doing `requestPermissions()`. This behavior was removed from Beacon, and you must now set the network when instantiating the wallet.
+In previous versions of Mavlet, you were able to set the `network` property when doing `requestPermissions()`. This behavior was removed from Mavlet, and you must now set the network when instantiating the wallet.
 
 You can choose among `mainnet`, `boreasnet`, `basenet` and `custom` to set up the network. Once the permissions have been configured, you can get the user's address by calling the `getPKH` method on the wallet:
 
@@ -106,14 +110,14 @@ or
 Mavryk.setProvider({ wallet });
 ```
 
-#### Try the Beacon wallet!
+#### Try the Mavlet wallet!
 
-Make sure you have the Beacon browser extension installed (the extension offers minimal features, the BeaconWallet works with any wallet implementing the TZIP-10 standard), the AirGap wallet on your phone, or any TZIP-10 ready wallet like Temple or Kukai.
+Make sure you have the Mavlet browser extension installed (the extension offers minimal features, the MavletWallet works with any wallet implementing the TZIP-10 standard), the AirGap wallet on your phone, or any TZIP-10 ready wallet like Temple or Kukai.
 
 ```js live noInline wallet
-// import { BeaconWallet } from '@mavrykdynamics/taquito-beacon-wallet';
+// import { MavletWallet } from '@mavrykdynamics/webmavryk-mavlet-wallet';
 // const options = { name: 'exampleWallet', enableMetrics: true };
-// const wallet = new BeaconWallet(options);
+// const wallet = new MavletWallet(options);
 
 wallet
   .requestPermissions()
@@ -126,13 +130,13 @@ Mavryk.setWalletProvider(wallet);
 ### Subscribing to events
 
 While your dApp is connected to the wallet, different events can happen on the wallet side. A reactive dApp can subscribe to these events and update the UI to create a good user experience.
-The different types of events are defined in the type `BeaconEvent` that can be imported from `"@airgap/beacon-sdk"`. Some of the events are: `ACTIVE_ACCOUNT_SET`, `PAIR_SUCCESS`, `SIGN_REQUEST_SUCCESS`.
-To see all possible events, please check out the [BeaconEvent in Beacon SDK documentation](https://typedocs.walletbeacon.io/enums/beaconevent.html).
+The different types of events are defined in the type `MavletEvent` that can be imported from `"@mavrykdynamics/mavlet-sdk"`. Some of the events are: `ACTIVE_ACCOUNT_SET`, `PAIR_SUCCESS`, `SIGN_REQUEST_SUCCESS`.
+To see all possible events, please check out the [MavletEvent in Mavlet SDK documentation](https://typedocs.mavlet.mavryk.org/enums/mavletevent.html).
 
 You can subscribe to any of these events as follows:
 
 ```ts
-await wallet.client.subscribeToEvent(BeaconEvent.ACTIVE_ACCOUNT_SET, (data) => {
+await wallet.client.subscribeToEvent(MavletEvent.ACTIVE_ACCOUNT_SET, (data) => {
   // logic to update the active account in your dApp's UI
   console.log(data.address);
 });
@@ -141,7 +145,7 @@ await wallet.requestPermissions();
 
 ### - Development wallets
 
-During the development of your dapp, you may prefer a less "user-friendly" option that gives you more information and details than a more user-friendly wallet. You may also want to install and set up a wallet quickly that requires less boilerplate than the Beacon SDK. In these cases, use the Temple Wallet (for a quick setup using the Temple wallet extension).
+During the development of your dapp, you may prefer a less "user-friendly" option that gives you more information and details than a more user-friendly wallet. You may also want to install and set up a wallet quickly that requires less boilerplate than the Mavlet SDK. In these cases, use the Temple Wallet (for a quick setup using the Temple wallet extension).
 
 - Temple wallet
 
@@ -151,7 +155,7 @@ Just like the other wallets, you have to import the Temple wallet class first:
 import { TempleWallet } from '@temple-wallet/dapp';
 ```
 
-Then, Temple requires an extra step to verify that the extension is installed and connected in the browser. Temple used to be called Thanos and some Taquito code still uses the name Thanos. The `TempleWallet` class exposes a static property called `isAvailable` that just does that. You must use it before attempting to connect the wallet:
+Then, Temple requires an extra step to verify that the extension is installed and connected in the browser. Temple used to be called Thanos and some Webmavryk code still uses the name Thanos. The `TempleWallet` class exposes a static property called `isAvailable` that just does that. You must use it before attempting to connect the wallet:
 
 ```js
 try {
@@ -178,7 +182,7 @@ The class constructor takes one parameter, the name of your dapp (this will be u
 await wallet.connect('mainnet' | 'boreasnet' | 'basenet' | 'mondaynet' | 'sandbox');
 ```
 
-(Temple used to be called Thanos and some Taquito code still uses the name Thanos.)
+(Temple used to be called Thanos and some Webmavryk code still uses the name Thanos.)
 Once the wallet is connected, there are a couple of things you can get out of it:
 
 ```js
@@ -225,7 +229,7 @@ TempleWallet.isAvailable()
 
 ## Making transfers
 
-Although it is possible to transfer tokens directly from the wallets, Taquito can send tokens *programmatically*. This method could be a better solution if you want to do calculations before sending the tokens, or if the amount of tokens to send is based on a variable value. It is also preferable to avoid manual inputs, which are often a source of errors. Using Taquito to send tokens only requires to sign a transaction, sit back and relax :)
+Although it is possible to transfer tokens directly from the wallets, Webmavryk can send tokens *programmatically*. This method could be a better solution if you want to do calculations before sending the tokens, or if the amount of tokens to send is based on a variable value. It is also preferable to avoid manual inputs, which are often a source of errors. Using Webmavryk to send tokens only requires to sign a transaction, sit back and relax :)
 
 ### - Transfer between implicit accounts
 
@@ -249,7 +253,7 @@ Mavryk.wallet
   });
 ```
 
-The `transfer` method takes an object with only two required properties: the `to` property that indicates the recipient of the transaction and the `amount` property for the number of tokens that should be sent. Unlike the Contract API, the transfer must be _sent_ by using the `.send` method, which returns a promise that will resolve with an instance of the [**TransactionWalletOperation class**](https://taquito.mavryk.org/typedoc/classes/_taquito_taquito.transactionwalletoperation.html). This instance holds, among others, the transaction hash under the `opHash` property. You can then call the `.confirmation()` method and pass as a parameter the number of confirmations you want to wait (one by default). Once confirmed, the returned promise is resolved to an object with a `complete` property set to true if the operation has been confirmed.
+The `transfer` method takes an object with only two required properties: the `to` property that indicates the recipient of the transaction and the `amount` property for the number of tokens that should be sent. Unlike the Contract API, the transfer must be _sent_ by using the `.send` method, which returns a promise that will resolve with an instance of the [**TransactionWalletOperation class**](https://webmavryk.mavryk.org/typedoc/classes/_webmavryk_webmavryk.transactionwalletoperation.html). This instance holds, among others, the transaction hash under the `opHash` property. You can then call the `.confirmation()` method and pass as a parameter the number of confirmations you want to wait (one by default). Once confirmed, the returned promise is resolved to an object with a `complete` property set to true if the operation has been confirmed.
 
 ### - Transfer to smart contracts
 
@@ -271,7 +275,7 @@ Transactions to smart contracts operate in the same fashion as transactions to a
 
 Sending a transaction to a smart contract to update its storage will be a different type of action as it implies targeting a specific entrypoint and formatting correctly the data to be sent.
 
-Fortunately, Taquito will make this operation go like a breeze! First, you need the contract abstraction created with the address of the smart contract you are targeting:
+Fortunately, Webmavryk will make this operation go like a breeze! First, you need the contract abstraction created with the address of the smart contract you are targeting:
 
 ```js
 const contract = await Mavryk.wallet.at('KT1TBxaaeikEUcVN2qdQY7n9Q21ykcX1NLzY');
@@ -339,7 +343,7 @@ If the entrypoint doesn't expect any value (or more precisely, if it expects a `
 contract.methodsObject.noArgumentEntrypoint(UnitValue).send();
 ```
 
-This will tell Taquito that a value of type unit needs to be sent to the entrypoint.
+This will tell Webmavryk that a value of type unit needs to be sent to the entrypoint.
 
 ### - `.send()` function arguments
 
@@ -372,7 +376,7 @@ If you choose to use the parameters, only one property is mandatory: the `amount
 
 ### - Operation hash and confirmation
 
-The `.send()` method returns an instance of the [`TransactionWalletOperation`](https://taquito.mavryk.org/typedoc/classes/_taquito_taquito.transactionwalletoperation.html) class with different properties and methods you can use to gather information about the transaction. Among them, there are two properties and one method that you will use most of the time when using Taquito:
+The `.send()` method returns an instance of the [`TransactionWalletOperation`](https://webmavryk.mavryk.org/typedoc/classes/_webmavryk_webmavryk.transactionwalletoperation.html) class with different properties and methods you can use to gather information about the transaction. Among them, there are two properties and one method that you will use most of the time when using Webmavryk:
 
 1. `.opHash`: this property holds the hash of the current transaction. It can be useful for debugging purposes or checking the status of the transaction in a block explorer.
 
@@ -388,7 +392,7 @@ The `.send()` method returns an instance of the [`TransactionWalletOperation`](h
 
 ## Originating a contract
 
-In the Mavryk lingo, "origination" means "deployment of a contract to the blockchain". Before Taquito, this was painstaking work as it required to interact directly with a Mavryk node and type commands to originate the contract. But not anymore! With Taquito, you only need the Michelson code and the initial storage to make it happen.
+In the Mavryk lingo, "origination" means "deployment of a contract to the blockchain". Before Webmavryk, this was painstaking work as it required to interact directly with a Mavryk node and type commands to originate the contract. But not anymore! With Webmavryk, you only need the Michelson code and the initial storage to make it happen.
 
 First, you need to get the code of the contract. If you deploy a contract you wrote, then you already have the code. If you want to deploy a copy of a contract, you can easily get its code with the following method:
 
@@ -401,12 +405,12 @@ const code = contract.script.code;
 If you get the contract code through this method, it will already be properly formatted for origination. If you have a `.mv` file, you can use the `michel-codec` package to encode it properly:
 
 ```js
-import { Parser } from '@mavrykdynamics/taquito-michel-codec';
+import { Parser } from '@mavrykdynamics/webmavryk-michel-codec';
 const parser = new Parser();
 const parsedMichelson = parser.parseScript(michelsonCode);
 ```
 
-> Note: Since Taquito version 6.3.2, you can also pass plain Michelson to the parser without formatting it.
+> Note: Since Webmavryk version 6.3.2, you can also pass plain Michelson to the parser without formatting it.
 
 For example, this straightforward Michelson contract:
 
@@ -487,7 +491,7 @@ Second, you need the initial storage. According to your smart contract's storage
 
 ```
 
-If you use the Ligo programming language and the storage is a record, you can simply use a JavaScript object that Taquito will encode according to the storage type:
+If you use the Ligo programming language and the storage is a record, you can simply use a JavaScript object that Webmavryk will encode according to the storage type:
 
 ```js
 
@@ -502,11 +506,11 @@ If you use the Ligo programming language and the storage is a record, you can si
 
 ```
 
-In case of a map or a big map, you must import `MichelsonMap` from `@mavrykdynamics/taquito` and use it to initialize the map:
+In case of a map or a big map, you must import `MichelsonMap` from `@mavrykdynamics/webmavryk` and use it to initialize the map:
 
 ```js
 
-import { MichelsonMap } from "@mavrykdynamics/taquito";
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
 
 {
   code: parsedMichelson,
@@ -522,7 +526,7 @@ You can even initialize your map/big map with key/value pairs if you wish:
 
 ```js
 
-import { MichelsonMap } from "@mavrykdynamics/taquito";
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
 
 {
   code: parsedMichelson,
@@ -564,14 +568,14 @@ The origination function returns an instance of the `OriginationWalletOperation`
 
 ## Working with the contract abstraction instance
 
-Taquito makes interacting with smart contracts very easy! With only the smart contract address you want to interact with, you can create a `contract abstraction` and use it for subsequent interactions. You will not only be able to call entrypoints of the smart contract but also fetch its storage!
+Webmavryk makes interacting with smart contracts very easy! With only the smart contract address you want to interact with, you can create a `contract abstraction` and use it for subsequent interactions. You will not only be able to call entrypoints of the smart contract but also fetch its storage!
 
 ### - Instance creation
 
 First, you need to import the Mavryk singleton object or instantiate the Mavryk toolkit and configure the RPC host you want to connect to:
 
 ```js
-import { Mavryk } from '@mavrykdynamics/taquito';
+import { Mavryk } from '@mavrykdynamics/webmavryk';
 
 Mavryk.setProvider({ rpc: 'https://YOUR_PREFERRED_RPC_URL' });
 ```
@@ -579,7 +583,7 @@ Mavryk.setProvider({ rpc: 'https://YOUR_PREFERRED_RPC_URL' });
 _or_
 
 ```js
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const Mavryk = new MavrykToolkit();
 
@@ -596,7 +600,7 @@ This returns the contract abstraction that you can now use to interact with the 
 
 ### - Contract properties and methods
 
-Now, let's observe the contract abstraction that we obtained. It's an instance of the [ContractAbstraction class](https://taquito.mavryk.org/typedoc/classes/_taquito_taquito.contractabstraction.html) with different properties and methods:
+Now, let's observe the contract abstraction that we obtained. It's an instance of the [ContractAbstraction class](https://webmavryk.mavryk.org/typedoc/classes/_webmavryk_webmavryk.contractabstraction.html) with different properties and methods:
 
 _Properties:_
 
@@ -604,9 +608,9 @@ _Properties:_
 
 2. `methodsObject`: an object whose methods are named after the contract entrypoints (if the entrypoints are not annotated, the methods will be numbers).
 
-3. `parameterSchema`: an instance of the [Parameter class](https://github.com/mavryk-network/mavryk-taquito/blob/d424fa178a95675920b21c8e8c228fbe0e7df36e/packages/taquito-michelson-encoder/src/schema/parameter.ts) with two useful methods: `hasAnnotation` tells you if the entrypoints are annotated and `isMultipleEntryPoint` tells you if the contract has multiple entrypoints (if _false_, you can interact with the contract with `.methodsObject.default()`).
+3. `parameterSchema`: an instance of the [Parameter class](https://github.com/mavryk-network/webmavryk/blob/d424fa178a95675920b21c8e8c228fbe0e7df36e/packages/webmavryk-michelson-encoder/src/schema/parameter.ts) with two useful methods: `hasAnnotation` tells you if the entrypoints are annotated and `isMultipleEntryPoint` tells you if the contract has multiple entrypoints (if _false_, you can interact with the contract with `.methodsObject.default()`).
 
-4. `schema`: an instance of the [Schema class](https://github.com/mavryk-network/mavryk-taquito/blob/d424fa178a95675920b21c8e8c228fbe0e7df36e/packages/taquito-michelson-encoder/src/schema/storage.ts#L15) with various methods to get more information about the storage or the structure of the contract.
+4. `schema`: an instance of the [Schema class](https://github.com/mavryk-network/webmavryk/blob/d424fa178a95675920b21c8e8c228fbe0e7df36e/packages/webmavryk-michelson-encoder/src/schema/storage.ts#L15) with various methods to get more information about the storage or the structure of the contract.
 
 5. `script`: an object with two properties: `code` is an array with three objects, each representing the JSON formatted Michelson code for the parameter, storage and code (respectively), `storage` is the JSON formatted Michelson code for the storage of the contract.
 
@@ -614,11 +618,11 @@ _Methods:_
 
 1. `bigMap`: a promise that takes a key from the big map in the storage as a parameter and returns the value associated with that key.
 
-2. `storage`: a promise that returns a representation of the storage value(s). The storage is represented as an object whose keys are the name of the values. `map` and `big map` values are returned as an instance of the [BigMapAbstraction](https://taquito.mavryk.org/typedoc/classes/_taquito_taquito.bigmapabstraction.html) while numeric values are returned as BigNumber.
+2. `storage`: a promise that returns a representation of the storage value(s). The storage is represented as an object whose keys are the name of the values. `map` and `big map` values are returned as an instance of the [BigMapAbstraction](https://webmavryk.mavryk.org/typedoc/classes/_webmavryk_webmavryk.bigmapabstraction.html) while numeric values are returned as BigNumber.
 
 ## The Wallet instance
 
-The Mavryk singleton object exposes a _wallet_ property in the same fashion it exposes the _contract_ property to which you may be used. This property is an instance of the [Wallet class](https://taquito.mavryk.org/typedoc/classes/_taquito_taquito.wallet.html) with a few useful methods you want to check out. It becomes available as soon as you set up a wallet by calling `Mavryk.setProvider({wallet})` or `Mavryk.setWalletProvider(wallet)`. Here is a list of the methods and a basic description of their function before seeing some examples:
+The Mavryk singleton object exposes a _wallet_ property in the same fashion it exposes the _contract_ property to which you may be used. This property is an instance of the [Wallet class](https://webmavryk.mavryk.org/typedoc/classes/_webmavryk_webmavryk.wallet.html) with a few useful methods you want to check out. It becomes available as soon as you set up a wallet by calling `Mavryk.setProvider({wallet})` or `Mavryk.setWalletProvider(wallet)`. Here is a list of the methods and a basic description of their function before seeing some examples:
 
 1. `at`: creates a smart contract abstraction for the address specified
 
@@ -642,7 +646,7 @@ const contract = await Mavryk.wallet.at('KT1HNgQQEUb7mDmnmLKy4xcq1xdPw3ieoKzv');
 
 The method is a promise that expects the contract's address for which you want to create the abstraction.
 
-This feature may be a lesser-known feature of Taquito, but it is possible to send operations batches at once! This operation is what the `batch` method does. There are two different ways of using it: you can either pass the operations to send as an array of objects in the parameter of the method or you can use the `withTransfer`, `withContractCall`, `withTransfer`, `withOrigination` or `withDelegation` methods it provides:
+This feature may be a lesser-known feature of Webmavryk, but it is possible to send operations batches at once! This operation is what the `batch` method does. There are two different ways of using it: you can either pass the operations to send as an array of objects in the parameter of the method or you can use the `withTransfer`, `withContractCall`, `withTransfer`, `withOrigination` or `withDelegation` methods it provides:
 
 ```js
 const op = await Mavryk.wallet
@@ -700,12 +704,12 @@ const contract = await op.contract();
 console.log('Contract address:', contract.address);
 ```
 
-Next, the `pkh` method allows you to retrieve the public key hash currently associated with the chosen wallet. Because the key is saved earlier in the process, you can pass an object as a parameter with a `forceRefetch` property set to **true** if you want Taquito to fetch the key and be sure you have the right one:
+Next, the `pkh` method allows you to retrieve the public key hash currently associated with the chosen wallet. Because the key is saved earlier in the process, you can pass an object as a parameter with a `forceRefetch` property set to **true** if you want Webmavryk to fetch the key and be sure you have the right one:
 
 ```js
 // to fetch the current public key hash
 const pkh = await Mavryk.wallet.pkh();
-// to force Taquito to retrieve the current public key hash
+// to force Webmavryk to retrieve the current public key hash
 const refetchedPkh = await Mavryk.wallet.pkh({ forceRefetch: true });
 ```
 

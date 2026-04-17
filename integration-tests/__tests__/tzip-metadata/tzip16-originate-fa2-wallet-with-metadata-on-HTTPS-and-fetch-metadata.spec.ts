@@ -1,6 +1,12 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from "../../config";
-import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/taquito-tzip16';
-import { MichelsonMap } from "@mavrykdynamics/taquito";
+import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/webmavryk-tzip16';
+import { MichelsonMap } from "@mavrykdynamics/webmavryk";
 import { fa2ContractTzip16 } from "../../data/fa2_contract_with_metadata";
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
@@ -285,7 +291,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
                },
                {
                   "error": {
-                     "string": "MVRK_RECEIVED"
+                     "string": "XTZ_RECEIVED"
                   },
                   "expansion": {
                      "string": "Contract received a non-zero amount of tokens"
@@ -461,7 +467,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
             },
             {
                "error": {
-                  "string": "MVRK_RECEIVED"
+                  "string": "XTZ_RECEIVED"
                },
                "expansion": {
                   "string": "Contract received a non-zero amount of tokens"

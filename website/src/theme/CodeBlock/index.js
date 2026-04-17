@@ -1,4 +1,10 @@
 /**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+/**
  * Copyright (c) 2017-present, Facebook, Inc.
  *
  * This source code is licensed under the Apache 2.0 License found in the
@@ -58,8 +64,8 @@ export default ({
 
   useEffect(() => {
     async function getDependencies() {
-      const { MavrykToolkit, MichelsonMap, compose, getRevealFee, RpcReadAdapter, UnitValue } = await import('@mavrykdynamics/taquito');
-      const { verifySignature } = await import('@mavrykdynamics/taquito-utils');
+      const { MavrykToolkit, MichelsonMap, compose, getRevealFee, RpcReadAdapter, UnitValue } = await import('@mavrykdynamics/webmavryk');
+      const { verifySignature } = await import('@mavrykdynamics/webmavryk-utils');
       const {
         validateAddress,
         validateChain,
@@ -77,22 +83,22 @@ export default ({
         stringToBytes,
         prefix,
         Prefix
-      } = await import('@mavrykdynamics/taquito-utils');
-      const { BeaconWallet } = await import('@mavrykdynamics/taquito-beacon-wallet');
-      const { InMemorySigner, importKey, Path, ECDSA, Ed25519, generateSecretKey } = await import('@mavrykdynamics/taquito-signer');
-      const { LedgerSigner, DerivationType } = await import('@mavrykdynamics/taquito-ledger-signer');
-      const { Tzip16Module, tzip16, MichelsonStorageView } = await import('@mavrykdynamics/taquito-tzip16')
-      const { Tzip12Module, tzip12 } = await import("@mavrykdynamics/taquito-tzip12");
-      const { Schema, ParameterSchema } = await import("@mavrykdynamics/taquito-michelson-encoder");
-      const { Parser, packDataBytes } = await import('@mavrykdynamics/taquito-michel-codec');
-      const { RpcClient } = await import('@mavrykdynamics/taquito-rpc');
+      } = await import('@mavrykdynamics/webmavryk-utils');
+      const { MavletWallet } = await import('@mavrykdynamics/webmavryk-mavlet-wallet');
+      const { InMemorySigner, importKey, Path, ECDSA, Ed25519, generateSecretKey } = await import('@mavrykdynamics/webmavryk-signer');
+      const { LedgerSigner, DerivationType } = await import('@mavrykdynamics/webmavryk-ledger-signer');
+      const { Tzip16Module, tzip16, MichelsonStorageView } = await import('@mavrykdynamics/webmavryk-tzip16')
+      const { Tzip12Module, tzip12 } = await import("@mavrykdynamics/webmavryk-tzip12");
+      const { Schema, ParameterSchema } = await import("@mavrykdynamics/webmavryk-michelson-encoder");
+      const { Parser, packDataBytes } = await import('@mavrykdynamics/webmavryk-michel-codec');
+      const { RpcClient } = await import('@mavrykdynamics/webmavryk-rpc');
       const TransportWebHID = (await import("@ledgerhq/hw-transport-webhid")).default;
 
       let wallet;
       if (typeof window !== 'undefined') {
         // solve localStorage is not defined Error when building server
         // can use localStorage on the browser, not on the server
-        wallet = new BeaconWallet({ name:"exampleWallet", network: { type: 'basenet'}, enableMetrics: true, });
+        wallet = new MavletWallet({ name:"exampleWallet", network: { type: 'basenet'}, enableMetrics: true, });
       }      
       const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network/');
       setDependencies({

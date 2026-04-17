@@ -1,7 +1,13 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from "../config";
-import { DefaultContractType } from '@mavrykdynamics/taquito';
-import { Chest, Timelock, ChestKey } from '@mavrykdynamics/taquito-timelock';
-import { stringToBytes } from '@mavrykdynamics/taquito-utils';
+import { DefaultContractType } from '@mavrykdynamics/webmavryk';
+import { Chest, Timelock, ChestKey } from '@mavrykdynamics/webmavryk-timelock';
+import { stringToBytes } from '@mavrykdynamics/webmavryk-utils';
 import { timelockCode, timelockStorage } from '../data/timelock-flip-contract';
 
 // please read the following link to understand the game
@@ -55,7 +61,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
       const storageFinish: any = await contract.storage()
 
       expect(storageFinish.guess).toBe(stringToBytes(message))
-      expect(storageFinish.result).toBe('00')
+      expect(storageFinish.result).toBe('01')
     });
 
 

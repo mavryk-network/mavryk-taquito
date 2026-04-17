@@ -1,4 +1,10 @@
-import { FieldNumberingStrategy } from "@mavrykdynamics/taquito-michelson-encoder";
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { FieldNumberingStrategy } from "@mavrykdynamics/webmavryk-michelson-encoder";
 import { CONFIGS } from "../../config";
 import { noAnnotCode, noAnnotInit } from "../../data/token_without_annotation";
 

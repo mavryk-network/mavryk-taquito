@@ -1,7 +1,13 @@
-import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 import { tacoContractTzip16 } from "../integration-tests/data/modified-taco-contract"
-import { stringToBytes } from '@mavrykdynamics/taquito-utils';
+import { stringToBytes } from '@mavrykdynamics/webmavryk-utils';
 
 async function example() {
   const provider = 'https://basenet.rpc.mavryk.network';

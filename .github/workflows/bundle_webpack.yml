@@ -22,20 +22,20 @@ jobs:
         node-version: lts/hydrogen
     - run: npm ci
     - run: npm run build
-    - run: npm -w packages/taquito-local-forging run build-webpack
+    - run: npm -w packages/webmavryk-local-forging run build-webpack
     -
       uses: actions/upload-artifact@v3
       with:
-        name: taquito-local-forging-vanilla
+        name: webmavryk-local-forging-vanilla
         path: |
-          packages/taquito-local-forging/dist/taquito_local_forging.js
-          packages/taquito-local-forging/dist/taquito_local_forging.js.map
+          packages/webmavryk-local-forging/dist/webmavryk_local_forging.js
+          packages/webmavryk-local-forging/dist/webmavryk_local_forging.js.map
 
-    - run: npm -w packages/taquito-beacon-wallet run build-webpack
+    - run: npm -w packages/webmavryk-mavlet-wallet run build-webpack
     -
       uses: actions/upload-artifact@v3
       with:
-        name: taquito-beacon-wallet-vanilla
+        name: webmavryk-mavlet-wallet-vanilla
         path: |
-          packages/taquito-beacon-wallet/dist/taquito_beacon_wallet.js
-          packages/taquito-beacon-wallet/dist/taquito_beacon_wallet.js.map
+          packages/webmavryk-mavlet-wallet/dist/webmavryk_mavlet_wallet.js
+          packages/webmavryk-mavlet-wallet/dist/webmavryk_mavlet_wallet.js.map

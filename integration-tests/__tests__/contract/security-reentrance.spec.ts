@@ -1,4 +1,10 @@
-import { Protocols } from '@mavrykdynamics/taquito';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { Protocols } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
 
 /**
@@ -119,4 +125,4 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
   });
 });
 
-// This test was transcribed to Taquito from bash scripts at https://github.com/InferenceAG/TezosSecurityBaselineChecking
+// This test was transcribed to Webmavryk from bash scripts at https://github.com/InferenceAG/TezosSecurityBaselineChecking

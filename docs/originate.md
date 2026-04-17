@@ -3,24 +3,28 @@ title: Originating (Deploying) Contracts
 author: Simon Boissonneault-Robert
 ---
 
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Taquito can _originate_ (create or deploy) Smart Contracts to the Mavryk Blockchain.
+Webmavryk can _originate_ (create or deploy) Smart Contracts to the Mavryk Blockchain.
 
 ## Example demonstrating origination of a contract
 
 In this example, we will originate the popular multi-sig contract available [here](https://github.com/murbard/smart-contracts/blob/master/multisig/michelson/generic.mv).
 
-> Since version [6.3.2](https://github.com/mavryk-network/mavryk-taquito/releases/tag/6.3.2-beta.0), Taquito allows encoding and decoding between "plain" Michelson and JSON Michelson. Smart Contracts' origination is now more straightforward than it was because it is no longer required to do the mavkit-client command-line to convert & expand "plain" Michelson to JSON Michelson. You can now pass JSON Michelson and "plain" Michelson using the `code` parameter of the `originate` method.
+> Since version [6.3.2](https://github.com/mavryk-network/webmavryk/releases/tag/6.3.2-beta.0), Webmavryk allows encoding and decoding between "plain" Michelson and JSON Michelson. Smart Contracts' origination is now more straightforward than it was because it is no longer required to do the mavkit-client command-line to convert & expand "plain" Michelson to JSON Michelson. You can now pass JSON Michelson and "plain" Michelson using the `code` parameter of the `originate` method.
 
-## Originate the contract using Taquito
+## Originate the contract using Webmavryk
 
-Here are three examples of originating a contract using Taquito. The first example initializes the storage of the contract using a familiar-looking javascript object. The second and third demonstrates the use of plain Michelson and JSON Michelson. The first method is preferred, but if you have a reason to circumvent the convenient storage API, you can do so.
+Here are three examples of originating a contract using Webmavryk. The first example initializes the storage of the contract using a familiar-looking javascript object. The second and third demonstrates the use of plain Michelson and JSON Michelson. The first method is preferred, but if you have a reason to circumvent the convenient storage API, you can do so.
 
-We will show these three examples using the `Contract API` and the `Wallet API.` The new Taquito Wallet API interacts with wallets, supporting Beacon, the TZIP-10 standard.
+We will show these three examples using the `Contract API` and the `Wallet API.` The new Webmavryk Wallet API interacts with wallets, supporting Mavlet, the TZIP-10 standard.
 
-> Note: To run the `Wallet API` examples, you can install a wallet extension to your browser. For example, the Beacon Extension can be download [here](https://www.walletbeacon.io/).
+> Note: To run the `Wallet API` examples, you can install a wallet extension to your browser. For example, the Mavlet Extension can be download [here](https://www.mavlet.mavryk.org/).
 
 <Tabs
 defaultValue="contractAPI"
@@ -33,8 +37,8 @@ values={[
 This requires a signer to be configured, ie:
 
 ```
-import { importKey } from '@mavrykdynamics/taquito-signer';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { importKey } from '@mavrykdynamics/webmavryk-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 importKey(Mavryk, "p2sk2obfVMEuPUnadAConLWk7Tf4Dt3n4svSgJwrgpamRqJXvaYcg1")
 ```
@@ -43,17 +47,17 @@ importKey(Mavryk, "p2sk2obfVMEuPUnadAConLWk7Tf4Dt3n4svSgJwrgpamRqJXvaYcg1")
   <TabItem value="walletAPI">
 
 ```
-import {  BeaconWallet } from '@mavrykdynamics/taquito-beacon-wallet';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import {  MavletWallet } from '@mavrykdynamics/webmavryk-mavlet-wallet';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 const Mavryk = new MavrykToolkit('https://ghostnet.ecadinfra.com');
 const option = { name: "nameOfWallet", network: { type: 'ghostnet' }, enableMetrics: true};
-const wallet = new BeaconWallet(option);
+const wallet = new MavletWallet(option);
 
 await wallet.client.subscribeToEvent(
-  BeaconEvent.ACTIVE_ACCOUNT_SET,
+  MavletEvent.ACTIVE_ACCOUNT_SET,
   async (account) => {
     // An active account has been set, update the dApp UI
-    console.log(`${BeaconEvent.ACTIVE_ACCOUNT_SET} triggered: `, account);
+    console.log(`${MavletEvent.ACTIVE_ACCOUNT_SET} triggered: `, account);
   },
 
 await wallet.requestPermissions();
@@ -65,7 +69,7 @@ Mavryk.setWalletProvider(wallet);
 
 ### a. Initializing storage using a Plain Old JavaScript Object
 
-You can pass your initial storage as a JavaScript object to the `storage:` property. Taquito will encode your JavaScript object into a Michelson expression.
+You can pass your initial storage as a JavaScript object to the `storage:` property. Webmavryk will encode your JavaScript object into a Michelson expression.
 
 This JavaScript object :
 
@@ -92,7 +96,7 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 // const genericMultisigJSONfile = require('./generic.json')
@@ -121,7 +125,7 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 // const genericMultisigJSONfile = require('./generic.json')
@@ -163,7 +167,7 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 // const genericMultisigJSONfile = require('./generic.json')
@@ -188,7 +192,7 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 // const genericMultisigJSONfile = require('./generic.json')
@@ -224,7 +228,7 @@ values={[
 <TabItem value="contractAPI">
 
 ```js live noInline
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 // const genericMultisigJSONfile = require('./generic.json')
@@ -261,7 +265,7 @@ Mavryk.contract
   <TabItem value="walletAPI">
 
 ```js live noInline wallet
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 // const Mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network');
 
 // const genericMultisigJSONfile = require('./generic.json')
@@ -298,9 +302,9 @@ Mavryk.wallet
 </TabItem>
 </Tabs>
 
-## Originate multiple contracts using Taquito
+## Originate multiple contracts using Webmavryk
 
-It is also possible to use Taquito to originate multiple contracts in one operation. The origination operations must be batched with the [Batch API](https://taquito.mavryk.org/docs/batch_API) and after the contracts have been originated, the addresses will be available in an array returned by the `getOriginatedContractAddresses` method of the operation object:
+It is also possible to use Webmavryk to originate multiple contracts in one operation. The origination operations must be batched with the [Batch API](https://webmavryk.mavryk.org/docs/batch_API) and after the contracts have been originated, the addresses will be available in an array returned by the `getOriginatedContractAddresses` method of the operation object:
 
 ```js noInline
 const batch = Mavryk.contract

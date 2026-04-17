@@ -66,7 +66,7 @@ jobs:
       with:
         status: ${{ job.status }}
         token: ${{ secrets.GITHUB_TOKEN }}
-        notification_title: "Taquito Mondaynet Integration Tests ${{job.status}}"
+        notification_title: "Webmavryk Mondaynet Integration Tests ${{job.status}}"
         message_format: "{emoji} *{workflow}* {status_message} on <{commit_url}|{commit_sha}> | <{run_url}|View Run>"
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.INTEGRATION_TESTS_SLACK_WEBHOOK }}

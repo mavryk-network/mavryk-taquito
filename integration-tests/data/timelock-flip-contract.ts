@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 // https://gitlab.com/mavryk-network/mavryk-protocol/-/blob/master/src/proto_alpha/lib_protocol/contracts/timelock_flip.mv
 
 export const timelockStorage = {

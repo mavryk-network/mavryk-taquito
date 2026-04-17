@@ -22,7 +22,7 @@ jobs:
       with:
         node-version: lts/hydrogen
     - run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-    - run: echo "PACKAGE_VERSION=`node -p "require('./packages/taquito/package.json').version"`" >> $GITHUB_ENV
+    - run: echo "PACKAGE_VERSION=`node -p "require('./packages/webmavryk/package.json').version"`" >> $GITHUB_ENV
     - run: echo "BRANCH_NAME=$(git branch --show-current)" >> $GITHUB_ENV
     - run: echo "TARGET_VERSION=${PACKAGE_VERSION}-${SHORT_SHA}--${BRANCH_NAME}" >> $GITHUB_ENV
     - run: npm ci
@@ -30,19 +30,19 @@ jobs:
     - run: npx lerna version "${TARGET_VERSION}" --no-push --no-git-tag-version --yes
     - run: npm run version-stamp
     - run: npm run build
-    - run: npm run -w @mavrykdynamics/taquito build:release
+    - run: npm run -w @mavrykdynamics/webmavryk build:release
     - run: git config user.email "actions@github.com" && git config user.name "Github Actions"
     - run: git add . && git commit -m "committing changes to files to make lerna happy in next step, this is expected to never be pushed to remote"
     - run: echo ${VERDACCIO_TOKEN} >> ~/.npmrc
-    - run: npx lerna publish --dist-tag edge from-package --yes --registry https://npm.preview.taquito.mavryk.org/
+    - run: npx lerna publish --dist-tag edge from-package --yes --registry https://npm.preview.webmavryk.mavryk.org/
     - if: ${{ github.event_name == 'pull_request' }}
       run: |
           echo "COMMENT_BODY<<EOF"  >> $GITHUB_ENV
-          echo "New packages have been deployed to the preview repository at https://npm.preview.taquito.mavryk.org/." >> $GITHUB_ENV
+          echo "New packages have been deployed to the preview repository at https://npm.preview.webmavryk.mavryk.org/." >> $GITHUB_ENV
           echo "" >> $GITHUB_ENV
           echo "### Published packages:" >> $GITHUB_ENV
           echo "\`\`\`" >> $GITHUB_ENV
-          find packages/ -mindepth 1 -maxdepth 2 -name package.json | xargs -I{} node -pe "require('./{}')['name']" | sed "s/^\(.*\)$/npm i \1@${TARGET_VERSION} --registry https:\/\/npm.preview.taquito.mavryk.org\//" >> $GITHUB_ENV
+          find packages/ -mindepth 1 -maxdepth 2 -name package.json | xargs -I{} node -pe "require('./{}')['name']" | sed "s/^\(.*\)$/npm i \1@${TARGET_VERSION} --registry https:\/\/npm.preview.webmavryk.mavryk.org\//" >> $GITHUB_ENV
           echo "\`\`\`" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
     - if: ${{ github.event_name == 'pull_request' }}

@@ -1,4 +1,10 @@
-import { MichelsonMap, UnitValue } from '@mavrykdynamics/taquito';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { MichelsonMap, UnitValue } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
 import { tzip7Contract } from '../../data/tzip_7_contract';
 import { testContract } from '../../data/test_lambda_view';

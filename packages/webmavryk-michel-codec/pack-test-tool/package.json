@@ -1,0 +1,14 @@
+{
+  "name": "pack-test-tool",
+  "version": "2.0.1",
+  "description": "Generate pack test data via Mavryk RPC",
+  "main": "pack-test-tool.js",
+  "private": true,
+  "scripts": {},
+  "author": "Eugene Zagidullin <eugene@ecadlabs.com>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@mavrykdynamics/webmavryk-rpc": "^2.0.1",
+    "yargs": "^17.7.2"
+  }
+}

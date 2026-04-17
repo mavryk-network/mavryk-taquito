@@ -1,7 +1,13 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from "../../../config";
-import { DefaultContractType, MavrykToolkit } from "@mavrykdynamics/taquito";
+import { DefaultContractType, MavrykToolkit } from "@mavrykdynamics/webmavryk";
 import { ticketsSendTz, ticketsBagTz, ticketsBlackholeTz } from "../../../data/code_with_ticket_transfer";
-import { RpcClient, TicketTokenParams } from '@mavrykdynamics/taquito-rpc';
+import { RpcClient, TicketTokenParams } from '@mavrykdynamics/webmavryk-rpc';
 
 CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
   const Mavryk1 = lib;

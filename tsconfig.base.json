@@ -21,56 +21,56 @@
     "baseUrl": "packages",
     "downlevelIteration": true,
     "paths": {
-      "@mavrykdynamics/taquito-core": [
-        "taquito-core/src/taquito-core.ts"
+      "@mavrykdynamics/webmavryk-core": [
+        "webmavryk-core/src/webmavryk-core.ts"
       ],
-      "@mavrykdynamics/taquito-beacon-wallet": [
-        "taquito-beacon-wallet/src/taquito-beacon-wallet.ts"
+      "@mavrykdynamics/webmavryk-mavlet-wallet": [
+        "webmavryk-mavlet-wallet/src/webmavryk-mavlet-wallet.ts"
       ],
-      "@mavrykdynamics/taquito-contracts-library": [
-        "taquito-contracts-library/src/taquito-contracts-library.ts"
+      "@mavrykdynamics/webmavryk-contracts-library": [
+        "webmavryk-contracts-library/src/webmavryk-contracts-library.ts"
       ],
-      "@mavrykdynamics/taquito-http-utils": [
-        "taquito-http-utils/src/taquito-http-utils.ts"
+      "@mavrykdynamics/webmavryk-http-utils": [
+        "webmavryk-http-utils/src/webmavryk-http-utils.ts"
       ],
-      "@mavrykdynamics/taquito-ledger-signer": [
-        "taquito-ledger-signer/src/taquito-ledger-signer.ts"
+      "@mavrykdynamics/webmavryk-ledger-signer": [
+        "webmavryk-ledger-signer/src/webmavryk-ledger-signer.ts"
       ],
-      "@mavrykdynamics/taquito-local-forging": [
-        "taquito-local-forging/src/taquito-local-forging.ts"
+      "@mavrykdynamics/webmavryk-local-forging": [
+        "webmavryk-local-forging/src/webmavryk-local-forging.ts"
       ],
-      "@mavrykdynamics/taquito-michel-codec": [
-        "taquito-michelson-encoder/src/taquito-michel-codec.ts"
+      "@mavrykdynamics/webmavryk-michel-codec": [
+        "webmavryk-michelson-encoder/src/webmavryk-michel-codec.ts"
       ],
-      "@mavrykdynamics/taquito-michelson-encoder": [
-        "taquito-michelson-encoder/src/taquito-michelson-encoder.ts"
+      "@mavrykdynamics/webmavryk-michelson-encoder": [
+        "webmavryk-michelson-encoder/src/webmavryk-michelson-encoder.ts"
       ],
-      "@mavrykdynamics/taquito-remote-signer": [
-        "taquito-remote-signer/src/taquito-remote-signer.ts"
+      "@mavrykdynamics/webmavryk-remote-signer": [
+        "webmavryk-remote-signer/src/webmavryk-remote-signer.ts"
       ],
-      "@mavrykdynamics/taquito-rpc": [
-        "taquito-rpc/src/taquito-rpc.ts"
+      "@mavrykdynamics/webmavryk-rpc": [
+        "webmavryk-rpc/src/webmavryk-rpc.ts"
       ],
-      "@mavrykdynamics/taquito-sapling": [
-        "taquito-sapling/taquito-sapling.ts"
+      "@mavrykdynamics/webmavryk-sapling": [
+        "webmavryk-sapling/webmavryk-sapling.ts"
       ],
-      "@mavrykdynamics/taquito-signer": [
-        "taquito-signer/src/taquito-signer.ts"
+      "@mavrykdynamics/webmavryk-signer": [
+        "webmavryk-signer/src/webmavryk-signer.ts"
       ],
-      "@mavrykdynamics/taquito": [
-        "taquito/src/taquito.ts"
+      "@mavrykdynamics/webmavryk": [
+        "webmavryk/src/webmavryk.ts"
       ],
-      "@mavrykdynamics/taquito-timelock": [
-        "taquito-timelock/src/taquito-timelock.ts"
+      "@mavrykdynamics/webmavryk-timelock": [
+        "webmavryk-timelock/src/webmavryk-timelock.ts"
       ],
-      "@mavrykdynamics/taquito-tzip12": [
-        "taquito-tzip12/src/taquito-tzip12.ts"
+      "@mavrykdynamics/webmavryk-tzip12": [
+        "webmavryk-tzip12/src/webmavryk-tzip12.ts"
       ],
-      "@mavrykdynamics/taquito-tzip16": [
-        "taquito-tzip16/src/taquito-tzip16.ts"
+      "@mavrykdynamics/webmavryk-tzip16": [
+        "webmavryk-tzip16/src/webmavryk-tzip16.ts"
       ],
-      "@mavrykdynamics/taquito-utils": [
-        "taquito-utils/src/taquito-utils.ts"
+      "@mavrykdynamics/webmavryk-utils": [
+        "webmavryk-utils/src/webmavryk-utils.ts"
       ]
     }
   }

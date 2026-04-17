@@ -1,6 +1,12 @@
-import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/taquito';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { InMemorySpendingKey, SaplingToolkit } from '@mavrykdynamics/taquito-sapling';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { MavrykToolkit, RpcReadAdapter } from '@mavrykdynamics/webmavryk';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { InMemorySpendingKey, SaplingToolkit } from '@mavrykdynamics/webmavryk-sapling';
 import { singleSaplingStateContractJProtocol } from '../integration-tests/data/single_sapling_state_contract_jakarta_michelson';
 const numberOfSaplingTx = 1;
 let totalTime = 0;

@@ -1,22 +1,28 @@
-import { VotingPeriodBlockResult } from '@mavrykdynamics/taquito-rpc';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { VotingPeriodBlockResult } from '@mavrykdynamics/webmavryk-rpc';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 import { CONFIGS, isSandbox, sleep } from '../../config';
 
 CONFIGS().forEach(async ({ lib, rpc, protocol, setup }) => {
-  const flexmasanet = isSandbox({ rpc }) ? test : test.skip;
+  const mavboxnet = isSandbox({ rpc }) ? test : test.skip;
   let blocksPerVotingPeriod: number;
   let blockTime: number;
   let currentPeriod: VotingPeriodBlockResult;
 
-  // Our ci flexmasa script have 3 bakers Alice, Bob and Charlie (.github/workflows/main.yml)
+  // Our ci mavbox script have 3 bakers Alice, Bob and Charlie (.github/workflows/main.yml)
   const Alice = lib; // Alice's secret key is passed through the command to run test is configured by integration-tests/config.ts
   const Bob = new MavrykToolkit(rpc);
   Bob.setSignerProvider(new InMemorySigner('edsk3RFfvaFaxbHx8BMtEW1rKQcPtDML3LXjNqMNLCzC3wLC1bWbAt'));
   const Charlie = new MavrykToolkit(rpc);
   Charlie.setSignerProvider(new InMemorySigner('edsk3RgWvbKKA1atEUcaGwivge7QtckHkTL9nQJUXQKY5r8WKp4pF4'));
 
-  describe(`Test Proposal and Ballot operation in ${protocol.substring(0, 8)} with flexmasa`, () => {
+  describe(`Test Proposal and Ballot operation in ${protocol.substring(0, 8)} with mavbox`, () => {
     beforeAll(async () => {
       await setup();
       let constants = await Alice.rpc.getConstants();
@@ -24,7 +30,7 @@ CONFIGS().forEach(async ({ lib, rpc, protocol, setup }) => {
       blockTime = constants.minimal_block_delay!.toNumber();
     });
 
-    flexmasanet('Should be able to inject proposal operation in proposal period', async () => {
+    mavboxnet('Should be able to inject proposal operation in proposal period', async () => {
 
       // double check if it's proposal period so that we can inject proposal operation
       currentPeriod = await Alice.rpc.getCurrentPeriod();
@@ -52,7 +58,7 @@ CONFIGS().forEach(async ({ lib, rpc, protocol, setup }) => {
       }
     });
 
-    flexmasanet('Should be able to inject ballot operation in exploration period', async () => {
+    mavboxnet('Should be able to inject ballot operation in exploration period', async () => {
       // if it's still proposal period make the test sleep to get into exploration period to inject ballot operation
       currentPeriod = await Alice.rpc.getCurrentPeriod();
       if (currentPeriod.voting_period.kind === 'proposal') {

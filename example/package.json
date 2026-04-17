@@ -1,7 +1,7 @@
 {
-  "name": "@mavrykdynamics/taquito-example",
+  "name": "@mavrykdynamics/webmavryk-example",
   "private": true,
-  "version": "20.1.0",
+  "version": "2.0.1",
   "scripts": {
     "example": "node -r ts-node/register --preserve-symlinks example-node.ts",
     "example:activation": "node -r ts-node/register --preserve-symlinks example-activate.ts",
@@ -42,20 +42,21 @@
   },
   "dependencies": {
     "@ledgerhq/hw-transport-node-hid": "^6.28.5",
-    "@mavrykdynamics/taquito": "^20.0.3",
-    "@mavrykdynamics/taquito-ledger-signer": "^20.0.3",
-    "@mavrykdynamics/taquito-local-forging": "^20.0.3",
-    "@mavrykdynamics/taquito-michel-codec": "^20.0.3",
-    "@mavrykdynamics/taquito-michelson-encoder": "^20.0.3",
-    "@mavrykdynamics/taquito-rpc": "^20.0.3",
-    "@mavrykdynamics/taquito-sapling": "^20.0.3",
-    "@mavrykdynamics/taquito-signer": "^20.0.3",
-    "@mavrykdynamics/taquito-tzip16": "^20.0.3",
-    "@mavrykdynamics/taquito-utils": "^20.0.3",
+    "@mavrykdynamics/webmavryk": "^2.0.1",
+    "@mavrykdynamics/webmavryk-ledger-signer": "^2.0.1",
+    "@mavrykdynamics/webmavryk-local-forging": "^2.0.1",
+    "@mavrykdynamics/webmavryk-michel-codec": "^2.0.1",
+    "@mavrykdynamics/webmavryk-michelson-encoder": "^2.0.1",
+    "@mavrykdynamics/webmavryk-rpc": "^2.0.1",
+    "@mavrykdynamics/webmavryk-sapling": "^2.0.1",
+    "@mavrykdynamics/webmavryk-signer": "^2.0.1",
+    "@mavrykdynamics/webmavryk-tzip16": "^2.0.1",
+    "@mavrykdynamics/webmavryk-utils": "^2.0.1",
     "bignumber.js": "^9.1.2"
   },
   "devDependencies": {
     "@types/node-hid": "^1.3.2",
     "ts-node": "^10.9.1"
-  }
+  },
+  "license": "Apache-2.0"
 }

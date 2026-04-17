@@ -1,0 +1,65 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { PermissionDeniedError, WebMavrykError } from '@mavrykdynamics/webmavryk-core';
+
+/**
+ *  @category Error
+ *  @description Error that indicates an unauthorized operation being attempted
+ */
+export class OperationNotAuthorizedError extends PermissionDeniedError {
+  constructor(public readonly message: string, public readonly cause: any) {
+    super();
+    this.name = 'OperationNotAuthorized';
+  }
+}
+
+/**
+ *  @category Error
+ *  @description Error that indicates bad signing data
+ */
+export class BadSigningDataError extends WebMavrykError {
+  constructor(
+    public readonly cause: any,
+    public readonly bytes: string,
+    readonly watermark?: Uint8Array
+  ) {
+    super();
+    this.name = 'BadSigningData';
+    this.message = watermark
+      ? `Invalid signing data with watermark`
+      : `Invalid signing data: "${bytes}"`;
+  }
+}
+
+/**
+ *  @category Error
+ *  @description Error that indicates a mismatch between the initialized and the requested public key
+ */
+export class PublicKeyVerificationError extends WebMavrykError {
+  constructor(
+    public readonly requestedPk: string,
+    public readonly requestedPkh: string,
+    public readonly initializedPkh: string
+  ) {
+    super();
+    this.name = 'PublicKeyVerificationFailedError';
+    this.message = `Requested pk "${requestedPk}" has pkh "${requestedPkh}" deesn't match initialized pkh "${initializedPkh}."`;
+  }
+}
+
+/**
+ *  @category Error
+ *  @description Error
+ */
+export class SignatureVerificationError extends WebMavrykError {
+  public name = 'SignatureVerificationFailedError';
+  constructor(public readonly bytes: string, public readonly signature: string) {
+    super();
+    this.name = 'SignatureVerificationFailedError';
+    this.message = `Invalid signature of bytes failed verification agaisnt public key.`;
+  }
+}

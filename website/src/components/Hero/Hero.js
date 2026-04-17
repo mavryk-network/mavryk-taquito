@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 import styles from './Hero.module.scss';
@@ -7,10 +13,10 @@ import '../../../static/slick/slick-theme.css';
 
 const FeatureList = [
   {
-    title: 'Developing on Mavryk can be delicious!',
+    title: 'Developing on Mavryk has never been easier!',
     description: (
       <>
-        Use our popular Taquito TypeScript library to develop your Mavryk blockchain apps faster and
+        Use our popular Webmavryk TypeScript library to develop your Mavryk blockchain apps faster and
         easier
       </>
     ),

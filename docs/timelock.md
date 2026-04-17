@@ -3,8 +3,12 @@ title: Timelock (BETA)
 author: Davis Sawali & Hui-An Yang
 ---
 
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 :::warning
-This feature is a work in progress and might go through refinements in the near future. We encourage Taquito users to try this feature and reach out to us if you have any issues or concerns.
+This feature is a work in progress and might go through refinements in the near future. We encourage Webmavryk users to try this feature and reach out to us if you have any issues or concerns.
 :::
 
 # Timelock (BETA)
@@ -20,11 +24,11 @@ This scheme makes it possible to prove a certain decision was made before the in
 
 above excerpt, taken from [here](https://docs.tezos.com/smart-contracts/data-types/crypto-data-types#classical-commit--reveal-scheme)
 
-## Taquito Implementation
+## Webmavryk Implementation
 
 ### Creating a chest
 ```
-import { Chest } from '@mavrykdynamics/taquito-timelock'
+import { Chest } from '@mavrykdynamics/webmavryk-timelock'
 
 const time = 10000;
 const payload = new TextEncoder().encode('message');
@@ -36,7 +40,7 @@ const keyBytes = key.encode();
 
 ### Create a chest from an existing Timelock
 ```
-import { Chest, Timelock } from '@mavrykdynamics/taquito-timelock';
+import { Chest, Timelock } from '@mavrykdynamics/webmavryk-timelock';
 
 // ...
 const time = 10000;
@@ -49,7 +53,7 @@ const keyBytes = key.encode();
 
 ### Opening a chest with an existing key
 ```
-import { Chest, ChestKey} from '@mavrykdynamics/taquito-timelock';
+import { Chest, ChestKey} from '@mavrykdynamics/webmavryk-timelock';
 
 //...
 const time = 10000;
@@ -140,12 +144,12 @@ code { UNPAIR 5;
 ### Originate the coinflip contract
 Let's originate the contract with initial storage values `level` of 0, a stub chest, `guess` value of 'ff' and `result` 'ff'.
 
-`timelockCode` and `timelockStorage` can be found [here](https://github.com/ecadlabs/taquito/blob/master/integration-tests/data/timelock-flip-contract.ts)
+`timelockCode` and `timelockStorage` can be found [here](https://github.com/mavryk-network/webmavryk/blob/master/integration-tests/data/timelock-flip-contract.ts)
 
 ```
-// import { MavrykToolkit } from '@mavrykdynamics/taquito';
-// import { Chest } from '@mavrykdynamics/taquito-timelock';
-// import { stringToBytes } from '@mavrykdynamics/taquito-utils';
+// import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
+// import { Chest } from '@mavrykdynamics/webmavryk-timelock';
+// import { stringToBytes } from '@mavrykdynamics/webmavryk-utils';
 // import { timelockCode, timelockStorage } from './timelock-flip-contract';
 
 // const Mavryk = new MavrykToolkit('https://ghostnet.ecadinfra.com');

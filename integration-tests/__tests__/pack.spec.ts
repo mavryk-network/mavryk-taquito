@@ -1,7 +1,13 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from "../config";
-import { MavrykToolkit } from "@mavrykdynamics/taquito";
-import { MichelsonType, MichelsonData, ProtocolID, packDataBytes } from "@mavrykdynamics/taquito-michel-codec";
-import { MichelsonV1Expression } from "@mavrykdynamics/taquito-rpc";
+import { MavrykToolkit } from "@mavrykdynamics/webmavryk";
+import { MichelsonType, MichelsonData, ProtocolID, packDataBytes } from "@mavrykdynamics/webmavryk-michel-codec";
+import { MichelsonV1Expression } from "@mavrykdynamics/webmavryk-rpc";
 import fs from "fs";
 import path from "path";
 
@@ -21,7 +27,7 @@ CONFIGS().forEach(({ rpc, protocol }) => {
             'binary-data1.json',
             'binary-data3.json'
         ];
-        const paths = files.map((f) => path.resolve(__dirname, `../../packages/taquito-michel-codec/test/${f}`));
+        const paths = files.map((f) => path.resolve(__dirname, `../../packages/webmavryk-michel-codec/test/${f}`));
         const src: TypedTestData[] = [].concat(
             ...paths.map((p) => JSON.parse(fs.readFileSync(p).toString()))
         );

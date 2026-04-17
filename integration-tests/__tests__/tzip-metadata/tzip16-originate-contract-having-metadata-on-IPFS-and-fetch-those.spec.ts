@@ -1,13 +1,19 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from '../../config';
 import { tacoContractTzip16 } from '../../data/modified-taco-contract';
-import { MichelsonMap } from '@mavrykdynamics/taquito';
-import { stringToBytes, tzip16, Tzip16Module, IpfsHttpHandler, Handler, MetadataProvider } from '@mavrykdynamics/taquito-tzip16';
+import { MichelsonMap } from '@mavrykdynamics/webmavryk';
+import { stringToBytes, tzip16, Tzip16Module, IpfsHttpHandler, Handler, MetadataProvider } from '@mavrykdynamics/webmavryk-tzip16';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
     const Mavryk = lib;
 
     const customHandler = new Map<string, Handler>([
-        ['ipfs', new IpfsHttpHandler('cloudflare-ipfs.com')]
+        ['ipfs', new IpfsHttpHandler('ipfs.io')]
     ]);
 
     const customMetadataProvider = new MetadataProvider(customHandler);

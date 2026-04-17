@@ -1,7 +1,11 @@
 #!/bin/bash
+# SPDX-License-Identifier: Apache-2.0
+# This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+# Original project: Taquito by ECAD Labs Inc.
 
-# Generate Flexmasa bootstrap accounts
-flexmasa_docker_image="${1}"
+
+# Generate Mavbox bootstrap accounts
+mavbox_docker_image="${1}"
 
 # Set environment variables
 export RUN_"${testnet_uppercase}"_WITH_SECRET_KEY=true
@@ -11,17 +15,17 @@ export POLLING_INTERVAL_MILLISECONDS=100
 export RPC_CACHE_MILLISECONDS=0
 export MAVRYK_BAKER=mv1Hox9jGJg3uSmsv9NTvuK7rMHh25cq44nv
 
-alice=$(docker run --rm "${flexmasa_docker_image}" flexmasa key alice)
-bob=$(docker run --rm "${flexmasa_docker_image}" flexmasa key bob)
-charlie=$(docker run --rm "${flexmasa_docker_image}" flexmasa key charlie)
-dave=$(docker run --rm "${flexmasa_docker_image}" flexmasa key dave)
+alice=$(docker run --rm "${mavbox_docker_image}" mavbox key alice)
+bob=$(docker run --rm "${mavbox_docker_image}" mavbox key bob)
+charlie=$(docker run --rm "${mavbox_docker_image}" mavbox key charlie)
+dave=$(docker run --rm "${mavbox_docker_image}" mavbox key dave)
 
 export "alice=${alice}"
 export "bob=${bob}"
 export "charlie=${charlie}"
 export "dave=${dave}"
 
-# Provision Flexmasa container
+# Provision Mavbox container
 protocol="${2}"
 testnet="${3}"
 testnet_uppercase="${4}"
@@ -32,8 +36,8 @@ docker run \
   --name baking-sandbox \
   --detach \
   -p 20000:20000 \
-  "${flexmasa_docker_image}" \
-  flexmasa mini-net \
+  "${mavbox_docker_image}" \
+  mavbox mini-net \
   --root /tmp/mini-box --size 1 \
   --set-history-mode N000:archive \
   --number-of-b 1 \

@@ -1,9 +1,15 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+*/
+
 .tabs-container {
   .tabs {
     height: fit-content;
 
     .tabs__item:hover {
-      color: #d3832b;
+      color: #4169E1;
       border-radius: 24px;
     }
     .tabs__item {
@@ -24,8 +30,8 @@
       font-size: 14px;
       line-height: 18px;
       letter-spacing: 0.3px;
-      color: #d3832b;
-      background: rgba(211, 131, 43, 0.2);
+      color: #4169E1;
+      background: rgba(59, 130, 246, 0.2);
       border-radius: 24px;
       // padding: 0px 10px !important;
       border: none;

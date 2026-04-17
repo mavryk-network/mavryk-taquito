@@ -1,8 +1,14 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from '../../config';
 import { ligoSample, ligoSampleMichelson } from '../../data/ligo-simple-contract';
 import { managerCode } from '../../data/manager_code';
-import { MANAGER_LAMBDA, OpKind } from '@mavrykdynamics/taquito';
-import { OperationContentsAndResultTransaction } from '@mavrykdynamics/taquito-rpc'
+import { MANAGER_LAMBDA, OpKind } from '@mavrykdynamics/webmavryk';
+import { OperationContentsAndResultTransaction } from '@mavrykdynamics/webmavryk-rpc'
 
 CONFIGS().forEach(({ lib, rpc, setup, knownContract, knownBaker, createAddress }) => {
     const Mavryk = lib;

@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 //contract for the example "Contract origination with map in storage having initial values"
 export const contractMapTacoShop = [
   { prim: 'parameter', args: [{ prim: 'nat' }] },

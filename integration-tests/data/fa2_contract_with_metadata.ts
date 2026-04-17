@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 // Code obtained from https://github.com/tqtezos/stablecoin/#mavryk-stablecoin
 export const fa2ContractTzip16 = `{
     parameter
@@ -1560,7 +1566,7 @@ export const fa2ContractTzip16 = `{
             CAR;
             DIG 13;
             CDR;
-            PUSH string "MVRK_RECEIVED";
+            PUSH string "XTZ_RECEIVED";
             PUSH mumav 0;
             AMOUNT;
             COMPARE;

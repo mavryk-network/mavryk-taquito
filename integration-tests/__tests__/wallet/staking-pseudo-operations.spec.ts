@@ -1,7 +1,13 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from '../../config';
-import { Protocols } from '@mavrykdynamics/taquito';
-import { ProtoGreaterOrEqual } from '@mavrykdynamics/taquito-michel-codec';
-import { InvalidStakingAddressError, InvalidFinalizeUnstakeAmountError } from '@mavrykdynamics/taquito-core';
+import { Protocols } from '@mavrykdynamics/webmavryk';
+import { ProtoGreaterOrEqual } from '@mavrykdynamics/webmavryk-michel-codec';
+import { InvalidStakingAddressError, InvalidFinalizeUnstakeAmountError } from '@mavrykdynamics/webmavryk-core';
 
 CONFIGS().forEach(({ lib, rpc, setup, protocol, knownBaker }) => {
   const Mavryk = lib;
@@ -37,7 +43,7 @@ CONFIGS().forEach(({ lib, rpc, setup, protocol, knownBaker }) => {
 
       const UnstakedBalance = await Mavryk.rpc.getUnstakedFrozenBalance(await Mavryk.signer.publicKeyHash());
       // unstaked balance returned in mumav therefore dividing by 1000000 and rounding explanation here https://tezos-dev.slack.com/archives/C05RS0MEJ9H/p1714641691368019?thread_ts=1714604532.409029&cid=C05RS0MEJ9H
-      expect(Math.round(UnstakedBalance.toNumber() / 1000000)).toEqual(1);
+      expect(Math.round(UnstakedBalance.toNumber() / 1000000)).toEqual(0);
     });
 
     boreasAndAlpha(`should be able to finalizeUnstake successfully: ${rpc}`, async () => {

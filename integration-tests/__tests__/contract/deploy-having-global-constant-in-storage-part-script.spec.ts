@@ -1,4 +1,10 @@
-import { DefaultGlobalConstantsProvider } from '@mavrykdynamics/taquito';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { DefaultGlobalConstantsProvider } from '@mavrykdynamics/webmavryk';
 import { CONFIGS } from '../../config';
 import { voteSampleGlobalConstants } from '../../data/vote_contract_global_constant_storage';
 
@@ -54,7 +60,7 @@ CONFIGS().forEach(({ lib, rpc, setup }) => {
 
             // We need to set up a global constants provider on the MavrykToolkit
             // We use an instance of DefaultGlobalConstantsProvider where the global constant hash and its corresponding expression need to be loaded manually
-            // Taquito use the globalConstantProvider to properly transform the storage object into the corresponding Michelson data on contract origination
+            // Webmavryk use the globalConstantProvider to properly transform the storage object into the corresponding Michelson data on contract origination
             const globalConstantProvider = new DefaultGlobalConstantsProvider();
             globalConstantProvider.loadGlobalConstant({
                 [constantHash1]: globalConstant1,

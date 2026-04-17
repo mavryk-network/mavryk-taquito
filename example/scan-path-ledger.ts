@@ -1,10 +1,16 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 
 // This example can be flaky as the result depends on the state of the ledger device.
 // Sometimes the transport will fail before all the paths have been scanned
 // rerun two or three times if needed
 
-import { LedgerSigner, DerivationType } from '@mavrykdynamics/taquito-ledger-signer';
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+import { LedgerSigner, DerivationType } from '@mavrykdynamics/webmavryk-ledger-signer';
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 import TransportNodeHid from "@ledgerhq/hw-transport-node-hid";
 
 async function example() {
@@ -13,7 +19,7 @@ async function example() {
     let index = 0;
     const mavryk = new MavrykToolkit('https://basenet.rpc.mavryk.network')
     while (index < 8) {
-        const ledgerSigner = new LedgerSigner(transport, `44'/1729'/${index}'/0'`, false, DerivationType.ED25519);
+        const ledgerSigner = new LedgerSigner(transport, `44'/1969'/${index}'/0'`, false, DerivationType.ED25519);
         mavryk.setProvider({ signer: ledgerSigner });
         const pkh = await mavryk.signer.publicKeyHash();
         const balance = await mavryk.mv.getBalance(pkh)

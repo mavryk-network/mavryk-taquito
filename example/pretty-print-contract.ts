@@ -1,5 +1,11 @@
-import { Parser, emitMicheline } from '@mavrykdynamics/taquito-michel-codec'
-import { MavrykToolkit } from '@mavrykdynamics/taquito';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { Parser, emitMicheline } from '@mavrykdynamics/webmavryk-michel-codec'
+import { MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 const provider = 'https://mainnet.rpc.mavryk.network/';
 

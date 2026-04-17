@@ -1,5 +1,11 @@
-import { Parser } from '@mavrykdynamics/taquito-michel-codec'
-import { Schema } from '@mavrykdynamics/taquito-michelson-encoder';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { Parser } from '@mavrykdynamics/webmavryk-michel-codec'
+import { Schema } from '@mavrykdynamics/webmavryk-michelson-encoder';
 
 const example = async () => {
     try {

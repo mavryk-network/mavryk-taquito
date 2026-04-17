@@ -1,7 +1,13 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from '../../config';
-import { compose, MichelsonMap, ViewSimulationError } from '@mavrykdynamics/taquito';
-import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/taquito-tzip16';
-import { tzip12, Tzip12Module, TokenIdNotFound, InvalidTokenMetadata } from '@mavrykdynamics/taquito-tzip12';
+import { compose, MichelsonMap, ViewSimulationError } from '@mavrykdynamics/webmavryk';
+import { tzip16, Tzip16Module, stringToBytes } from '@mavrykdynamics/webmavryk-tzip16';
+import { tzip12, Tzip12Module, TokenIdNotFound, InvalidTokenMetadata } from '@mavrykdynamics/webmavryk-tzip12';
 import { fa2TokenFactory } from '../../data/fa2-token-factory';
 import { fa2ForTokenMetadataView } from '../../data/fa2-for-token-metadata-view';
 
@@ -258,7 +264,7 @@ CONFIGS().forEach(({ lib, rpc, setup, createAddress }) => {
 				token_id: 0,
 				decimals: 3,
 				name: 'Taquito test URI',
-				symbol: 'MVRK2'
+				symbol: 'XTZ2'
 			});
 
 			const tokenMetadata1 = await contract.tzip12().getTokenMetadata(1);

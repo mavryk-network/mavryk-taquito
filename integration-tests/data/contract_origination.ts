@@ -1,4 +1,10 @@
-import { OperationContentsOrigination } from "@mavrykdynamics/taquito-rpc"
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { OperationContentsOrigination } from "@mavrykdynamics/webmavryk-rpc"
 
 export const rpcToForge = {
   "branch": "BLQ6JyEEzUNkA7WEDSAbyFYLoEK7RVcNcjbjrN5LrmqoUW4qmu3",

@@ -1,9 +1,15 @@
-import { CompositeForger, RpcForger, MavrykToolkit, Protocols, TaquitoLocalForger, PollingSubscribeProvider } from '@mavrykdynamics/taquito';
-import { RemoteSigner } from '@mavrykdynamics/taquito-remote-signer';
-import { HttpBackend } from '@mavrykdynamics/taquito-http-utils';
-import { b58cencode, Prefix, prefix } from '@mavrykdynamics/taquito-utils';
-import { importKey, InMemorySigner } from '@mavrykdynamics/taquito-signer';
-import { RpcClient, RpcClientCache } from '@mavrykdynamics/taquito-rpc';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { CompositeForger, RpcForger, MavrykToolkit, Protocols, WebMavrykLocalForger, PollingSubscribeProvider } from '@mavrykdynamics/webmavryk';
+import { RemoteSigner } from '@mavrykdynamics/webmavryk-remote-signer';
+import { HttpBackend } from '@mavrykdynamics/webmavryk-http-utils';
+import { b58cencode, Prefix, prefix } from '@mavrykdynamics/webmavryk-utils';
+import { importKey, InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
+import { RpcClient, RpcClientCache } from '@mavrykdynamics/webmavryk-rpc';
 import { KnownContracts } from './known-contracts';
 import { knownContractsProtoALph } from './known-contracts-ProtoALph';
 import { knownContractsPtBasenet } from './known-contracts-PtBasenet';
@@ -33,7 +39,7 @@ const forgers: ForgerType[] = [ForgerType.COMPOSITE];
 // user running integration test can pass environment variable MAVRYK_NETWORK_TYPE=sandbox to specify which network to run against
 export enum NetworkType {
   TESTNET,  // corresponds basenet, boreasnet and weeklynet etc.
-  SANDBOX,  // corresponds to flexmasa local chain
+  SANDBOX,  // corresponds to mavbox local chain
 }
 
 interface Config {
@@ -88,7 +94,7 @@ export const defaultSecretKey: SecretKeyConfig = {
 const defaultEphemeralConfig = (keyUrl: string): EphemeralConfig => ({
   type: SignerType.EPHEMERAL_KEY as SignerType.EPHEMERAL_KEY,
   keyUrl: keyUrl,
-  requestHeaders: { Authorization: 'Bearer taquito-example' },
+  requestHeaders: { Authorization: 'Bearer webmavryk-example' },
 });
 
 // Named parameters for defaultConfig below
@@ -117,7 +123,7 @@ const defaultConfig = ({
     rpc: process.env[`MAVRYK_RPC_${networkName}`] || defaultRpc,
     pollingIntervalMilliseconds: process.env[`POLLING_INTERVAL_MILLISECONDS`] || undefined,
     rpcCacheMilliseconds: process.env[`RPC_CACHE_MILLISECONDS`] || '1000',
-    knownBaker: process.env[`MAVRYK_BAKER`] || (networkName === 'WEEKLYNET' ? 'mv1TenQi9u6VPEwjb1kyXCdq5UoLKzH34ozP' : 'mv1A1LYBjHEe6JUT8dg4nLdkftGE7nYPNwfc'),
+    knownBaker: process.env[`MAVRYK_BAKER`] || (networkName === 'WEEKLYNET' ? 'mv1TenQi9u6VPEwjb1kyXCdq5UoLKzH34ozP' : 'mv1V4h45W3p4e1sjSBvRkK2uYbvkTnSuHg8g'),
     knownContract: process.env[`MAVRYK_${networkName}_CONTRACT_ADDRESS`] || knownContracts.contract,
     knownBigMapContract: process.env[`MAVRYK_${networkName}_BIGMAPCONTRACT_ADDRESS`] || knownContracts.bigMapContract,
     knownTzip1216Contract: process.env[`MAVRYK_${networkName}_TZIP1216CONTRACT_ADDRESS`] || knownContracts.tzip12BigMapOffChainContract,
@@ -129,34 +135,34 @@ const defaultConfig = ({
   }
 }
 
-const boreasnetEphemeral: Config =
-  defaultConfig({
-    networkName: 'BOREASNET',
-    protocol: Protocols.PtBoreas,
-    defaultRpc: 'http://boreasnet.i.ecadinfra.com:8732/',
-    knownContracts: knownContractsPtBoreas,
-    signerConfig: defaultEphemeralConfig('https://keygen.ecadinfra.com/boreasnet')
-  });
+// const boreasnetEphemeral: Config =
+//   defaultConfig({
+//     networkName: 'BOREASNET',
+//     protocol: Protocols.PtBoreas,
+//     defaultRpc: 'https://basenet.rpc.mavryk.network/',
+//     knownContracts: knownContractsPtBoreas,
+//     signerConfig: defaultEphemeralConfig('https://keygen.mavryk.network/basenet')
+//   });
 
-const boreasnetSecretKey: Config =
-  { ...boreasnetEphemeral, ...{ signerConfig: defaultSecretKey }, ...{ defaultRpc: 'http://boreasnet.i.ecadinfra.com:8732/' } };
+// const boreasnetSecretKey: Config =
+//   { ...boreasnetEphemeral, ...{ signerConfig: defaultSecretKey }, ...{ defaultRpc: 'https://basenet.rpc.mavryk.network/' } };
 
-const atlasnetSecretKey: Config =
-  defaultConfig({
-    networkName: 'ATLASNET',
-    protocol: Protocols.PtAtLas,
-    defaultRpc: 'https://atlasnet.rpc.mavryk.network',
-    knownContracts: knownContractsPtAtLas,
-    signerConfig: defaultSecretKey
-  });
+// const atlasnetSecretKey: Config =
+//   defaultConfig({
+//     networkName: 'ATLASNET',
+//     protocol: Protocols.PtAtLas,
+//     defaultRpc: 'https://atlasnet.rpc.mavryk.network',
+//     knownContracts: knownContractsPtAtLas,
+//     signerConfig: defaultSecretKey
+//   });
 
 const basenetEphemeral: Config =
   defaultConfig({
     networkName: 'BASENET',
-    protocol: Protocols.PtAtLas,
+    protocol: Protocols.PtBoreas,
     defaultRpc: 'https://basenet.rpc.mavryk.network',
     knownContracts: knownContractsPtBasenet,
-    signerConfig: defaultEphemeralConfig('https://keygen.ecadinfra.com/ghostnet')
+    signerConfig: defaultEphemeralConfig('https://keygen.mavryk.network/basenet')
   });
 
 const basenetSecretKey: Config =
@@ -177,31 +183,31 @@ const weeklynetSecretKey: Config =
 const providers: Config[] = [];
 
 if (process.env['RUN_WITH_SECRET_KEY']) {
-  providers.push(boreasnetSecretKey);
-} else if (process.env['RUN_BOREASNET_WITH_SECRET_KEY']) {
-  providers.push(boreasnetSecretKey);
+  providers.push(basenetSecretKey);
+// } else if (process.env['RUN_BOREASNET_WITH_SECRET_KEY']) {
+//   providers.push(boreasnetSecretKey);
 } else if (process.env['RUN_BASENET_WITH_SECRET_KEY']) {
   providers.push(basenetSecretKey);
-} else if (process.env['RUN_ATLASNET_WITH_SECRET_KEY']) {
-  providers.push(atlasnetSecretKey);
-} else if (process.env['RUN_WEEKLYNET_WITH_SECRET_KEY']) {
-  providers.push(weeklynetSecretKey);
-} else if (process.env['BOREASNET']) {
-  providers.push(boreasnetEphemeral);
+// } else if (process.env['RUN_ATLASNET_WITH_SECRET_KEY']) {
+//   providers.push(atlasnetSecretKey);
+// } else if (process.env['RUN_WEEKLYNET_WITH_SECRET_KEY']) {
+//   providers.push(weeklynetSecretKey);
+// } else if (process.env['BOREASNET']) {
+//   providers.push(boreasnetEphemeral);
 } else if (process.env['BASENET']) {
   providers.push(basenetEphemeral);
-} else if (process.env['WEEKLYNET']) {
-  providers.push(weeklynetEphemeral);
+// } else if (process.env['WEEKLYNET']) {
+//   providers.push(weeklynetEphemeral);
 } else {
-  providers.push(boreasnetEphemeral);
+  providers.push(basenetEphemeral);
 }
 
 const setupForger = (Mavryk: MavrykToolkit, forger: ForgerType): void => {
   if (forger === ForgerType.LOCAL) {
-    Mavryk.setProvider({ forger: Mavryk.getFactory(TaquitoLocalForger)() });
+    Mavryk.setProvider({ forger: Mavryk.getFactory(WebMavrykLocalForger)() });
   } else if (forger === ForgerType.COMPOSITE) {
     const rpcForger = Mavryk.getFactory(RpcForger)();
-    const localForger = Mavryk.getFactory(TaquitoLocalForger)()
+    const localForger = Mavryk.getFactory(WebMavrykLocalForger)()
     const composite = new CompositeForger([rpcForger, localForger]);
     Mavryk.setProvider({ forger: composite });
   } else if (forger === ForgerType.RPC) {
@@ -220,7 +226,7 @@ const setupSignerWithFreshKey = async (
       url: keyUrl,
       method: 'POST',
       headers: requestHeaders,
-      json: false,
+      json: true,
     });
 
     const signer = new InMemorySigner(key!);

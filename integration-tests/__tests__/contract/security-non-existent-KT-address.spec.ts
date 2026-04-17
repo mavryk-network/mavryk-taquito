@@ -1,6 +1,12 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from '../../config';
-import { RpcClient } from '@mavrykdynamics/taquito-rpc';
-import { Protocols, MavrykToolkit } from '@mavrykdynamics/taquito';
+import { RpcClient } from '@mavrykdynamics/webmavryk-rpc';
+import { Protocols, MavrykToolkit } from '@mavrykdynamics/webmavryk';
 
 // TC001 - non-existing KT addresses can not be prefunded
 
@@ -22,11 +28,11 @@ CONFIGS().forEach(({ rpc, setup, protocol }) => {
       try {
         await Mavryk.contract.at(testContractAddress);
       } catch (error: any) {
-        // Contract Address cannot be prefunded because it cannot be loaded into Taquito
+        // Contract Address cannot be prefunded because it cannot be loaded into Webmavryk
         expect(error.message).toContain('Http error response: (404)');
       }
     });
   });
 });
 
-// This test was transcribed to Taquito from bash scripts at https://github.com/InferenceAG/TezosSecurityBaselineChecking
+// This test was transcribed to Webmavryk from bash scripts at https://github.com/InferenceAG/TezosSecurityBaselineChecking

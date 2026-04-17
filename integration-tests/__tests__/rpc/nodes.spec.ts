@@ -1,11 +1,17 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from '../../config';
-import { DefaultContractType, Protocols } from "@mavrykdynamics/taquito";
-import { RpcClientCache, RpcClient, RPCRunViewParam, RPCRunScriptViewParam, PendingOperationsV1, PendingOperationsV2, PvmKind } from '@mavrykdynamics/taquito-rpc';
-import { encodeExpr } from '@mavrykdynamics/taquito-utils';
-import { Schema } from '@mavrykdynamics/taquito-michelson-encoder';
+import { DefaultContractType, Protocols } from "@mavrykdynamics/webmavryk";
+import { RpcClientCache, RpcClient, RPCRunViewParam, RPCRunScriptViewParam, PendingOperationsV1, PendingOperationsV2, PvmKind } from '@mavrykdynamics/webmavryk-rpc';
+import { encodeExpr } from '@mavrykdynamics/webmavryk-utils';
+import { Schema } from '@mavrykdynamics/webmavryk-michelson-encoder';
 import { tokenBigmapCode, tokenBigmapStorage } from '../../data/token_bigmap';
 import { ticketCode, ticketStorage } from '../../data/code_with_ticket';
-import { ProtoGreaterOrEqual } from '@mavrykdynamics/taquito-michel-codec';
+import { ProtoGreaterOrEqual } from '@mavrykdynamics/webmavryk-michel-codec';
 
 CONFIGS().forEach(
   ({
@@ -20,7 +26,7 @@ CONFIGS().forEach(
     knownViewContract,
   }) => {
     const Mavryk = lib;
-    const unrestrictedRPCNode = rpc.endsWith("ecadinfra.com") ? test.skip : test;
+    const unrestrictedRPCNode = rpc.endsWith("rpc.mavryk.network") ? test.skip : test;
     const boreasAndAlpha = ProtoGreaterOrEqual(protocol, Protocols.PtBoreas) ? test : test.skip;
 
     let ticketContract: DefaultContractType;

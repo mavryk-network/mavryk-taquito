@@ -1,3 +1,9 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+*/
+
 .section {
   padding: 72px 0;
 }
@@ -112,7 +118,7 @@ main {
   font-weight: 600;
   font-size: 20px;
   text-transform: capitalize;
-  background: var(--yellow-second);
+  background: var(--blue-primary);
   display: flex;
   min-width: 135px !important;
   justify-content: center;

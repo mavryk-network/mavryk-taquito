@@ -1,3 +1,9 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+*/
+
 .admonition-heading {
   font-family: Rounded Mplus 1c;
   font-style: normal;
@@ -32,39 +38,39 @@
   }
 }
 .admonition-note {
-  background: rgba(211, 131, 43, 0.1);
+  background: rgba(59, 130, 246, 0.1);
   border-radius: 0px 50px 50px 0px;
-  border-color: #d3832b;
+  border-color: #262626;
   .admonition-icon {
     svg {
       path {
-        fill: #d3832b;
+        fill: #4169E1;
       }
     }
   }
   .admonition-heading {
-    color: #d3832b;
+    color: #4169E1;
   }
   .admonition-content > * {
-    color: #d3832b;
+    color: #4169E1;
   }
 }
 
 .admonition-info {
-  background: rgba(255, 181, 0, 0.1);
+  background: rgba(59, 130, 246, 0.1);
   border-radius: 0px 50px 50px 0px;
-  border-color: #ffb500;
+  border-color: #262626;
   .admonition-icon {
     svg {
       path {
-        fill: #ffb500;
+        fill: #4169E1;
       }
     }
   }
   .admonition-heading {
-    color: #ffb500;
+    color: #4169E1;
   }
   .admonition-content > * {
-    color: #ffb500;
+    color: #4169E1;
   }
 }

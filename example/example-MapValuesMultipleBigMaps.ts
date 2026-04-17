@@ -1,5 +1,11 @@
-import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/taquito';
-import { InMemorySigner } from '@mavrykdynamics/taquito-signer';
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { MichelsonMap, MavrykToolkit } from '@mavrykdynamics/webmavryk';
+import { InMemorySigner } from '@mavrykdynamics/webmavryk-signer';
 import { tokenCode } from '../integration-tests/data/tokens';
 
 async function example() {

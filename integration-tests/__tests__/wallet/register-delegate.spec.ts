@@ -1,6 +1,12 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from '../../config';
 
-CONFIGS().forEach(({ lib, rpc, setup, protocol }) => {
+CONFIGS().forEach(({ lib, rpc, setup }) => {
     const Mavryk = lib;
     describe(`Test delegate registration through wallet api: ${rpc}`, () => {
         beforeEach(async () => {

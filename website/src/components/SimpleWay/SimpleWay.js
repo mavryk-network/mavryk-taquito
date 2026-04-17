@@ -1,6 +1,11 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import React from 'react';
 import styles from './SimpleWay.module.scss';
-import SimpleWaySvg from '../../../static/img/logo-taquito-color.svg';
 import StartNowButton from '../StartNowButton/StartNowButton';
 
 const FeatureList = [
@@ -51,7 +56,6 @@ export default function SimpleWay() {
       <div className={styles.container}>
         <Feature {...FeatureList[0]} />
         <div className={styles.simpleWaySvg}>
-          <SimpleWaySvg />
         </div>
       </div>
     </section>

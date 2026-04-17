@@ -1,6 +1,12 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { CONFIGS } from "../config";
-import { Chest, Timelock, ChestKey } from '../../packages/taquito-timelock/src/taquito-timelock';
-import { buf2hex } from '@mavrykdynamics/taquito-utils';
+import { Chest, Timelock, ChestKey } from '../../packages/webmavryk-timelock/src/webmavryk-timelock';
+import { buf2hex } from '@mavrykdynamics/webmavryk-utils';
 import * as crypto from 'crypto';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {

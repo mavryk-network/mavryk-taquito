@@ -1,7 +1,13 @@
-import { DefaultContractType, OriginationOperation } from "@mavrykdynamics/taquito";
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+import { DefaultContractType, OriginationOperation } from "@mavrykdynamics/webmavryk";
 import { CONFIGS } from "../../config";
-import { buf2hex } from "@mavrykdynamics/taquito-utils";
-import { Chest } from '@mavrykdynamics/taquito-timelock';
+import { buf2hex } from "@mavrykdynamics/webmavryk-utils";
+import { Chest } from '@mavrykdynamics/webmavryk-timelock';
 
 CONFIGS().forEach(({ lib, rpc, setup }) => {
   const Mavryk = lib;

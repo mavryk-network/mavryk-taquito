@@ -1,3 +1,9 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
 import { db } from "../firebase";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import React from "react";
@@ -127,14 +133,14 @@ class AddFeedback extends React.Component<IProps, IState> {
                         type="radio"
                         id="productfeedback"
                         name="type"
-                        value="TaquitoProductFeedback "
+                        value="WebmavrykProductFeedback "
                         onClick={() =>
                           this.setState({
-                            section: "Taquito Product Feedback",
+                            section: "Webmavryk Product Feedback",
                           })
                         }
                       />
-                      Taquito Product Feedback
+                      Webmavryk Product Feedback
                     </label>
                   </div>
                   <div className="radio">

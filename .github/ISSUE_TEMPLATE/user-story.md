@@ -1,3 +1,7 @@
+<!-- SPDX-License-Identifier: Apache-2.0
+     This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+     Original project: Taquito by ECAD Labs Inc. -->
+
 ---
 name: User story
 about: 'USER STORY:'
@@ -7,7 +11,7 @@ assignees: ''
 
 ---
 
-**As Taquito user, I want to <...>, so that <I can see or avoid this outcome>**
+**As Webmavryk user, I want to <...>, so that <I can see or avoid this outcome>**
 
 **Use cases:**
 

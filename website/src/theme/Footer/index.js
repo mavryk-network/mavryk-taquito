@@ -1,4 +1,10 @@
 /**
+ * SPDX-License-Identifier: Apache-2.0
+ * This file has been modified for the WebMavryk fork of Taquito by Mavryk Dynamics (2025).
+ * Original project: Taquito by ECAD Labs Inc.
+ */
+
+/**
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the Apache 2.0 License found in the
@@ -73,7 +79,7 @@ function Footer() {
       renderer: 'svg',
       loop: false,
       autoplay: false,
-      animationData: require('../../../static/gif/Taquito_Loop_01.json'),
+      animationData: require('../../../static/gif/Webmavryk_Loop_01.json'),
       name: 'footerLogo',
     });
 
@@ -116,18 +122,7 @@ function Footer() {
                             <FooterForm />
                           </li>
                         ) : item.html === 'image' ? (
-                          <a key={key} href="/" rel="noreferrer noopener" aria-label="">
-                            <div
-                              ref={footerContainer}
-                              onMouseEnter={() => lottie.play('footerLogo')}
-                              onMouseLeave={() => setInterval(() => {
-                                if (isActive) {
-                                  return lottie.stop('footerLogo');
-                                }
-                              }, 5000)}
-                              className="footerLogo"
-                            />
-                          </a>
+                          null
                         ) : (
                           <li
                             key={key}
@@ -150,26 +145,6 @@ function Footer() {
           </div>
         )}
 
-        {(logo || copyright) && (
-          <div className="footer__bottom text--center">
-            {logo && (logo.src || logo.srcDark) && (
-              <div className="margin-bottom--sm">
-                {logo.href ? (
-                  <Link href={logo.href} className={styles.footerLogoLink}>
-                    <FooterLogo
-                      alt={logo.alt}
-                      sources={sources}
-                      width={logo.width}
-                      height={logo.height}
-                    />
-                  </Link>
-                ) : (
-                  <FooterLogo alt={logo.alt} sources={sources} />
-                )}
-              </div>
-            )}
-          </div>
-        )}
       </div>
       <div className="footer__copyright">
         {`Copyright © ${new Date().getFullYear()} ECAD Labs - Open Source Apache 2.0 License`}
